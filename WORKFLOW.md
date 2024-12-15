@@ -39,7 +39,7 @@ This document outlines the development workflow for the project. The `dev` branc
 3. Work on your feature, then stage and commit your changes:
     ```bash
     git add .
-    git commit -m "Add feature description"
+    git commit -m " feature: commit-message"
     ```
     Replace `Add feature description` with a brief description of the changes you made. Examples:
    - "Fix navbar alignment issue in mobile view"
