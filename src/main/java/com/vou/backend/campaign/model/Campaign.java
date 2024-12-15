@@ -1,6 +1,4 @@
 package com.vou.backend.campaign.model;
-import com.vou.backend.user.model.UserFavoriteCampaign;
-import com.vou.backend.user.model.UserItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,9 +27,6 @@ public class Campaign {
     private String status;
     private Date createdAt;
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
-    private List<UserFavoriteCampaign> favouriteCampaigns = new ArrayList<>();
-    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
-    private List<CampaignVoucher> campaignVouchers = new ArrayList<>();
-    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
-    private List<CampaignGame> campaignGames = new ArrayList<>();
+    private List<FavoriteCampaignUser> favouriteCampaigns = new ArrayList<>();
+
 }

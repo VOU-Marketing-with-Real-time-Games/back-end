@@ -1,8 +1,7 @@
 package com.vou.backend.notification.repository;
 
+import com.vou.backend.notification.model.NotificationUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.management.Notification;
-
-public interface NotificationRepository extends JpaRepository<Notification,Long> {
+public interface NotificationRepository extends JpaRepository<NotificationUser,Long> {
 }

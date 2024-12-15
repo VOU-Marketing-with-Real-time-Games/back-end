@@ -18,9 +18,8 @@ public class NotificationUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private Date time;
+    private Date createdAt;
     private Boolean isRead;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Boolean isDeleted;
+    private Long userId;
 }

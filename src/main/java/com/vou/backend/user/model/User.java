@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,16 +35,4 @@ public class User {
     private String facebookLink;
     private Integer turnNum;
     private Date createdAt;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<NotificationUser> notifications = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserItem> userItems = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserAnswer> userAnswers = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserFavoriteCampaign> favouriteCampaigns = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserVoucher>  userVouchers = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserCampaignGame> userCampaignGames = new ArrayList<>();
 }

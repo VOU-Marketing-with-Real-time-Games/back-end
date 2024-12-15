@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.awt.*;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @Table(name = "branch")
@@ -18,12 +18,15 @@ public class Branch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String field;
     private String address;
-    private Enum status;
+    private String status;
+
+    @Column(columnDefinition = "POINT SRID 4326", nullable = false)
     private Point location;
+
     private Boolean enable;
+
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    Brand brand;
+    private Brand brand;
 }

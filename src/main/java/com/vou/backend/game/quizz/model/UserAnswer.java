@@ -1,7 +1,6 @@
-package com.vou.backend.user.model;
+package com.vou.backend.game.quizz.model;
 
-import com.vou.backend.game.model.Item;
-import com.vou.backend.game.model.Question;
+import com.vou.backend.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,12 +19,14 @@ public class UserAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    private Long userId;
+
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
+
+    private String answer;
     private Boolean isCorrect;
     private Date timeAnswer;
 }

@@ -24,8 +24,9 @@ public class Brand {
     private String field;
     private String status;
     private Boolean enabled;
-    private String creator;
+    private Long userId;
     private Date createdAt;
+
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
     private List<Branch> branches = new ArrayList<>();
 }

@@ -1,7 +1,5 @@
-package com.vou.backend.game.model;
+package com.vou.backend.game.quizz.model;
 
-import com.vou.backend.user.model.UserAnswer;
-import com.vou.backend.user.model.UserItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,11 +26,12 @@ public class Question {
     private String option3;
     private String option4;
     private String answer;
-    private String explain;
+    private String explaination;
+
     @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    Quiz quiz;
+    @JoinColumn(name = "quizz_id")
+    private Quizz quizz;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<UserAnswer> userAnswers = new ArrayList<>();
-
 }

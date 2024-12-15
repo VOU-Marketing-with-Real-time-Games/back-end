@@ -1,15 +1,10 @@
-package com.vou.backend.game.model;
+package com.vou.backend.game.puzzle.model;
 
-import com.vou.backend.user.model.UserItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -25,9 +20,8 @@ public class Item {
     private String description;
     private Integer total;
     private Integer remainingNum;
+
     @ManyToOne
     @JoinColumn(name = "puzzle_id")
-    Puzzle puzzle;
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<UserItem> userItems = new ArrayList<>();
+    private Puzzle puzzle;
 }

@@ -1,5 +1,4 @@
-package com.vou.backend.user.model;
-
+package com.vou.backend.game.game_info.model;
 
 import com.vou.backend.campaign.model.Campaign;
 import jakarta.persistence.*;
@@ -8,23 +7,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "user_favourite_campaign")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserFavoriteCampaign {
+public class GameCampaign {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Long campaignId;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @ManyToOne
-    @JoinColumn(name = "campaign_id")
-    private Campaign campaign;
-    Date addToTime;
+    @JoinColumn(name = "game_info_id")
+    private GameInfo gameInfo;
+
+    private Long gameId;
 }

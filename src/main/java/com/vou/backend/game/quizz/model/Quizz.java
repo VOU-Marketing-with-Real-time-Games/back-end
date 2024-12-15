@@ -1,6 +1,5 @@
-package com.vou.backend.game.model;
+package com.vou.backend.game.quizz.model;
 
-import com.vou.backend.brand.model.Branch;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,22 +7,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "puzzle")
+@Table(name = "quizz")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Puzzle {
+public class Quizz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String image;
     private String name;
     private String description;
-    private Integer itemNum;
-    @OneToMany(mappedBy = "puzzle", cascade = CascadeType.ALL)
-    private List<Item> items = new ArrayList<>();
+    private Date createdAt;
+    private Integer secondPerQuestion;
+    private Long campaignGameId;
+
+    @OneToMany(mappedBy = "quizz", cascade = CascadeType.ALL)
+    private List<Question> questions = new ArrayList<>();
 }

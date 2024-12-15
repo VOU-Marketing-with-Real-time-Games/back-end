@@ -1,7 +1,6 @@
-package com.vou.backend.user.model;
+package com.vou.backend.voucher.model;
 
-import com.vou.backend.game.model.Item;
-import com.vou.backend.voucher.model.Voucher;
+import com.vou.backend.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,16 +15,17 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserVoucher {
+public class VoucherUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    private Long userId;
+
     @ManyToOne
     @JoinColumn(name = "voucher_id")
     private Voucher voucher;
+
     private  Date addToTime;
     private String status;
 }

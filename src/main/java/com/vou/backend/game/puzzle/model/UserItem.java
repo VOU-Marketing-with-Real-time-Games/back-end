@@ -1,14 +1,11 @@
-package com.vou.backend.user.model;
+package com.vou.backend.game.puzzle.model;
 
-import com.vou.backend.campaign.model.Campaign;
-import com.vou.backend.game.model.Item;
+import com.vou.backend.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Entity
 @Table(name = "user_item")
@@ -20,9 +17,9 @@ public class UserItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    private Long userId;
+
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
