@@ -23,5 +23,6 @@ public class UserItem {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
+
     private Integer totalItem;
 }

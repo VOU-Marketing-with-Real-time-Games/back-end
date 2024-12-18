@@ -28,4 +28,10 @@ public class Quizz {
 
     @OneToMany(mappedBy = "quizz", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
+
+    public void copy(Quizz quizz) {
+        this.name = quizz.getName();
+        this.description = quizz.getDescription();
+        this.secondPerQuestion = quizz.getSecondPerQuestion();
+    }
 }
