@@ -2,10 +2,7 @@ package com.vou.backend.game.game_info.model;
 
 import com.vou.backend.user.model.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "user_campaign_game")
@@ -13,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class UserCampaignGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

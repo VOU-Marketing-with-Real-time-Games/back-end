@@ -22,9 +22,19 @@ public class Puzzle {
     private String image;
     private String name;
     private String description;
+
     private Integer itemNum;
+
     private Long campaignGameId;
 
     @OneToMany(mappedBy = "puzzle", cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
+
+    public void copy(Puzzle puzzle) {
+        this.image = puzzle.getImage();
+        this.name = puzzle.getName();
+        this.description = puzzle.getDescription();
+        this.itemNum = puzzle.getItemNum();
+        this.items = puzzle.getItems();
+    }
 }

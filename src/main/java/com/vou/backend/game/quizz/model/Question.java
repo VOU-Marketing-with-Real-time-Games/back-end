@@ -34,4 +34,16 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<UserAnswer> userAnswers = new ArrayList<>();
+
+    public void copy(Question questionDetails) {
+        this.questionName = questionDetails.getQuestionName();
+        this.image = questionDetails.getImage();
+        this.option1 = questionDetails.getOption1();
+        this.option2 = questionDetails.getOption2();
+        this.option3 = questionDetails.getOption3();
+        this.option4 = questionDetails.getOption4();
+        this.answer = questionDetails.getAnswer();
+        this.explaination = questionDetails.getExplaination();
+        this.quizz = questionDetails.getQuizz();
+    }
 }

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -23,5 +25,13 @@ public class GameCampaign {
     @JoinColumn(name = "game_info_id")
     private GameInfo gameInfo;
 
+    @OneToMany(mappedBy = "campaignGame")
+    private List<UserCampaignGame> userCampaignGames;
+
     private Long gameId;
+
+    public void copy(GameCampaign gameCampaign) {
+        this.campaignId = gameCampaign.getCampaignId();
+        this.gameId = gameCampaign.getGameId();
+    }
 }
