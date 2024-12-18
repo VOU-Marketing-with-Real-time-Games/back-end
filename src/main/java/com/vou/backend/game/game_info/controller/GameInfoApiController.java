@@ -6,13 +6,11 @@ import com.vou.backend.game.game_info.model.GameInfo;
 import com.vou.backend.game.game_info.service.GameService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing game information.
@@ -24,8 +22,6 @@ import java.util.stream.Collectors;
 public class GameInfoApiController {
 
     private final GameService gameService;
-    private final ModelMapper modelMapper;
-
     /**
      * Retrieves all game information.
      *
@@ -33,10 +29,7 @@ public class GameInfoApiController {
      */
     @GetMapping
     public ResponseEntity<List<GameInfoDto>> getAllGames() {
-        List<GameInfo> gameInfos = gameService.findAll();
-        List<GameInfoDto> gameInfoDtos = gameInfos.stream()
-                .map(gameInfo -> modelMapper.map(gameInfo, GameInfoDto.class))
-                .collect(Collectors.toList());
+        List<GameInfoDto> gameInfoDtos = gameService.findAll();
         return ResponseEntity.ok(gameInfoDtos);
     }
 
@@ -49,8 +42,7 @@ public class GameInfoApiController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<GameInfoDto> getGameById(@PathVariable Long id) throws GameNotFoundException {
-        GameInfo gameInfo = gameService.findById(id);
-        GameInfoDto gameInfoDto = modelMapper.map(gameInfo, GameInfoDto.class);
+        GameInfoDto gameInfoDto = gameService.findById(id);
         return ResponseEntity.ok(gameInfoDto);
     }
 
@@ -64,9 +56,7 @@ public class GameInfoApiController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<GameInfoDto> updateGame(@PathVariable Long id, @Valid @RequestBody GameInfoDto gameInfoDto) throws GameNotFoundException {
-        GameInfo gameInfo = modelMapper.map(gameInfoDto, GameInfo.class);
-        GameInfo updatedGameInfo = gameService.updateGame(id, gameInfo);
-        GameInfoDto updatedGameInfoDto = modelMapper.map(updatedGameInfo, GameInfoDto.class);
+        GameInfoDto updatedGameInfoDto = gameService.updateGame(id, gameInfoDto);
         return ResponseEntity.ok(updatedGameInfoDto);
     }
 }

@@ -23,39 +23,32 @@ public class QuestionApiController {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    public List<QuestionResponseDto> getAllQuestions() {
-        return questionService.getAllQuestions().stream()
-                .map(question -> modelMapper.map(question, QuestionResponseDto.class))
-                .collect(Collectors.toList());
+    public ResponseEntity<List<QuestionResponseDto>> getAllQuestions() {
+        List<QuestionResponseDto> questionResponseDtos = questionService.getAllQuestions();
+        return ResponseEntity.ok(questionResponseDtos);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<QuestionResponseDto> getQuestionById(@PathVariable Long id) throws QuestionNotFoundException {
-        Question question = questionService.getQuestionById(id);
-        QuestionResponseDto questionResponseDto = modelMapper.map(question, QuestionResponseDto.class);
+        QuestionResponseDto questionResponseDto = questionService.getQuestionById(id);
         return ResponseEntity.ok(questionResponseDto);
     }
 
     @GetMapping("/quizz/{quizzId}")
-    public List<QuestionResponseDto> getQuestionsByQuizzId(Long quizzId) {
-        return questionService.getQuestionsByQuizzId(quizzId).stream()
-                .map(question -> modelMapper.map(question, QuestionResponseDto.class))
-                .collect(Collectors.toList());
+    public ResponseEntity<List<QuestionResponseDto>> getQuestionsByQuizzId(Long quizzId) {
+        List<QuestionResponseDto> questionResponseDtos = questionService.getQuestionsByQuizzId(quizzId);
+        return ResponseEntity.ok(questionResponseDtos);
     }
 
     @PostMapping
     public ResponseEntity<QuestionResponseDto> createQuestion(@RequestBody QuestionRequestDto questionRequestDto) throws QuizzNotFoundException {
-        Question question = modelMapper.map(questionRequestDto, Question.class);
-        Question createdQuestion = questionService.createQuestion(question);
-        QuestionResponseDto questionResponseDto = modelMapper.map(createdQuestion, QuestionResponseDto.class);
+        QuestionResponseDto questionResponseDto = questionService.createQuestion(questionRequestDto);
         return ResponseEntity.ok(questionResponseDto);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<QuestionResponseDto> updateQuestion(@PathVariable Long id, @RequestBody QuestionRequestDto questionRequestDto) throws QuizzNotFoundException, QuestionNotFoundException {
-        Question questionDetails = modelMapper.map(questionRequestDto, Question.class);
-        Question updatedQuestion = questionService.updateQuestion(id, questionDetails);
-        QuestionResponseDto questionResponseDto = modelMapper.map(updatedQuestion, QuestionResponseDto.class);
+        QuestionResponseDto questionResponseDto = questionService.updateQuestion(id, questionRequestDto);
         return ResponseEntity.ok(questionResponseDto);
     }
 

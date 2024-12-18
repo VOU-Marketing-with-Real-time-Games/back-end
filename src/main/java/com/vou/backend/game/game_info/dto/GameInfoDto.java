@@ -1,6 +1,5 @@
 package com.vou.backend.game.game_info.dto;
 
-import com.vou.backend.game.game_info.model.GameType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

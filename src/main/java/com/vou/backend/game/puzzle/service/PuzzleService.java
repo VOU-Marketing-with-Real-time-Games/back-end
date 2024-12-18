@@ -7,12 +7,16 @@ import com.vou.backend.game.game_info.exception.PuzzleNotFoundException;
 import com.vou.backend.game.game_info.model.GameCampaign;
 import com.vou.backend.game.game_info.model.GameType;
 import com.vou.backend.game.game_info.service.GameCampaignService;
+import com.vou.backend.game.puzzle.dto.PuzzleRequestDto;
+import com.vou.backend.game.puzzle.dto.PuzzleResponseDto;
 import com.vou.backend.game.puzzle.model.Item;
 import com.vou.backend.game.puzzle.model.Puzzle;
 import com.vou.backend.game.puzzle.repository.PuzzleRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +25,12 @@ public class PuzzleService {
     private final PuzzleRepository puzzleRepository;
     private final GameCampaignService gameCampaignService;
     private final ItemService itemService;
+    private final ModelMapper modelMapper;
 
-    public Puzzle createPuzzle(Puzzle puzzle) throws GameCampaignNotFoundException, Game_CampaignGameConflict {
-        GameCampaign gameCampaign = gameCampaignService.findById(puzzle.getCampaignGameId());
+    public PuzzleResponseDto createPuzzle(PuzzleRequestDto puzzleRequestDto) throws GameCampaignNotFoundException, Game_CampaignGameConflict {
+        Puzzle puzzle = modelMapper.map(puzzleRequestDto, Puzzle.class);
+
+        GameCampaign gameCampaign = gameCampaignService.getById(puzzle.getCampaignGameId());
         if(gameCampaign.getGameInfo().getType() != GameType.SHAKE_GAME)
         {
             throw new Game_CampaignGameConflict("Game Campaign does not match with the game type");
@@ -34,15 +41,16 @@ public class PuzzleService {
         }
 
         Puzzle savedPuzzle = puzzleRepository.save(puzzle);
-
         gameCampaign.setGameId(savedPuzzle.getId());
         gameCampaignService.updateGameCampaign(gameCampaign);
 
-        return savedPuzzle;
+        return modelMapper.map(savedPuzzle, PuzzleResponseDto.class);
     }
 
-    public Puzzle updatePuzzle(Long id, Puzzle puzzle) throws PuzzleNotFoundException, GameCampaignNotFoundException, Game_CampaignGameConflict {
-        GameCampaign gameCampaign = gameCampaignService.findById(puzzle.getCampaignGameId());
+    public PuzzleResponseDto updatePuzzle(Long id, PuzzleRequestDto puzzleRequestDto) throws PuzzleNotFoundException, GameCampaignNotFoundException, Game_CampaignGameConflict {
+        Puzzle puzzle = modelMapper.map(puzzleRequestDto, Puzzle.class);
+
+        GameCampaign gameCampaign = gameCampaignService.getById(puzzle.getCampaignGameId());
         if(gameCampaign.getGameInfo().getType() != GameType.SHAKE_GAME)
         {
             throw new Game_CampaignGameConflict("Game Campaign does not match with the game type");
@@ -57,21 +65,27 @@ public class PuzzleService {
             item.setPuzzle(existingPuzzle);
         }
         existingPuzzle.copy(puzzle);
-        return puzzleRepository.save(existingPuzzle);
+        Puzzle updatedPuzzle = puzzleRepository.save(existingPuzzle);
+        return modelMapper.map(updatedPuzzle, PuzzleResponseDto.class);
     }
 
-    public Puzzle getPuzzleById(Long id) throws PuzzleNotFoundException {
-        return puzzleRepository.findById(id)
+    public PuzzleResponseDto getPuzzleById(Long id) throws PuzzleNotFoundException {
+        Puzzle puzzle = puzzleRepository.findById(id)
                 .orElseThrow(() -> new PuzzleNotFoundException("Puzzle not found"));
+        return modelMapper.map(puzzle, PuzzleResponseDto.class);
     }
 
-    public List<Puzzle> getAllPuzzles() {
-        return puzzleRepository.findAll();
+    public List<PuzzleResponseDto> getAllPuzzles() {
+        var puzzles = puzzleRepository.findAll();
+        return puzzles.stream()
+                .map(puzzle -> modelMapper.map(puzzle, PuzzleResponseDto.class))
+                .collect(Collectors.toList());
     }
 
     public void deletePuzzle(Long id) throws PuzzleNotFoundException, GameCampaignNotFoundException, GameNotFoundException {
-        Puzzle puzzle = getPuzzleById(id);
-        GameCampaign gameCampaign = gameCampaignService.findById(puzzle.getCampaignGameId());
+        Puzzle puzzle = puzzleRepository.findById(id)
+                .orElseThrow(() -> new PuzzleNotFoundException("Puzzle not found"));
+        GameCampaign gameCampaign = gameCampaignService.getById(puzzle.getCampaignGameId());
         gameCampaign.setGameId(null);
         puzzleRepository.deleteById(id);
     }

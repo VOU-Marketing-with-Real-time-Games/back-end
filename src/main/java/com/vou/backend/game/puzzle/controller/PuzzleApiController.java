@@ -30,24 +30,19 @@ public class PuzzleApiController {
 
     @PostMapping
     public ResponseEntity<PuzzleResponseDto> createPuzzle(@Valid @RequestBody PuzzleRequestDto puzzleRequestDto) throws Game_CampaignGameConflict, GameCampaignNotFoundException {
-        Puzzle puzzle = modelMapper.map(puzzleRequestDto, Puzzle.class);
-        Puzzle createdPuzzle = puzzleService.createPuzzle(puzzle);
-        PuzzleResponseDto responseDto = modelMapper.map(createdPuzzle, PuzzleResponseDto.class);
+        PuzzleResponseDto responseDto = puzzleService.createPuzzle(puzzleRequestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PuzzleResponseDto> updatePuzzle(@PathVariable Long id, @Valid @RequestBody PuzzleRequestDto puzzleRequestDto) throws GameCampaignNotFoundException, PuzzleNotFoundException, Game_CampaignGameConflict {
-        Puzzle puzzle = modelMapper.map(puzzleRequestDto, Puzzle.class);
-        Puzzle updatedPuzzle = puzzleService.updatePuzzle(id, puzzle);
-        PuzzleResponseDto responseDto = modelMapper.map(updatedPuzzle, PuzzleResponseDto.class);
+        PuzzleResponseDto responseDto = puzzleService.updatePuzzle(id, puzzleRequestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PuzzleResponseDto> getPuzzleById(@PathVariable Long id) throws PuzzleNotFoundException {
-        Puzzle puzzle = puzzleService.getPuzzleById(id);
-        PuzzleResponseDto responseDto = modelMapper.map(puzzle, PuzzleResponseDto.class);
+        PuzzleResponseDto responseDto = puzzleService.getPuzzleById(id);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 

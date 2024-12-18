@@ -27,33 +27,26 @@ public class QuizzApiController {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    public List<QuizzResponseDto> getAllQuizzes() {
-        return quizzService.getAllQuizzes().stream()
-                .map(quizz -> modelMapper.map(quizz, QuizzResponseDto.class))
-                .collect(Collectors.toList());
+    public ResponseEntity<List<QuizzResponseDto>> getAllQuizzes() {
+        return ResponseEntity.ok(quizzService.getAllQuizzes());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<QuizzResponseDto> getQuizzById(@PathVariable Long id) throws QuizzNotFoundException {
-        Quizz quizz = quizzService.getQuizzById(id);
-        QuizzResponseDto quizzResponseDto = modelMapper.map(quizz, QuizzResponseDto.class);
+        QuizzResponseDto quizzResponseDto = quizzService.getQuizzById(id);
         return ResponseEntity.ok(quizzResponseDto);
     }
 
     @PostMapping
     public ResponseEntity<QuizzResponseDto> createQuizz(@Valid @RequestBody QuizzRequestDto quizzRequestDto) throws GameCampaignNotFoundException, Game_CampaignGameConflict {
-        Quizz quizz = modelMapper.map(quizzRequestDto, Quizz.class);
-        Quizz createdQuizz = quizzService.createQuizz(quizz);
-        QuizzResponseDto quizzResponseDto = modelMapper.map(createdQuizz, QuizzResponseDto.class);
+        QuizzResponseDto quizzResponseDto = quizzService.createQuizz(quizzRequestDto);
         return ResponseEntity.ok(quizzResponseDto);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<QuizzResponseDto> updateQuizz(@PathVariable Long id,@Valid @RequestBody QuizzRequestDto quizzRequestDto) throws QuizzNotFoundException {
-            Quizz quizzDetails = modelMapper.map(quizzRequestDto, Quizz.class);
-            Quizz updatedQuizz = quizzService.updateQuizz(id, quizzDetails);
-            QuizzResponseDto quizzResponseDto = modelMapper.map(updatedQuizz, QuizzResponseDto.class);
-            return ResponseEntity.ok(quizzResponseDto);
+        QuizzResponseDto quizzResponseDto = quizzService.updateQuizz(id, quizzRequestDto);
+        return ResponseEntity.ok(quizzResponseDto);
     }
 
     @DeleteMapping("/{id}")

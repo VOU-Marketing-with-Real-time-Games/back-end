@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @Validated
 public class GameCampaignApiController {
     private final GameCampaignService gameCampaignService;
-    private final ModelMapper modelMapper;
 
     /**
      * Retrieves all game campaigns.
@@ -36,10 +35,8 @@ public class GameCampaignApiController {
      */
     @GetMapping
     public ResponseEntity<List<GameCampaignResponseDto>> getAllGameCampaigns() {
-        List<GameCampaign> gameCampaigns = gameCampaignService.findAll();
-        List<GameCampaignResponseDto> responseDtos = gameCampaigns.stream()
-                .map(gameCampaign -> modelMapper.map(gameCampaign, GameCampaignResponseDto.class))
-                .collect(Collectors.toList());
+
+        List<GameCampaignResponseDto> responseDtos = gameCampaignService.findAll();
         return ResponseEntity.ok(responseDtos);
     }
 
@@ -52,8 +49,7 @@ public class GameCampaignApiController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<GameCampaignResponseDto> getGameCampaignById(@PathVariable Long id) throws GameCampaignNotFoundException {
-        GameCampaign gameCampaign = gameCampaignService.findById(id);
-        GameCampaignResponseDto responseDto = modelMapper.map(gameCampaign, GameCampaignResponseDto.class);
+        GameCampaignResponseDto responseDto = gameCampaignService.findById(id);
         return ResponseEntity.ok(responseDto);
     }
 
@@ -66,9 +62,7 @@ public class GameCampaignApiController {
      */
     @PostMapping
     public ResponseEntity<GameCampaignResponseDto> createGameCampaign(@RequestBody @Valid GameCampaignRequestDto requestDto) throws GameNotFoundException {
-        GameCampaign gameCampaign = modelMapper.map(requestDto, GameCampaign.class);
-        GameCampaign savedGameCampaign = gameCampaignService.createGameCampaign(gameCampaign);
-        GameCampaignResponseDto responseDto = modelMapper.map(savedGameCampaign, GameCampaignResponseDto.class);
+        GameCampaignResponseDto responseDto = gameCampaignService.createGameCampaign(requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
@@ -83,12 +77,9 @@ public class GameCampaignApiController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<GameCampaignResponseDto> updateGameCampaign(@PathVariable Long id, @RequestBody @Valid GameCampaignRequestDto requestDto) throws GameCampaignNotFoundException, GameNotFoundException {
-        GameCampaign gameCampaign = modelMapper.map(requestDto, GameCampaign.class);
-        GameCampaign updatedGameCampaign = gameCampaignService.updateGameCampaign(id,gameCampaign);
-        GameCampaignResponseDto responseDto = modelMapper.map(updatedGameCampaign, GameCampaignResponseDto.class);
+        GameCampaignResponseDto responseDto = gameCampaignService.updateGameCampaign(id, requestDto);
         return ResponseEntity.ok(responseDto);
     }
-
 
     /**
      * Deletes a game campaign by its ID.
@@ -110,11 +101,9 @@ public class GameCampaignApiController {
      * @return a list of GameCampaignResponseDto
      */
     @GetMapping("/campaign/{campaignId}")
-    public List<GameCampaignResponseDto> findByCampaignId(@PathVariable Long campaignId) {
-        List<GameCampaign> gameCampaigns = gameCampaignService.findByCampaignId(campaignId);
-        return gameCampaigns.stream()
-                .map(gameCampaign -> modelMapper.map(gameCampaign, GameCampaignResponseDto.class))
-                .collect(Collectors.toList());
+    public ResponseEntity<List<GameCampaignResponseDto>> findByCampaignId(@PathVariable Long campaignId) {
+        List<GameCampaignResponseDto> gameCampaignDtos = gameCampaignService.findByCampaignId(campaignId);
+        return ResponseEntity.ok(gameCampaignDtos);
     }
 
     /**
@@ -126,10 +115,7 @@ public class GameCampaignApiController {
      */
     @GetMapping("/{campaignId}/users")
     public ResponseEntity<List<UserCampaignGameResponseDto>> getUserCampaignGames(@PathVariable Long campaignId) throws GameCampaignNotFoundException {
-        List<UserCampaignGame> userCampaignGames = gameCampaignService.getUserCampaignGames(campaignId);
-        List<UserCampaignGameResponseDto> responseDtos = userCampaignGames.stream()
-                .map(userCampaignGame -> modelMapper.map(userCampaignGame, UserCampaignGameResponseDto.class))
-                .collect(Collectors.toList());
+        List<UserCampaignGameResponseDto> responseDtos = gameCampaignService.getUserCampaignGames(campaignId);
         return ResponseEntity.ok(responseDtos);
     }
 }

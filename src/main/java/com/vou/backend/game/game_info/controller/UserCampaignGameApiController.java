@@ -7,7 +7,6 @@ import com.vou.backend.game.game_info.exception.UserCampaignGameNotFoundExceptio
 import com.vou.backend.game.game_info.model.UserCampaignGame;
 import com.vou.backend.game.game_info.service.UserCampaignGameService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 public class UserCampaignGameApiController {
 
     private final UserCampaignGameService userCampaignGameService;
-    private final ModelMapper modelMapper;
 
     /**
      * Creates a new user campaign game.
@@ -36,9 +34,7 @@ public class UserCampaignGameApiController {
      */
     @PostMapping
     public ResponseEntity<UserCampaignGameResponseDto> createUserCampaignGame(@RequestBody UserCampaignGameRequestDto requestDto) throws GameCampaignNotFoundException {
-        UserCampaignGame userCampaignGame = modelMapper.map(requestDto, UserCampaignGame.class);
-        UserCampaignGame savedUserCampaignGame = userCampaignGameService.saveUserCampaignGame(userCampaignGame);
-        UserCampaignGameResponseDto responseDto = modelMapper.map(savedUserCampaignGame, UserCampaignGameResponseDto.class);
+        UserCampaignGameResponseDto responseDto = userCampaignGameService.saveUserCampaignGame(requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
@@ -51,8 +47,7 @@ public class UserCampaignGameApiController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<UserCampaignGameResponseDto> getUserCampaignGameById(@PathVariable Long id) throws UserCampaignGameNotFoundException {
-        UserCampaignGame userCampaignGame = userCampaignGameService.getUserCampaignGameById(id);
-        UserCampaignGameResponseDto responseDto = modelMapper.map(userCampaignGame, UserCampaignGameResponseDto.class);
+        UserCampaignGameResponseDto responseDto = userCampaignGameService.getUserCampaignGameById(id);
         return ResponseEntity.ok(responseDto);
     }
 
@@ -63,10 +58,7 @@ public class UserCampaignGameApiController {
      */
     @GetMapping
     public ResponseEntity<List<UserCampaignGameResponseDto>> getAllUserCampaignGames() {
-        List<UserCampaignGame> userCampaignGames = userCampaignGameService.getAllUserCampaignGames();
-        List<UserCampaignGameResponseDto> responseDtos = userCampaignGames.stream()
-                .map(userCampaignGame -> modelMapper.map(userCampaignGame, UserCampaignGameResponseDto.class))
-                .collect(Collectors.toList());
+        List<UserCampaignGameResponseDto> responseDtos = userCampaignGameService.getAllUserCampaignGames();
         return ResponseEntity.ok(responseDtos);
     }
 
@@ -80,8 +72,7 @@ public class UserCampaignGameApiController {
      */
     @GetMapping("/{id}/completed")
     public ResponseEntity<UserCampaignGameResponseDto> updateUserCampaignGame(@PathVariable Long id) throws UserCampaignGameNotFoundException, GameCampaignNotFoundException {
-        UserCampaignGame updatedUserCampaignGame = userCampaignGameService.updateUserCampaignGame(id);
-        UserCampaignGameResponseDto responseDto = modelMapper.map(updatedUserCampaignGame, UserCampaignGameResponseDto.class);
+        UserCampaignGameResponseDto responseDto = userCampaignGameService.updateUserCampaignGame(id);
         return ResponseEntity.ok(responseDto);
     }
 
@@ -93,10 +84,7 @@ public class UserCampaignGameApiController {
      */
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<UserCampaignGameResponseDto>> findByUserId(@PathVariable Long userId) {
-        List<UserCampaignGame> userCampaignGames = userCampaignGameService.findByUserId(userId);
-        List<UserCampaignGameResponseDto> responseDtos = userCampaignGames.stream()
-                .map(userCampaignGame -> modelMapper.map(userCampaignGame, UserCampaignGameResponseDto.class))
-                .collect(Collectors.toList());
+        List<UserCampaignGameResponseDto> responseDtos = userCampaignGameService.findByUserId(userId);
         return ResponseEntity.ok(responseDtos);
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GameInfoRepository extends JpaRepository<GameInfo, Long> {
-
     @Query("SELECT g FROM GameInfo g WHERE g.type = ?1")
     GameInfo findByType(GameType type);
 }
