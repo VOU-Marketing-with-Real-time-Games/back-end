@@ -1,5 +1,6 @@
 package com.vou.backend.exception_handler;
 
+import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.game.game_info.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -75,7 +76,8 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({GameNotFoundException.class, GameCampaignNotFoundException.class, UserCampaignGameNotFoundException.class, PuzzleNotFoundException.class, QuizzNotFoundException.class, QuestionNotFoundException.class})
+    @ExceptionHandler({GameNotFoundException.class, GameCampaignNotFoundException.class, UserCampaignGameNotFoundException.class, PuzzleNotFoundException.class, QuizzNotFoundException.class, QuestionNotFoundException.class
+    , CampaignNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorDTO handleNotFoundException(HttpServletRequest request, Exception ex) {

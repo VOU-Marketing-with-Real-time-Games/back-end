@@ -19,12 +19,9 @@ public class FavoriteCampaignUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long userId;
-
     @ManyToOne
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
-
     Date addToTime;
 }

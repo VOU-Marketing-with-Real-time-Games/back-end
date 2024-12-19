@@ -1,5 +1,8 @@
 package com.vou.backend.config;
 
+import com.vou.backend.campaign.dto.CampaignDto;
+import com.vou.backend.campaign.dto.CampaignResponseDto;
+import com.vou.backend.campaign.model.Campaign;
 import com.vou.backend.game.game_info.dto.*;
 import com.vou.backend.game.game_info.model.GameCampaign;
 import com.vou.backend.game.game_info.model.GameInfo;
@@ -37,8 +40,36 @@ public class AppConfig {
         configUserCampaignGameConverters(modelMapper);
         configPuzzleConverters(modelMapper);
         configQuestionConverters(modelMapper);
+        configCampaignConverters(modelMapper);
         return modelMapper;
     }
+    private void configCampaignConverters(ModelMapper modelMapper) {
+        // DTO to Model mapping
+        modelMapper.typeMap(CampaignDto.class, Campaign.class).addMappings(mapper -> {
+            mapper.skip(Campaign::setId);
+            mapper.skip(Campaign::setCreatedAt);
+            mapper.skip(Campaign::setFavouriteCampaigns);
+        }).setPostConverter(context -> {
+            Campaign campaign = context.getDestination();
+            if (campaign.getStatus() == null) {
+                campaign.setStatus("Pending");
+            }
+            return campaign;
+        });
+
+        // Model to Response DTO mapping
+        modelMapper.typeMap(Campaign.class, CampaignResponseDto.class).addMappings(mapper -> {
+            mapper.map(Campaign::getName, CampaignResponseDto::setName);
+            mapper.map(Campaign::getImage, CampaignResponseDto::setImage);
+            mapper.map(Campaign::getFiledId, CampaignResponseDto::setFiledId);
+            mapper.map(Campaign::getStartDate, CampaignResponseDto::setStartDate);
+            mapper.map(Campaign::getEndDate, CampaignResponseDto::setEndDate);
+            mapper.map(Campaign::getCreatedAt, CampaignResponseDto::setCreatedAt);
+            mapper.map(Campaign::getStatus, CampaignResponseDto::setStatus);
+        });
+
+    }
+
 
     private void configGameCampaignConverters(ModelMapper modelMapper) {
         Converter<GameInfo, GameInfoDto> gameInfoToGameInfoDtoConverter = context -> modelMapper.map(context.getSource(), GameInfoDto.class);
