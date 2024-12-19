@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/campaigns")
 @RequiredArgsConstructor
@@ -41,5 +43,11 @@ public class CampaignController {
     public ResponseEntity<?> deleteCampaign(@PathVariable Long id) throws CampaignNotFoundException {
         campaignService.deleteCampaignById(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/user-favourite/{id}")
+    public ResponseEntity<?> getFavoriteCampaign(@PathVariable Long id)
+    {
+        List<CampaignResponseDto> campaigns = campaignService.getFavouriteCampaignsByUser(id);
+        return new ResponseEntity<>(campaigns,HttpStatus.OK);
     }
 }

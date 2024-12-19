@@ -28,5 +28,4 @@ public class Campaign {
     private Date createdAt;
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<FavoriteCampaignUser> favouriteCampaigns = new ArrayList<>();
-
 }

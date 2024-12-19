@@ -4,7 +4,9 @@ import com.vou.backend.campaign.dto.CampaignDto;
 import com.vou.backend.campaign.dto.CampaignResponseDto;
 import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.campaign.model.Campaign;
+import com.vou.backend.campaign.model.FavoriteCampaignUser;
 import com.vou.backend.campaign.repository.CampaignRepository;
+import com.vou.backend.campaign.repository.FavoriteCampaignUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -12,11 +14,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CampaignService {
     private  final CampaignRepository campaignRepository;
+    private final FavoriteCampaignUserRepository favoriteCampaignUserRepository;
     private final ModelMapper modelMapper;
     public CampaignResponseDto createCampaign(CampaignDto campaignDto)
     {
@@ -48,6 +53,13 @@ public class CampaignService {
         validateId(id);
         getCampaign(id);
         campaignRepository.deleteById(id);
+    }
+    public List<CampaignResponseDto> getFavouriteCampaignsByUser(Long userId) {
+        validateId(userId);
+        List<FavoriteCampaignUser> favouriteCampaigns = favoriteCampaignUserRepository.findByUserId(userId);
+        return favouriteCampaigns.stream()
+                .map(favoriteCampaignUser -> modelMapper.map(favoriteCampaignUser.getCampaign(), CampaignResponseDto.class))
+                .collect(Collectors.toList());
     }
     private void validateId(Long id) {
         if (id == null || id <= 0) {
