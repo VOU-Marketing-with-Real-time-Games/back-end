@@ -4,19 +4,24 @@ import com.vou.backend.voucher.dto.VoucherResponseDto;
 import com.vou.backend.voucher.exception.ExistedVoucherException;
 import com.vou.backend.voucher.exception.VoucherNotFoundException;
 import com.vou.backend.voucher.model.Voucher;
+import com.vou.backend.voucher.model.VoucherUser;
 import com.vou.backend.voucher.repository.VoucherRepository;
+import com.vou.backend.voucher.repository.VoucherUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class VoucherService {
     private final VoucherRepository voucherRepository;
+    private final VoucherUserRepository voucherUserRepository;
     private final ModelMapper modelMapper;
     public VoucherResponseDto createVoucher(VoucherDto voucherDto) throws ExistedVoucherException {
         Optional<Voucher> existedVoucher = voucherRepository.findById(voucherDto.getCode());
@@ -53,5 +58,11 @@ public class VoucherService {
         if (id == null || id.length()==0) {
             throw new IllegalArgumentException("Invalid ID");
         }
+    }
+    public List<VoucherResponseDto> getVouchersByUserId(Long userId) {
+        List<VoucherUser> voucherUsers = voucherUserRepository.findByUserId(userId);
+        return voucherUsers.stream()
+                .map(voucherUser -> modelMapper.map(voucherUser.getVoucher(), VoucherResponseDto.class))
+                .collect(Collectors.toList());
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/vouchers")
@@ -42,5 +44,9 @@ public class VoucherController {
     public ResponseEntity<?> deleteVoucher(@PathVariable String id) throws VoucherNotFoundException {
         voucherService.deleteVoucherById(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/user/{userId}")
+    public List<VoucherResponseDto> getUserVouchers(@PathVariable Long userId) {
+        return voucherService.getVouchersByUserId(userId);
     }
 }
