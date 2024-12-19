@@ -4,7 +4,9 @@ import com.vou.backend.voucher.dto.VoucherResponseDto;
 import com.vou.backend.voucher.exception.ExistedVoucherException;
 import com.vou.backend.voucher.exception.VoucherNotFoundException;
 import com.vou.backend.voucher.model.Voucher;
+import com.vou.backend.voucher.model.VoucherCampaign;
 import com.vou.backend.voucher.model.VoucherUser;
+import com.vou.backend.voucher.repository.VoucherCampaignRepository;
 import com.vou.backend.voucher.repository.VoucherRepository;
 import com.vou.backend.voucher.repository.VoucherUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class VoucherService {
     private final VoucherRepository voucherRepository;
     private final VoucherUserRepository voucherUserRepository;
+    private final VoucherCampaignRepository voucherCampaignRepository;
     private final ModelMapper modelMapper;
     public VoucherResponseDto createVoucher(VoucherDto voucherDto) throws ExistedVoucherException {
         Optional<Voucher> existedVoucher = voucherRepository.findById(voucherDto.getCode());
@@ -63,6 +66,12 @@ public class VoucherService {
         List<VoucherUser> voucherUsers = voucherUserRepository.findByUserId(userId);
         return voucherUsers.stream()
                 .map(voucherUser -> modelMapper.map(voucherUser.getVoucher(), VoucherResponseDto.class))
+                .collect(Collectors.toList());
+    }
+    public List<VoucherResponseDto> getVouchersByCampaignId(Long campaignId) {
+        List<VoucherCampaign> voucherCampaigns = voucherCampaignRepository.findByIdCampaignId(campaignId);
+        return voucherCampaigns.stream()
+                .map(voucherCampaign -> modelMapper.map(voucherCampaign.getId().getVoucher(), VoucherResponseDto.class))
                 .collect(Collectors.toList());
     }
 }

@@ -46,7 +46,11 @@ public class VoucherController {
         return ResponseEntity.noContent().build();
     }
     @GetMapping("/user/{userId}")
-    public List<VoucherResponseDto> getUserVouchers(@PathVariable Long userId) {
-        return voucherService.getVouchersByUserId(userId);
+    public ResponseEntity<?> getUserVouchers(@PathVariable Long userId) {
+        return new ResponseEntity<>(voucherService.getVouchersByUserId(userId),HttpStatus.OK);
+    }
+    @GetMapping("/campaign/{campaignId}")
+    public  ResponseEntity<?> getCampaignVouchers(@PathVariable Long campaignId) {
+        return new ResponseEntity<>(voucherService.getVouchersByCampaignId(campaignId),HttpStatus.OK);
     }
 }
