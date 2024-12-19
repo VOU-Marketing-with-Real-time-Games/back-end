@@ -1,5 +1,8 @@
 package com.vou.backend.config;
 
+import com.vou.backend.campaign.dto.CampaignDto;
+import com.vou.backend.campaign.dto.CampaignResponseDto;
+import com.vou.backend.campaign.model.Campaign;
 import com.vou.backend.game.game_info.dto.*;
 import com.vou.backend.game.game_info.model.GameCampaign;
 import com.vou.backend.game.game_info.model.GameInfo;
@@ -14,6 +17,9 @@ import com.vou.backend.game.puzzle.model.Puzzle;
 import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
 import com.vou.backend.game.quizz.model.Question;
+import com.vou.backend.voucher.dto.VoucherDto;
+import com.vou.backend.voucher.dto.VoucherResponseDto;
+import com.vou.backend.voucher.model.Voucher;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -37,8 +43,61 @@ public class AppConfig {
         configUserCampaignGameConverters(modelMapper);
         configPuzzleConverters(modelMapper);
         configQuestionConverters(modelMapper);
+        configCampaignConverters(modelMapper);
         return modelMapper;
     }
+    private void configCampaignConverters(ModelMapper modelMapper) {
+        // DTO to Model mapping
+        modelMapper.typeMap(CampaignDto.class, Campaign.class).addMappings(mapper -> {
+            mapper.skip(Campaign::setId);
+            mapper.skip(Campaign::setCreatedAt);
+            mapper.skip(Campaign::setFavouriteCampaigns);
+        }).setPostConverter(context -> {
+            Campaign campaign = context.getDestination();
+            if (campaign.getStatus() == null) {
+                campaign.setStatus("Pending");
+            }
+            return campaign;
+        });
+
+        // Model to Response DTO mapping
+        modelMapper.typeMap(Campaign.class, CampaignResponseDto.class).addMappings(mapper -> {
+            mapper.map(Campaign::getName, CampaignResponseDto::setName);
+            mapper.map(Campaign::getImage, CampaignResponseDto::setImage);
+            mapper.map(Campaign::getFiledId, CampaignResponseDto::setFiledId);
+            mapper.map(Campaign::getStartDate, CampaignResponseDto::setStartDate);
+            mapper.map(Campaign::getEndDate, CampaignResponseDto::setEndDate);
+            mapper.map(Campaign::getCreatedAt, CampaignResponseDto::setCreatedAt);
+            mapper.map(Campaign::getStatus, CampaignResponseDto::setStatus);
+        });
+    }
+    private void configVoucherConverters(ModelMapper modelMapper)
+    {
+        // DTO to Model mapping
+        modelMapper.typeMap(VoucherDto.class, Voucher.class).addMappings(mapper -> {
+            mapper.skip(Voucher::setQrCode);
+            mapper.skip(Voucher::setCreatedAt);
+            mapper.skip(Voucher::setStatus);
+        }).setPostConverter(context -> {
+            Voucher voucher = context.getDestination();
+            if (voucher.getStatus() == null) {
+                voucher.setStatus("Pending");
+            }
+            return voucher;
+        });
+        // Model to Response DTO mapping
+        modelMapper.typeMap(Voucher.class, VoucherResponseDto.class).addMappings(mapper -> {
+            mapper.map(Voucher::getCode, VoucherResponseDto::setCode);
+            mapper.map(Voucher::getImage, VoucherResponseDto::setImage);
+            mapper.map(Voucher::getQrCode, VoucherResponseDto::setQrCode);
+            mapper.map(Voucher::getCreatedAt, VoucherResponseDto::setCreatedAt);
+            mapper.map(Voucher::getDescription, VoucherResponseDto::setDescription);
+            mapper.map(Voucher::getBrandId, VoucherResponseDto::setBrandId);
+            mapper.map(Voucher::getDiscount, VoucherResponseDto::setDiscount);
+            mapper.map(Voucher::getExpiredDate,VoucherResponseDto::setExpiredDate);
+        });
+    }
+
 
     private void configGameCampaignConverters(ModelMapper modelMapper) {
         Converter<GameInfo, GameInfoDto> gameInfoToGameInfoDtoConverter = context -> modelMapper.map(context.getSource(), GameInfoDto.class);
