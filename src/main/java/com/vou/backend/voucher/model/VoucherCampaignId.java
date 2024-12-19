@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Builder
 public class VoucherCampaignId implements Serializable {
     private Long campaignId;
-
     @ManyToOne
     @JoinColumn(name = "voucher_id")
     private Voucher voucher;

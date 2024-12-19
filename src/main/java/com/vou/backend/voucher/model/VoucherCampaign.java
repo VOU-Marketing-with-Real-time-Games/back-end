@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class VoucherCampaign {
     @EmbeddedId
     private VoucherCampaignId id;
-
     private Integer total;
     private Integer remaining;
 }

@@ -19,13 +19,10 @@ public class VoucherUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long userId;
-
     @ManyToOne
     @JoinColumn(name = "voucher_id")
     private Voucher voucher;
-
     private  Date addToTime;
     private String status;
 }

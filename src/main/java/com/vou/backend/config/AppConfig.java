@@ -17,6 +17,9 @@ import com.vou.backend.game.puzzle.model.Puzzle;
 import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
 import com.vou.backend.game.quizz.model.Question;
+import com.vou.backend.voucher.dto.VoucherDto;
+import com.vou.backend.voucher.dto.VoucherResponseDto;
+import com.vou.backend.voucher.model.Voucher;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -67,7 +70,32 @@ public class AppConfig {
             mapper.map(Campaign::getCreatedAt, CampaignResponseDto::setCreatedAt);
             mapper.map(Campaign::getStatus, CampaignResponseDto::setStatus);
         });
-
+    }
+    private void configVoucherConverters(ModelMapper modelMapper)
+    {
+        // DTO to Model mapping
+        modelMapper.typeMap(VoucherDto.class, Voucher.class).addMappings(mapper -> {
+            mapper.skip(Voucher::setQrCode);
+            mapper.skip(Voucher::setCreatedAt);
+            mapper.skip(Voucher::setStatus);
+        }).setPostConverter(context -> {
+            Voucher voucher = context.getDestination();
+            if (voucher.getStatus() == null) {
+                voucher.setStatus("Pending");
+            }
+            return voucher;
+        });
+        // Model to Response DTO mapping
+        modelMapper.typeMap(Voucher.class, VoucherResponseDto.class).addMappings(mapper -> {
+            mapper.map(Voucher::getCode, VoucherResponseDto::setCode);
+            mapper.map(Voucher::getImage, VoucherResponseDto::setImage);
+            mapper.map(Voucher::getQrCode, VoucherResponseDto::setQrCode);
+            mapper.map(Voucher::getCreatedAt, VoucherResponseDto::setCreatedAt);
+            mapper.map(Voucher::getDescription, VoucherResponseDto::setDescription);
+            mapper.map(Voucher::getBrandId, VoucherResponseDto::setBrandId);
+            mapper.map(Voucher::getDiscount, VoucherResponseDto::setDiscount);
+            mapper.map(Voucher::getExpiredDate,VoucherResponseDto::setExpiredDate);
+        });
     }
 
 
