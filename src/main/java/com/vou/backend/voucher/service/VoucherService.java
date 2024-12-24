@@ -1,4 +1,5 @@
 package com.vou.backend.voucher.service;
+import com.vou.backend.voucher.dto.UpdateVoucherDto;
 import com.vou.backend.voucher.dto.VoucherDto;
 import com.vou.backend.voucher.dto.VoucherResponseDto;
 import com.vou.backend.voucher.exception.ExistedVoucherException;
@@ -45,7 +46,7 @@ public class VoucherService {
                 .orElseThrow(() -> new VoucherNotFoundException("Voucher not found with id: " + id));
         return modelMapper.map(voucher,VoucherResponseDto.class);
     }
-    public VoucherResponseDto updateVoucher(String id, VoucherDto voucherDto) throws VoucherNotFoundException {
+    public VoucherResponseDto updateVoucher(String id, UpdateVoucherDto voucherDto) throws VoucherNotFoundException {
         validateId(id);
         Voucher voucher = voucherRepository.findById(id)
                 .orElseThrow(() -> new VoucherNotFoundException("Voucher not found with id: " + id));
