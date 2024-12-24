@@ -17,6 +17,7 @@ import com.vou.backend.game.puzzle.model.Puzzle;
 import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
 import com.vou.backend.game.quizz.model.Question;
+import com.vou.backend.voucher.dto.UpdateVoucherDto;
 import com.vou.backend.voucher.dto.VoucherDto;
 import com.vou.backend.voucher.dto.VoucherResponseDto;
 import com.vou.backend.voucher.model.Voucher;
@@ -95,6 +96,11 @@ public class AppConfig {
             mapper.map(Voucher::getBrandId, VoucherResponseDto::setBrandId);
             mapper.map(Voucher::getDiscount, VoucherResponseDto::setDiscount);
             mapper.map(Voucher::getExpiredDate,VoucherResponseDto::setExpiredDate);
+        });
+        //Update Dto to model mapping
+        modelMapper.typeMap(UpdateVoucherDto.class, Voucher.class).addMappings(mapper -> {
+            mapper.skip(Voucher::setQrCode);
+            mapper.skip(Voucher::setCreatedAt);
         });
     }
 

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CampaignService {
-    private  final CampaignRepository campaignRepository;
+    private final CampaignRepository campaignRepository;
     private final FavoriteCampaignUserRepository favoriteCampaignUserRepository;
     private final ModelMapper modelMapper;
     public CampaignResponseDto createCampaign(CampaignDto campaignDto)

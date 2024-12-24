@@ -1,5 +1,6 @@
 package com.vou.backend.voucher.controller;
 
+import com.vou.backend.voucher.dto.UpdateVoucherDto;
 import com.vou.backend.voucher.dto.VoucherDto;
 import com.vou.backend.voucher.dto.VoucherResponseDto;
 import com.vou.backend.voucher.exception.ExistedVoucherException;
@@ -36,7 +37,7 @@ public class VoucherController {
         return new ResponseEntity<>(voucher,HttpStatus.OK);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?>  updateAVoucher(@PathVariable String id,@Valid @RequestBody VoucherDto voucherDto) throws VoucherNotFoundException {
+    public ResponseEntity<?>  updateAVoucher(@PathVariable String id,@Valid @RequestBody UpdateVoucherDto voucherDto) throws VoucherNotFoundException {
         VoucherResponseDto voucher = voucherService.updateVoucher(id,voucherDto);
         return new ResponseEntity<>(voucher,HttpStatus.OK);
     }
