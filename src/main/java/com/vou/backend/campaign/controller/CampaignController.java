@@ -1,6 +1,7 @@
 package com.vou.backend.campaign.controller;
 import com.vou.backend.campaign.dto.CampaignDto;
 import com.vou.backend.campaign.dto.CampaignResponseDto;
+import com.vou.backend.campaign.dto.UpdateCampaignDto;
 import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.campaign.service.CampaignService;
 import jakarta.validation.Valid;
@@ -60,7 +61,7 @@ public class CampaignController {
      * @throws CampaignNotFoundException if the campaign is not found
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?>  updateACampaign(@PathVariable Long id,@Valid @RequestBody CampaignDto campaignDto) throws CampaignNotFoundException {
+    public ResponseEntity<?>  updateACampaign(@PathVariable Long id,@Valid @RequestBody UpdateCampaignDto campaignDto) throws CampaignNotFoundException {
             CampaignResponseDto campaign = campaignService.updateCampaign(id,campaignDto);
             return new ResponseEntity<>(campaign,HttpStatus.OK);
     }

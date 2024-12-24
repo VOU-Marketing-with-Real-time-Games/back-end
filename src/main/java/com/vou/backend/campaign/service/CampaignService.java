@@ -2,6 +2,7 @@ package com.vou.backend.campaign.service;
 
 import com.vou.backend.campaign.dto.CampaignDto;
 import com.vou.backend.campaign.dto.CampaignResponseDto;
+import com.vou.backend.campaign.dto.UpdateCampaignDto;
 import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.campaign.model.Campaign;
 import com.vou.backend.campaign.model.FavoriteCampaignUser;
@@ -41,7 +42,7 @@ public class CampaignService {
                 .orElseThrow(() -> new CampaignNotFoundException("Campaign not found with id: " + id));
         return modelMapper.map(campaign,CampaignResponseDto.class);
     }
-    public CampaignResponseDto updateCampaign(Long id, CampaignDto campaignDto) throws CampaignNotFoundException
+    public CampaignResponseDto updateCampaign(Long id, UpdateCampaignDto campaignDto) throws CampaignNotFoundException
     {
         validateId(id);
         Campaign campaign = campaignRepository.findById(id)

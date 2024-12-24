@@ -9,11 +9,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CampaignDto {
+public class UpdateCampaignDto {
     @NotBlank(message = "Name of campaign must not be empty")
     private String name;
     @NotBlank(message = "Image of campaign must not be empty")
@@ -28,4 +29,5 @@ public class CampaignDto {
     private Date endDate;
     @NotNull(message = "Brand id value must not be null")
     private  Long brandId;
+    private String status;
 }

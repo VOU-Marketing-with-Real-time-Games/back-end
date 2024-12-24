@@ -2,6 +2,7 @@ package com.vou.backend.config;
 
 import com.vou.backend.campaign.dto.CampaignDto;
 import com.vou.backend.campaign.dto.CampaignResponseDto;
+import com.vou.backend.campaign.dto.UpdateCampaignDto;
 import com.vou.backend.campaign.model.Campaign;
 import com.vou.backend.game.game_info.dto.*;
 import com.vou.backend.game.game_info.model.GameCampaign;
@@ -45,6 +46,7 @@ public class AppConfig {
         configPuzzleConverters(modelMapper);
         configQuestionConverters(modelMapper);
         configCampaignConverters(modelMapper);
+        configVoucherConverters(modelMapper);
         return modelMapper;
     }
     private void configCampaignConverters(ModelMapper modelMapper) {
@@ -53,25 +55,31 @@ public class AppConfig {
             mapper.skip(Campaign::setId);
             mapper.skip(Campaign::setCreatedAt);
             mapper.skip(Campaign::setFavouriteCampaigns);
-        }).setPostConverter(context -> {
-            Campaign campaign = context.getDestination();
-            if (campaign.getStatus() == null) {
-                campaign.setStatus("Pending");
-            }
-            return campaign;
+            mapper.map(CampaignDto::getBrandId, Campaign::setBrandId);
         });
 
         // Model to Response DTO mapping
         modelMapper.typeMap(Campaign.class, CampaignResponseDto.class).addMappings(mapper -> {
             mapper.map(Campaign::getName, CampaignResponseDto::setName);
             mapper.map(Campaign::getImage, CampaignResponseDto::setImage);
-            mapper.map(Campaign::getFiledId, CampaignResponseDto::setFiledId);
+            mapper.map(Campaign::getField, CampaignResponseDto::setField);
             mapper.map(Campaign::getStartDate, CampaignResponseDto::setStartDate);
             mapper.map(Campaign::getEndDate, CampaignResponseDto::setEndDate);
             mapper.map(Campaign::getCreatedAt, CampaignResponseDto::setCreatedAt);
             mapper.map(Campaign::getStatus, CampaignResponseDto::setStatus);
+            mapper.map(Campaign::getBrandId, CampaignResponseDto::setBrandId);
+            mapper.map(Campaign::getId, CampaignResponseDto::setId);
+        });
+
+        // Update DTO to Model mapping
+        modelMapper.typeMap(UpdateCampaignDto.class, Campaign.class).addMappings(mapper -> {
+            mapper.skip(Campaign::setId);
+            mapper.skip(Campaign::setCreatedAt);
+            mapper.skip(Campaign::setFavouriteCampaigns);
+            mapper.skip(Campaign::setFavouriteCampaigns);
         });
     }
+
     private void configVoucherConverters(ModelMapper modelMapper)
     {
         // DTO to Model mapping
