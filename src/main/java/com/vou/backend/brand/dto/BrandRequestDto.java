@@ -26,12 +26,4 @@ public class BrandRequestDto {
     @NotNull
     @NotBlank
     private String field;
-
-    public Brand toBrand() {
-        Brand brand = new Brand();
-        brand.setName(this.name);
-        brand.setField(this.field);
-        brand.setEnabled(true);
-        return brand;
-    }
 }

@@ -37,7 +37,7 @@ public class BrandService {
     }
 
     public BrandRespondDto update(Long id, BrandRequestDto brandDto) throws BrandNotFoundException, BranchNotFoundException {
-        Brand brand = brandDto.toBrand();
+        Brand brand = modelMapper.map(brandDto,Brand.class);
         Brand existingBrand = brandRepository.findById(id)
                 .orElseThrow(
                         () -> new BrandNotFoundException("Brand with id " + id + " not found"));
