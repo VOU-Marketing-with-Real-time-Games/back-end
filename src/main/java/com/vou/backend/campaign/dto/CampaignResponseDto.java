@@ -1,22 +1,18 @@
-package com.vou.backend.campaign.model;
-import jakarta.persistence.*;
+package com.vou.backend.campaign.dto;
+
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-@Entity
-@Table(name = "campaign")
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Campaign {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CampaignResponseDto {
     private Long id;
     private String name;
     private String image;
@@ -26,6 +22,4 @@ public class Campaign {
     private String status;
     private Date createdAt;
     private  Long brandId;
-    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
-    private List<FavoriteCampaignUser> favouriteCampaigns = new ArrayList<>();
 }

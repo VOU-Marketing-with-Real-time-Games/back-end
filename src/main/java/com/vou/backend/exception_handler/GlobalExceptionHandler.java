@@ -9,7 +9,10 @@ import com.vou.backend.user.exception.PhoneNumberExistedException;
 import com.vou.backend.user.exception.UserEmailExistedException;
 import com.vou.backend.user.exception.UserNameExistedException;
 import com.vou.backend.user.exception.UserNotFoundException;
-
+import com.vou.backend.campaign.exception.CampaignNotFoundException;
+import com.vou.backend.game.game_info.exception.*;
+import com.vou.backend.voucher.exception.ExistedVoucherException;
+import com.vou.backend.voucher.exception.VoucherNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +88,7 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({ Game_CampaignGameConflict.class })
+    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleBadRequestException(HttpServletRequest request, Exception ex) {
@@ -108,7 +111,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({ GameNotFoundException.class, GameCampaignNotFoundException.class,
             UserCampaignGameNotFoundException.class, PuzzleNotFoundException.class, QuizzNotFoundException.class,
             QuestionNotFoundException.class, BranchNotFoundException.class, BrandNotFoundException.class,
-            UserNotFoundException.class
+            UserNotFoundException.class,CampaignNotFoundException.class, VoucherNotFoundException.class
     })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
@@ -144,4 +147,5 @@ public class GlobalExceptionHandler {
         LOGGER.error("Internal Server Error: {}", ex.getMessage(), ex);
         return error;
     }
+
 }

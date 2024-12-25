@@ -39,8 +39,6 @@
 			<artifactId>jts-core</artifactId>
 			<version>1.18.2</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
