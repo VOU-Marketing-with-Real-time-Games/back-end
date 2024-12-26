@@ -17,17 +17,13 @@ import java.util.Date;
 public class Voucher {
     @Id
     private String code;
-
     private String qrCode;
     private String image;
     private Double discount;
-
     @Column(length = 1000)
     private String description;
-
-    private Date expired_date;
+    private Date expiredDate;
     private String status;
     private Date createdAt;
-
     private  Long brandId;
 }
