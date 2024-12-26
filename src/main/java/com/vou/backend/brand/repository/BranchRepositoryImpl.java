@@ -4,7 +4,6 @@ import com.vou.backend.brand.model.Branch;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.locationtech.jts.geom.Point;
-
 import java.util.List;
 
 public class BranchRepositoryImpl implements BranchRepositoryCustom {

@@ -65,6 +65,11 @@
 			<scope>test</scope>
 		</dependency>
 		-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+            <version>6.6.4.Final</version> 
+        </dependency>
 	</dependencies>
 
 	<build>

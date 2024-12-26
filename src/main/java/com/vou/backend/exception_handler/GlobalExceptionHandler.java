@@ -1,5 +1,14 @@
 package com.vou.backend.exception_handler;
 
+import com.vou.backend.brand.exception.BranchExistedException;
+import com.vou.backend.brand.exception.BranchNotFoundException;
+import com.vou.backend.brand.exception.BrandExistedException;
+import com.vou.backend.brand.exception.BrandNotFoundException;
+import com.vou.backend.game.game_info.exception.*;
+import com.vou.backend.user.exception.PhoneNumberExistedException;
+import com.vou.backend.user.exception.UserEmailExistedException;
+import com.vou.backend.user.exception.UserNameExistedException;
+import com.vou.backend.user.exception.UserNotFoundException;
 import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.game.game_info.exception.*;
 import com.vou.backend.voucher.exception.ExistedVoucherException;
@@ -25,13 +34,34 @@ public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
+     * Handles duplication errors and returns an ErrorDTO.
+     *
+     * @param request the HTTP request
+     * @param ex      the Exception
+     * @return an ErrorDTO containing error details
+     */
+    @ExceptionHandler({ PhoneNumberExistedException.class, UserEmailExistedException.class,
+            UserNameExistedException.class, BranchExistedException.class, BrandExistedException.class })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorDTO handleDuplicationExceptions(HttpServletRequest request, Exception ex) {
+        ErrorDTO error = new ErrorDTO();
+        error.setTimestamp(new Date());
+        error.setPath(request.getServletPath());
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.addError(ex.getMessage());
+        LOGGER.error("Validation Error: {}", ex.getMessage(), ex);
+        return error;
+    }
+
+    /**
      * Handles validation errors and returns an ErrorDTO.
      *
      * @param request the HTTP request
      * @param ex      the MethodArgumentNotValidException
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleValidationExceptions(HttpServletRequest request, MethodArgumentNotValidException ex) {
@@ -78,8 +108,11 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({GameNotFoundException.class, GameCampaignNotFoundException.class, UserCampaignGameNotFoundException.class, PuzzleNotFoundException.class, QuizzNotFoundException.class, QuestionNotFoundException.class
-    , CampaignNotFoundException.class, VoucherNotFoundException.class})
+    @ExceptionHandler({ GameNotFoundException.class, GameCampaignNotFoundException.class,
+            UserCampaignGameNotFoundException.class, PuzzleNotFoundException.class, QuizzNotFoundException.class,
+            QuestionNotFoundException.class, BranchNotFoundException.class, BrandNotFoundException.class,
+            UserNotFoundException.class,CampaignNotFoundException.class, VoucherNotFoundException.class
+    })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorDTO handleNotFoundException(HttpServletRequest request, Exception ex) {

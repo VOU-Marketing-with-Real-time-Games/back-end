@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import org.locationtech.jts.geom.Point;
 
 @Entity
@@ -13,6 +16,8 @@ import org.locationtech.jts.geom.Point;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +34,25 @@ public class Branch {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+
+    public void copy(Branch branch) {
+        if (branch.getName() != null) {
+            this.setName(branch.getName());
+        }
+        if (branch.getAddress() != null) {
+            this.setAddress(branch.getAddress());
+        }
+        if (branch.getStatus() != null) {
+            this.setStatus(branch.getStatus());
+        }
+        if (branch.getLocation() != null) {
+            this.setLocation(branch.getLocation());
+        }
+        if (branch.getEnable() != null) {
+            this.setEnable(branch.getEnable());
+        }
+        if (branch.getBrand() != null) {
+            this.setBrand(branch.getBrand());
+        }
+    }
 }
