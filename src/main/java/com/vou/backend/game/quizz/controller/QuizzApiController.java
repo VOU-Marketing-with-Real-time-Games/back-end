@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class QuizzApiController {
 
     private final QuizzService quizzService;
-    private final ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<List<QuizzResponseDto>> getAllQuizzes() {

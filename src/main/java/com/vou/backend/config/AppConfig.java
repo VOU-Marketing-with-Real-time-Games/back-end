@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class AppConfig {
+
     /**
      * Configures and returns a ModelMapper bean.
      *
