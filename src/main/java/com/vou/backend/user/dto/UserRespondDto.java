@@ -4,15 +4,11 @@ import java.util.Date;
 
 import com.vou.backend.user.model.User;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class UserRespondDto {
     private Long id;
     private String avatar;
