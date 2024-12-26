@@ -15,10 +15,13 @@ import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
 import com.vou.backend.game.quizz.model.Question;
 import com.vou.backend.game.quizz.model.Quizz;
+import com.vou.backend.notification.dto.NotificationDto;
+import com.vou.backend.notification.model.NotificationUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -349,5 +352,27 @@ public class ConfigTests {
         assertThat(questionResponseDto.getAnswer()).isEqualTo(question.getAnswer());
         assertThat(questionResponseDto.getExplaination()).isEqualTo(question.getExplaination());
         assertThat(questionResponseDto.getQuizzId()).isEqualTo(question.getQuizz().getId());
+    }
+
+
+    @Test
+    public void testNotificationUserToNotificationDtoMapping() {
+        NotificationUser notificationUser = NotificationUser.builder()
+                .id(1L)
+                .content("Test Notification")
+                .createdAt(new Date())
+                .isRead(false)
+                .isDeleted(false)
+                .userId(1L)
+                .build();
+
+        NotificationDto notificationDto = modelMapper.map(notificationUser, NotificationDto.class);
+
+        assertThat(notificationDto).isNotNull();
+        assertThat(notificationDto.getId()).isEqualTo(notificationUser.getId());
+        assertThat(notificationDto.getContent()).isEqualTo(notificationUser.getContent());
+        assertThat(notificationDto.getCreatedAt()).isEqualTo(notificationUser.getCreatedAt());
+        assertThat(notificationDto.getIsRead()).isEqualTo(notificationUser.getIsRead());
+        assertThat(notificationDto.getUserId()).isEqualTo(notificationUser.getUserId());
     }
 }
