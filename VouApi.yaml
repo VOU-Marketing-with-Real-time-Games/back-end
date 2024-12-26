@@ -1,0 +1,1329 @@
+openapi: 3.0.3
+info:
+  title: VOU System API
+  description: API Documentation for the VOU System complying with RESTful principles.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/v1
+tags:
+  - name: User
+    description: Endpoints for managing users and their activities
+  - name: Brand
+    description: Endpoints for managing brands and branches
+  - name: Campaign
+    description: Endpoints for managing campaigns
+  - name: Voucher
+    description: Endpoints for managing vouchers
+  - name: Notification
+    description: Endpoints for managing notifications
+  - name: GameInfo
+    description: Endpoints for managing games, quizzes, and puzzles
+
+paths:
+  /users:
+    post:
+      tags:
+        - User
+      summary: Create a new user (register)
+      description: Add a new user to the system.
+      requestBody:
+        description: User details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullname:
+                  type: string
+                  example: Le Minh Hoang
+                username:
+                  type: string
+                  example: johndoe
+                email:
+                  type: string
+                  format: email
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  format: password
+                  example: securePassword123
+                role:
+                  type: string
+                  example: ADMIN
+                phoneNum:
+                  type: string
+                  example: 0123456789 
+                dob:
+                  type: string
+                  format: date
+                  example: 2003-03-01
+                gender :
+                  type: string
+                  example: MALE
+                
+              required:
+                - username
+                - email
+                - password
+                - fullname
+                - phoneNum
+      responses:
+        201:
+          description: User created successfully
+        400:
+          description: Validation error or Email, Username is existed
+
+    get:
+      tags:
+        - User
+      summary: Retrieve all users
+      description: Get a list of all registered users.
+      responses:
+        200:
+          description: List of users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: UUID format
+                    fullname:
+                     type: string
+                     example: Le Minh Hoang
+                    avatar:
+                     type: string
+                     example: example avatar link
+                    status:
+                     type: string
+                     example: ENABLE
+                    username:
+                     type: string
+                     example: johndoe
+                    email:
+                     type: string
+                     format: email
+                     example: johndoe@example.com
+                    role:
+                     type: string
+                     example: ADMIN
+                    createdAt:
+                     type: string
+                     example: datetime data                     
+                    phoneNum:
+                     type: string
+                     example: 0123456789 
+      
+  /users/{userId}:
+    get:
+      tags:
+        - User
+      summary: Retrieve a specific user
+      description: Get details of a user by their unique ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: UUID format
+      responses:
+        200:
+          description: User details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    id:
+                      type: string
+                      example: UUID format
+                    fullname:
+                     type: string
+                     example: Le Minh Hoang
+                    avatar:
+                     type: string
+                     example: example avatar link
+                    status:
+                     type: string
+                     example: ENABLE
+                    username:
+                     type: string
+                     example: johndoe
+                    email:
+                     type: string
+                     format: email
+                     example: johndoe@example.com
+                    role:
+                     type: string
+                     example: ADMIN
+                    createdAt:
+                     type: string
+                     example: datetime data                     
+                    phoneNum:
+                     type: string
+                     example: 0123456789 
+        404:
+          description: User not found
+
+
+    put:
+      tags:
+        - User
+      summary: Update user details
+      description: Modify the details of an existing user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: UUID format
+      requestBody:
+        description: Updated user details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                    fullname:
+                     type: string
+                     example: Le Minh Hoang
+                    avatar:
+                     type: object
+                     example: 
+                    username:
+                     type: string
+                     example: johndoe
+                    email:
+                     type: string
+                     format: email
+                     example: johndoe@example.com
+                    role:
+                     type: string
+                     example: ADMIN
+                    phoneNum:
+                     type: string
+                     example: 0123456789 
+      responses:
+        200:
+          description: User updated successfully
+        404:
+          description: User not found
+        400:
+          description: Validation error or Email, Username is existed
+
+  /brands:
+    post:
+      tags:
+        - Brand
+      summary: Create a new brand
+      description: Add a new brand to the system.
+      requestBody:
+        description: Brand details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: BrandName
+                field:
+                  type: string
+                  example: Retail
+              required:
+                - name
+                - field
+    
+      responses:
+        201:
+          description: Brand created successfully
+        400:
+          description: Validation error
+
+    get:
+      tags:
+        - Brand
+      summary: Retrieve all brands
+      description: Get a list of all brands.
+      responses:
+        200:
+          description: List of brands retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                   id:
+                    type: number
+                    example: 1
+                   name:
+                    type: string
+                    example: ABC BrandName
+                   field:
+                    type: string
+                    example: Retail
+                   status:
+                    type: string
+                    example: ENABLE
+                   enabled:
+                    type: boolean
+                    example: true
+                   creator:
+                    type: string
+                    example: userId
+                   createdAt:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+
+  /brands/{brandId}:
+    get:
+      tags:
+        - Brand
+      summary: Retrieve a specific brand
+      description: Get details of a brand by its unique ID.
+      parameters:
+        - name: brandId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: Brand details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                  name:
+                    type: string
+                    example: ABC BrandName
+                  field:
+                    type: string
+                    example: Retail
+                  status:
+                    type: string
+                    example: Retail
+                  enabled:
+                    type: boolean
+                    example: true
+                  creator:
+                    type: string
+                    example: userId
+                  createdAt:
+                    type: string
+                    format: date
+                    example: 2024-03-01
+                
+        404:
+          description: Brand not found
+
+    put:
+      tags:
+        - Brand
+      summary: Update brand details
+      description: Modify the details of an existing brand.
+      parameters:
+        - name: brandId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      requestBody:
+        description: Updated brand details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: UpdatedBrandName
+                field:
+                  type: string
+                  example: UpdatedField
+                status:
+                  type: string
+                  example: REFUSE your brand is illegal
+              required:
+                - name
+                - field
+                - status
+      responses:
+        200:
+          description: Brand updated successfully
+        404:
+          description: Brand not found
+
+    delete:
+      tags:
+        - Brand
+      summary: Delete a brand
+      description: Remove a brand from the system by its unique ID.
+      parameters:
+        - name: brandId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        204:
+          description: Brand deleted successfully
+        404:
+          description: Brand not found
+
+  /branches:
+    post:
+      tags:
+        - Brand
+      summary: Create a new branch
+      description: Add a new branch under a brand.
+      requestBody:
+        description: Branch details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                brandId:
+                  type: number
+                  example: 1
+                name:
+                  type: string
+                  example: BranchName
+                address:
+                  type: string
+                  example: 123 Main St, City
+                long:
+                  type : number
+                  example: 1.2
+                lat:
+                  type : number
+                  example: 1.2
+              required:
+                - brandId
+                - name
+                - address
+                - long
+                - lat
+      responses:
+        201:
+          description: Branch created successfully
+        400:
+          description: Validation error
+        404:
+          description: Brand not found
+
+    get:
+      tags:
+        - Brand
+      summary: Retrieve all branches
+      description: Get a list of all branches.
+      responses:
+        200:
+          description: List of branches retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    brandId:
+                      type: number
+                      example: 1  
+                    name:
+                      type: string
+                      example: Branch ABC 
+                    address:
+                      type: string
+                      example: 123 Main St, City
+                    status:
+                      type: string
+                      example: OPENING
+                    long:
+                      type: number
+                      example: 1.2
+                    lat:
+                      type: number
+                      example: 1.2
+  /branches/{branchId}:
+    get:
+      tags:
+        - Brand
+      summary: Retrieve a specific branch
+      description: Get details of a branch by its unique ID.
+      parameters:
+        - name: branchId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: Branch details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    id:
+                      type: number
+                      example: 1
+                    brandId:
+                      type: number
+                      example: 1  
+                    name:
+                      type: string
+                      example: Branch ABC 
+                    address:
+                      type: string
+                      example: 123 Main St, City
+                    status:
+                      type: string
+                      example: OPENING
+                    enable:
+                      type: boolean
+                      example: true
+                    long:
+                      type: number
+                      example: 1.2
+                    lat:
+                      type: number
+                      example: 1.2
+        404:
+          description: Branch not found
+
+    put:
+      tags:
+        - Brand
+      summary: Update branch details
+      description: Modify the details of an existing branch.
+      parameters:
+        - name: branchId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      requestBody:
+        description: Updated branch details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: UpdatedBranchName
+                address:
+                  type: string
+                  example: Updated address
+                long:
+                  type: number
+                  example: 1.2
+                lat:
+                  type: number
+                  example: 1.2
+                enable:
+                  type: boolean
+                  example: true
+                status:
+                  type: string
+                  example: CLOSED
+              required:
+                - name
+                - location
+                - status
+      responses:
+        200:
+          description: Branch updated successfully
+        404:
+          description: Branch not found
+
+    delete:
+      tags:
+        - Brand
+      summary: Delete a branch
+      description: Remove a branch from the system by its unique ID.
+      parameters:
+        - name: branchId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        204:
+          description: Branch deleted successfully
+        404:
+          description: Branch not found
+          
+  /campaigns:
+    post:
+      tags:
+        - Campaign
+      summary: Create a new campaign
+      description: Add a new campaign to the system.
+      requestBody:
+        description: Campaign details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Spring Sale 
+                image:
+                  type: object
+                  example:
+                field:
+                  type: string
+                  example: Fashion
+                startDate:
+                  type: string
+                  format: date
+                  example: 2024-03-01
+                endDate:
+                  type: string
+                  format: date
+                  example: 2024-03-31
+                brandId:
+                  type: number
+                  example: 1
+              required:
+                - name
+                - field
+                - startDate
+                - endDate
+                - brandId
+                
+      responses:
+        201:
+          description: Campaign created successfully
+        400:
+          description: Validation error
+
+    get:
+      tags:
+        - Campaign
+      summary: Retrieve all campaigns
+      description: Get a list of all campaigns.
+      responses:
+        200:
+          description: List of campaigns retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    name:
+                      type: string
+                      example: Spring Sale 2024
+                    image:
+                      type: string
+                      example: https://...
+                    startDate:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    endDate:
+                     type: string
+                     format: date
+                     example: 2024-03-31
+                    status:
+                      type: string
+                      example: PENDING
+                    createdAt:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    brandId:
+                     type: number
+                     example: 1
+                    
+    
+  /campaigns/{campaignId}:
+    get:
+      tags:
+        - Campaign
+      summary: Retrieve a specific campaign
+      description: Get details of a campaign by its unique ID.
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: Campaign details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    id:
+                      type: string
+                      example: campaign123
+                    name:
+                      type: string
+                      example: Spring Sale 2024
+                    image:
+                      type: string
+                      example: https://...
+                    field:
+                      type: string
+                      example: fashion
+                    startDate:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    endDate:
+                     type: string
+                     format: date
+                     example: 2024-03-31
+                    status:
+                      type: string
+                      example: PENDING
+                    createdAt:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    brandId:
+                     type: number
+                     example: 1
+        404:
+          description: Campaign not found
+
+    put:
+      tags:
+        - Campaign
+      summary: Update campaign details
+      description: Modify the details of an existing campaign.
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      requestBody:
+        description: Updated campaign details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                    name:
+                      type: string
+                      example: Spring Sale 2024
+                    image:
+                      type: object
+                      example: 
+                    field:
+                      type: string
+                      example: food
+                    startDate:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    endDate:
+                     type: string
+                     format: date
+                     example: 2024-03-31
+                    status:
+                      type: string
+                      example: APROVED
+                    brandId:
+                     type: number
+                     example: 1
+      responses:
+        200:
+          description: Campaign updated successfully
+        404:
+          description: Campaign not found
+        400:
+          description: Validation Error
+
+    delete:
+      tags:
+        - Campaign
+      summary: Delete a campaign
+      description: Remove a campaign from the system by its unique ID.
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        204:
+          description: Campaign deleted successfully
+        404:
+          description: Campaign not found
+  /campaigns/user/{userId}:
+    get:
+      tags:
+        - Campaign
+      summary: Retrieve all campaigns which user participated
+      description: Get a list of all campaigns by user ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: List of campaigns retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    name:
+                      type: string
+                      example: Spring Sale 2024
+                    image:
+                      type: string
+                      example: https://....
+                    startDate:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    endDate:
+                     type: string
+                     format: date
+                     example: 2024-03-31
+                    status:
+                      type: string
+                      example: HAPPENING
+                    createdAt:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    brandId:
+                     type: number
+                     example: 1
+  /campaigns/user-favourite/{userId}:
+    get:
+      tags:
+        - Campaign
+      summary: Retrieve all campaigns which user added to list favourite
+      description: Get a list of all favourite campaigns by user ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: List of campaigns retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    name:
+                      type: string
+                      example: Spring Sale 2024
+                    image:
+                      type: string
+                      example: https://....
+                    startDate:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    endDate:
+                     type: string
+                     format: date
+                     example: 2024-03-31
+                    status:
+                      type: string
+                      example: HAPPENING
+                    createdAt:
+                     type: string
+                     format: date
+                     example: 2024-03-01
+                    brandId:
+                     type: number
+                     example: 1
+  /vouchers:
+    post:
+      tags:
+        - Voucher
+      summary: Create a new voucher
+      description: Add a new voucher to the system.
+      requestBody:
+        description: Voucher details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: SPRING2024
+                image:
+                  type: object
+                  example: 
+                description:
+                  type: string
+                  example: ......
+                discount:
+                  type: number
+                  format: float
+                  example: 15.0
+                expirationDate:
+                  type: string
+                  format: date-time
+                  example: 2024-03-31T23:59:59Z
+                brandId:
+                  type: number
+                  example: 1
+              required:
+                - code
+                - discount
+                - image
+                - expirationDate
+                - brandId
+      responses:
+        201:
+          description: Voucher created successfully
+        400:
+          description: Validation error
+
+    get:
+      tags:
+        - Voucher
+      summary: Retrieve all vouchers
+      description: Get a list of all vouchers.
+      responses:
+        200:
+          description: List of vouchers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                     type: string
+                     example: SPRING2024
+                    qrCode:
+                     type: string
+                     example: https://....
+                    image:
+                     type: string
+                     example: https://....
+                    description:
+                     type: string
+                     example: ......
+                    discount:
+                     type: number
+                     format: float
+                     example: 15.0
+                    expirationDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-31T23:59:59Z
+                    createdDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-20T23:59:59Z
+                    brandId:
+                     type: number
+                     example: 1
+
+  /vouchers/{voucherId}:
+    get:
+      tags:
+        - Voucher
+      summary: Retrieve a specific voucher
+      description: Get details of a voucher by its unique ID.
+      parameters:
+        - name: voucherId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: SPRING2024
+      responses:
+        200:
+          description: Voucher details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    code:
+                     type: string
+                     example: SPRING2024
+                    qrCode:
+                     type: string
+                     example: https://....
+                    image:
+                     type: string
+                     example: https://....
+                    description:
+                     type: string
+                     example: ......
+                    discount:
+                     type: number
+                     format: float
+                     example: 15.0
+                    expirationDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-31T23:59:59Z
+                    createdDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-20T23:59:59Z
+                    brandId:
+                     type: number
+                     example: 1
+        404:
+          description: Voucher not found
+
+    put:
+      tags:
+        - Voucher
+      summary: Update voucher details
+      description: Modify the details of an existing voucher.
+      parameters:
+        - name: voucherId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: SPRING2024
+      requestBody:
+        description: Updated voucher details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: object
+                  example: 
+                discount:
+                  type: number
+                  format: float
+                  example: 20.0
+                description:
+                     type: string
+                     example: ......
+                expirationDate:
+                  type: string
+                  format: date-time
+                  example: 2024-04-30T23:59:59Z
+                status:
+                  type: string
+                  enum: [ACTIVE, EXPIRED, REDEEMED]
+                  example: ACTIVE
+              required:
+                - code
+                - discount
+                - expirationDate
+                - status
+      responses:
+        200:
+          description: Voucher updated successfully
+        404:
+          description: Voucher not found
+
+    delete:
+      tags:
+        - Voucher
+      summary: Delete a voucher
+      description: Remove a voucher from the system by its unique ID.
+      parameters:
+        - name: voucherId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: SPRING2024
+      responses:
+        204:
+          description: Voucher deleted successfully
+        404:
+          description: Voucher not found
+          
+  /vouchers/user/{userId}:
+    get:
+      tags:
+        - Voucher
+      summary: List vouchers for a specific user
+      description: Retrieve all vouchers assigned to a user by their unique ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: UUID format
+      responses:
+        200:
+          description: List of vouchers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                     type: string
+                     example: SPRING2024
+                    qrCode:
+                     type: string
+                     example: https://....
+                    image:
+                     type: string
+                     example: https://....
+                    description:
+                     type: string
+                     example: ......
+                    discount:
+                     type: number
+                     format: float
+                     example: 15.0
+                    expirationDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-31T23:59:59Z
+                    createdDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-20T23:59:59Z
+                    brandId:
+                     type: number
+                     example: 1
+        404:
+          description: User not found 
+  
+  /vouchers/campaign/{campaignId}:
+    get:
+      tags:
+        - Voucher
+      summary: List vouchers for a specific campaign
+      description: Retrieve all vouchers created for a specific campaign.
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: campaign123
+      responses:
+        200:
+          description: List of vouchers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                     type: string
+                     example: SPRING2024
+                    qrCode:
+                     type: string
+                     example: https://....
+                    image:
+                     type: string
+                     example: https://....
+                    description:
+                     type: string
+                     example: ......
+                    discount:
+                     type: number
+                     format: float
+                     example: 15.0
+                    expirationDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-31T23:59:59Z
+                    createdDate:
+                     type: string
+                     format: date-time
+                     example: 2024-03-20T23:59:59Z
+                    brandId:
+                     type: number
+                     example: 1
+        404:
+          description: Campaign not found
+          
+  /notifications/user/{userId}:
+    get:
+      tags:
+        - Notification
+      summary: Retrieve notifications for a specific user
+      description: Get a list of notifications assigned to a user by their unique ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: UUID format
+      responses:
+        200:
+          description: Notifications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    content:
+                      type: string
+                      example: Your voucher is about to expired
+                    isRead:
+                      type: boolean
+                      example: false
+                    isDelete:
+                      type: boolean
+                      example: false
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: 2024-03-15T12:00:00Z
+        404:
+          description: User not found 
+
+  /notifications/{notificationId}:
+    put:
+      tags:
+        - Notification
+      summary: Update a notification status
+      description: Mark a notification as READ, UNREAD, SOFT DELETE
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: notif456
+      requestBody:
+        description: Updated notification status
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                    id:
+                      type: number
+                      example: 1
+                    content:
+                      type: string
+                      example: Your voucher is about to expired
+                    isRead:
+                      type: boolean
+                      example: true
+                    isDelete:
+                      type: boolean
+                      example: true
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: 2024-03-15T12:00:00Z
+              required:
+                - status
+      responses:
+        200:
+          description: Notification status updated successfully
+        404:
+          description: Notification not found
+  /games:
+    get:
+      tags:
+        - GameInfo
+      summary: Retrieve all games
+      description: Get a list of all available games.
+      responses:
+        200:
+          description: List of games retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    name:
+                      type: string
+                      example: Quizz
+                    type:
+                      type: string
+                      example: QUIZZ
+                    image:
+                      type: string
+                      example: https://....
+                    enable:
+                      type: boolean
+                      example: true
+                    
