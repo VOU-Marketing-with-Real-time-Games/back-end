@@ -33,7 +33,6 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
     /**
      * Handles duplication errors and returns an ErrorDTO.
      *
@@ -89,7 +88,7 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class})
+    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class, InvalidTradeItem.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleBadRequestException(HttpServletRequest request, Exception ex) {
@@ -148,5 +147,4 @@ public class GlobalExceptionHandler {
         LOGGER.error("Internal Server Error: {}", ex.getMessage(), ex);
         return error;
     }
-
 }

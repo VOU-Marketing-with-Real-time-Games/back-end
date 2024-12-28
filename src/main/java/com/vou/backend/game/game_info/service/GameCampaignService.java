@@ -83,4 +83,10 @@ public class GameCampaignService {
                 .map(userCampaignGame -> modelMapper.map(userCampaignGame, UserCampaignGameResponseDto.class))
                 .collect(Collectors.toList());
     }
+
+    public List<Long> listCampaignIdByGameId(Long gameId) throws GameNotFoundException {
+        GameInfo gameInfo = gameService.getById(gameId);
+        return gameCampaignRepository.findDistinctCampaignByGameId(gameInfo.getId());
+    }
+
 }

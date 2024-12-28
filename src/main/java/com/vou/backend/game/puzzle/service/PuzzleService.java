@@ -75,6 +75,11 @@ public class PuzzleService {
         return modelMapper.map(puzzle, PuzzleResponseDto.class);
     }
 
+    public Puzzle getById(Long id) throws PuzzleNotFoundException {
+        return puzzleRepository.findById(id)
+                .orElseThrow(() -> new PuzzleNotFoundException("Puzzle not found"));
+    }
+
     public List<PuzzleResponseDto> getAllPuzzles() {
         var puzzles = puzzleRepository.findAll();
         return puzzles.stream()

@@ -87,7 +87,7 @@ public class BranchService {
 
         return branch;
     }
-    
+
     public List<BranchRespondDto> findNearBy(Point center, Double radius) {
         return branchRepository.findByLocationWithRadius(center, radius).stream().map(
             branch -> modelMapper.map(branch, BranchRespondDto.class)).toList();

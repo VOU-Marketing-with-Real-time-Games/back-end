@@ -5,12 +5,10 @@ import com.vou.backend.game.game_info.model.GameCampaign;
 import com.vou.backend.game.game_info.model.GameInfo;
 import com.vou.backend.game.game_info.model.GameType;
 import com.vou.backend.game.game_info.model.UserCampaignGame;
-import com.vou.backend.game.puzzle.dto.ItemRequestDto;
-import com.vou.backend.game.puzzle.dto.ItemResponseDto;
-import com.vou.backend.game.puzzle.dto.PuzzleRequestDto;
-import com.vou.backend.game.puzzle.dto.PuzzleResponseDto;
+import com.vou.backend.game.puzzle.dto.*;
 import com.vou.backend.game.puzzle.model.Item;
 import com.vou.backend.game.puzzle.model.Puzzle;
+import com.vou.backend.game.puzzle.model.UserItem;
 import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
 import com.vou.backend.game.quizz.model.Question;
@@ -374,5 +372,42 @@ public class ConfigTests {
         assertThat(notificationDto.getCreatedAt()).isEqualTo(notificationUser.getCreatedAt());
         assertThat(notificationDto.getIsRead()).isEqualTo(notificationUser.getIsRead());
         assertThat(notificationDto.getUserId()).isEqualTo(notificationUser.getUserId());
+    }
+
+    @Test
+    public void testConfigUserItemConverters() {
+        // Create Item
+        Item item = Item.builder()
+                .id(1L)
+                .position(1)
+                .description("Test Item")
+                .total(10)
+                .remainingNum(5)
+                .build();
+
+        // Create UserItem
+        UserItem userItem = UserItem.builder()
+                .id(1L)
+                .userId(1L)
+                .item(item)
+                .totalItem(5)
+                .build();
+
+        // Convert UserItem to UserItemDto
+        UserItemDto userItemDto = modelMapper.map(userItem, UserItemDto.class);
+
+        // Verify the conversion
+        assertThat(userItemDto).isNotNull();
+        assertThat(userItemDto.getId()).isEqualTo(userItem.getId());
+        assertThat(userItemDto.getUserId()).isEqualTo(userItem.getUserId());
+        assertThat(userItemDto.getTotalItem()).isEqualTo(userItem.getTotalItem());
+
+        ItemResponseDto itemResponseDto = userItemDto.getItem();
+        assertThat(itemResponseDto).isNotNull();
+        assertThat(itemResponseDto.getId()).isEqualTo(item.getId());
+        assertThat(itemResponseDto.getPosition()).isEqualTo(item.getPosition());
+        assertThat(itemResponseDto.getDescription()).isEqualTo(item.getDescription());
+        assertThat(itemResponseDto.getTotal()).isEqualTo(item.getTotal());
+        assertThat(itemResponseDto.getRemainingNum()).isEqualTo(item.getRemainingNum());
     }
 }

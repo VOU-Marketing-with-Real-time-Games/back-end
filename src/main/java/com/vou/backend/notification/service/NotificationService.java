@@ -39,6 +39,7 @@ public class NotificationService {
         return response;
     }
 
+
     /**
      * Soft deletes a notification by setting its isDeleted flag to true.
      *

@@ -42,6 +42,14 @@ public class CampaignService {
                 .orElseThrow(() -> new CampaignNotFoundException("Campaign not found with id: " + id));
         return modelMapper.map(campaign,CampaignResponseDto.class);
     }
+
+    public Campaign findCampaign(Long id) throws CampaignNotFoundException
+    {
+        validateId(id);
+        return campaignRepository.findById(id)
+                .orElseThrow(() -> new CampaignNotFoundException("Campaign not found with id: " + id));
+    }
+
     public CampaignResponseDto updateCampaign(Long id, UpdateCampaignDto campaignDto) throws CampaignNotFoundException
     {
         validateId(id);
@@ -62,6 +70,8 @@ public class CampaignService {
                 .map(favoriteCampaignUser -> modelMapper.map(favoriteCampaignUser.getCampaign(), CampaignResponseDto.class))
                 .collect(Collectors.toList());
     }
+
+
     private void validateId(Long id) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Invalid ID");
