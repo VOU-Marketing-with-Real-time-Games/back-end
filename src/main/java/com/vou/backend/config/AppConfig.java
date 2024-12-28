@@ -16,22 +16,28 @@ import com.vou.backend.game.puzzle.model.UserItem;
 import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
 import com.vou.backend.game.quizz.model.Question;
+import com.vou.backend.user.dto.UserRequestDto;
+import com.vou.backend.user.dto.UserRespondDto;
+import com.vou.backend.user.model.User;
 import com.vou.backend.voucher.dto.UpdateVoucherDto;
 import com.vou.backend.voucher.dto.VoucherDto;
 import com.vou.backend.voucher.dto.VoucherResponseDto;
 import com.vou.backend.voucher.model.Voucher;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
+@RequiredArgsConstructor
 public class AppConfig {
-
+    private final PasswordEncoder passwordEncoder;
     /**
      * Configures and returns a ModelMapper bean.
      *
@@ -46,8 +52,22 @@ public class AppConfig {
         configQuestionConverters(modelMapper);
         configCampaignConverters(modelMapper);
         configVoucherConverters(modelMapper);
+        configUserConverters(modelMapper);
         configUserItemConverters(modelMapper);
         return modelMapper;
+    }
+    private void configUserConverters(ModelMapper modelMapper) {
+        modelMapper.typeMap(UserRequestDto.class, User.class).addMappings(mapper -> {
+            mapper.skip(User::setId);
+            mapper.skip(User::setStatus);
+            mapper.skip(User::setTurnNum);
+            mapper.skip(User::setCreatedAt);
+            mapper.map(UserRequestDto::getUserName, User::setUsername);
+            mapper.using(context -> passwordEncoder.encode((String) context.getSource()))
+                    .map(UserRequestDto::getPassword, User::setPassword);
+        });
+        // Model to Response DTO mapping
+        modelMapper.typeMap(User.class, UserRespondDto.class);
     }
     private void configCampaignConverters(ModelMapper modelMapper) {
         // DTO to Model mapping
@@ -194,7 +214,6 @@ public class AppConfig {
             }
         });
     }
-
     private void configUserItemConverters(ModelMapper modelMapper) {
         Converter<Item, ItemResponseDto> itemToItemResponseDtoConverter = context ->
                 modelMapper.map(context.getSource(), ItemResponseDto.class);
