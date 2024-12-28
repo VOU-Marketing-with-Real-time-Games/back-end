@@ -1,18 +1,14 @@
 package com.vou.backend.game.game_info;
 
-import com.vou.backend.game.game_info.model.GameCampaign;
-import com.vou.backend.game.game_info.model.GameInfo;
-import com.vou.backend.game.game_info.model.UserCampaignGame;
-import com.vou.backend.game.game_info.repository.GameCampaignRepository;
-import com.vou.backend.game.game_info.repository.GameInfoRepository;
-import com.vou.backend.game.game_info.repository.UserCampaignGameRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.vou.backend.filter.game.game_info.model.GameCampaign;
+import com.vou.backend.filter.game.game_info.model.UserCampaignGame;
+import com.vou.backend.filter.game.game_info.repository.GameCampaignRepository;
+import com.vou.backend.filter.game.game_info.repository.UserCampaignGameRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import java.util.List;
 import java.util.Optional;

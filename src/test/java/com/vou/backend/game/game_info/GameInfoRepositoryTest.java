@@ -1,8 +1,8 @@
 package com.vou.backend.game.game_info;
 
-import com.vou.backend.game.game_info.model.GameInfo;
-import com.vou.backend.game.game_info.model.GameType;
-import com.vou.backend.game.game_info.repository.GameInfoRepository;
+import com.vou.backend.filter.game.game_info.model.GameInfo;
+import com.vou.backend.filter.game.game_info.model.GameType;
+import com.vou.backend.filter.game.game_info.repository.GameInfoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
