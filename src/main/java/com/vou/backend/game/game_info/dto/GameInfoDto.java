@@ -39,8 +39,7 @@ public class GameInfoDto {
      * Must be either QUIZZ or SHAKE_GAME.
      * Cannot be null.
      */
-    @NotNull(message = "Game type cannot be null")
-    @Pattern(regexp = "QUIZZ|SHAKE_GAME", message = "Game type must be either QUIZZ or SHAKE_GAME")
+
     private String type;
 
     /**

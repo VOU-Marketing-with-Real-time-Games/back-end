@@ -1,5 +1,8 @@
 package com.vou.backend.game.game_info.service;
 
+import com.vou.backend.campaign.exception.CampaignNotFoundException;
+import com.vou.backend.campaign.model.Campaign;
+import com.vou.backend.campaign.service.CampaignService;
 import com.vou.backend.game.game_info.dto.UserCampaignGameRequestDto;
 import com.vou.backend.game.game_info.dto.UserCampaignGameResponseDto;
 import com.vou.backend.game.game_info.exception.GameCampaignNotFoundException;
@@ -22,6 +25,7 @@ public class UserCampaignGameService {
     private final UserCampaignGameRepository userCampaignGameRepository;
     private final GameCampaignService gameCampaignService;
     private final ModelMapper modelMapper;
+    private final CampaignService campaignService;
 
     public UserCampaignGameResponseDto saveUserCampaignGame(UserCampaignGameRequestDto userCampaignGameDto) throws GameCampaignNotFoundException {
         UserCampaignGame userCampaignGame = modelMapper.map(userCampaignGameDto, UserCampaignGame.class);
@@ -69,4 +73,16 @@ public class UserCampaignGameService {
                 .map(userCampaignGame -> modelMapper.map(userCampaignGame, UserCampaignGameResponseDto.class))
                 .collect(Collectors.toList());
     }
+
+    //
+    public List<Long> getDistinctUserIdByCampaignId(Long campaignId) throws CampaignNotFoundException {
+        Campaign campaign = campaignService.findCampaign(campaignId);
+        return userCampaignGameRepository.findDistinctUserIdByCampaignId(campaign.getId());
+    }
+
+    public List<Long> getDistinctUserIdAllCampaigns() {
+        return userCampaignGameRepository.findDistinctUserIdAllCampaign();
+    }
+
+
 }

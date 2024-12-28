@@ -28,7 +28,6 @@ public class GameInfo {
 
     public void copy(GameInfo gameInfo) {
         this.name = gameInfo.getName();
-        this.image = gameInfo.getImage();
         this.manual = gameInfo.getManual();
         this.enable = gameInfo.getEnable();
     }

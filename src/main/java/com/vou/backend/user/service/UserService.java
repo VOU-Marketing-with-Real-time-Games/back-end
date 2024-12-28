@@ -66,4 +66,8 @@ public class UserService {
         userRepository.delete(user);
         return modelMapper.map(user, UserRespondDto.class);
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }
