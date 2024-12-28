@@ -72,7 +72,10 @@ public class AuthService {
                 .userName(userResponse.getName())
                 .fullName(userResponse.getGivenName())
                 .avatar(userResponse.getPicture())
+                .phoneNumber("123456789")
+                .gender(userResponse.getGender())
                 .dob(null)
+                .role("USER")
                 .build();
         User user = modelMapper.map(userDto, User.class);
         userRepository.save(user);

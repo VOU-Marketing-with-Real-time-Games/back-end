@@ -24,4 +24,5 @@ public class OutboundUserResponse {
     String familyName; // The family name (last name) of the user
     String picture; // The URL of the user's profile picture
     String locale; // The locale of the user (e.g., en-US)
+    String gender;
 }
