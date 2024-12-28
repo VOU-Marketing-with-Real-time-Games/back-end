@@ -4,7 +4,7 @@ import com.vou.backend.brand.exception.BranchExistedException;
 import com.vou.backend.brand.exception.BranchNotFoundException;
 import com.vou.backend.brand.exception.BrandExistedException;
 import com.vou.backend.brand.exception.BrandNotFoundException;
-import com.vou.backend.filter.game.game_info.exception.*;
+import com.vou.backend.game.game_info.exception.*;
 import com.vou.backend.user.exception.PhoneNumberExistedException;
 import com.vou.backend.user.exception.UserEmailExistedException;
 import com.vou.backend.user.exception.UserNameExistedException;

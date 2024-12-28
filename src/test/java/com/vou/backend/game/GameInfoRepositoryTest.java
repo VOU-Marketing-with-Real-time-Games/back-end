@@ -1,6 +1,6 @@
 package com.vou.backend.game;
 
-import com.vou.backend.filter.game.game_info.repository.GameRepository;
+import com.vou.backend.game.game_info.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
