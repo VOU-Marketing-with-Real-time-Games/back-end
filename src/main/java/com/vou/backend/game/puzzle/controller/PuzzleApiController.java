@@ -6,7 +6,6 @@ import com.vou.backend.game.game_info.exception.Game_CampaignGameConflict;
 import com.vou.backend.game.game_info.exception.PuzzleNotFoundException;
 import com.vou.backend.game.puzzle.dto.PuzzleRequestDto;
 import com.vou.backend.game.puzzle.dto.PuzzleResponseDto;
-import com.vou.backend.game.puzzle.model.Puzzle;
 import com.vou.backend.game.puzzle.service.PuzzleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

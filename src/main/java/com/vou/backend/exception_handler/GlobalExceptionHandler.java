@@ -5,6 +5,7 @@ import com.vou.backend.brand.exception.BranchNotFoundException;
 import com.vou.backend.brand.exception.BrandExistedException;
 import com.vou.backend.brand.exception.BrandNotFoundException;
 import com.vou.backend.game.game_info.exception.*;
+import com.vou.backend.image.exception.ImageNotFoundException;
 import com.vou.backend.user.exception.PhoneNumberExistedException;
 import com.vou.backend.user.exception.UserEmailExistedException;
 import com.vou.backend.user.exception.UserNameExistedException;
@@ -32,7 +33,6 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
     /**
      * Handles duplication errors and returns an ErrorDTO.
      *
@@ -88,7 +88,7 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class})
+    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class, InvalidTradeItem.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleBadRequestException(HttpServletRequest request, Exception ex) {
@@ -111,7 +111,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({ GameNotFoundException.class, GameCampaignNotFoundException.class,
             UserCampaignGameNotFoundException.class, PuzzleNotFoundException.class, QuizzNotFoundException.class,
             QuestionNotFoundException.class, BranchNotFoundException.class, BrandNotFoundException.class,
-            UserNotFoundException.class,CampaignNotFoundException.class, VoucherNotFoundException.class
+            UserNotFoundException.class,CampaignNotFoundException.class, VoucherNotFoundException.class, ImageNotFoundException.class
     })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
@@ -147,5 +147,4 @@ public class GlobalExceptionHandler {
         LOGGER.error("Internal Server Error: {}", ex.getMessage(), ex);
         return error;
     }
-
 }

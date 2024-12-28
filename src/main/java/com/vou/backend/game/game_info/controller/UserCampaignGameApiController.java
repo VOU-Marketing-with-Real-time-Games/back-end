@@ -1,5 +1,6 @@
 package com.vou.backend.game.game_info.controller;
 
+import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.game.game_info.dto.UserCampaignGameRequestDto;
 import com.vou.backend.game.game_info.dto.UserCampaignGameResponseDto;
 import com.vou.backend.game.game_info.exception.GameCampaignNotFoundException;
@@ -85,6 +86,18 @@ public class UserCampaignGameApiController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<UserCampaignGameResponseDto>> findByUserId(@PathVariable Long userId) {
         List<UserCampaignGameResponseDto> responseDtos = userCampaignGameService.findByUserId(userId);
+        return ResponseEntity.ok(responseDtos);
+    }
+
+    @GetMapping("/campaign/{campaignId}/users")
+    public ResponseEntity<List<Long>> findDistinctUserByCampaign(@PathVariable Long campaignId) throws CampaignNotFoundException {
+        List<Long> responseDtos = userCampaignGameService.getDistinctUserIdByCampaignId(campaignId);
+        return ResponseEntity.ok(responseDtos);
+    }
+
+    @GetMapping("/campaign/users")
+    public ResponseEntity<List<Long>> findDistinctUserByAllCampaign()  {
+        List<Long> responseDtos = userCampaignGameService.getDistinctUserIdAllCampaigns();
         return ResponseEntity.ok(responseDtos);
     }
 }

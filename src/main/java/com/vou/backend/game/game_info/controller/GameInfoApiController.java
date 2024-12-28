@@ -2,7 +2,6 @@ package com.vou.backend.game.game_info.controller;
 
 import com.vou.backend.game.game_info.dto.GameInfoDto;
 import com.vou.backend.game.game_info.exception.GameNotFoundException;
-import com.vou.backend.game.game_info.model.GameInfo;
 import com.vou.backend.game.game_info.service.GameService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +21,7 @@ import java.util.List;
 public class GameInfoApiController {
 
     private final GameService gameService;
+
     /**
      * Retrieves all game information.
      *

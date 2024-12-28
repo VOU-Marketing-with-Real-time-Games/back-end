@@ -7,10 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("delete from Item i where i.puzzle.id = :puzzleId")
     @Modifying
     void deleteByPuzzleId(Long puzzleId);
+
+    @Query("select i from Item i where i.puzzle.id = :puzzleId and i.remainingNum > 0")
+    List<Item> findByPuzzleId(Long puzzleId);
 }

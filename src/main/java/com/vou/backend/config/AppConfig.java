@@ -9,12 +9,10 @@ import com.vou.backend.game.game_info.model.GameCampaign;
 import com.vou.backend.game.game_info.model.GameInfo;
 import com.vou.backend.game.game_info.model.GameType;
 import com.vou.backend.game.game_info.model.UserCampaignGame;
-import com.vou.backend.game.puzzle.dto.ItemRequestDto;
-import com.vou.backend.game.puzzle.dto.ItemResponseDto;
-import com.vou.backend.game.puzzle.dto.PuzzleRequestDto;
-import com.vou.backend.game.puzzle.dto.PuzzleResponseDto;
+import com.vou.backend.game.puzzle.dto.*;
 import com.vou.backend.game.puzzle.model.Item;
 import com.vou.backend.game.puzzle.model.Puzzle;
+import com.vou.backend.game.puzzle.model.UserItem;
 import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
 import com.vou.backend.game.quizz.model.Question;
@@ -55,6 +53,7 @@ public class AppConfig {
         configCampaignConverters(modelMapper);
         configVoucherConverters(modelMapper);
         configUserConverters(modelMapper);
+        configUserItemConverters(modelMapper);
         return modelMapper;
     }
     private void configUserConverters(ModelMapper modelMapper) {
@@ -215,5 +214,15 @@ public class AppConfig {
             }
         });
     }
+    private void configUserItemConverters(ModelMapper modelMapper) {
+        Converter<Item, ItemResponseDto> itemToItemResponseDtoConverter = context ->
+                modelMapper.map(context.getSource(), ItemResponseDto.class);
 
+        modelMapper.addMappings(new PropertyMap<UserItem, UserItemDto>() {
+            @Override
+            protected void configure() {
+                using(itemToItemResponseDtoConverter).map(source.getItem()).setItem(null);
+            }
+        });
+    }
 }

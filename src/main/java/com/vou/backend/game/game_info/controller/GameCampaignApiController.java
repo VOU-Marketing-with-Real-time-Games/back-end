@@ -5,18 +5,14 @@ import com.vou.backend.game.game_info.dto.GameCampaignResponseDto;
 import com.vou.backend.game.game_info.dto.UserCampaignGameResponseDto;
 import com.vou.backend.game.game_info.exception.GameCampaignNotFoundException;
 import com.vou.backend.game.game_info.exception.GameNotFoundException;
-import com.vou.backend.game.game_info.model.GameCampaign;
-import com.vou.backend.game.game_info.model.UserCampaignGame;
 import com.vou.backend.game.game_info.service.GameCampaignService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing game campaigns.
@@ -35,7 +31,6 @@ public class GameCampaignApiController {
      */
     @GetMapping
     public ResponseEntity<List<GameCampaignResponseDto>> getAllGameCampaigns() {
-
         List<GameCampaignResponseDto> responseDtos = gameCampaignService.findAll();
         return ResponseEntity.ok(responseDtos);
     }
@@ -116,6 +111,12 @@ public class GameCampaignApiController {
     @GetMapping("/{campaignId}/users")
     public ResponseEntity<List<UserCampaignGameResponseDto>> getUserCampaignGames(@PathVariable Long campaignId) throws GameCampaignNotFoundException {
         List<UserCampaignGameResponseDto> responseDtos = gameCampaignService.getUserCampaignGames(campaignId);
+        return ResponseEntity.ok(responseDtos);
+    }
+
+    @GetMapping("/game/{gameId}/campaigns")
+    public ResponseEntity<List<Long>> getListCampaignByGameId(@PathVariable Long gameId) throws GameNotFoundException {
+        List<Long> responseDtos = gameCampaignService.listCampaignIdByGameId(gameId);
         return ResponseEntity.ok(responseDtos);
     }
 }

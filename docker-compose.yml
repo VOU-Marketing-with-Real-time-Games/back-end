@@ -1,0 +1,28 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: voucher-mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: vou
+      MYSQL_USER: web
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - vou-mysql-data:/var/lib/mysql
+  mongodb:
+    image: mongo:7.0
+    container_name: voucher-mongo-db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
+      MONGO_INITDB_DATABASE: vou
+    ports:
+      - "27017:27017"
+    volumes:
+      - vou-mongo-data:/data/db
+
+volumes:
+  vou-mysql-data:
+  vou-mongo-data:

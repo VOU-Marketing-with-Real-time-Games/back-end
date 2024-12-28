@@ -24,7 +24,9 @@ public class Quizz {
     private String description;
     private Date createdAt;
     private Integer secondPerQuestion;
+    private Date startTime;
     private Long campaignGameId;
+
 
     @OneToMany(mappedBy = "quizz", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
