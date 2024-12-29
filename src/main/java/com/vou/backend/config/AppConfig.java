@@ -13,9 +13,10 @@ import com.vou.backend.game.puzzle.dto.*;
 import com.vou.backend.game.puzzle.model.Item;
 import com.vou.backend.game.puzzle.model.Puzzle;
 import com.vou.backend.game.puzzle.model.UserItem;
-import com.vou.backend.game.quizz.dto.QuestionRequestDto;
-import com.vou.backend.game.quizz.dto.QuestionResponseDto;
+import com.vou.backend.game.quizz.dto.*;
 import com.vou.backend.game.quizz.model.Question;
+import com.vou.backend.game.quizz.model.Quizz;
+import com.vou.backend.game.quizz.model.UserAnswer;
 import com.vou.backend.voucher.dto.UpdateVoucherDto;
 import com.vou.backend.voucher.dto.VoucherDto;
 import com.vou.backend.voucher.dto.VoucherResponseDto;
@@ -26,6 +27,8 @@ import org.modelmapper.PropertyMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,8 +50,39 @@ public class AppConfig {
         configCampaignConverters(modelMapper);
         configVoucherConverters(modelMapper);
         configUserItemConverters(modelMapper);
+        configQuizzConverters(modelMapper);
+        configUserAnswerConverters(modelMapper);
         return modelMapper;
     }
+
+    private void configQuizzConverters(ModelMapper modelMapper) {
+        // Map QuizzRequestDto to Quizz
+        modelMapper.addMappings(new PropertyMap<QuizzRequestDto, Quizz>() {
+            @Override
+            protected void configure() {
+                skip(destination.getId()); // Skip mapping ID
+                skip(destination.getStartTime());
+            }
+        });
+
+        // Map Quizz to QuizzResponseDto
+        modelMapper.addMappings(new PropertyMap<Quizz, QuizzResponseDto>() {
+            @Override
+            protected void configure() {
+                map().setCreatedAt(sourceToTargetDateConverter(source.getCreatedAt()));
+                map().setStartTime(sourceToTargetDateConverter(source.getStartTime()));
+            }
+        });
+    }
+
+    // Helper for formatting Date to String
+    private static String sourceToTargetDateConverter(Date date) {
+        if (date == null) return null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        formatter.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+        return formatter.format(date);
+    }
+
     private void configCampaignConverters(ModelMapper modelMapper) {
         // DTO to Model mapping
         modelMapper.typeMap(CampaignDto.class, Campaign.class).addMappings(mapper -> {
@@ -185,8 +219,10 @@ public class AppConfig {
             @Override
             protected void configure() {
                 map().getQuizz().setId(source.getQuizzId());
+                skip(destination.getId());
             }
         });
+
         modelMapper.addMappings(new PropertyMap<Question, QuestionResponseDto>() {
             @Override
             protected void configure() {
@@ -203,6 +239,20 @@ public class AppConfig {
             @Override
             protected void configure() {
                 using(itemToItemResponseDtoConverter).map(source.getItem()).setItem(null);
+            }
+        });
+    }
+
+    private void configUserAnswerConverters(ModelMapper modelMapper) {
+        // DTO to Model mapping
+        modelMapper.addMappings(new PropertyMap<UserAnswerRequestDto, UserAnswer>() {
+            @Override
+            protected void configure() {
+                map().getQuestion().setId(source.getQuestionId());
+                skip(destination.getId());
+                skip(destination.getQuestion());
+                skip(destination.getIsCorrect());
+                skip(destination.getScore());
             }
         });
     }

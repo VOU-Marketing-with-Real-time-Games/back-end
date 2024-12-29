@@ -11,8 +11,11 @@ import com.vou.backend.game.puzzle.model.Puzzle;
 import com.vou.backend.game.puzzle.model.UserItem;
 import com.vou.backend.game.quizz.dto.QuestionRequestDto;
 import com.vou.backend.game.quizz.dto.QuestionResponseDto;
+import com.vou.backend.game.quizz.dto.QuizzRequestDto;
+import com.vou.backend.game.quizz.dto.UserAnswerRequestDto;
 import com.vou.backend.game.quizz.model.Question;
 import com.vou.backend.game.quizz.model.Quizz;
+import com.vou.backend.game.quizz.model.UserAnswer;
 import com.vou.backend.notification.dto.NotificationDto;
 import com.vou.backend.notification.model.NotificationUser;
 import org.junit.jupiter.api.BeforeEach;
@@ -409,5 +412,43 @@ public class ConfigTests {
         assertThat(itemResponseDto.getDescription()).isEqualTo(item.getDescription());
         assertThat(itemResponseDto.getTotal()).isEqualTo(item.getTotal());
         assertThat(itemResponseDto.getRemainingNum()).isEqualTo(item.getRemainingNum());
+    }
+
+    @Test
+    public void testQuizzRequestDtoToQuizzMapping() {
+        QuizzRequestDto quizzRequestDto = QuizzRequestDto.builder()
+                .name("Sample Quizz")
+                .description("Sample Description")
+                .secondPerQuestion(30)
+                .campaignGameId(1L)
+                //.startTime(new Date(System.currentTimeMillis() + 10000)) // Future date
+                .build();
+
+        Quizz quizz = modelMapper.map(quizzRequestDto, Quizz.class);
+
+        assertThat(quizz).isNotNull();
+        assertThat(quizz.getName()).isEqualTo(quizzRequestDto.getName());
+        assertThat(quizz.getDescription()).isEqualTo(quizzRequestDto.getDescription());
+        assertThat(quizz.getSecondPerQuestion()).isEqualTo(quizzRequestDto.getSecondPerQuestion());
+        assertThat(quizz.getCampaignGameId()).isEqualTo(quizzRequestDto.getCampaignGameId());
+        assertThat(quizz.getStartTime()).isEqualTo(quizzRequestDto.getStartTime());
+    }
+
+    @Test
+    public void testUserAnswerRequestDtoToUserAnswerMapping() {
+        UserAnswerRequestDto userAnswerRequestDto = new UserAnswerRequestDto();
+        userAnswerRequestDto.setUserId(1L);
+        userAnswerRequestDto.setQuestionId(2L);
+        userAnswerRequestDto.setAnswer("Sample Answer");
+        userAnswerRequestDto.setAnswerTime(30);
+
+        UserAnswer userAnswer = modelMapper.map(userAnswerRequestDto, UserAnswer.class);
+
+        assertThat(userAnswer).isNotNull();
+        assertThat(userAnswer.getUserId()).isEqualTo(userAnswerRequestDto.getUserId());
+        assertThat(userAnswer.getAnswer()).isEqualTo(userAnswerRequestDto.getAnswer());
+        assertThat(userAnswer.getAnswerTime()).isEqualTo(userAnswerRequestDto.getAnswerTime());
+        assertThat(userAnswer.getQuestion()).isNotNull();
+        assertThat(userAnswer.getQuestion().getId()).isEqualTo(userAnswerRequestDto.getQuestionId());
     }
 }
