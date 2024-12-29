@@ -103,28 +103,4 @@ public class UserItemService {
                 .map(userItem -> modelMapper.map(userItem, UserItemDto.class))
                 .toList();
     }
-
-    public void tradeItem(ItemTradeDto itemTradeDto) throws Exception {
-       UserItem userItem = userItemRepository.findByUserIdAndItemId(itemTradeDto.getUserId(), itemTradeDto.getItemId());
-       User user = userService.findByEmail(itemTradeDto.getEmail());
-       if(user == null || userItem == null || userItem.getTotalItem() < itemTradeDto.getNumItem())
-       {
-           throw new InvalidTradeItem("Invalid trade item");
-       }
-
-       userItem.setTotalItem(userItem.getTotalItem() - itemTradeDto.getNumItem());
-
-       UserItem userItemReceiver = userItemRepository.findByUserIdAndItemId(user.getId(), itemTradeDto.getItemId());
-         if(userItemReceiver == null)
-         {
-              userItemReceiver = UserItem.builder().userId(user.getId()).item(userItem.getItem()).totalItem(itemTradeDto.getNumItem()).build();
-              userItemRepository.save(userItemReceiver);
-              checkReceiveVoucherAndNotify(user.getId(), userItem.getItem().getPuzzle().getId());
-         }
-         else
-         {
-              userItemReceiver.setTotalItem(userItemReceiver.getTotalItem() + itemTradeDto.getNumItem());
-         }
-    }
-
 }
