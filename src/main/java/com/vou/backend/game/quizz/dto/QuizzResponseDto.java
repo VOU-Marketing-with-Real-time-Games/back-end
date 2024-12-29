@@ -14,7 +14,8 @@ public class QuizzResponseDto {
     private Long id;
     private String name;
     private String description;
-    private Date createdAt;
+    private String createdAt;
     private Integer secondPerQuestion;
+    private String startTime;
     private Long campaignGameId;
 }

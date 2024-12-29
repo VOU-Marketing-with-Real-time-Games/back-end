@@ -1,10 +1,7 @@
 package com.vou.backend.game.quizz.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class Quizz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +32,7 @@ public class Quizz {
     public void copy(Quizz quizz) {
         this.name = quizz.getName();
         this.description = quizz.getDescription();
+        this.startTime = quizz.getStartTime();
         this.secondPerQuestion = quizz.getSecondPerQuestion();
     }
 }
