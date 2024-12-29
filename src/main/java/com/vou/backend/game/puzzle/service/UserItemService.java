@@ -1,11 +1,8 @@
 package com.vou.backend.game.puzzle.service;
 
-import com.vou.backend.game.game_info.exception.InvalidTradeItem;
-import com.vou.backend.game.game_info.exception.PuzzleNotFoundException;
 import com.vou.backend.game.game_info.model.GameCampaign;
 import com.vou.backend.game.game_info.model.GameType;
 import com.vou.backend.game.game_info.repository.GameCampaignRepository;
-import com.vou.backend.game.game_info.service.GameCampaignService;
 import com.vou.backend.game.puzzle.dto.ItemResponseDto;
 import com.vou.backend.game.puzzle.dto.ItemTradeDto;
 import com.vou.backend.game.puzzle.dto.UserItemDto;

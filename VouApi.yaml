@@ -1209,6 +1209,48 @@ paths:
         404:
           description: Campaign not found
           
+  /notifications:
+    post:
+      tags:
+        - Notification
+      summary: Add a new notification
+      description: Create a new notification in the system.
+      requestBody:
+        description: Notification details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationDto'
+      responses:
+        201:
+          description: Notification created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationDto'
+        400:
+          description: Validation error
+
+  /notifications/{id}:
+    delete:
+      tags:
+        - Notification
+      summary: Soft delete a notification
+      description: Soft delete a notification by setting its isDeleted flag to true.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        204:
+          description: Notification deleted successfully
+        404:
+          description: Notification not found
+
   /notifications/user/{userId}:
     get:
       tags:
@@ -1220,8 +1262,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: UUID format
+            type: integer
+            example: 1
       responses:
         200:
           description: Notifications retrieved successfully
@@ -1230,71 +1272,9 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                      example: 1
-                    content:
-                      type: string
-                      example: Your voucher is about to expired
-                    isRead:
-                      type: boolean
-                      example: false
-                    isDelete:
-                      type: boolean
-                      example: false
-                    createdAt:
-                      type: string
-                      format: date-time
-                      example: 2024-03-15T12:00:00Z
+                  $ref: '#/components/schemas/NotificationDto'
         404:
-          description: User not found 
-
-  /notifications/{notificationId}:
-    put:
-      tags:
-        - Notification
-      summary: Update a notification status
-      description: Mark a notification as READ, UNREAD, SOFT DELETE
-      parameters:
-        - name: notificationId
-          in: path
-          required: true
-          schema:
-            type: number
-            example: notif456
-      requestBody:
-        description: Updated notification status
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                    id:
-                      type: number
-                      example: 1
-                    content:
-                      type: string
-                      example: Your voucher is about to expired
-                    isRead:
-                      type: boolean
-                      example: true
-                    isDelete:
-                      type: boolean
-                      example: true
-                    createdAt:
-                      type: string
-                      format: date-time
-                      example: 2024-03-15T12:00:00Z
-              required:
-                - status
-      responses:
-        200:
-          description: Notification status updated successfully
-        404:
-          description: Notification not found
+          description: User not found
   /games:
     get:
       tags:
@@ -1326,4 +1306,131 @@ paths:
                     enable:
                       type: boolean
                       example: true
+  /game-info:
+    get:
+      tags:
+        - GameInfo
+      summary: Retrieve all games
+      description: Get a list of all available games.
+      responses:
+        200:
+          description: List of games retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameInfoDto'
+
+  /game-info/{id}:
+    get:
+      tags:
+        - GameInfo
+      summary: Retrieve game information by ID
+      description: Get details of a game by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: Game details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameInfoDto'
+        404:
+          description: Game not found
+
+    put:
+      tags:
+        - GameInfo
+      summary: Update game information
+      description: Modify the details of an existing game.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        description: Updated game details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameInfoRequestDto'
+      responses:
+        200:
+          description: Game updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameInfoDto'
+        404:
+          description: Game not found
+        400:
+          description: Validation error
                     
+components:
+  schemas:
+    NotificationDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        content:
+          type: string
+          example: Your voucher is about to expire
+        createdAt:
+          type: string
+          format: date-time
+          example: 2024-03-15T12:00:00Z
+        isRead:
+          type: boolean
+          example: false
+        userId:
+          type: integer
+          example: 1
+
+    GameInfoRequestDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Quizz
+        image:
+          type: string
+          example: id image store in mongo
+        manual:
+          type: string
+          example: Instructions for the game
+        enable:
+          type: boolean
+          example: true
+    GameInfoDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Quizz
+        image:
+          type: string
+          example: id image store in mongo
+        type:
+          type: string
+          example: QUIZZ
+        manual:
+          type: string
+          example: Instructions for the game
+        enable:
+          type: boolean
+          example: true
