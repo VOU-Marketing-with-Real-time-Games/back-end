@@ -38,7 +38,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping("register")
     public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException{
         UserRespondDto user = userService.create(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
