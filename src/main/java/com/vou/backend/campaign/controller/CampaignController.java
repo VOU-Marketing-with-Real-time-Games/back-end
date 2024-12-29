@@ -1,9 +1,13 @@
 package com.vou.backend.campaign.controller;
+import com.vou.backend.campaign.dto.AddFavoriteDto;
 import com.vou.backend.campaign.dto.CampaignDto;
 import com.vou.backend.campaign.dto.CampaignResponseDto;
 import com.vou.backend.campaign.dto.UpdateCampaignDto;
+import com.vou.backend.campaign.exception.CampaignAlreadyAddedException;
 import com.vou.backend.campaign.exception.CampaignNotFoundException;
+import com.vou.backend.campaign.model.FavoriteCampaignUser;
 import com.vou.backend.campaign.service.CampaignService;
+import com.vou.backend.campaign.service.FavoriteCampaignService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CampaignController {
     private final CampaignService campaignService;
+    private final FavoriteCampaignService favoriteCampaignService;
     /**
      * Create a new campaign.
      *
@@ -88,4 +93,17 @@ public class CampaignController {
         List<CampaignResponseDto> campaigns = campaignService.getFavouriteCampaignsByUser(id);
         return new ResponseEntity<>(campaigns,HttpStatus.OK);
     }
+    /**
+     * Add a campaign to the user's favorite list.
+     *
+     * @param addFavoriteDto the AddFavoriteDto containing the user ID and campaign ID
+     * @return the FavoriteCampaignUser
+     * @throws CampaignNotFoundException if the campaign is not found
+     */
+    @PostMapping("/add-favourite")
+    public ResponseEntity<?> addFavoriteCampaign(@Valid @RequestBody AddFavoriteDto addFavoriteDto) throws CampaignNotFoundException, CampaignAlreadyAddedException {
+            FavoriteCampaignUser favoriteCampaignUser = favoriteCampaignService.addFavoriteCampaign(addFavoriteDto.getUserId(), addFavoriteDto.getCampaignId());
+            return new ResponseEntity<>(favoriteCampaignUser, HttpStatus.CREATED);
+    }
+
 }
