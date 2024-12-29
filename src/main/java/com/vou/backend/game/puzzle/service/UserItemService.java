@@ -1,13 +1,10 @@
 package com.vou.backend.game.puzzle.service;
 
 import com.vou.backend.game.game_info.exception.InvalidTradeItem;
-import com.vou.backend.game.game_info.exception.PuzzleNotFoundException;
 import com.vou.backend.game.game_info.model.GameCampaign;
 import com.vou.backend.game.game_info.model.GameType;
 import com.vou.backend.game.game_info.repository.GameCampaignRepository;
-import com.vou.backend.game.game_info.service.GameCampaignService;
 import com.vou.backend.game.puzzle.dto.ItemResponseDto;
-import com.vou.backend.game.puzzle.dto.ItemTradeDto;
 import com.vou.backend.game.puzzle.dto.UserItemDto;
 import com.vou.backend.game.puzzle.model.Item;
 import com.vou.backend.game.puzzle.model.Puzzle;
@@ -17,7 +14,6 @@ import com.vou.backend.notification.dto.NotificationDto;
 import com.vou.backend.notification.service.NotificationService;
 import com.vou.backend.user.model.User;
 import com.vou.backend.user.service.UserService;
-import com.vou.backend.voucher.model.Voucher;
 import com.vou.backend.voucher.service.VoucherCampaignService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -104,27 +100,6 @@ public class UserItemService {
                 .toList();
     }
 
-    public void tradeItem(ItemTradeDto itemTradeDto) throws Exception {
-       UserItem userItem = userItemRepository.findByUserIdAndItemId(itemTradeDto.getUserId(), itemTradeDto.getItemId());
-       User user = userService.findByEmail(itemTradeDto.getEmail());
-       if(user == null || userItem == null || userItem.getTotalItem() < itemTradeDto.getNumItem())
-       {
-           throw new InvalidTradeItem("Invalid trade item");
-       }
 
-       userItem.setTotalItem(userItem.getTotalItem() - itemTradeDto.getNumItem());
-
-       UserItem userItemReceiver = userItemRepository.findByUserIdAndItemId(user.getId(), itemTradeDto.getItemId());
-         if(userItemReceiver == null)
-         {
-              userItemReceiver = UserItem.builder().userId(user.getId()).item(userItem.getItem()).totalItem(itemTradeDto.getNumItem()).build();
-              userItemRepository.save(userItemReceiver);
-              checkReceiveVoucherAndNotify(user.getId(), userItem.getItem().getPuzzle().getId());
-         }
-         else
-         {
-              userItemReceiver.setTotalItem(userItemReceiver.getTotalItem() + itemTradeDto.getNumItem());
-         }
-    }
 
 }

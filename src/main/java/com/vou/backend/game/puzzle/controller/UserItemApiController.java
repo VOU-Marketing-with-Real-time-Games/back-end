@@ -1,10 +1,8 @@
 package com.vou.backend.game.puzzle.controller;
 
 import com.vou.backend.game.puzzle.dto.ItemResponseDto;
-import com.vou.backend.game.puzzle.dto.ItemTradeDto;
 import com.vou.backend.game.puzzle.dto.UserItemDto;
 import com.vou.backend.game.puzzle.service.UserItemService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,11 +40,5 @@ public class UserItemApiController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(itemResponseDto);
-    }
-
-    @PostMapping("/trade")
-    public ResponseEntity<?> tradeItem(@RequestBody @Valid ItemTradeDto tradeDto) throws Exception {
-        userItemService.tradeItem(tradeDto);
-        return ResponseEntity.ok().build();
     }
 }

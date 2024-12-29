@@ -20,6 +20,7 @@ public class PuzzleRequestDto {
     @NotNull(message = "Name cannot be null")
     private String name;
     private String description;
+    private String image;
 
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     private Integer itemNum;

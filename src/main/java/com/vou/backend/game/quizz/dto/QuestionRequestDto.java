@@ -17,6 +17,8 @@ public class QuestionRequestDto {
     @NotBlank(message = "Question name cannot be blank")
     private String questionName;
 
+    private String image;
+
     @NotNull(message = "Option 1 cannot be null")
     @NotBlank(message = "Option 1 cannot be blank")
     private String option1;

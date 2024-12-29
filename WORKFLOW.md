@@ -82,7 +82,7 @@ This document outlines the development workflow for the project. The `dev` branc
 2. Follow the same review and merge process as above.
 3. Optionally, create a tag for the release
     ```bash
-   git checkout main
+    git checkout main
     git pull origin main
     git tag -a vX.Y.Z -m "Release version X.Y.Z"
     git push origin vX.Y.Z
