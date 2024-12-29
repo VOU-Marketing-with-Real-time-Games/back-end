@@ -88,7 +88,7 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class, InvalidTradeItem.class})
+    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleBadRequestException(HttpServletRequest request, Exception ex) {
