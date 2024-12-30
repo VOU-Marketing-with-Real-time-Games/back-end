@@ -56,6 +56,7 @@ public class UserService {
             throw new PhoneNumberExistedException("Phone number existed");
         }
         user.setTurnNum(0);
+        user.setStatus("NOT ACTIVE");
         user.setCreatedAt(new Date());
         userRepository.save(user);
         return modelMapper.map(user, UserRespondDto.class);
