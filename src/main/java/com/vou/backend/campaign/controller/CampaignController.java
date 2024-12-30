@@ -8,6 +8,8 @@ import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.campaign.model.FavoriteCampaignUser;
 import com.vou.backend.campaign.service.CampaignService;
 import com.vou.backend.campaign.service.FavoriteCampaignService;
+import com.vou.backend.notification.dto.NotificationDto;
+import com.vou.backend.notification.service.NotificationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,7 @@ import java.util.List;
 public class CampaignController {
     private final CampaignService campaignService;
     private final FavoriteCampaignService favoriteCampaignService;
+    private final NotificationService notificationService;
     /**
      * Create a new campaign.
      *
@@ -30,8 +33,13 @@ public class CampaignController {
      * @return the created CampaignResponseDto
      */
     @PostMapping
-    public ResponseEntity<?> createCampaign(@Valid @RequestBody CampaignDto campaignDTO) {
+    public ResponseEntity<?> createCampaign(@Valid @RequestBody CampaignDto campaignDTO) throws Exception {
            CampaignResponseDto campaign = campaignService.createCampaign(campaignDTO);
+           NotificationDto notificationDto = NotificationDto.builder()
+                .content("A new campaign has been created: " + campaign.getName())
+                .isRead(false)
+                .build();
+           notificationService.sendNotificationToAdmins(notificationDto);
            return new ResponseEntity<>(campaign, HttpStatus.CREATED);
     }
     /**
