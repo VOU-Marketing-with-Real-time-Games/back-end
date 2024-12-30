@@ -31,7 +31,6 @@ public class NotificationSocketHandler extends TextWebSocketHandler {
         sessions.remove(session);
         logger.info("Client disconnected: " + session.getId());
     }
-
     public void broadcastToClients(NotificationDto notificationDto) throws Exception {
         String message = gson.toJson(notificationDto);
         for (WebSocketSession session : sessions) {

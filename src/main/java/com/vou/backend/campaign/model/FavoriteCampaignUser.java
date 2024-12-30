@@ -1,6 +1,7 @@
 package com.vou.backend.campaign.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class FavoriteCampaignUser {
     private Long userId;
     @ManyToOne
     @JoinColumn(name = "campaign_id")
+    @JsonIgnore
     private Campaign campaign;
     Date addToTime;
 }

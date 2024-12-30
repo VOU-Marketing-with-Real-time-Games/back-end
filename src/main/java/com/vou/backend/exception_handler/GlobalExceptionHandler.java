@@ -4,6 +4,7 @@ import com.vou.backend.brand.exception.BranchExistedException;
 import com.vou.backend.brand.exception.BranchNotFoundException;
 import com.vou.backend.brand.exception.BrandExistedException;
 import com.vou.backend.brand.exception.BrandNotFoundException;
+import com.vou.backend.campaign.exception.CampaignAlreadyAddedException;
 import com.vou.backend.game.game_info.exception.*;
 import com.vou.backend.image.exception.ImageNotFoundException;
 import com.vou.backend.user.exception.*;
@@ -85,7 +86,7 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class})
+    @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class, InvalidTradeItem.class, CampaignAlreadyAddedException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleBadRequestException(HttpServletRequest request, Exception ex) {

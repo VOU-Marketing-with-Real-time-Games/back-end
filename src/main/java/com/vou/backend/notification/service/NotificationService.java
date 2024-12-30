@@ -5,6 +5,8 @@ import com.vou.backend.notification.exception.NotificationUserNotFoundException;
 import com.vou.backend.notification.model.NotificationUser;
 import com.vou.backend.notification.repository.NotificationRepository;
 import com.vou.backend.notification.socket.NotificationSocketHandler;
+import com.vou.backend.user.model.User;
+import com.vou.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
     private final ModelMapper modelMapper;
     private final NotificationSocketHandler notificationSocketHandler;
+    private final UserRepository userRepository;
 
     /**
      * Adds a new notification.
@@ -73,5 +76,17 @@ public class NotificationService {
         return notifications.stream()
                 .map(notificationUser -> modelMapper.map(notificationUser, NotificationDto.class))
                 .collect(Collectors.toList());
+    }
+    public void sendNotificationToAdmins(NotificationDto notificationDto) throws Exception {
+        List<User> adminUsers = userRepository.findByRole("ADMIN");
+        for (User admin : adminUsers) {
+            NotificationUser notificationUser = modelMapper.map(notificationDto, NotificationUser.class);
+            notificationUser.setUserId(admin.getId());
+            notificationUser.setIsDeleted(false);
+            notificationUser.setCreatedAt(new Date());
+            notificationRepository.save(notificationUser);
+            NotificationDto response = modelMapper.map(notificationUser, NotificationDto.class);
+            notificationSocketHandler.broadcastToClients(response);
+        }
     }
 }

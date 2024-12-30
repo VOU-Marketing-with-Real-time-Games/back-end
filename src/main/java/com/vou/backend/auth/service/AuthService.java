@@ -1,5 +1,4 @@
 package com.vou.backend.auth.service;
-
 import com.vou.backend.auth.dto.ExchangeTokenRequest;
 import com.vou.backend.auth.dto.OutboundUserResponse;
 import com.vou.backend.auth.httpclient.OutboundIdentityClient;
