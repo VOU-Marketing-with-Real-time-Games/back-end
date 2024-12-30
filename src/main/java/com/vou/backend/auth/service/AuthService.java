@@ -5,6 +5,8 @@ import com.vou.backend.auth.dto.OutboundUserResponse;
 import com.vou.backend.auth.httpclient.OutboundIdentityClient;
 import com.vou.backend.auth.httpclient.OutboundUserClient;
 import com.vou.backend.user.dto.UserRequestDto;
+import com.vou.backend.user.exception.UserEmailExistedException;
+import com.vou.backend.user.exception.UserNameExistedException;
 import com.vou.backend.user.exception.UserNotFoundException;
 import com.vou.backend.user.model.User;
 import com.vou.backend.user.repository.UserRepository;
@@ -29,6 +31,8 @@ public class AuthService {
     private  final OutboundIdentityClient outboundIdentityClient;
     private final OutboundUserClient outboundUserClient;
     private final ModelMapper modelMapper;
+    private final EmailService emailService;
+    private final OtpService otpService;
     @NonFinal
     @Value("${outbound.identity.client-id}")
     protected  String CLIENT_ID;
@@ -48,6 +52,10 @@ public class AuthService {
         if(!passwordEncoder.matches(password,user.getPassword()))
         {
             throw new BadCredentialsException("Invalid password!");
+        }
+        if(!user.getStatus().equals("ACTIVE"))
+        {
+            throw new BadCredentialsException("User is not active!");
         }
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userName,password);
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
@@ -82,5 +90,28 @@ public class AuthService {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(),"123456");
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         return jwtTokenUtil.generateToken(user);
+    }
+    public void sendOTP(String email) throws Exception
+    {
+        if (userRepository.findByEmail(email) == null) {
+            throw new UserNotFoundException("Email does not exist in the system!");
+        }
+        String otp = emailService.generateOtp();
+        otpService.storeOtp(email,otp);
+        emailService.sendOtpEmail(email, otp);
+    }
+    public boolean verifyOTP(String otp,String email) throws Exception
+    {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UserNotFoundException("Email does not exist in the system!");
+        }
+        boolean valid = otpService.verifyOtp(otp,email);
+        if(valid)
+        {
+            user.setStatus("ACTIVE");
+            userRepository.save(user);
+        }
+        return valid;
     }
 }
