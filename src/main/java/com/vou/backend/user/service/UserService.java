@@ -3,16 +3,13 @@ package com.vou.backend.user.service;
 import java.util.Date;
 import java.util.List;
 
+import com.vou.backend.user.exception.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vou.backend.user.dto.UserRequestDto;
 import com.vou.backend.user.dto.UserRespondDto;
-import com.vou.backend.user.exception.PhoneNumberExistedException;
-import com.vou.backend.user.exception.UserEmailExistedException;
-import com.vou.backend.user.exception.UserNameExistedException;
-import com.vou.backend.user.exception.UserNotFoundException;
 import com.vou.backend.user.model.User;
 import com.vou.backend.user.repository.UserRepository;
 
@@ -55,6 +52,10 @@ public class UserService {
         if (userRepository.findByPhoneNumber(user.getPhoneNumber()) != null) {
             throw new PhoneNumberExistedException("Phone number existed");
         }
+        if(userDto.getRole()=="ADMIN")
+        {
+            throw new AdminRoleRegistrationException("Admin role cannot be registered");
+        }
         user.setTurnNum(0);
         user.setCreatedAt(new Date());
         userRepository.save(user);
@@ -73,5 +74,22 @@ public class UserService {
 
     public List<User> findByListId(List<Long> listId) {
         return userRepository.findByIds(listId);
+    }
+    public UserRespondDto createByAdmin(UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException,
+            PhoneNumberExistedException {
+        User user = modelMapper.map(userDto, User.class);
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            throw new UserNameExistedException("Username existed");
+        }
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            throw new UserEmailExistedException("Email existed");
+        }
+        if (userRepository.findByPhoneNumber(user.getPhoneNumber()) != null) {
+            throw new PhoneNumberExistedException("Phone number existed");
+        }
+        user.setTurnNum(0);
+        user.setCreatedAt(new Date());
+        userRepository.save(user);
+        return modelMapper.map(user, UserRespondDto.class);
     }
 }
