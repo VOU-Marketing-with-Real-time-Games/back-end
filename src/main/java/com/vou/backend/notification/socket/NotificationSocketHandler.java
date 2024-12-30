@@ -25,14 +25,12 @@ public class NotificationSocketHandler extends TextWebSocketHandler {
         sessions.add(session);
         logger.info("Client connected: " + session.getId());
     }
-
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         // TODO Auto-generated method stub
         sessions.remove(session);
         logger.info("Client disconnected: " + session.getId());
     }
-
     public void broadcastToClients(NotificationDto notificationDto) throws Exception {
         String message = gson.toJson(notificationDto);
         for (WebSocketSession session : sessions) {
