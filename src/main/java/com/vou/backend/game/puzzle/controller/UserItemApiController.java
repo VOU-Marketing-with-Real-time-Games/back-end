@@ -43,10 +43,4 @@ public class UserItemApiController {
         }
         return ResponseEntity.ok(itemResponseDto);
     }
-
-    @PostMapping("/trade")
-    public ResponseEntity<?> tradeItem(@RequestBody @Valid ItemTradeDto tradeDto) throws Exception {
-        userItemService.tradeItem(tradeDto);
-        return ResponseEntity.ok().build();
-    }
 }

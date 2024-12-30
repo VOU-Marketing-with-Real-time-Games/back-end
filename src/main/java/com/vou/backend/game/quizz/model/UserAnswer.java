@@ -28,5 +28,6 @@ public class UserAnswer {
 
     private String answer;
     private Boolean isCorrect;
-    private Date timeAnswer;
+    private Integer answerTime;
+    private Integer score;
 }

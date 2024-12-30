@@ -23,7 +23,7 @@ public class QuestionApiController {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    public ResponseEntity<List<QuestionResponseDto>> getAllQuestions() {
+    public ResponseEntity<List<QuestionResponseDto>> getAllQuestions(){
         List<QuestionResponseDto> questionResponseDtos = questionService.getAllQuestions();
         return ResponseEntity.ok(questionResponseDtos);
     }
