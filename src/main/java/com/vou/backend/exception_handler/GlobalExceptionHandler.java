@@ -6,10 +6,7 @@ import com.vou.backend.brand.exception.BrandExistedException;
 import com.vou.backend.brand.exception.BrandNotFoundException;
 import com.vou.backend.game.game_info.exception.*;
 import com.vou.backend.image.exception.ImageNotFoundException;
-import com.vou.backend.user.exception.PhoneNumberExistedException;
-import com.vou.backend.user.exception.UserEmailExistedException;
-import com.vou.backend.user.exception.UserNameExistedException;
-import com.vou.backend.user.exception.UserNotFoundException;
+import com.vou.backend.user.exception.*;
 import com.vou.backend.campaign.exception.CampaignNotFoundException;
 import com.vou.backend.game.game_info.exception.*;
 import com.vou.backend.voucher.exception.ExistedVoucherException;
@@ -61,7 +58,7 @@ public class GlobalExceptionHandler {
      * @param ex      the MethodArgumentNotValidException
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    @ExceptionHandler({ MethodArgumentNotValidException.class, AdminRoleRegistrationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleValidationExceptions(HttpServletRequest request, MethodArgumentNotValidException ex) {

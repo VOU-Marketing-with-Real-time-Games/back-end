@@ -31,34 +31,74 @@ import jakarta.validation.Valid;
 public class UserController {
     @Autowired
     private UserService userService;
-
+    /**
+     * Get all users.
+     *
+     * @return a list of UserRespondDto
+     */
     @GetMapping()
     public ResponseEntity<?> getAllUser() {
         List<UserRespondDto> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-
+    /**
+     * Create a new user.
+     *
+     * @param userDto the UserRequestDto containing the details of the user
+     * @return the created UserRespondDto
+     */
     @PostMapping("register")
     public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException{
         UserRespondDto user = userService.create(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-
+    /**
+     * Get a user by its ID.
+     *
+     * @param id the ID of the user
+     * @return the UserRespondDto
+     * @throws UserNotFoundException if the user is not found
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserByID(@PathVariable("id") Long id) throws UserNotFoundException {
         UserRespondDto user = userService.findById(id);
         return ResponseEntity.ok(user);
     }
-
+    /**
+     * Update a user.
+     *
+     * @param id the ID of the user
+     * @param userDto the UserRequestDto containing the details of the user
+     * @return the updated UserRespondDto
+     * @throws UserNotFoundException if the user is not found
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id,@Valid @RequestBody UserRequestDto userDto) throws UserNotFoundException {
         UserRespondDto user = userService.update(id,userDto);
         return ResponseEntity.ok(user);
     }
-
+    /**
+     * Delete a user.
+     *
+     * @param id the ID of the user
+     * @return the deleted UserRespondDto
+     * @throws UserNotFoundException if the user is not found
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) throws UserNotFoundException {
         UserRespondDto user = userService.delete(id);
         return ResponseEntity.ok(user);
     }
+    /**
+     * Create a new user by admin.
+     *
+     * @param userDto the UserRequestDto containing the details of the user
+     * @return the created UserRespondDto
+     */
+    @PostMapping("create")
+    public ResponseEntity<?> createUserByAdmin(@Valid @RequestBody UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException{
+        UserRespondDto user = userService.createByAdmin(userDto);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
 }
