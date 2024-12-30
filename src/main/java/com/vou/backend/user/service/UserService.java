@@ -57,6 +57,7 @@ public class UserService {
             throw new AdminRoleRegistrationException("Admin role cannot be registered");
         }
         user.setTurnNum(0);
+        user.setStatus("NOT ACTIVE");
         user.setCreatedAt(new Date());
         userRepository.save(user);
         return modelMapper.map(user, UserRespondDto.class);

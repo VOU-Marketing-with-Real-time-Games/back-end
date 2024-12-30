@@ -18,7 +18,20 @@ tags:
     description: Endpoints for managing notifications
   - name: GameInfo
     description: Endpoints for managing games, quizzes, and puzzles
-
+  - name: GameCampaign
+    description: Endpoints for managing game campaigns
+  - name: UserCampaignGame
+    description: Endpoints for managing user campaign games
+  - name: Puzzle
+    description: Endpoints for managing puzzles
+  - name: UserItem
+    description: Endpoints for managing user items
+  - name: Quizz
+    description: Endpoints for managing quizzes
+  - name: Question
+    description: Endpoints for managing questions
+  - name: UserAnswer
+    description: Endpoints for managing user answers
 paths:
   /users:
     post:
@@ -1375,7 +1388,769 @@ paths:
           description: Game not found
         400:
           description: Validation error
-                    
+  /game-campaigns:
+    get:
+      tags:
+        - GameCampaign
+      summary: Retrieve all game campaigns
+      description: Get a list of all game campaigns.
+      responses:
+        200:
+          description: List of game campaigns retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameCampaignResponseDto'
+
+    post:
+      tags:
+        - GameCampaign
+      summary: Create a new game campaign
+      description: Add a new game campaign to the system.
+      requestBody:
+        description: Game campaign details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameCampaignRequestDto'
+      responses:
+        201:
+          description: Game campaign created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameCampaignResponseDto'
+        400:
+          description: Validation error
+        404:
+          description: Game not found
+
+  /game-campaigns/{id}:
+    get:
+      tags:
+        - GameCampaign
+      summary: Retrieve a game campaign by ID
+      description: Get details of a game campaign by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: Game campaign details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameCampaignResponseDto'
+        404:
+          description: Game campaign not found
+
+    put:
+      tags:
+        - GameCampaign
+      summary: Update game campaign details
+      description: Modify the details of an existing game campaign.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        description: Updated game campaign details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameCampaignRequestDto'
+      responses:
+        200:
+          description: Game campaign updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameCampaignResponseDto'
+        404:
+          description: Game campaign not found
+        400:
+          description: Validation error
+
+    delete:
+      tags:
+        - GameCampaign
+      summary: Delete a game campaign
+      description: Remove a game campaign from the system by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        204:
+          description: Game campaign deleted successfully
+        404:
+          description: Game campaign not found
+
+  /game-campaigns/campaign/{campaignId}:
+    get:
+      tags:
+        - GameCampaign
+      summary: Retrieve game campaigns by campaign ID
+      description: Get a list of game campaigns by campaign ID.
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: List of game campaigns retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameCampaignResponseDto'
+
+  /game-campaigns/{campaignId}/users:
+    get:
+      tags:
+        - GameCampaign
+      summary: Retrieve user campaign games by campaign ID
+      description: Get a list of user campaign games by campaign ID.
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: List of user campaign games retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCampaignGameResponseDto'
+        404:
+          description: Game campaign not found
+
+  /game-campaigns/game/{gameId}/campaigns:
+    get:
+      tags:
+        - GameCampaign
+      summary: Retrieve campaign IDs by game ID
+      description: Get a list of campaign IDs by game ID.
+      parameters:
+        - name: gameId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: List of campaign IDs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  example: 1
+        404:
+          description: Game not found
+
+  /user-campaign-games:
+    post:
+      tags:
+        - UserCampaignGame
+      summary: Create a new user campaign game
+      description: Add a new user campaign game to the system.
+      requestBody:
+        description: User campaign game details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCampaignGameRequestDto'
+      responses:
+        201:
+          description: User campaign game created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCampaignGameResponseDto'
+        400:
+          description: Validation error
+        404:
+          description: Game campaign not found
+
+    get:
+      tags:
+        - UserCampaignGame
+      summary: Retrieve all user campaign games
+      description: Get a list of all user campaign games.
+      responses:
+        200:
+          description: List of user campaign games retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCampaignGameResponseDto'
+
+  /user-campaign-games/{id}:
+    get:
+      tags:
+        - UserCampaignGame
+      summary: Retrieve a user campaign game by ID
+      description: Get details of a user campaign game by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: User campaign game details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCampaignGameResponseDto'
+        404:
+          description: User campaign game not found
+
+  /user-campaign-games/{id}/completed:
+    get:
+      tags:
+        - UserCampaignGame
+      summary: Update user campaign game to completed
+      description: Mark a user campaign game as completed.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: User campaign game updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCampaignGameResponseDto'
+        404:
+          description: User campaign game not found
+
+  /user-campaign-games/user/{userId}:
+    get:
+      tags:
+        - UserCampaignGame
+      summary: Retrieve user campaign games by user ID
+      description: Get a list of user campaign games by user ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: List of user campaign games retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCampaignGameResponseDto'
+
+  /user-campaign-games/campaign/{campaignId}/users:
+    get:
+      tags:
+        - UserCampaignGame
+      summary: Retrieve distinct users by campaign ID
+      description: Get a list of distinct users by campaign ID.
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: List of distinct users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  example: 1
+        404:
+          description: Campaign not found
+
+  /user-campaign-games/campaign/users:
+    get:
+      tags:
+        - UserCampaignGame
+      summary: Retrieve distinct users by all campaigns
+      description: Get a list of distinct users by all campaigns.
+      responses:
+        200:
+          description: List of distinct users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  example: 1
+  /puzzles:
+    post:
+      tags:
+        - Puzzle
+      summary: Create a new puzzle
+      description: Add a new puzzle to the system.
+      requestBody:
+        description: Puzzle details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PuzzleRequestDto'
+      responses:
+        201:
+          description: Puzzle created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PuzzleResponseDto'
+        400:
+          description: Validation error
+
+    get:
+      tags:
+        - Puzzle
+      summary: Retrieve all puzzles
+      description: Get a list of all puzzles.
+      responses:
+        200:
+          description: List of puzzles retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PuzzleResponseDto'
+
+  /puzzles/{id}:
+    get:
+      tags:
+        - Puzzle
+      summary: Retrieve a specific puzzle
+      description: Get details of a puzzle by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: Puzzle details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PuzzleResponseDto'
+        404:
+          description: Puzzle not found
+
+    put:
+      tags:
+        - Puzzle
+      summary: Update puzzle details
+      description: Modify the details of an existing puzzle.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        description: Updated puzzle details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PuzzleRequestDto'
+      responses:
+        200:
+          description: Puzzle updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PuzzleResponseDto'
+        404:
+          description: Puzzle not found
+        400:
+          description: Validation error
+
+    delete:
+      tags:
+        - Puzzle
+      summary: Delete a puzzle
+      description: Remove a puzzle from the system by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        204:
+          description: Puzzle deleted successfully
+        404:
+          description: Puzzle not found
+
+  /user-items/add-random-item/user/{userId}/puzzle/{puzzleId}:
+    get:
+      tags:
+        - UserItem
+      summary: Add a random item to a user
+      description: Add a random item to a user for a specific puzzle.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: puzzleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: Item added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponseDto'
+        204:
+          description: No content
+
+  /user-items/user/{userId}/puzzle/{puzzleId}:
+    get:
+      tags:
+        - UserItem
+      summary: Retrieve user items by user ID and puzzle ID
+      description: Get a list of user items by user ID and puzzle ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: puzzleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: List of user items retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserItemDto'
+        204:
+          description: No content
+
+  /user-items/user/{userId}:
+    get:
+      tags:
+        - UserItem
+      summary: Retrieve user items by user ID
+      description: Get a list of user items by user ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: List of user items retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserItemDto'
+        204:
+          description: No content
+  /quizzes:
+    get:
+      tags:
+        - Quizz
+      summary: Retrieve all quizzes
+      description: Get a list of all quizzes.
+      responses:
+        200:
+          description: List of quizzes retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuizzResponseDto'
+    post:
+      tags:
+        - Quizz
+      summary: Create a new quiz
+      description: Add a new quiz to the system.
+      requestBody:
+        description: Quiz details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizzRequestDto'
+      responses:
+        201:
+          description: Quiz created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizzResponseDto'
+        400:
+          description: Validation error
+
+  /quizzes/{id}:
+    get:
+      tags:
+        - Quizz
+      summary: Retrieve a specific quiz
+      description: Get details of a quiz by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: Quiz details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizzResponseDto'
+        404:
+          description: Quiz not found
+    put:
+      tags:
+        - Quizz
+      summary: Update quiz details
+      description: Modify the details of an existing quiz.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        description: Updated quiz details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizzRequestDto'
+      responses:
+        200:
+          description: Quiz updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizzResponseDto'
+        404:
+          description: Quiz not found
+        400:
+          description: Validation error
+    delete:
+      tags:
+        - Quizz
+      summary: Delete a quiz
+      description: Remove a quiz from the system by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        204:
+          description: Quiz deleted successfully
+        404:
+          description: Quiz not found
+  /questions:
+    get:
+      tags:
+        - Question
+      summary: Retrieve all questions
+      description: Get a list of all questions.
+      responses:
+        200:
+          description: List of questions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuestionResponseDto'
+
+    post:
+      tags:
+        - Question
+      summary: Create a new question
+      description: Add a new question to the system.
+      requestBody:
+        description: Question details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionRequestDto'
+      responses:
+        201:
+          description: Question created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionResponseDto'
+        400:
+          description: Validation error
+
+  /questions/{id}:
+    get:
+      tags:
+        - Question
+      summary: Retrieve a specific question
+      description: Get details of a question by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Question details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionResponseDto'
+        404:
+          description: Question not found
+
+    put:
+      tags:
+        - Question
+      summary: Update question details
+      description: Modify the details of an existing question.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Updated question details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionRequestDto'
+      responses:
+        200:
+          description: Question updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionResponseDto'
+        404:
+          description: Question not found
+        400:
+          description: Validation error
+
+    delete:
+      tags:
+        - Question
+      summary: Delete a question
+      description: Remove a question from the system by its unique ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Question deleted successfully
+        404:
+          description: Question not found
+
+  /user-answers:
+    post:
+      tags:
+        - UserAnswer
+      summary: Save a user answer
+      description: Save a user's answer to a question.
+      requestBody:
+        description: User answer details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAnswerRequestDto'
+      responses:
+        201:
+          description: User answer saved successfully
+        400:
+          description: Validation error
+
 components:
   schemas:
     NotificationDto:
@@ -1434,3 +2209,293 @@ components:
         enable:
           type: boolean
           example: true
+    GameCampaignRequestDto:
+      type: object
+      properties:
+        campaignId:
+          type: integer
+          example: 1
+        gameInfoId:
+          type: integer
+          example: 1
+        gameId:
+          type: integer
+          example: 1
+      required:
+        - campaignId
+        - gameInfoId
+
+    GameCampaignResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        campaignId:
+          type: integer
+          example: 1
+        gameInfodto:
+          $ref: '#/components/schemas/GameInfoDto'
+        gameId:
+          type: integer
+          example: 1
+
+    UserCampaignGameRequestDto:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        campaignGameId:
+          type: integer
+          example: 1
+      required:
+        - userId
+        - campaignGameId
+
+    UserCampaignGameResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        campaignGameId:
+          type: integer
+          example: 1
+        isCompleted:
+          type: boolean
+          example: false
+    PuzzleRequestDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Puzzle Name
+        description:
+          type: string
+          example: Puzzle Description
+        itemNum:
+          type: integer
+          example: 10
+        campaignGameId:
+          type: integer
+          example: 1
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemRequestDto'
+      required:
+        - name
+        - itemNum
+        - campaignGameId
+
+    PuzzleResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Puzzle Name
+        description:
+          type: string
+          example: Puzzle Description
+        itemNum:
+          type: integer
+          example: 10
+        campaignGameId:
+          type: integer
+          example: 1
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemResponseDto'
+
+    ItemRequestDto:
+      type: object
+      properties:
+        position:
+          type: integer
+          example: 1
+        description:
+          type: string
+          example: Item Description
+        total:
+          type: integer
+          example: 100
+
+    ItemResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        position:
+          type: integer
+          example: 1
+        description:
+          type: string
+          example: Item Description
+        total:
+          type: integer
+          example: 100
+        remainingNum:
+          type: integer
+          example: 50
+
+    UserItemDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        item:
+          $ref: '#/components/schemas/ItemResponseDto'
+        totalItem:
+          type: integer
+          example: 5
+    QuizzRequestDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Sample Quiz
+        description:
+          type: string
+          example: This is a sample quiz.
+        secondPerQuestion:
+          type: integer
+          example: 30
+        campaignGameId:
+          type: integer
+          example: 1
+        startTime:
+          type: string
+          format: date-time
+          example: 2024-03-01T12:00:00Z
+      required:
+        - name
+        - startTime
+    QuizzResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Sample Quiz
+        description:
+          type: string
+          example: This is a sample quiz.
+        createdAt:
+          type: string
+          format: date-time
+          example: 2024-03-01T12:00:00Z
+        secondPerQuestion:
+          type: integer
+          example: 30
+        startTime:
+          type: string
+          format: date-time
+          example: 2024-03-01T12:00:00Z
+        campaignGameId:
+          type: integer
+          example: 1
+    QuestionRequestDto:
+      type: object
+      properties:
+        questionName:
+          type: string
+          example: What is the capital of France?
+        option1:
+          type: string
+          example: Paris
+        option2:
+          type: string
+          example: London
+        option3:
+          type: string
+          example: Berlin
+        option4:
+          type: string
+          example: Madrid
+        answer:
+          type: string
+          example: Paris
+        explaination:
+          type: string
+          example: Paris is the capital of France.
+        quizzId:
+          type: integer
+          example: 1
+      required:
+        - questionName
+        - option1
+        - option2
+        - option3
+        - option4
+        - answer
+        - quizzId
+
+    QuestionResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        questionName:
+          type: string
+          example: What is the capital of France?
+        image:
+          type: string
+          example: image_url
+        option1:
+          type: string
+          example: Paris
+        option2:
+          type: string
+          example: London
+        option3:
+          type: string
+          example: Berlin
+        option4:
+          type: string
+          example: Madrid
+        answer:
+          type: string
+          example: Paris
+        explaination:
+          type: string
+          example: Paris is the capital of France.
+        quizzId:
+          type: integer
+          example: 1
+
+    UserAnswerRequestDto:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        questionId:
+          type: integer
+          example: 1
+        answer:
+          type: string
+          example: Paris
+        answerTime:
+          type: integer
+          example: 10
+      required:
+        - userId
+        - questionId
+        - answer
+        - answerTime

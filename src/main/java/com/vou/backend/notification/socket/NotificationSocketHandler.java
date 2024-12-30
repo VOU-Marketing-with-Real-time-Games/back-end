@@ -25,7 +25,6 @@ public class NotificationSocketHandler extends TextWebSocketHandler {
         sessions.add(session);
         logger.info("Client connected: " + session.getId());
     }
-
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         // TODO Auto-generated method stub
