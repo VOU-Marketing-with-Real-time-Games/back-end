@@ -1,22 +1,36 @@
 package com.vou.backend.user.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import com.vou.backend.user.exception.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vou.backend.user.dto.PlayTurnRequestDto;
 import com.vou.backend.user.dto.UserRequestDto;
 import com.vou.backend.user.dto.UserRespondDto;
+import com.vou.backend.user.exception.InvalidRedeemException;
+import com.vou.backend.user.exception.PhoneNumberExistedException;
+import com.vou.backend.user.exception.UserEmailExistedException;
+import com.vou.backend.user.exception.UserNameExistedException;
+import com.vou.backend.user.exception.UserNotFoundException;
+import com.vou.backend.user.model.Gift;
 import com.vou.backend.user.model.User;
+import com.vou.backend.user.repository.GiftLinkRepository;
 import com.vou.backend.user.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private GiftLinkRepository giftLinkRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -52,8 +66,7 @@ public class UserService {
         if (userRepository.findByPhoneNumber(user.getPhoneNumber()) != null) {
             throw new PhoneNumberExistedException("Phone number existed");
         }
-        if(userDto.getRole()=="ADMIN")
-        {
+        if (userDto.getRole() == "ADMIN") {
             throw new AdminRoleRegistrationException("Admin role cannot be registered");
         }
         user.setTurnNum(0);
@@ -76,7 +89,9 @@ public class UserService {
     public List<User> findByListId(List<Long> listId) {
         return userRepository.findByIds(listId);
     }
-    public UserRespondDto createByAdmin(UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException,
+
+    public UserRespondDto createByAdmin(UserRequestDto userDto)
+            throws UserNameExistedException, UserEmailExistedException,
             PhoneNumberExistedException {
         User user = modelMapper.map(userDto, User.class);
         if (userRepository.findByUsername(user.getUsername()) != null) {
@@ -91,6 +106,33 @@ public class UserService {
         user.setTurnNum(0);
         user.setCreatedAt(new Date());
         userRepository.save(user);
+        return modelMapper.map(user, UserRespondDto.class);
+    }
+
+    @Transactional
+    public UserRespondDto increasePlayCount(PlayTurnRequestDto playTurnRequestDto)
+            throws InvalidRedeemException, UserNotFoundException {
+        User user = userRepository.findById(playTurnRequestDto.getUserID())
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        if (giftLinkRepository.existsByUserIdAndPlatform(playTurnRequestDto.getUserID(),
+                playTurnRequestDto.getMethod())) {
+            throw new InvalidRedeemException("User has already shared on this platform");
+        }
+
+        user.setTurnNum(user.getTurnNum() + playTurnRequestDto.getQuantity());
+        userRepository.save(user);
+
+        String token = UUID.randomUUID().toString();
+        Gift gift = new Gift();
+        gift.setSenderId(0L); // gift from Admin id
+        gift.setContent(playTurnRequestDto.getQuantity());
+        gift.setType("points");
+        gift.setToken(token);
+        gift.setCreatedAt(LocalDateTime.now());
+        gift.setRedeemedAt(LocalDateTime.now());
+        giftLinkRepository.save(gift);
+
         return modelMapper.map(user, UserRespondDto.class);
     }
 }

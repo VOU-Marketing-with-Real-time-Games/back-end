@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redeem Points</title>
+    <style>
+      /* Keyframes for pop-up animation */
+      @keyframes shake-pop {
+        0% {
+          transform: scale(1) rotate(0deg) translateX(0);
+        }
+        10% {
+          transform: scale(1.1) rotate(5deg) translateX(-10px);
+        }
+        20% {
+          transform: scale(1.2) rotate(-5deg) translateX(10px);
+        }
+        30% {
+          transform: scale(1.1) rotate(5deg) translateX(-10px);
+        }
+        40% {
+          transform: scale(1.1) rotate(-5deg) translateX(10px);
+        }
+        50% {
+          transform: scale(1.2) rotate(0deg) translateX(0);
+        }
+        60% {
+          transform: scale(1.1) rotate(5deg) translateX(-10px);
+        }
+        70% {
+          transform: scale(1.2) rotate(-5deg) translateX(10px);
+        }
+        80% {
+          transform: scale(1.1) rotate(5deg) translateX(-10px);
+        }
+        90% {
+          transform: scale(1.2) rotate(0deg) translateX(10px);
+          opacity: 1; /* Make the image fade out after the explosion */
+        }
+        95% {
+          transform: scale(3) rotate(720deg) translateX(0); /* Explosion effect */
+        }
+        100% {
+          transform: scale(3) rotate(720deg) translateX(0); /* Explosion effect, hold for final frame */
+          opacity: 0; /* Make the image fade out after the explosion */
+        }
+      }
+
+      /* Style for the image button */
+      #redeem-image {
+        cursor: pointer;
+        /* width: 50px; */
+        /* height: 50px; */
+        border-radius: 8px;
+        transition: transform 0.4s ease; /* smooth transform on hover */
+      }
+
+      /* Animation class */
+      .shake-pop {
+        animation: shake-pop 3s ease-in-out; /* Trigger the shake animation */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Redeem Your</h1>
+    <!-- Error message if token is invalid or missing -->
+    <div th:if="${error}" style="color: red">
+      <p th:text="${error}"></p>
+    </div>
+
+    <!-- Only show the redeem button if a valid token is present -->
+    <div th:if="${token}">
+      <p>Click the box below to redeem your points in the app:</p>
+      <img id="redeem-image" src="/v1/images/gift-box.png" alt="Gift Box" />
+    </div>
+
+    <script>
+      const redeemImage = document.getElementById("redeem-image");
+      const token = [[${token}]];  // Ensure proper token replacement in your template engine
+
+      redeemImage.addEventListener("click", () => {
+        // Add the shake-pop animation to the image
+        redeemImage.classList.add("shake-pop");
+
+        // Remove the animation class after it finishes to allow it to be re-triggered
+        setTimeout(() => {
+          redeemImage.classList.remove("shake-pop");
+
+          // Redirect logic based on the token
+          if (token) {
+            window.location.href = `vou://redeem?token=${token}`;
+          } else {
+            alert("Invalid token.");
+          }
+        }, 3000); // Match the animation duration (400ms)
+      });
+    </script>
+  </body>
+</html>
