@@ -32,6 +32,11 @@ tags:
     description: Endpoints for managing questions
   - name: UserAnswer
     description: Endpoints for managing user answers
+  - name: Gift
+    description: Endpoints for create gift link and redeem gift link
+  - name: Image
+    description: Operations related to image management
+
 paths:
   /users:
     post:
@@ -2150,9 +2155,211 @@ paths:
           description: User answer saved successfully
         400:
           description: Validation error
+  /gift/create:
+    post:
+      tags:
+        - Gift
+      summary: Create Gift Token
+      description: Creates a new gift token based on the provided request.
+      requestBody:
+        description: Gift link creation request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftLinkRequest'
+      responses:
+        '200':
+          description: Gift token created successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "abcdef123456"
+        '400':
+          description: Invalid input
+  /gift/redeem:
+    post:
+      tags:
+        - Gift
+      summary: Redeem Gift
+      description: Redeems a gift link based on the provided request.
+      requestBody:
+        description: Gift redemption request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedeemGiftRequest'
+      responses:
+        '200':
+          description: Gift redeemed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedeemGiftRespondDto'
+        '400':
+          description: Invalid input or redemption failed
+    get:
+      tags:
+        - Gift
+      summary: Redeem Gift Page
+      description: Displays the redeem gift page, optionally pre-filled with the provided token.
+      parameters:
+        - name: token
+          in: query
+          required: false
+          schema:
+            type: string
+          description: The token to pre-fill the redeem page
+      responses:
+        '200':
+          description: Redeem page displayed
+        '400':
+          description: Invalid or missing token
+
+  /image:
+    post:
+      tags:
+        - Image
+      summary: Upload Image
+      description: Uploads an image file and stores it.
+      requestBody:
+        description: The image file to upload
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The image file to upload
+      responses:
+        '200':
+          description: Image uploaded successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: The ID of the uploaded image
+                example: "image123"
+        '400':
+          description: Invalid image file
+  /image/{imageId}:
+    get:
+      tags:
+        - Image
+      summary: Retrieve Image
+      description: Retrieves an image by its ID.
+      parameters:
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the image to retrieve
+      responses:
+        '200':
+          description: Image retrieved successfully
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+                description: The binary data of the image
+        '404':
+          description: Image not found
+    delete:
+      tags:
+        - Image
+      summary: Delete Image
+      description: Deletes an image by its ID.
+      parameters:
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the image to delete
+      responses:
+        '200':
+          description: Image deleted successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Image deleted successfully"
+        '404':
+          description: Image not found
+
 
 components:
   schemas:
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the image
+          example: "image123"
+        contentType:
+          type: string
+          description: MIME type of the image
+          example: "image/jpeg"
+        content:
+          type: string
+          format: binary
+          description: Binary content of the image
+    GiftLinkRequest:
+      type: object
+      properties:
+        senderId:
+          type: integer
+          format: int64
+          description: ID of the gift sender
+          example: 12345
+        type:
+          type: string
+          enum: [points, item]
+          description: Type of the gift (either 'points' or 'item')
+          example: "points"
+        content:
+          type: integer
+          description: Amount or value of the gift
+          example: 100
+      required:
+        - senderId
+        - type
+        - content
+    RedeemGiftRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The gift token to redeem
+          example: "abcdef123456"
+        receiverId:
+          type: integer
+          format: int64
+          description: ID of the gift receiver
+          example: 67890
+      required:
+        - token
+        - receiverId
+    RedeemGiftRespondDto:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the redeemed gift
+          example: "points"
+        content:
+          type: integer
+          format: int64
+          description: Amount or value of the redeemed gift
+          example: 100
     NotificationDto:
       type: object
       properties:
@@ -2499,3 +2706,4 @@ components:
         - questionId
         - answer
         - answerTime
+

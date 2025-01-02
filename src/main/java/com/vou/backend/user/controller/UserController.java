@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vou.backend.user.dto.PlayTurnRequestDto;
 import com.vou.backend.user.dto.UserRequestDto;
 import com.vou.backend.user.dto.UserRespondDto;
+import com.vou.backend.user.exception.InvalidRedeemException;
 import com.vou.backend.user.exception.PhoneNumberExistedException;
 import com.vou.backend.user.exception.UserEmailExistedException;
 import com.vou.backend.user.exception.UserNameExistedException;
@@ -31,6 +33,7 @@ import jakarta.validation.Valid;
 public class UserController {
     @Autowired
     private UserService userService;
+
     /**
      * Get all users.
      *
@@ -41,6 +44,7 @@ public class UserController {
         List<UserRespondDto> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
     /**
      * Create a new user.
      *
@@ -48,10 +52,12 @@ public class UserController {
      * @return the created UserRespondDto
      */
     @PostMapping("register")
-    public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException{
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDto userDto)
+            throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException {
         UserRespondDto user = userService.create(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
+
     /**
      * Get a user by its ID.
      *
@@ -64,19 +70,22 @@ public class UserController {
         UserRespondDto user = userService.findById(id);
         return ResponseEntity.ok(user);
     }
+
     /**
      * Update a user.
      *
-     * @param id the ID of the user
+     * @param id      the ID of the user
      * @param userDto the UserRequestDto containing the details of the user
      * @return the updated UserRespondDto
      * @throws UserNotFoundException if the user is not found
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id,@Valid @RequestBody UserRequestDto userDto) throws UserNotFoundException {
-        UserRespondDto user = userService.update(id,userDto);
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserRequestDto userDto)
+            throws UserNotFoundException {
+        UserRespondDto user = userService.update(id, userDto);
         return ResponseEntity.ok(user);
     }
+
     /**
      * Delete a user.
      *
@@ -89,6 +98,7 @@ public class UserController {
         UserRespondDto user = userService.delete(id);
         return ResponseEntity.ok(user);
     }
+
     /**
      * Create a new user by admin.
      *
@@ -96,9 +106,17 @@ public class UserController {
      * @return the created UserRespondDto
      */
     @PostMapping("create")
-    public ResponseEntity<?> createUserByAdmin(@Valid @RequestBody UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException{
+
+    public ResponseEntity<?> createUserByAdmin(@Valid @RequestBody UserRequestDto userDto)
+            throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException {
         UserRespondDto user = userService.createByAdmin(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
+    @PostMapping("/{id}/increase-play-turn")
+    public ResponseEntity<?> increasePlayTurn(@Valid @RequestBody PlayTurnRequestDto playTurnRequestDto)
+            throws InvalidRedeemException, UserNotFoundException {
+        UserRespondDto newPlayCount = userService.increasePlayCount(playTurnRequestDto);
+        return ResponseEntity.ok(newPlayCount);
+    }
 }
