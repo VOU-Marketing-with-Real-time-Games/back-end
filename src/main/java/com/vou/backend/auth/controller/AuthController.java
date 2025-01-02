@@ -25,7 +25,7 @@ public class AuthController {
     public ResponseEntity<?> login(@Valid @RequestBody UserLoginDto userLoginDto)
     {
         try {
-            String token = authService.login(userLoginDto.getUserName(), userLoginDto.getPassword());
+            String token = authService.login(userLoginDto.getUsername(), userLoginDto.getPassword());
             LoginResponseDto loginResponse = new LoginResponseDto();
             loginResponse.setToken(token);
             return ResponseEntity.ok().body(loginResponse);
