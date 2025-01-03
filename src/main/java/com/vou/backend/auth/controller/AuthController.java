@@ -25,7 +25,7 @@ public class AuthController {
     public ResponseEntity<?> login(@Valid @RequestBody UserLoginDto userLoginDto)
     {
         try {
-            String token = authService.login(userLoginDto.getUserName(), userLoginDto.getPassword());
+            String token = authService.login(userLoginDto.getUsername(), userLoginDto.getPassword());
             LoginResponseDto loginResponse = new LoginResponseDto();
             loginResponse.setToken(token);
             return ResponseEntity.ok().body(loginResponse);
@@ -79,4 +79,14 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getMe() {
+        try {
+            return ResponseEntity.ok(authService.getMe());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

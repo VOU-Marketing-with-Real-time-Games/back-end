@@ -22,7 +22,7 @@ public class UserRequestDto {
     private String fullName;
     @NotNull(message = "Username is required")
     @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Username can only contain alphanumeric characters")
-    private String userName;
+    private String username;
     @NotNull(message = "Email is required")
     @Email(message = "Invalid email format")
     private String email;
