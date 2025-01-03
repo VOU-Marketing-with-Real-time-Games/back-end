@@ -43,7 +43,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             }
 
             final String token = authHeader.substring(7);
-            final String userIdentifier = jwtTokenUtil.extractEmail(token);
+            final String userIdentifier = jwtTokenUtil.extractUsername(token);
+            System.out.println(userIdentifier);
             if (userIdentifier != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User userDetails = (User) userDetailsService.loadUserByUsername(userIdentifier);
                 if (jwtTokenUtil.validateToken(token, userDetails)) {
@@ -65,24 +66,24 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
 
     private boolean isByPassToken(@NonNull HttpServletRequest request) {
-        return true;
-//        final List<Pair<String, String>> byPassTokens = Arrays.asList(
-//                Pair.of("/auth/login", "POST"),
-//                Pair.of("/auth/forgot-password", "POST"),
-//                Pair.of("/users/**", "GET"),
-//                Pair.of("/users/register", "POST")
-//        );
-//
-//        String requestServletPath = request.getServletPath();
-//        String requestMethod = request.getMethod();
-//        AntPathMatcher pathMatcher = new AntPathMatcher();
-//        for (Pair<String, String> entry : byPassTokens) {
-//            String path = entry.getFirst();
-//            String method = entry.getSecond();
-//            if (pathMatcher.match(path, requestServletPath) && requestMethod.equalsIgnoreCase(method)) {
-//                return true;
-//            }
-//        }
-//        return false;
+//        return true;
+        final List<Pair<String, String>> byPassTokens = Arrays.asList(
+                Pair.of("/auth/login", "POST"),
+                Pair.of("/auth/forgot-password", "POST"),
+                Pair.of("/users/**", "GET"),
+                Pair.of("/users/register", "POST")
+        );
+
+        String requestServletPath = request.getServletPath();
+        String requestMethod = request.getMethod();
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+        for (Pair<String, String> entry : byPassTokens) {
+            String path = entry.getFirst();
+            String method = entry.getSecond();
+            if (pathMatcher.match(path, requestServletPath) && requestMethod.equalsIgnoreCase(method)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

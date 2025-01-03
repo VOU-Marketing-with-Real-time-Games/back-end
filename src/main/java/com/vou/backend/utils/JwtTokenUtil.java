@@ -78,9 +78,14 @@ public class JwtTokenUtil {
         Claims claims = extractAllClaims(token);
         return  claims.get("email",String.class);
     }
+    public String extractUsername(String token)
+    {
+        Claims claims = extractAllClaims(token);
+        return claims.get("username",String.class);
+    }
     public boolean validateToken(String token, UserDetails userDetails)
     {
-        String email = extractEmail(token);
-        return (email.equals(userDetails.getUsername())&&!isTokenExpired(token));
+        String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())&&!isTokenExpired(token));
     }
 }
