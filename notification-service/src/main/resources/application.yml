@@ -1,0 +1,13 @@
+spring:
+  application:
+     name: notification-service
+  data:
+     mongodb:
+        uri: mongodb+srv://minhhoang:tryMiyNjxDol9fmj@myusshop.mee5s.mongodb.net/myshopchat?retryWrites=true&w=majority&appName=MyUSShop
+server:
+  port: 8002
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Eureka server

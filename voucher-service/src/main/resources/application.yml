@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: voucher-service
+  datasource:
+    url: jdbc:mysql://${MYSQL_URL}:3306/${VOUCHER_DB}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.hibernate.format_sql: true
+
+server:
+  port: 8006
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true

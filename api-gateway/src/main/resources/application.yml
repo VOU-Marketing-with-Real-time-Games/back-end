@@ -1,0 +1,52 @@
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false  # Enable service discovery for dynamic routing
+      routes:
+        - id: game-service
+          uri: lb://game-service
+          predicates:
+            - Path=/v1/game/**
+        - id: game-service
+          uri: lb://game-service
+          predicates:
+            - Path=/v1/game/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/v1/notifications/**
+      globals:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*" # Or your front-end app URL
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+  application:
+    name: gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Eureka server
+
+server:
+  port: 8080
+
