@@ -23,7 +23,7 @@ import com.vou.backend.brand.model.Brand;
 import com.vou.backend.brand.service.BrandService;
 
 @RestController
-@RequestMapping("/brands")
+@RequestMapping("brands")
 public class BrandController {
     @Autowired
     private BrandService brandService;

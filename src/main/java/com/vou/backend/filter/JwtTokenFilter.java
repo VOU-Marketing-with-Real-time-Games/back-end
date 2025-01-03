@@ -32,7 +32,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws IOException {
         try {
-            if (isByPassToken(request)) {
+            if (isBypassToken(request)) {
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -64,7 +64,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }
     }
 
-    private boolean isByPassToken(@NonNull HttpServletRequest request) {
+    private boolean isBypassToken(@NonNull HttpServletRequest request) {
 //        return true;
         final List<Pair<String, String>> byPassTokens = Arrays.asList(
                 Pair.of("/v1/auth/login", "POST"),

@@ -49,7 +49,18 @@ CREATE TABLE IF NOT EXISTS `brand` (
 
 -- Dumping data for table vou.brand: ~1 rows (approximately)
 INSERT INTO `brand` (`id`, `created_at`, `enabled`, `field`, `name`, `status`, `user_id`) VALUES
-	(1, '2024-12-28 14:32:32.000000', b'1', 'Fashion', 'Gucci', 'OPENING', 2);
+	(1, '2024-12-28 14:32:32.000000', b'1', 'Fashion', 'Gucci', 'ACTIVE', 2);
+
+INSERT INTO `brand` (`id`, `created_at`, `enabled`, `field`, `name`, `status`, `user_id`) VALUES
+    (2, '2024-12-29 10:15:00.000000', b'1', 'Technology', 'Apple', 'ACTIVE', 3),
+    (3, '2024-12-30 09:00:00.000000', b'0', 'Fashion', 'H&M', 'INACTIVE', 4),
+    (4, '2024-12-30 11:45:00.000000', b'1', 'Automotive', 'Tesla', 'ACTIVE', 5),
+    (5, '2024-12-31 08:20:00.000000', b'0', 'Retail', 'Walmart', 'BANNED', 6),
+    (6, '2024-12-31 15:30:00.000000', b'1', 'Entertainment', 'Netflix', 'ACTIVE', 7),
+    (7, '2025-01-01 13:00:00.000000', b'1', 'Food & Beverage', 'Starbucks', 'INACTIVE', 8),
+    (8, '2025-01-02 09:50:00.000000', b'0', 'Technology', 'Microsoft', 'BANNED', 9),
+    (9, '2025-01-02 17:10:00.000000', b'1', 'Fashion', 'Louis Vuitton', 'ACTIVE', 10),
+    (10, '2025-01-03 10:05:00.000000', b'1', 'Healthcare', 'Pfizer', 'INACTIVE', 11);
 
 -- Dumping structure for table vou.campaign
 CREATE TABLE IF NOT EXISTS `campaign` (
@@ -68,8 +79,12 @@ CREATE TABLE IF NOT EXISTS `campaign` (
 
 -- Dumping data for table vou.campaign: ~2 rows (approximately)
 INSERT INTO `campaign` (`id`, `created_at`, `end_date`, `filed_id`, `image`, `name`, `start_date`, `status`, `brand_id`, `field`) VALUES
-	(1, '2024-12-27 23:05:10.000000', '2024-12-27 23:05:12.000000', '', NULL, NULL, '2024-12-27 23:05:44.000000', NULL, 1, NULL),
-	(2, '2024-12-27 23:06:04.000000', '2024-12-27 23:06:05.000000', NULL, NULL, NULL, '2024-12-27 23:06:08.000000', NULL, 1, NULL);
+(3, '2024-12-20 09:00:00.000000', '2024-12-31 23:59:59.000000', null, 'https://randomwordgenerator.com/img/picture-generator/52e9d44a4f52ad14f1dc8460962e33791c3ad6e04e507441722a72dd914fc7_640.jpg', 'Holiday Season Deals', '2024-12-22 00:00:00.000000', 'PENDING', 2, 'Retail'),
+(4, '2024-12-10 10:00:00.000000', '2024-12-25 23:59:59.000000', null, 'https://randomwordgenerator.com/img/picture-generator/5fe7dd404255b10ff3d8992cc12c30771037dbf85254794174267fdd9e44_640.jpg', 'Winter Clearance Sale', '2024-12-12 00:00:00.000000', 'ACTIVE', 3, 'Fashion'),
+(5, '2025-01-01 08:00:00.000000', '2025-01-10 23:59:59.000000', null, 'https://randomwordgenerator.com/img/picture-generator/50e2d1414852b10ff3d8992cc12c30771037dbf852547940772c7ed59f4f_640.jpg', 'New Year Promotions', '2025-01-01 00:00:00.000000', 'ENDED', 1, 'Electronics'),
+(6, '2024-11-01 15:00:00.000000', '2024-11-15 23:59:59.000000', null, 'https://randomwordgenerator.com/img/picture-generator/54e3dc4b4250b10ff3d8992cc12c30771037dbf85254784b722673dc9148_640.jpg', 'Black Friday Discounts', '2024-11-05 00:00:00.000000', 'REJECTED', 4, 'Technology'),
+(7, '2025-01-02 12:00:00.000000', '2025-01-15 23:59:59.000000', null, 'https://randomwordgenerator.com/img/picture-generator/53e2d7464f57b10ff3d8992cc12c30771037dbf85254784973267cd49344_640.jpg', 'Back to School Offers', '2025-01-03 00:00:00.000000', 'ACTIVE', 5, 'Education Supplies');
+
 
 -- Dumping structure for table vou.favourite_campaign_user
 CREATE TABLE IF NOT EXISTS `favourite_campaign_user` (
@@ -230,8 +245,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- Dumping data for table vou.user: ~2 rows (approximately)
 INSERT INTO `user` (`id`, `avatar`, `created_at`, `dob`, `email`, `facebook_link`, `full_name`, `gender`, `password`, `phone_number`, `role`, `status`, `turn_num`, `username`) VALUES
-	(1, NULL, '2024-12-28 14:31:07.000000', '2024-12-28 14:31:09.000000', 'leminhoang123456le@gmail.com', NULL, 'Le Minh Hoang', 'Male', '', NULL, NULL, NULL, 10, NULL),
-	(2, NULL, '2024-12-28 15:54:13.000000', '2024-12-28 15:54:26.000000', 'leminhhoang@gmail.com', NULL, 'Nguyen Tan', 'Male', NULL, NULL, NULL, NULL, 10, NULL);
+    (3, NULL, '2025-01-03 10:40:28.919000', '2003-03-01 06:00:00.000000', 'phuonghieuto@gmail.com', NULL, 'To Phuong Hieu', 'MALE', '$2a$10$glpJ1SsXNJQIG/4TD5mNFO2757IQA3e98MQKTfRC06wMDCG1QetNO', '0123456789', 'ADMIN', 'ACTIVE', '0', 'phuonghieuto');
+INSERT INTO `user` (`id`, `avatar`, `created_at`, `dob`, `email`, `facebook_link`, `full_name`, `gender`, `password`, `phone_number`, `role`, `status`, `turn_num`, `username`) VALUES
+(4, 'https://example.com/avatars/user1.jpg', '2025-01-02 09:00:00.000000', '1995-06-15 00:00:00.000000', 'john.doe@example.com', 'https://facebook.com/john.doe', 'John Doe', 'Male', '$2a$10$abc123examplepasswordhash', '0987654321', 'USER', 'ACTIVE', 15, 'johndoe'),
+(5, 'https://example.com/avatars/user2.jpg', '2025-01-01 14:30:00.000000', '1998-03-12 00:00:00.000000', 'jane.smith@example.com', 'https://facebook.com/jane.smith', 'Jane Smith', 'Female', '$2a$10$xyz456examplepasswordhash', '0912345678', 'USER', 'INACTIVE', 0, 'janesmith'),
+(6, 'https://example.com/avatars/user3.jpg', '2025-01-03 11:00:00.000000', '2000-08-20 00:00:00.000000', 'mike.jones@example.com', NULL, 'Mike Jones', 'Male', '$2a$10$def789examplepasswordhash', '0956789123', 'BRAND', 'BANNED', 0, 'mikejones'),
+(7, NULL, '2025-01-03 08:45:00.000000', '1987-11-05 00:00:00.000000', 'anna.brown@example.com', NULL, 'Anna Brown', 'Female', '$2a$10$ghi012examplepasswordhash', '0976543210', 'ADMIN', 'ACTIVE', 25, 'annabrown'),
+(8, 'https://example.com/avatars/user4.jpg', '2025-01-03 09:15:00.000000', '1990-04-18 00:00:00.000000', 'peter.parker@example.com', 'https://facebook.com/peter.parker', 'Peter Parker', 'Male', '$2a$10$jkl345examplepasswordhash', '0945678910', 'USER', 'BANNED', 0, 'peterparker');
 
 -- Dumping structure for table vou.user_answer
 CREATE TABLE IF NOT EXISTS `user_answer` (
