@@ -86,6 +86,7 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
+
     @ExceptionHandler({Game_CampaignGameConflict.class, ExistedVoucherException.class, InvalidRedeemException.class, CampaignAlreadyAddedException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
