@@ -42,11 +42,11 @@ public class AuthService {
     protected String REDIRECT_URI = "http://localhost:3000/authenticate";
     @NonFinal
     protected String GRANT_TYPE = "authorization_code";
-    public String login(String userName, String password) throws Exception {
-        User user = userRepository.findByUsername(userName);
+    public String login(String username, String password) throws Exception {
+        User user = userRepository.findByUsername(username);
         if(user==null)
         {
-            throw new UserNotFoundException("Invalid username!");
+            throw new UserNotFoundException("User not found!");
         }
         if(!passwordEncoder.matches(password,user.getPassword()))
         {
@@ -56,7 +56,7 @@ public class AuthService {
         {
             throw new BadCredentialsException("User is not active!");
         }
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userName,password);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username,password);
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         return jwtTokenUtil.generateToken(user);
     }
