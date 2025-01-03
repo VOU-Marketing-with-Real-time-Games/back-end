@@ -27,7 +27,7 @@ public class AuthController {
         try {
             String token = authService.login(userLoginDto.getUsername(), userLoginDto.getPassword());
             LoginResponseDto loginResponse = new LoginResponseDto();
-            loginResponse.setToken(token);
+            loginResponse.setAccessToken(token);
             return ResponseEntity.ok().body(loginResponse);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -44,7 +44,7 @@ public class AuthController {
         try {
         String token = authService.outboundAuthentication(code);
         LoginResponseDto loginResponse = new LoginResponseDto();
-        loginResponse.setToken(token);
+        loginResponse.setAccessToken(token);
         return ResponseEntity.ok().body(loginResponse);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -79,4 +79,14 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getMe() {
+        try {
+            return ResponseEntity.ok(authService.getMe());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/campaigns")
+@RequestMapping("campaigns")
 @RequiredArgsConstructor
 public class CampaignController {
     private final CampaignService campaignService;

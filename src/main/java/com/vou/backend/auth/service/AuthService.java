@@ -4,6 +4,7 @@ import com.vou.backend.auth.dto.OutboundUserResponse;
 import com.vou.backend.auth.httpclient.OutboundIdentityClient;
 import com.vou.backend.auth.httpclient.OutboundUserClient;
 import com.vou.backend.user.dto.UserRequestDto;
+import com.vou.backend.user.dto.UserRespondDto;
 import com.vou.backend.user.exception.UserEmailExistedException;
 import com.vou.backend.user.exception.UserNameExistedException;
 import com.vou.backend.user.exception.UserNotFoundException;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -76,7 +78,7 @@ public class AuthService {
         UserRequestDto userDto = UserRequestDto.builder()
                 .email(userResponse.getEmail())
                 .password("123456")
-                .userName(userResponse.getName())
+                .username(userResponse.getName())
                 .fullName(userResponse.getGivenName())
                 .avatar(userResponse.getPicture())
                 .phoneNumber("123456789")
@@ -112,5 +114,14 @@ public class AuthService {
             userRepository.save(user);
         }
         return valid;
+    }
+
+    public UserRespondDto getMe() throws UserNotFoundException {
+        String userIdentifier = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(userIdentifier);
+        if (user == null) {
+            throw new UserNotFoundException("User not found!");
+        }
+        return modelMapper.map(user, UserRespondDto.class);
     }
 }

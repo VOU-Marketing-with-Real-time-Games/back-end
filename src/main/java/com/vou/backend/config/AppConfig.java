@@ -95,7 +95,7 @@ public class AppConfig {
             mapper.skip(User::setStatus);
             mapper.skip(User::setTurnNum);
             mapper.skip(User::setCreatedAt);
-            mapper.map(UserRequestDto::getUserName, User::setUsername);
+            mapper.map(UserRequestDto::getUsername, User::setUsername);
             mapper.using(context -> passwordEncoder.encode((String) context.getSource()))
                     .map(UserRequestDto::getPassword, User::setPassword);
         });
