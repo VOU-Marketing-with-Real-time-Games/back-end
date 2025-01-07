@@ -14,7 +14,7 @@ import java.util.List;
  * REST controller for managing game information.
  */
 @RestController
-@RequestMapping("/v1/game/game-info")
+@RequestMapping("/v3/game/game-info")
 @RequiredArgsConstructor
 @Validated
 public class GameInfoApiController {

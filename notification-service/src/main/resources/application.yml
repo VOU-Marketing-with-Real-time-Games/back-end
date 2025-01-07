@@ -3,7 +3,11 @@ spring:
      name: notification-service
   data:
      mongodb:
-        uri: mongodb+srv://minhhoang:tryMiyNjxDol9fmj@myusshop.mee5s.mongodb.net/myshopchat?retryWrites=true&w=majority&appName=MyUSShop
+         host: mongo
+         port: 27017
+         database: notification
+         username: ${MONGO_INITDB_ROOT_USERNAME}
+         password: ${MONGO_INITDB_ROOT_PASSWORD}
 server:
   port: 8002
 

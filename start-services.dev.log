@@ -1,1413 +1,228 @@
-time="2025-01-03T23:47:16+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro-sevices\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
- Container game-service  Stopping
- Container notification-service  Stopping
- Container image-service  Stopping
- Container brand-service  Stopping
- Container user-service  Stopping
- Container voucher-service  Stopping
- Container campaign-service  Stopping
+time="2025-01-07T20:44:54+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro-sevices\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container mongodb  Stopping
  Container mysql  Stopping
- Container api-gateway  Stopping
+ Container game-service  Stopping
  Container mysql  Stopped
  Container mysql  Removing
- Container user-service  Stopped
- Container user-service  Removing
- Container api-gateway  Stopped
- Container api-gateway  Removing
- Container image-service  Stopped
- Container image-service  Removing
- Container brand-service  Stopped
- Container brand-service  Removing
- Container campaign-service  Stopped
- Container campaign-service  Removing
- Container voucher-service  Stopped
- Container voucher-service  Removing
- Container notification-service  Stopped
- Container notification-service  Removing
  Container game-service  Stopped
  Container game-service  Removing
  Container mysql  Removed
- Container api-gateway  Removed
- Container user-service  Removed
  Container game-service  Removed
- Container campaign-service  Removed
- Container brand-service  Removed
- Container voucher-service  Removed
- Container image-service  Removed
- Container notification-service  Removed
  Container discovery-server  Stopping
+ Container mongodb  Stopped
+ Container mongodb  Removing
+ Container mongodb  Removed
  Container discovery-server  Stopped
  Container discovery-server  Removing
  Container discovery-server  Removed
  Network micro-sevices_microservices-network  Removing
  Network micro-sevices_default  Removing
- Network micro-sevices_microservices-network  Removed
+ Network micro-sevices_microservices-network  Resource is still in use
  Network micro-sevices_default  Removed
-time="2025-01-03T23:47:18+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro-sevices\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-01-07T20:44:59+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro-sevices\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [discovery internal] load build definition from Dockerfile.dev
 #1 transferring dockerfile: 701B 0.0s done
 #1 DONE 0.1s
 
-#2 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#2 ...
+#2 [discovery auth] library/openjdk:pull token for registry-1.docker.io
+#2 DONE 0.0s
 
 #3 [discovery auth] library/maven:pull token for registry-1.docker.io
 #3 DONE 0.0s
 
-#4 [discovery auth] library/openjdk:pull token for registry-1.docker.io
-#4 DONE 0.0s
+#4 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#4 DONE 2.3s
 
 #5 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#5 ...
-
-#2 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#2 DONE 2.6s
-
-#5 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#5 DONE 2.6s
+#5 DONE 4.0s
 
 #6 [discovery internal] load .dockerignore
 #6 transferring context: 2B done
 #6 DONE 0.0s
 
-#7 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.0s done
-#7 DONE 0.1s
+#7 [discovery internal] load build context
+#7 DONE 0.0s
 
-#8 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#8 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.0s done
+#8 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.0s done
 #8 DONE 0.1s
 
-#9 [discovery internal] load build context
-#9 transferring context: 2.96kB 0.0s done
-#9 DONE 0.0s
+#9 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#9 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#9 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
+#9 DONE 0.1s
 
-#10 [discovery build 2/6] WORKDIR /app
+#7 [discovery internal] load build context
+#7 transferring context: 731B done
+#7 DONE 0.0s
+
+#10 [discovery build 3/6] COPY pom.xml .
 #10 CACHED
 
-#11 [discovery build 3/6] COPY pom.xml .
-#11 DONE 0.1s
+#11 [discovery build 5/6] COPY src ./src
+#11 CACHED
 
-#12 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#12 5.988 [INFO] Scanning for projects...
-#12 7.139 [INFO] 
-#12 7.139 [INFO] ---------------------< com.hcmus:discovery-server >---------------------
-#12 7.139 [INFO] Building discovery-server 0.0.1-SNAPSHOT
-#12 7.139 [INFO]   from pom.xml
-#12 7.139 [INFO] --------------------------------[ jar ]---------------------------------
-#12 7.160 [INFO] 
-#12 7.160 [INFO] --- dependency:3.8.1:go-offline (default-cli) @ discovery-server ---
-#12 11.60 [INFO] Resolved plugin: jetty-servlet-9.4.46.v20220331.jar
-#12 11.60 [INFO] Resolved plugin: httpcore5-5.3.1.jar
-#12 11.60 [INFO] Resolved plugin: asm-9.7.jar
-#12 11.60 [INFO] Resolved plugin: doxia-module-twiki-1.11.1.jar
-#12 11.60 [INFO] Resolved plugin: jdependency-2.8.0.jar
-#12 11.60 [INFO] Resolved plugin: velocity-tools-2.0.jar
-#12 11.60 [INFO] Resolved plugin: plexus-java-1.3.0.jar
-#12 11.60 [INFO] Resolved plugin: jackson-module-parameter-names-2.18.2.jar
-#12 11.60 [INFO] Resolved plugin: flexmark-ext-gfm-tasklist-0.42.14.jar
-#12 11.60 [INFO] Resolved plugin: flexmark-ext-admonition-0.42.14.jar
-#12 11.60 [INFO] Resolved plugin: jna-5.13.0.jar
-#12 11.60 [INFO] Resolved plugin: maven-core-3.2.5.jar
-#12 11.60 [INFO] Resolved plugin: flexmark-ext-footnotes-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-ext-gfm-strikethrough-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-ext-media-tags-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: doxia-module-xhtml-1.11.1.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-util-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-ext-anchorlink-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: asm-9.6.jar
-#12 11.61 [INFO] Resolved plugin: aether-api-1.0.0.v20140518.jar
-#12 11.61 [INFO] Resolved plugin: autolink-0.6.0.jar
-#12 11.61 [INFO] Resolved plugin: maven-filtering-3.3.1.jar
-#12 11.61 [INFO] Resolved plugin: maven-surefire-plugin-3.5.2.jar
-#12 11.61 [INFO] Resolved plugin: surefire-extensions-api-3.5.2.jar
-#12 11.61 [INFO] Resolved plugin: surefire-api-3.5.2.jar
-#12 11.61 [INFO] Resolved plugin: maven-archiver-3.6.2.jar
-#12 11.61 [INFO] Resolved plugin: doxia-skin-model-1.11.1.jar
-#12 11.61 [INFO] Resolved plugin: dom4j-1.1.jar
-#12 11.61 [INFO] Resolved plugin: plexus-compiler-api-2.15.0.jar
-#12 11.61 [INFO] Resolved plugin: commons-io-2.16.1.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-youtrack-converter-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: tomlj-1.0.0.jar
-#12 11.61 [INFO] Resolved plugin: httpclient-4.5.13.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-ext-toc-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: qdox-2.0.3.jar
-#12 11.61 [INFO] Resolved plugin: maven-resolver-util-1.9.18.jar
-#12 11.61 [INFO] Resolved plugin: jetty-http-9.4.46.v20220331.jar
-#12 11.61 [INFO] Resolved plugin: micrometer-observation-1.14.2.jar
-#12 11.61 [INFO] Resolved plugin: spring-boot-loader-tools-3.4.1.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-jira-converter-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: maven-reporting-api-3.1.1.jar
-#12 11.61 [INFO] Resolved plugin: maven-plugin-api-3.2.5.jar
-#12 11.61 [INFO] Resolved plugin: sisu-guice-3.2.3-no_aop.jar
-#12 11.61 [INFO] Resolved plugin: flexmark-ext-attributes-0.42.14.jar
-#12 11.61 [INFO] Resolved plugin: commons-lang3-3.8.1.jar
-#12 11.61 [INFO] Resolved plugin: maven-aether-provider-3.2.5.jar
-#12 11.61 [INFO] Resolved plugin: aether-util-1.0.0.v20140518.jar
-#12 11.61 [INFO] Resolved plugin: jetty-security-9.4.46.v20220331.jar
-#12 11.61 [INFO] Resolved plugin: httpcore5-h2-5.3.1.jar
-#12 11.61 [INFO] Resolved plugin: maven-common-artifact-filters-3.4.0.jar
-#12 11.61 [INFO] Resolved plugin: maven-compiler-plugin-3.13.0.jar
-#12 11.61 [INFO] Resolved plugin: org.eclipse.sisu.plexus-0.3.5.jar
-#12 11.61 [INFO] Resolved plugin: jackson-annotations-2.18.2.jar
-#12 11.61 [INFO] Resolved plugin: doxia-core-1.11.1.jar
-#12 11.62 [INFO] Resolved plugin: flexmark-ext-ins-0.42.14.jar
-#12 11.62 [INFO] Resolved plugin: google-collections-1.0.jar
-#12 11.62 [INFO] Resolved plugin: flexmark-ext-emoji-0.42.14.jar
-#12 11.62 [INFO] Resolved plugin: doxia-integration-tools-1.11.1.jar
-#12 11.62 [INFO] Resolved plugin: maven-resolver-api-1.4.1.jar
-#12 11.62 [INFO] Resolved plugin: spring-boot-buildpack-platform-3.4.1.jar
-#12 11.62 [INFO] Resolved plugin: plexus-compiler-manager-2.15.0.jar
-#12 11.62 [INFO] Resolved plugin: maven-repository-metadata-3.2.5.jar
-#12 11.62 [INFO] Resolved plugin: flexmark-ext-jekyll-front-matter-0.42.14.jar
-#12 11.62 [INFO] Resolved plugin: doxia-decoration-model-1.11.1.jar
-#12 11.62 [INFO] Resolved plugin: flexmark-all-0.42.14.jar
-#12 11.62 [INFO] Resolved plugin: maven-shared-incremental-1.1.jar
-#12 11.62 [INFO] Resolved plugin: file-management-3.1.0.jar
-#12 11.62 [INFO] Resolved plugin: commons-compress-1.26.1.jar
-#12 11.62 [INFO] Resolved plugin: spring-context-6.2.1.jar
-#12 11.62 [INFO] Resolved plugin: jetty-webapp-9.4.46.v20220331.jar
-#12 11.62 [INFO] Resolved plugin: plexus-io-3.2.0.jar
-#12 11.62 [INFO] Resolved plugin: xbean-reflect-3.7.jar
-#12 11.62 [INFO] Resolved plugin: maven-reporting-exec-1.6.0.jar
-#12 11.62 [INFO] Resolved plugin: doxia-sink-api-1.11.1.jar
-#12 11.62 [INFO] Resolved plugin: jetty-xml-9.4.46.v20220331.jar
-#12 11.62 [INFO] Resolved plugin: plexus-xml-3.0.0.jar
-#12 11.62 [INFO] Resolved plugin: plexus-velocity-1.2.jar
-#12 11.62 [INFO] Resolved plugin: plexus-container-default-2.1.0.jar
-#12 11.62 [INFO] Resolved plugin: commons-codec-1.11.jar
-#12 11.62 [INFO] Resolved plugin: snappy-0.4.jar
-#12 11.62 [INFO] Resolved plugin: jsr305-3.0.2.jar
-#12 11.63 [INFO] Resolved plugin: maven-deploy-plugin-3.1.3.jar
-#12 11.63 [INFO] Resolved plugin: plexus-build-api-0.0.7.jar
-#12 11.63 [INFO] Resolved plugin: asm-9.5.jar
-#12 11.63 [INFO] Resolved plugin: maven-dependency-tree-3.2.1.jar
-#12 11.63 [INFO] Resolved plugin: doxia-module-fml-1.11.1.jar
-#12 11.63 [INFO] Resolved plugin: commons-digester-1.8.jar
-#12 11.63 [INFO] Resolved plugin: jetty-server-9.4.46.v20220331.jar
-#12 11.63 [INFO] Resolved plugin: maven-shared-utils-3.4.2.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-abbreviation-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: maven-archiver-3.5.2.jar
-#12 11.63 [INFO] Resolved plugin: zstd-jni-1.5.5-11.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-definition-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: doxia-logging-api-1.11.1.jar
-#12 11.63 [INFO] Resolved plugin: plexus-xml-3.0.1.jar
-#12 11.63 [INFO] Resolved plugin: maven-install-plugin-3.1.3.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-yaml-front-matter-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: maven-shade-plugin-3.5.0.jar
-#12 11.63 [INFO] Resolved plugin: maven-site-plugin-3.12.1.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-superscript-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: commons-collections-3.2.2.jar
-#12 11.63 [INFO] Resolved plugin: doxia-module-markdown-1.11.1.jar
-#12 11.63 [INFO] Resolved plugin: qdox-2.1.0.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-xwiki-macros-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: commons-compress-1.20.jar
-#12 11.63 [INFO] Resolved plugin: maven-resources-plugin-3.3.1.jar
-#12 11.63 [INFO] Resolved plugin: velocity-1.7.jar
-#12 11.63 [INFO] Resolved plugin: maven-resolver-api-1.9.18.jar
-#12 11.63 [INFO] Resolved plugin: plexus-utils-3.5.1.jar
-#12 11.63 [INFO] Resolved plugin: jackson-databind-2.18.2.jar
-#12 11.63 [INFO] Resolved plugin: aopalliance-1.0.jar
-#12 11.63 [INFO] Resolved plugin: aether-spi-1.0.0.v20140518.jar
-#12 11.63 [INFO] Resolved plugin: surefire-logger-api-3.5.2.jar
-#12 11.63 [INFO] Resolved plugin: plexus-interpolation-1.26.jar
-#12 11.63 [INFO] Resolved plugin: spring-expression-6.2.1.jar
-#12 11.63 [INFO] Resolved plugin: maven-settings-builder-3.2.5.jar
-#12 11.63 [INFO] Resolved plugin: httpcore-4.4.14.jar
-#12 11.63 [INFO] Resolved plugin: commons-lang3-3.12.0.jar
-#12 11.63 [INFO] Resolved plugin: spring-aop-6.2.1.jar
-#12 11.63 [INFO] Resolved plugin: maven-artifact-3.2.5.jar
-#12 11.63 [INFO] Resolved plugin: plexus-compiler-javac-2.15.0.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-enumerated-reference-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: plexus-component-annotations-2.1.1.jar
-#12 11.63 [INFO] Resolved plugin: surefire-shared-utils-3.5.2.jar
-#12 11.63 [INFO] Resolved plugin: commons-logging-1.2.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-escaped-character-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: plexus-java-1.2.0.jar
-#12 11.63 [INFO] Resolved plugin: plexus-cipher-1.4.jar
-#12 11.63 [INFO] Resolved plugin: spring-jcl-6.2.1.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: plexus-utils-3.4.2.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-aside-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: flexmark-ext-wikilink-0.42.14.jar
-#12 11.63 [INFO] Resolved plugin: org.eclipse.sisu.inject-0.3.5.jar
-#12 11.63 [INFO] Resolved plugin: plexus-io-3.4.2.jar
-#12 11.63 [INFO] Resolved plugin: surefire-extensions-spi-3.5.2.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-gfm-tables-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: antlr4-runtime-4.7.2.jar
-#12 11.64 [INFO] Resolved plugin: plexus-interpolation-1.27.jar
-#12 11.64 [INFO] Resolved plugin: commons-io-2.11.0.jar
-#12 11.64 [INFO] Resolved plugin: jetty-io-9.4.46.v20220331.jar
-#12 11.64 [INFO] Resolved plugin: cdi-api-1.2.jar
-#12 11.64 [INFO] Resolved plugin: commons-chain-1.1.jar
-#12 11.64 [INFO] Resolved plugin: commons-codec-1.16.1.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-html-parser-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: javax.inject-1.jar
-#12 11.64 [INFO] Resolved plugin: asm-tree-9.5.jar
-#12 11.64 [INFO] Resolved plugin: maven-shared-utils-3.3.4.jar
-#12 11.64 [INFO] Resolved plugin: javax.servlet-api-3.1.0.jar
-#12 11.64 [INFO] Resolved plugin: jetty-util-ajax-9.4.46.v20220331.jar
-#12 11.64 [INFO] Resolved plugin: commons-io-2.13.0.jar
-#12 11.64 [INFO] Resolved plugin: httpclient5-5.4.1.jar
-#12 11.64 [INFO] Resolved plugin: maven-settings-3.2.5.jar
-#12 11.64 [INFO] Resolved plugin: jna-platform-5.13.0.jar
-#12 11.64 [INFO] Resolved plugin: jsoup-1.10.2.jar
-#12 11.64 [INFO] Resolved plugin: oro-2.0.8.jar
-#12 11.64 [INFO] Resolved plugin: surefire-booter-3.5.2.jar
-#12 11.64 [INFO] Resolved plugin: maven-common-artifact-filters-3.3.2.jar
-#12 11.64 [INFO] Resolved plugin: xz-1.9.jar
-#12 11.64 [INFO] Resolved plugin: aether-impl-1.0.0.v20140518.jar
-#12 11.64 [INFO] Resolved plugin: commons-text-1.3.jar
-#12 11.64 [INFO] Resolved plugin: plexus-utils-4.0.0.jar
-#12 11.64 [INFO] Resolved plugin: commons-lang-2.4.jar
-#12 11.64 [INFO] Resolved plugin: slf4j-api-1.7.36.jar
-#12 11.64 [INFO] Resolved plugin: spring-boot-maven-plugin-3.4.1.jar
-#12 11.64 [INFO] Resolved plugin: doxia-module-apt-1.11.1.jar
-#12 11.64 [INFO] Resolved plugin: maven-resolver-util-1.4.1.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-gfm-issues-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: jetty-util-9.4.46.v20220331.jar
-#12 11.64 [INFO] Resolved plugin: maven-model-builder-3.2.5.jar
-#12 11.64 [INFO] Resolved plugin: maven-jar-plugin-3.4.2.jar
-#12 11.64 [INFO] Resolved plugin: plexus-archiver-4.2.7.jar
-#12 11.64 [INFO] Resolved plugin: commons-io-2.6.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-youtube-embedded-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-formatter-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: maven-model-3.2.5.jar
-#12 11.64 [INFO] Resolved plugin: plexus-utils-4.0.1.jar
-#12 11.64 [INFO] Resolved plugin: jdom2-2.0.6.1.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-profile-pegdown-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: doxia-module-docbook-simple-1.11.1.jar
-#12 11.64 [INFO] Resolved plugin: commons-compress-1.25.0.jar
-#12 11.64 [INFO] Resolved plugin: guava-16.0.1.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-typographic-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-autolink-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-jekyll-tag-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-gitlab-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: doxia-module-xdoc-1.11.1.jar
-#12 11.64 [INFO] Resolved plugin: doxia-site-renderer-1.11.1.jar
-#12 11.64 [INFO] Resolved plugin: commons-beanutils-1.7.0.jar
-#12 11.64 [INFO] Resolved plugin: maven-surefire-common-3.5.2.jar
-#12 11.64 [INFO] Resolved plugin: commons-lang3-3.14.0.jar
-#12 11.64 [INFO] Resolved plugin: plexus-classworlds-2.5.2.jar
-#12 11.64 [INFO] Resolved plugin: doxia-module-confluence-1.11.1.jar
-#12 11.64 [INFO] Resolved plugin: doxia-module-xhtml5-1.11.1.jar
-#12 11.64 [INFO] Resolved plugin: maven-clean-plugin-3.4.0.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-tables-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: javax.annotation-api-1.2.jar
-#12 11.64 [INFO] Resolved plugin: flexmark-ext-macros-0.42.14.jar
-#12 11.64 [INFO] Resolved plugin: micrometer-commons-1.14.2.jar
-#12 11.64 [INFO] Resolved plugin: plexus-sec-dispatcher-1.3.jar
-#12 11.65 [INFO] Resolved plugin: commons-collections4-4.4.jar
-#12 11.65 [INFO] Resolved plugin: plexus-i18n-1.0-beta-10.jar
-#12 11.65 [INFO] Resolved plugin: jackson-core-2.18.2.jar
-#12 11.65 [INFO] Resolved plugin: spring-core-6.2.1.jar
-#12 11.65 [INFO] Resolved plugin: flexmark-ext-gfm-users-0.42.14.jar
-#12 11.65 [INFO] Resolved plugin: plexus-archiver-4.9.2.jar
-#12 11.65 [INFO] Resolved plugin: spring-beans-6.2.1.jar
-#12 11.65 [INFO] Resolved plugin: asm-commons-9.5.jar
-#12 11.65 [INFO] Resolved dependency: reactor-extra-3.5.2.jar
-#12 11.65 [INFO] Resolved dependency: micrometer-core-1.14.1.jar
-#12 11.65 [INFO] Resolved dependency: httpcore5-5.3.1.jar
-#12 11.65 [INFO] Resolved dependency: hk2-locator-3.0.6.jar
-#12 11.65 [INFO] Resolved dependency: hk2-utils-3.0.6.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: jersey-hk2-3.1.9.jar
-#12 11.65 [INFO] Resolved dependency: jul-to-slf4j-2.0.16.jar
-#12 11.65 [INFO] Resolved dependency: istack-commons-runtime-4.1.2.jar
-#12 11.65 [INFO] Resolved dependency: spring-expression-6.2.1.jar
-#12 11.65 [INFO] Resolved dependency: netflix-infix-0.3.0.jar
-#12 11.65 [INFO] Resolved dependency: joda-time-2.8.1.jar
-#12 11.65 [INFO] Resolved dependency: log4j-to-slf4j-2.24.3.jar
-#12 11.65 [INFO] Resolved dependency: jersey-server-3.1.9.jar
-#12 11.65 [INFO] Resolved dependency: aopalliance-repackaged-3.0.6.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-autoconfigure-3.4.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-aop-6.2.1.jar
-#12 11.65 [INFO] Resolved dependency: stringtemplate-3.2.1.jar
-#12 11.65 [INFO] Resolved dependency: byte-buddy-agent-1.15.4.jar
-#12 11.65 [INFO] Resolved dependency: tomcat-embed-websocket-10.1.33.jar
-#12 11.65 [INFO] Resolved dependency: commons-math-2.2.jar
-#12 11.65 [INFO] Resolved dependency: jersey-apache-connector-3.1.9.jar
-#12 11.65 [INFO] Resolved dependency: spring-beans-6.2.0.jar
-#12 11.65 [INFO] Resolved dependency: micrometer-jakarta9-1.14.1.jar
-#12 11.65 [INFO] Resolved dependency: gson-2.11.0.jar
-#12 11.65 [INFO] Resolved dependency: json-smart-2.5.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-expression-6.2.0.jar
-#12 11.65 [INFO] Resolved dependency: eureka-core-2.0.4.jar
-#12 11.65 [INFO] Resolved dependency: servo-core-0.5.3.jar
-#12 11.65 [INFO] Resolved dependency: spring-cloud-starter-loadbalancer-4.2.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-cloud-netflix-eureka-client-4.2.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-webmvc-6.2.0.jar
-#12 11.65 [INFO] Resolved dependency: asm-9.6.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-web-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: opentest4j-1.3.0.jar
-#12 11.65 [INFO] Resolved dependency: stax2-api-4.2.2.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-autoconfigure-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: bcprov-jdk18on-1.78.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-logging-3.4.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-aop-6.2.0.jar
-#12 11.65 [INFO] Resolved dependency: accessors-smart-2.5.1.jar
-#12 11.65 [INFO] Resolved dependency: commons-logging-1.3.3.jar
-#12 11.65 [INFO] Resolved dependency: spring-jcl-6.2.1.jar
-#12 11.65 [INFO] Resolved dependency: jaxb-runtime-4.0.5.jar
-#12 11.65 [INFO] Resolved dependency: httpclient-4.5.3.jar
-#12 11.65 [INFO] Resolved dependency: failureaccess-1.0.2.jar
-#12 11.65 [INFO] Resolved dependency: log4j-to-slf4j-2.24.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-web-6.2.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-bridge-3.1.1.jar
-#12 11.65 [INFO] Resolved dependency: aws-java-sdk-sts-1.11.277.jar
-#12 11.65 [INFO] Resolved dependency: commons-lang-2.6.jar
-#12 11.65 [INFO] Resolved dependency: jackson-datatype-jdk8-2.18.1.jar
-#12 11.65 [INFO] Resolved dependency: xmlunit-core-2.10.0.jar
-#12 11.65 [INFO] Resolved dependency: eureka-core-jersey3-2.0.4.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-logging-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-jcl-6.2.0.jar
-#12 11.65 [INFO] Resolved dependency: j2objc-annotations-3.0.0.jar
-#12 11.65 [INFO] Resolved dependency: jackson-annotations-2.18.1.jar
-#12 11.65 [INFO] Resolved dependency: micrometer-observation-1.14.2.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-3.4.1.jar
-#12 11.65 [INFO] Resolved dependency: HdrHistogram-2.2.2.jar
-#12 11.65 [INFO] Resolved dependency: spring-cloud-starter-4.2.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-actuator-autoconfigure-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: commons-codec-1.17.1.jar
-#12 11.65 [INFO] Resolved dependency: hamcrest-2.2.jar
-#12 11.65 [INFO] Resolved dependency: jackson-databind-2.18.1.jar
-#12 11.65 [INFO] Resolved dependency: jersey-container-servlet-3.1.9.jar
-#12 11.65 [INFO] Resolved dependency: aws-java-sdk-autoscaling-1.11.277.jar
-#12 11.65 [INFO] Resolved dependency: httpclient5-5.4.1.jar
-#12 11.65 [INFO] Resolved dependency: slf4j-api-2.0.11.jar
-#12 11.65 [INFO] Resolved dependency: httpcore5-h2-5.3.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-context-support-6.2.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-test-3.4.1.jar
-#12 11.65 [INFO] Resolved dependency: micrometer-observation-1.14.1.jar
-#12 11.65 [INFO] Resolved dependency: log4j-api-2.24.3.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-actuator-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: jakarta.servlet-api-6.0.0.jar
-#12 11.65 [INFO] Resolved dependency: jackson-module-parameter-names-2.18.1.jar
-#12 11.65 [INFO] Resolved dependency: antlr-runtime-3.4.jar
-#12 11.65 [INFO] Resolved dependency: logback-core-1.5.12.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-json-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: junit-jupiter-api-5.11.4.jar
-#12 11.65 [INFO] Resolved dependency: error_prone_annotations-2.28.0.jar
-#12 11.65 [INFO] Resolved dependency: jaxb-core-4.0.5.jar
-#12 11.65 [INFO] Resolved dependency: junit-jupiter-engine-5.11.4.jar
-#12 11.65 [INFO] Resolved dependency: eureka-client-jersey3-2.0.4.jar
-#12 11.65 [INFO] Resolved dependency: listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar
-#12 11.65 [INFO] Resolved dependency: evictor-1.0.0.jar
-#12 11.65 [INFO] Resolved dependency: jackson-dataformat-xml-2.18.1.jar
-#12 11.65 [INFO] Resolved dependency: objenesis-3.3.jar
-#12 11.65 [INFO] Resolved dependency: javassist-3.30.2-GA.jar
-#12 11.65 [INFO] Resolved dependency: spring-cloud-netflix-eureka-server-4.2.0.jar
-#12 11.65 [INFO] Resolved dependency: jackson-datatype-jsr310-2.18.1.jar
-#12 11.65 [INFO] Resolved dependency: jersey-common-3.1.9.jar
-#12 11.65 [INFO] Resolved dependency: spring-cloud-context-4.2.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-test-3.4.1.jar
-#12 11.65 [INFO] Resolved dependency: antlr-2.7.7.jar
-#12 11.65 [INFO] Resolved dependency: angus-activation-2.0.2.jar
-#12 11.65 [INFO] Resolved dependency: jmespath-java-1.11.277.jar
-#12 11.65 [INFO] Resolved dependency: reactor-core-3.7.0.jar
-#12 11.65 [INFO] Resolved dependency: osgi-resource-locator-1.0.3.jar
-#12 11.65 [INFO] Resolved dependency: snakeyaml-2.3.jar
-#12 11.65 [INFO] Resolved dependency: freemarker-2.3.33.jar
-#12 11.65 [INFO] Resolved dependency: xmlpull-1.1.3.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-cache-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-freemarker-3.4.0.jar
-#12 11.65 [INFO] Resolved dependency: spring-boot-starter-3.4.1.jar
-#12 11.65 [INFO] Resolved dependency: assertj-core-3.26.3.jar
-#12 11.65 [INFO] Resolved dependency: byte-buddy-1.14.18.jar
-#12 11.65 [INFO] Resolved dependency: spectator-api-1.7.3.jar
-#12 11.65 [INFO] Resolved dependency: httpcore-4.4.16.jar
-#12 11.65 [INFO] Resolved dependency: spring-security-crypto-6.4.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-context-6.2.1.jar
-#12 11.65 [INFO] Resolved dependency: hk2-api-3.1.1.jar
-#12 11.65 [INFO] Resolved dependency: jakarta.activation-api-2.1.3.jar
-#12 11.65 [INFO] Resolved dependency: commons-jxpath-1.3.jar
-#12 11.65 [INFO] Resolved dependency: jackson-dataformat-cbor-2.18.1.jar
-#12 11.65 [INFO] Resolved dependency: spring-cloud-commons-4.2.0.jar
-#12 11.65 [INFO] Resolved dependency: junit-jupiter-params-5.11.4.jar
-#12 11.65 [INFO] Resolved dependency: jsonassert-1.5.3.jar
-#12 11.65 [INFO] Resolved dependency: xstream-1.4.20.jar
-#12 11.65 [INFO] Resolved dependency: spring-cloud-starter-netflix-eureka-server-4.2.0.jar
-#12 11.65 [INFO] Resolved dependency: checker-qual-3.43.0.jar
-#12 11.65 [INFO] Resolved dependency: aws-java-sdk-ec2-1.11.277.jar
-#12 11.65 [INFO] Resolved dependency: jakarta.validation-api-3.0.2.jar
-#12 11.66 [INFO] Resolved dependency: spring-cloud-loadbalancer-4.2.0.jar
-#12 11.66 [INFO] Resolved dependency: spring-boot-test-autoconfigure-3.4.1.jar
-#12 11.66 [INFO] Resolved dependency: mockito-core-5.14.2.jar
-#12 11.66 [INFO] Resolved dependency: jsr305-3.0.2.jar
-#12 11.66 [INFO] Resolved dependency: spring-boot-actuator-3.4.0.jar
-#12 11.66 [INFO] Resolved dependency: log4j-api-2.24.1.jar
-#12 11.66 [INFO] Resolved dependency: jersey-client-3.1.9.jar
-#12 11.66 [INFO] Resolved dependency: junit-platform-commons-1.11.4.jar
-#12 11.66 [INFO] Resolved dependency: jakarta.xml.bind-api-4.0.2.jar
-#12 11.66 [INFO] Resolved dependency: aws-java-sdk-route53-1.11.277.jar
-#12 11.66 [INFO] Resolved dependency: micrometer-commons-1.14.1.jar
-#12 11.66 [INFO] Resolved dependency: commons-configuration-1.10.jar
-#12 11.66 [INFO] Resolved dependency: jakarta.ws.rs-api-3.1.0.jar
-#12 11.66 [INFO] Resolved dependency: jettison-1.5.4.jar
-#12 11.66 [INFO] Resolved dependency: junit-platform-engine-1.11.4.jar
-#12 11.66 [INFO] Resolved dependency: mockito-junit-jupiter-5.14.2.jar
-#12 11.66 [INFO] Resolved dependency: jakarta.annotation-api-2.1.1.jar
-#12 11.66 [INFO] Resolved dependency: slf4j-api-2.0.16.jar
-#12 11.66 [INFO] Resolved dependency: logback-classic-1.5.12.jar
-#12 11.66 [INFO] Resolved dependency: jackson-core-2.18.1.jar
-#12 11.66 [INFO] Resolved dependency: awaitility-4.2.2.jar
-#12 11.66 [INFO] Resolved dependency: spring-core-6.2.0.jar
-#12 11.66 [INFO] Resolved dependency: eureka-client-2.0.4.jar
-#12 11.66 [INFO] Resolved dependency: jakarta.inject-api-2.0.1.jar
-#12 11.66 [INFO] Resolved dependency: guava-33.3.1-jre.jar
-#12 11.66 [INFO] Resolved dependency: javax.annotation-api-1.2.jar
-#12 11.66 [INFO] Resolved dependency: tomcat-embed-core-10.1.33.jar
-#12 11.66 [INFO] Resolved dependency: micrometer-commons-1.14.2.jar
-#12 11.66 [INFO] Resolved dependency: tomcat-embed-el-10.1.33.jar
-#12 11.66 [INFO] Resolved dependency: mxparser-1.2.2.jar
-#12 11.66 [INFO] Resolved dependency: aws-java-sdk-core-1.11.277.jar
-#12 11.66 [INFO] Resolved dependency: json-path-2.9.0.jar
-#12 11.66 [INFO] Resolved dependency: jersey-container-servlet-core-3.1.9.jar
-#12 11.66 [INFO] Resolved dependency: apiguardian-api-1.1.2.jar
-#12 11.66 [INFO] Resolved dependency: spring-core-6.2.1.jar
-#12 11.66 [INFO] Resolved dependency: txw2-4.0.5.jar
-#12 11.66 [INFO] Resolved dependency: woodstox-core-7.0.0.jar
-#12 11.66 [INFO] Resolved dependency: LatencyUtils-2.0.3.jar
-#12 11.66 [INFO] Resolved dependency: netflix-eventbus-0.3.0.jar
-#12 11.66 [INFO] Resolved dependency: spring-context-6.2.0.jar
-#12 11.66 [INFO] Resolved dependency: spring-test-6.2.1.jar
-#12 11.66 [INFO] Resolved dependency: spring-boot-starter-tomcat-3.4.0.jar
-#12 11.66 [INFO] Resolved dependency: ion-java-1.0.2.jar
-#12 11.66 [INFO] Resolved dependency: android-json-0.0.20131108.vaadin1.jar
-#12 11.66 [INFO] Resolved dependency: spring-beans-6.2.1.jar
-#12 11.66 [INFO] Resolved dependency: spring-boot-starter-3.4.0.jar
-#12 11.66 [INFO] Resolved dependency: reactive-streams-1.0.4.jar
-#12 11.66 [INFO] Resolved dependency: junit-jupiter-5.11.4.jar
-#12 11.66 [INFO] Resolved dependency: spring-boot-devtools-3.4.1.jar
-#12 11.66 [INFO] ------------------------------------------------------------------------
-#12 11.66 [INFO] BUILD SUCCESS
-#12 11.66 [INFO] ------------------------------------------------------------------------
-#12 11.66 [INFO] Total time:  5.757 s
-#12 11.67 [INFO] Finished at: 2025-01-03T16:47:33Z
-#12 11.67 [INFO] ------------------------------------------------------------------------
-#12 DONE 11.7s
+#12 [discovery stage-1 2/3] WORKDIR /app
+#12 CACHED
 
-#13 [discovery build 5/6] COPY src ./src
-#13 DONE 0.1s
+#13 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#13 CACHED
 
-#14 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#14 2.057 [INFO] Scanning for projects...
-#14 2.442 [INFO] 
-#14 2.442 [INFO] ---------------------< com.hcmus:discovery-server >---------------------
-#14 2.442 [INFO] Building discovery-server 0.0.1-SNAPSHOT
-#14 2.443 [INFO]   from pom.xml
-#14 2.443 [INFO] --------------------------------[ jar ]---------------------------------
-#14 3.361 [INFO] 
-#14 3.361 [INFO] --- clean:3.4.0:clean (default-clean) @ discovery-server ---
-#14 3.479 [INFO] 
-#14 3.479 [INFO] --- resources:3.3.1:resources (default-resources) @ discovery-server ---
-#14 3.686 [INFO] Copying 1 resource from src/main/resources to target/classes
-#14 3.758 [INFO] Copying 0 resource from src/main/resources to target/classes
-#14 3.761 [INFO] 
-#14 3.761 [INFO] --- compiler:3.13.0:compile (default-compile) @ discovery-server ---
-#14 4.032 [INFO] Recompiling the module because of changed source code.
-#14 4.072 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/classes
-#14 5.957 [INFO] 
-#14 5.957 [INFO] --- resources:3.3.1:testResources (default-testResources) @ discovery-server ---
-#14 5.964 [INFO] skip non existing resourceDirectory /app/src/test/resources
-#14 5.964 [INFO] 
-#14 5.964 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ discovery-server ---
-#14 5.976 [INFO] Recompiling the module because of changed dependency.
-#14 5.977 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
-#14 6.766 [INFO] 
-#14 6.766 [INFO] --- surefire:3.5.2:test (default-test) @ discovery-server ---
-#14 6.995 [INFO] Tests are skipped.
-#14 6.995 [INFO] 
-#14 6.996 [INFO] --- jar:3.4.2:jar (default-jar) @ discovery-server ---
-#14 7.489 [INFO] Building jar: /app/target/discovery-server-0.0.1-SNAPSHOT.jar
-#14 7.589 [INFO] 
-#14 7.589 [INFO] --- spring-boot:3.4.1:repackage (repackage) @ discovery-server ---
-#14 12.07 [INFO] Replacing main artifact /app/target/discovery-server-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
-#14 12.08 [INFO] The original artifact has been renamed to /app/target/discovery-server-0.0.1-SNAPSHOT.jar.original
-#14 12.08 [INFO] 
-#14 12.08 [INFO] --- install:3.1.3:install (default-install) @ discovery-server ---
-#14 12.12 [INFO] Installing /app/pom.xml to /root/.m2/repository/com/hcmus/discovery-server/0.0.1-SNAPSHOT/discovery-server-0.0.1-SNAPSHOT.pom
-#14 12.14 [INFO] Installing /app/target/discovery-server-0.0.1-SNAPSHOT.jar to /root/.m2/repository/com/hcmus/discovery-server/0.0.1-SNAPSHOT/discovery-server-0.0.1-SNAPSHOT.jar
-#14 14.25 [INFO] ------------------------------------------------------------------------
-#14 14.25 [INFO] BUILD SUCCESS
-#14 14.25 [INFO] ------------------------------------------------------------------------
-#14 14.26 [INFO] Total time:  12.230 s
-#14 14.26 [INFO] Finished at: 2025-01-03T16:47:48Z
-#14 14.26 [INFO] ------------------------------------------------------------------------
-#14 DONE 14.5s
+#14 [discovery build 2/6] WORKDIR /app
+#14 CACHED
 
-#15 [discovery stage-1 2/3] WORKDIR /app
+#15 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
 #15 CACHED
 
 #16 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
-#16 DONE 0.2s
+#16 CACHED
 
 #17 [discovery] exporting to image
-#17 exporting layers
-#17 exporting layers 3.1s done
-#17 exporting manifest sha256:eb55983c4ac91b17f3df7f33e82f12049fdd9f650ccc53b46a63cfb39194fd0e 0.0s done
-#17 exporting config sha256:374f721f8a8b0eb88376388ccac7b412d78bc3dda6f81b95accb4f6400659776 0.0s done
-#17 exporting attestation manifest sha256:72928e822180b0a7b845a3065b64a47f7eaad30982febad08775af09187f698a 0.0s done
-#17 exporting manifest list sha256:26eb6cab1e191ddc2297410b96b7ec08d26375fe18706af2623e59366e75ef97 0.0s done
-#17 naming to docker.io/library/micro-sevices-discovery:latest
-#17 naming to docker.io/library/micro-sevices-discovery:latest 0.0s done
-#17 unpacking to docker.io/library/micro-sevices-discovery:latest
-#17 unpacking to docker.io/library/micro-sevices-discovery:latest 0.5s done
-#17 DONE 3.7s
+#17 exporting layers done
+#17 exporting manifest sha256:549eb40efcd69ea3d684d5413ecaa5d8432110c727b67fd3af17fb3973718bf5 done
+#17 exporting config sha256:9d30c3878afea0a8d3fe14dbe83061a8f54076cfef12d24c9685fada66943c73 done
+#17 exporting attestation manifest sha256:4f78fe45137002cd464be15c0b1b3742cdc15e8caf19fb0ffb783a79ef57ee42 0.0s done
+#17 exporting manifest list sha256:7aea0e3a15b1848b80ff8dad14d03b0020ae4b55f0dffb23dbd3e26c2838cccf
+#17 exporting manifest list sha256:7aea0e3a15b1848b80ff8dad14d03b0020ae4b55f0dffb23dbd3e26c2838cccf 0.0s done
+#17 naming to docker.io/library/micro-sevices-discovery:latest done
+#17 unpacking to docker.io/library/micro-sevices-discovery:latest done
+#17 DONE 0.1s
 
 #18 [discovery] resolving provenance for metadata file
 #18 DONE 0.1s
 
-#19 [brand-service internal] load build definition from Dockerfile.dev
-#19 transferring dockerfile: 695B 0.0s done
+#19 [game-service internal] load build definition from Dockerfile.dev
+#19 transferring dockerfile: 693B done
 #19 DONE 0.0s
 
-#20 [notification-service internal] load build definition from Dockerfile.dev
-#20 transferring dockerfile: 709B 0.0s done
-#20 DONE 0.1s
+#5 [game-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#5 DONE 4.6s
 
-#21 [gateway internal] load build definition from Dockerfile.dev
-#21 transferring dockerfile: 691B done
+#4 [game-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#4 DONE 2.8s
+
+#20 [game-service internal] load .dockerignore
+#20 transferring context: 2B done
+#20 DONE 0.0s
+
+#21 [game-service internal] load build context
+#21 DONE 0.0s
+
+#9 [game-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#9 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
+#9 DONE 0.1s
+
+#8 [game-service stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
+#8 DONE 0.1s
+
+#21 [game-service internal] load build context
+#21 transferring context: 8.72kB 0.1s done
 #21 DONE 0.1s
 
-#22 [voucher-service internal] load build definition from Dockerfile.dev
-#22 transferring dockerfile: 699B done
-#22 DONE 0.1s
-
-#23 [campaign-service internal] load build definition from Dockerfile.dev
-#23 transferring dockerfile: 701B done
-#23 DONE 0.1s
-
-#24 [image-service internal] load build definition from Dockerfile.dev
-#24 transferring dockerfile: 695B done
-#24 DONE 0.1s
-
-#25 [user-service internal] load build definition from Dockerfile.dev
-#25 transferring dockerfile: 693B 0.0s done
-#25 DONE 0.1s
-
-#26 [game-service internal] load build definition from Dockerfile.dev
-#26 transferring dockerfile: 693B done
-#26 DONE 0.1s
-
-#2 [game-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#2 DONE 3.6s
-
-#5 [image-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#5 DONE 3.7s
-
-#27 [game-service internal] load .dockerignore
-#27 transferring context: 2B done
-#27 DONE 0.1s
-
-#28 [brand-service internal] load .dockerignore
-#28 transferring context: 2B done
-#28 DONE 0.1s
-
-#29 [gateway internal] load .dockerignore
-#29 transferring context: 2B done
-#29 DONE 0.1s
-
-#30 [voucher-service internal] load .dockerignore
-#30 transferring context: 2B done
-#30 DONE 0.1s
-
-#31 [brand-service internal] load build context
-#31 DONE 0.0s
-
-#32 [game-service internal] load build context
-#32 DONE 0.0s
-
-#33 [notification-service internal] load .dockerignore
-#33 transferring context: 2B done
-#33 DONE 0.1s
-
-#34 [user-service internal] load .dockerignore
-#34 transferring context: 2B done
-#34 DONE 0.1s
-
-#35 [voucher-service internal] load build context
-#35 DONE 0.0s
-
-#36 [notification-service internal] load build context
-#36 DONE 0.0s
-
-#37 [image-service internal] load .dockerignore
-#37 transferring context: 2B done
-#37 DONE 0.1s
-
-#38 [user-service internal] load build context
-#38 DONE 0.0s
-
-#39 [campaign-service internal] load .dockerignore
-#39 transferring context: 2B done
-#39 DONE 0.2s
-
-#8 [gateway build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#8 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
-#8 DONE 0.1s
-
-#7 [gateway stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
-#7 DONE 0.1s
-
-#8 [campaign-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#8 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
-#8 DONE 0.1s
-
-#7 [campaign-service stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
-#7 DONE 0.1s
-
-#35 [voucher-service internal] load build context
-#35 transferring context: 1.12kB 0.0s done
-#35 DONE 0.1s
-
-#31 [brand-service internal] load build context
-#31 transferring context: 922B 0.0s done
-#31 DONE 0.1s
-
-#40 [gateway internal] load build context
-#40 transferring context: 2.91kB 0.0s done
-#40 DONE 0.1s
-
-#41 [campaign-service internal] load build context
-#41 transferring context: 1.03kB 0.0s done
-#41 DONE 0.2s
-
-#38 [user-service internal] load build context
-#38 transferring context: 845B 0.0s done
-#38 DONE 0.1s
-
-#36 [notification-service internal] load build context
-#36 transferring context: 2.48kB 0.1s done
-#36 DONE 0.1s
-
-#42 [image-service internal] load build context
-#42 transferring context: 848B 0.0s done
-#42 DONE 0.1s
-
-#32 [game-service internal] load build context
-#32 transferring context: 8.23kB 0.1s done
-#32 DONE 0.2s
-
-#43 [voucher-service build 5/6] COPY src ./src
-#43 CACHED
-
-#44 [voucher-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#44 CACHED
-
-#45 [voucher-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#45 CACHED
-
-#46 [voucher-service build 3/6] COPY pom.xml .
-#46 CACHED
-
-#47 [voucher-service stage-1 3/3] COPY --from=build /app/target/voucher-service-0.0.1-SNAPSHOT.jar .
-#47 CACHED
-
-#48 [user-service build 3/6] COPY pom.xml .
-#48 CACHED
-
-#49 [user-service build 5/6] COPY src ./src
-#49 CACHED
-
-#50 [user-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#50 CACHED
-
-#51 [user-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#51 CACHED
-
-#52 [user-service stage-1 3/3] COPY --from=build /app/target/user_service-0.0.1-SNAPSHOT.jar .
-#52 CACHED
-
-#53 [notification-service build 5/6] COPY src ./src
-#53 CACHED
-
-#54 [notification-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#54 CACHED
-
-#55 [notification-service build 3/6] COPY pom.xml .
-#55 CACHED
-
-#56 [notification-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#56 CACHED
-
-#57 [notification-service stage-1 3/3] COPY --from=build /app/target/notification-service-0.0.1-SNAPSHOT.jar .
-#57 CACHED
-
-#58 [game-service build 5/6] COPY src ./src
-#58 CACHED
-
-#59 [game-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#59 CACHED
-
-#60 [game-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#60 CACHED
-
-#61 [game-service build 3/6] COPY pom.xml .
-#61 CACHED
-
-#62 [game-service stage-1 3/3] COPY --from=build /app/target/game-service-0.0.1-SNAPSHOT.jar .
-#62 CACHED
-
-#63 [image-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#63 CACHED
-
-#64 [image-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#64 CACHED
-
-#65 [image-service build 3/6] COPY pom.xml .
-#65 CACHED
-
-#66 [image-service build 5/6] COPY src ./src
-#66 CACHED
-
-#67 [image-service stage-1 3/3] COPY --from=build /app/target/image-service-0.0.1-SNAPSHOT.jar .
-#67 CACHED
-
-#68 [campaign-service build 3/6] COPY pom.xml .
-#68 CACHED
-
-#69 [campaign-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#69 CACHED
-
-#70 [campaign-service build 5/6] COPY src ./src
-#70 CACHED
-
-#71 [campaign-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#71 CACHED
-
-#72 [campaign-service stage-1 3/3] COPY --from=build /app/target/campaign-service-0.0.1-SNAPSHOT.jar .
-#72 CACHED
-
-#73 [brand-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#73 CACHED
-
-#74 [brand-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#74 CACHED
-
-#15 [brand-service stage-1 2/3] WORKDIR /app
-#15 CACHED
-
-#75 [brand-service build 5/6] COPY src ./src
-#75 CACHED
-
-#76 [brand-service build 3/6] COPY pom.xml .
-#76 CACHED
-
-#77 [brand-service stage-1 3/3] COPY --from=build /app/target/brand-service-0.0.1-SNAPSHOT.jar .
-#77 CACHED
-
-#10 [voucher-service build 2/6] WORKDIR /app
-#10 CACHED
-
-#78 [notification-service] exporting to image
-#78 exporting layers done
-#78 exporting manifest sha256:35f5af188b6db3a91dbe9e5e95532eb008b10fc40a44656449cbe00aa2cf1ec1 0.0s done
-#78 exporting config sha256:3f0fdbdd0f21eaf2e84d433e12465a30f4599c83abf3bd56441fbbc72b63ed94 0.0s done
-#78 ...
-
-#79 [gateway build 3/6] COPY pom.xml .
-#79 DONE 0.3s
-
-#78 [notification-service] exporting to image
-#78 exporting attestation manifest sha256:b798bd3f81b56e6047350bb0a7152391a931d6cfba34dbe328da24bf282be991
-#78 exporting attestation manifest sha256:b798bd3f81b56e6047350bb0a7152391a931d6cfba34dbe328da24bf282be991 0.2s done
-#78 exporting manifest list sha256:05188eea12cc7d1d5efbbb14276b723cd886866aad9895fc0acb50b927bfca1c
-#78 ...
-
-#80 [voucher-service] exporting to image
-#80 exporting layers done
-#80 exporting manifest sha256:f94cf8b037cdbc542a4fd2e57f17f87b98719d8b2055aad1a7d26805cd809d9a done
-#80 exporting config sha256:2c5e487974864fc267367fb944fba9de8d42cc7a30a302fe20387aaaaff36153 0.0s done
-#80 exporting attestation manifest sha256:ae793abff21da861a8f0026122dbc69b84c1b6f0cceb976cc96d787460c63228 0.4s done
-#80 exporting manifest list sha256:4255b0707c13d0686ca3e5e0e8bf78c99255493a22f890bed9ff381d8858ce2c 0.2s done
-#80 naming to docker.io/library/micro-sevices-voucher-service:latest 0.0s done
-#80 unpacking to docker.io/library/micro-sevices-voucher-service:latest 0.1s done
-#80 DONE 0.8s
-
-#78 [notification-service] exporting to image
-#78 exporting manifest list sha256:05188eea12cc7d1d5efbbb14276b723cd886866aad9895fc0acb50b927bfca1c 0.2s done
-#78 naming to docker.io/library/micro-sevices-notification-service:latest 0.0s done
-#78 unpacking to docker.io/library/micro-sevices-notification-service:latest
-#78 ...
-
-#81 [game-service] exporting to image
-#81 exporting layers done
-#81 exporting manifest sha256:267338fe3c685bce15059a913847ee900d648368f585530a423730f7ddc4e81d 0.0s done
-#81 exporting config sha256:115d616ae2db61c794229c8a4b0a56b95a1a8fcad8b30bd5efa3abc10b99428e 0.0s done
-#81 exporting attestation manifest sha256:f7994b4270841d9dfae5793eedb14e5d2f0a01943d5d87dec63f8c6ca6ebc720 0.2s done
-#81 exporting manifest list sha256:b8aab6982f44cb95c29da41edb2502f8f7da12a6c06c682516e12ae3e51e18cf 0.1s done
-#81 naming to docker.io/library/micro-sevices-game-service:latest 0.1s done
-#81 unpacking to docker.io/library/micro-sevices-game-service:latest 0.0s done
-#81 DONE 1.0s
-
-#78 [notification-service] exporting to image
-#78 unpacking to docker.io/library/micro-sevices-notification-service:latest 0.1s done
-#78 DONE 1.0s
-
-#82 [image-service] exporting to image
-#82 exporting layers done
-#82 exporting manifest sha256:530ef518081b5a26880c021dcf7cd0db0633086afe7a61be7860edb4a4146df8 0.0s done
-#82 exporting config sha256:1517a1b83de747434bde5d61b76973a0f93c60e0038f1e2e29aaf9e54a18775d 0.0s done
-#82 exporting attestation manifest sha256:ec238a24bf11c3115a68c438807e271041465cd4c712ecc937b70ce49a7f3ba9 0.2s done
-#82 exporting manifest list sha256:a6e8ca9fd83e6b1957b186873c5f94ca45f07aa2bcd4e42a4c80ce5be50e37fc 0.2s done
-#82 naming to docker.io/library/micro-sevices-image-service:latest 0.0s done
-#82 unpacking to docker.io/library/micro-sevices-image-service:latest 0.1s done
-#82 DONE 1.0s
-
-#83 [user-service] exporting to image
-#83 exporting layers done
-#83 exporting manifest sha256:93e539509076ac998f0586542e091d83236468082e25fbdce15af058fba89706 0.0s done
-#83 exporting config sha256:ad4ed7dea5946a34639b67eba714bac247b0b1ce494faef22c14b32842dfc843 0.0s done
-#83 exporting attestation manifest sha256:a6518ed874f47cce8edd782f5a900bae6a4544253853946bbb0abb4903704231 0.2s done
-#83 exporting manifest list sha256:c899ce8c73cead36079f0efc595680430be122b0584726a6b7267110bd2a30ae 0.2s done
-#83 naming to docker.io/library/micro-sevices-user-service:latest 0.0s done
-#83 unpacking to docker.io/library/micro-sevices-user-service:latest 0.1s done
-#83 DONE 1.0s
-
-#84 [campaign-service] exporting to image
-#84 exporting layers done
-#84 exporting manifest sha256:20e10852931bbe9b055d4bf3d2df0d55503f9b6c471c1e8b5192805eafc60742 0.0s done
-#84 exporting config sha256:762f2d0e75e26f0c6cebd9d089eb4d58bcffc235e0ad361bfed22ab79ffecad4 0.0s done
-#84 exporting attestation manifest sha256:002a27a85bc0e78af9368c8e85f72a064442f21362956dbf452aafec096644ad 0.3s done
-#84 exporting manifest list sha256:441c59ecb8d7f89bda7af01ee55b1cf0fbc59038ee1bcef723cff928b3b06358 0.1s done
-#84 naming to docker.io/library/micro-sevices-campaign-service:latest 0.0s done
-#84 unpacking to docker.io/library/micro-sevices-campaign-service:latest 0.1s done
-#84 DONE 1.0s
-
-#85 [brand-service] exporting to image
-#85 exporting layers done
-#85 exporting manifest sha256:b1a4d25f4d3f1b44ff3dca26236096f1aae13b735a85a9fc3746e1c74ae3a151 0.0s done
-#85 exporting config sha256:143c3e65dc53c3cfc3c183eaf6d2532209e200271f4d301fc67841f80f914cdb 0.0s done
-#85 exporting attestation manifest sha256:8cc1aaf81b74274f57ab48c648ca012f65935b1fdfd250346d2f598c81b93a13 0.3s done
-#85 exporting manifest list sha256:96649eb04f8462bc4637f0e164a44c0a53b03a900587358e83a3687fa4ddc0ac 0.1s done
-#85 naming to docker.io/library/micro-sevices-brand-service:latest 0.0s done
-#85 unpacking to docker.io/library/micro-sevices-brand-service:latest 0.1s done
-#85 DONE 1.0s
-
-#86 [gateway build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#86 ...
-
-#87 [user-service] resolving provenance for metadata file
-#87 DONE 0.4s
-
-#88 [image-service] resolving provenance for metadata file
-#88 DONE 0.5s
-
-#89 [campaign-service] resolving provenance for metadata file
-#89 DONE 0.3s
-
-#90 [voucher-service] resolving provenance for metadata file
-#90 DONE 0.9s
-
-#91 [notification-service] resolving provenance for metadata file
-#91 DONE 0.1s
-
-#92 [brand-service] resolving provenance for metadata file
-#92 DONE 0.2s
-
-#93 [game-service] resolving provenance for metadata file
-#93 DONE 0.7s
-
-#86 [gateway build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#86 3.704 [INFO] Scanning for projects...
-#86 4.153 [WARNING] 
-#86 4.153 [WARNING] Some problems were encountered while building the effective model for com.hcmus:api-gateway:jar:0.0.1-SNAPSHOT
-#86 4.153 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-test:jar -> duplicate declaration of version (?) @ line 51, column 15
-#86 4.153 [WARNING] 
-#86 4.154 [WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
-#86 4.154 [WARNING] 
-#86 4.154 [WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
-#86 4.154 [WARNING] 
-#86 4.577 [INFO] 
-#86 4.577 [INFO] -----------------------< com.hcmus:api-gateway >------------------------
-#86 4.578 [INFO] Building api-gateway 0.0.1-SNAPSHOT
-#86 4.578 [INFO]   from pom.xml
-#86 4.578 [INFO] --------------------------------[ jar ]---------------------------------
-#86 4.585 [INFO] 
-#86 4.585 [INFO] --- dependency:3.8.1:go-offline (default-cli) @ api-gateway ---
-#86 7.352 [INFO] Resolved plugin: jetty-servlet-9.4.46.v20220331.jar
-#86 7.352 [INFO] Resolved plugin: httpcore5-5.3.1.jar
-#86 7.352 [INFO] Resolved plugin: asm-9.7.jar
-#86 7.352 [INFO] Resolved plugin: doxia-module-twiki-1.11.1.jar
-#86 7.352 [INFO] Resolved plugin: jdependency-2.8.0.jar
-#86 7.355 [INFO] Resolved plugin: velocity-tools-2.0.jar
-#86 7.355 [INFO] Resolved plugin: plexus-java-1.3.0.jar
-#86 7.355 [INFO] Resolved plugin: jackson-module-parameter-names-2.18.2.jar
-#86 7.355 [INFO] Resolved plugin: flexmark-ext-gfm-tasklist-0.42.14.jar
-#86 7.355 [INFO] Resolved plugin: flexmark-ext-admonition-0.42.14.jar
-#86 7.356 [INFO] Resolved plugin: jna-5.13.0.jar
-#86 7.356 [INFO] Resolved plugin: maven-core-3.2.5.jar
-#86 7.356 [INFO] Resolved plugin: flexmark-ext-footnotes-0.42.14.jar
-#86 7.356 [INFO] Resolved plugin: flexmark-ext-gfm-strikethrough-0.42.14.jar
-#86 7.356 [INFO] Resolved plugin: flexmark-ext-media-tags-0.42.14.jar
-#86 7.356 [INFO] Resolved plugin: doxia-module-xhtml-1.11.1.jar
-#86 7.357 [INFO] Resolved plugin: flexmark-util-0.42.14.jar
-#86 7.357 [INFO] Resolved plugin: flexmark-ext-anchorlink-0.42.14.jar
-#86 7.357 [INFO] Resolved plugin: asm-9.6.jar
-#86 7.357 [INFO] Resolved plugin: aether-api-1.0.0.v20140518.jar
-#86 7.357 [INFO] Resolved plugin: autolink-0.6.0.jar
-#86 7.358 [INFO] Resolved plugin: maven-filtering-3.3.1.jar
-#86 7.358 [INFO] Resolved plugin: maven-surefire-plugin-3.5.2.jar
-#86 7.358 [INFO] Resolved plugin: surefire-extensions-api-3.5.2.jar
-#86 7.358 [INFO] Resolved plugin: surefire-api-3.5.2.jar
-#86 7.358 [INFO] Resolved plugin: maven-archiver-3.6.2.jar
-#86 7.358 [INFO] Resolved plugin: doxia-skin-model-1.11.1.jar
-#86 7.359 [INFO] Resolved plugin: dom4j-1.1.jar
-#86 7.359 [INFO] Resolved plugin: plexus-compiler-api-2.15.0.jar
-#86 7.359 [INFO] Resolved plugin: commons-io-2.16.1.jar
-#86 7.359 [INFO] Resolved plugin: flexmark-youtrack-converter-0.42.14.jar
-#86 7.359 [INFO] Resolved plugin: tomlj-1.0.0.jar
-#86 7.360 [INFO] Resolved plugin: httpclient-4.5.13.jar
-#86 7.360 [INFO] Resolved plugin: flexmark-ext-toc-0.42.14.jar
-#86 7.360 [INFO] Resolved plugin: qdox-2.0.3.jar
-#86 7.360 [INFO] Resolved plugin: maven-resolver-util-1.9.18.jar
-#86 7.360 [INFO] Resolved plugin: jetty-http-9.4.46.v20220331.jar
-#86 7.361 [INFO] Resolved plugin: micrometer-observation-1.14.2.jar
-#86 7.361 [INFO] Resolved plugin: spring-boot-loader-tools-3.4.1.jar
-#86 7.362 [INFO] Resolved plugin: flexmark-jira-converter-0.42.14.jar
-#86 7.362 [INFO] Resolved plugin: maven-reporting-api-3.1.1.jar
-#86 7.363 [INFO] Resolved plugin: maven-plugin-api-3.2.5.jar
-#86 7.363 [INFO] Resolved plugin: sisu-guice-3.2.3-no_aop.jar
-#86 7.364 [INFO] Resolved plugin: flexmark-ext-attributes-0.42.14.jar
-#86 7.365 [INFO] Resolved plugin: commons-lang3-3.8.1.jar
-#86 7.366 [INFO] Resolved plugin: maven-aether-provider-3.2.5.jar
-#86 7.366 [INFO] Resolved plugin: aether-util-1.0.0.v20140518.jar
-#86 7.367 [INFO] Resolved plugin: jetty-security-9.4.46.v20220331.jar
-#86 7.367 [INFO] Resolved plugin: httpcore5-h2-5.3.1.jar
-#86 7.368 [INFO] Resolved plugin: maven-common-artifact-filters-3.4.0.jar
-#86 7.368 [INFO] Resolved plugin: maven-compiler-plugin-3.13.0.jar
-#86 7.368 [INFO] Resolved plugin: org.eclipse.sisu.plexus-0.3.5.jar
-#86 7.368 [INFO] Resolved plugin: jackson-annotations-2.18.2.jar
-#86 7.368 [INFO] Resolved plugin: doxia-core-1.11.1.jar
-#86 7.369 [INFO] Resolved plugin: flexmark-ext-ins-0.42.14.jar
-#86 7.369 [INFO] Resolved plugin: google-collections-1.0.jar
-#86 7.369 [INFO] Resolved plugin: flexmark-ext-emoji-0.42.14.jar
-#86 7.369 [INFO] Resolved plugin: maven-resolver-api-1.4.1.jar
-#86 7.369 [INFO] Resolved plugin: doxia-integration-tools-1.11.1.jar
-#86 7.370 [INFO] Resolved plugin: spring-boot-buildpack-platform-3.4.1.jar
-#86 7.370 [INFO] Resolved plugin: plexus-compiler-manager-2.15.0.jar
-#86 7.370 [INFO] Resolved plugin: maven-repository-metadata-3.2.5.jar
-#86 7.370 [INFO] Resolved plugin: flexmark-ext-jekyll-front-matter-0.42.14.jar
-#86 7.370 [INFO] Resolved plugin: doxia-decoration-model-1.11.1.jar
-#86 7.370 [INFO] Resolved plugin: flexmark-all-0.42.14.jar
-#86 7.370 [INFO] Resolved plugin: maven-shared-incremental-1.1.jar
-#86 7.370 [INFO] Resolved plugin: file-management-3.1.0.jar
-#86 7.370 [INFO] Resolved plugin: commons-compress-1.26.1.jar
-#86 7.371 [INFO] Resolved plugin: spring-context-6.2.1.jar
-#86 7.371 [INFO] Resolved plugin: jetty-webapp-9.4.46.v20220331.jar
-#86 7.371 [INFO] Resolved plugin: plexus-io-3.2.0.jar
-#86 7.371 [INFO] Resolved plugin: xbean-reflect-3.7.jar
-#86 7.371 [INFO] Resolved plugin: maven-reporting-exec-1.6.0.jar
-#86 7.371 [INFO] Resolved plugin: doxia-sink-api-1.11.1.jar
-#86 7.372 [INFO] Resolved plugin: plexus-xml-3.0.0.jar
-#86 7.372 [INFO] Resolved plugin: jetty-xml-9.4.46.v20220331.jar
-#86 7.372 [INFO] Resolved plugin: plexus-velocity-1.2.jar
-#86 7.372 [INFO] Resolved plugin: plexus-container-default-2.1.0.jar
-#86 7.372 [INFO] Resolved plugin: commons-codec-1.11.jar
-#86 7.372 [INFO] Resolved plugin: snappy-0.4.jar
-#86 7.372 [INFO] Resolved plugin: jsr305-3.0.2.jar
-#86 7.373 [INFO] Resolved plugin: maven-deploy-plugin-3.1.3.jar
-#86 7.373 [INFO] Resolved plugin: plexus-build-api-0.0.7.jar
-#86 7.373 [INFO] Resolved plugin: asm-9.5.jar
-#86 7.373 [INFO] Resolved plugin: maven-dependency-tree-3.2.1.jar
-#86 7.373 [INFO] Resolved plugin: doxia-module-fml-1.11.1.jar
-#86 7.373 [INFO] Resolved plugin: commons-digester-1.8.jar
-#86 7.373 [INFO] Resolved plugin: jetty-server-9.4.46.v20220331.jar
-#86 7.373 [INFO] Resolved plugin: maven-shared-utils-3.4.2.jar
-#86 7.374 [INFO] Resolved plugin: flexmark-ext-abbreviation-0.42.14.jar
-#86 7.374 [INFO] Resolved plugin: maven-archiver-3.5.2.jar
-#86 7.374 [INFO] Resolved plugin: zstd-jni-1.5.5-11.jar
-#86 7.374 [INFO] Resolved plugin: flexmark-ext-definition-0.42.14.jar
-#86 7.375 [INFO] Resolved plugin: doxia-logging-api-1.11.1.jar
-#86 7.375 [INFO] Resolved plugin: plexus-xml-3.0.1.jar
-#86 7.375 [INFO] Resolved plugin: maven-install-plugin-3.1.3.jar
-#86 7.375 [INFO] Resolved plugin: flexmark-ext-yaml-front-matter-0.42.14.jar
-#86 7.375 [INFO] Resolved plugin: maven-shade-plugin-3.5.0.jar
-#86 7.375 [INFO] Resolved plugin: maven-site-plugin-3.12.1.jar
-#86 7.376 [INFO] Resolved plugin: flexmark-ext-superscript-0.42.14.jar
-#86 7.376 [INFO] Resolved plugin: commons-collections-3.2.2.jar
-#86 7.376 [INFO] Resolved plugin: doxia-module-markdown-1.11.1.jar
-#86 7.377 [INFO] Resolved plugin: qdox-2.1.0.jar
-#86 7.377 [INFO] Resolved plugin: flexmark-ext-xwiki-macros-0.42.14.jar
-#86 7.378 [INFO] Resolved plugin: commons-compress-1.20.jar
-#86 7.378 [INFO] Resolved plugin: maven-resolver-api-1.9.18.jar
-#86 7.378 [INFO] Resolved plugin: velocity-1.7.jar
-#86 7.379 [INFO] Resolved plugin: maven-resources-plugin-3.3.1.jar
-#86 7.379 [INFO] Resolved plugin: plexus-utils-3.5.1.jar
-#86 7.380 [INFO] Resolved plugin: jackson-databind-2.18.2.jar
-#86 7.381 [INFO] Resolved plugin: aopalliance-1.0.jar
-#86 7.381 [INFO] Resolved plugin: aether-spi-1.0.0.v20140518.jar
-#86 7.382 [INFO] Resolved plugin: surefire-logger-api-3.5.2.jar
-#86 7.383 [INFO] Resolved plugin: plexus-interpolation-1.26.jar
-#86 7.383 [INFO] Resolved plugin: spring-expression-6.2.1.jar
-#86 7.383 [INFO] Resolved plugin: maven-settings-builder-3.2.5.jar
-#86 7.384 [INFO] Resolved plugin: httpcore-4.4.14.jar
-#86 7.384 [INFO] Resolved plugin: commons-lang3-3.12.0.jar
-#86 7.384 [INFO] Resolved plugin: spring-aop-6.2.1.jar
-#86 7.384 [INFO] Resolved plugin: maven-artifact-3.2.5.jar
-#86 7.384 [INFO] Resolved plugin: plexus-compiler-javac-2.15.0.jar
-#86 7.385 [INFO] Resolved plugin: flexmark-ext-enumerated-reference-0.42.14.jar
-#86 7.385 [INFO] Resolved plugin: plexus-component-annotations-2.1.1.jar
-#86 7.385 [INFO] Resolved plugin: surefire-shared-utils-3.5.2.jar
-#86 7.385 [INFO] Resolved plugin: commons-logging-1.2.jar
-#86 7.385 [INFO] Resolved plugin: flexmark-ext-escaped-character-0.42.14.jar
-#86 7.385 [INFO] Resolved plugin: plexus-java-1.2.0.jar
-#86 7.386 [INFO] Resolved plugin: plexus-cipher-1.4.jar
-#86 7.386 [INFO] Resolved plugin: spring-jcl-6.2.1.jar
-#86 7.386 [INFO] Resolved plugin: flexmark-0.42.14.jar
-#86 7.386 [INFO] Resolved plugin: plexus-utils-3.4.2.jar
-#86 7.386 [INFO] Resolved plugin: flexmark-ext-aside-0.42.14.jar
-#86 7.386 [INFO] Resolved plugin: flexmark-ext-wikilink-0.42.14.jar
-#86 7.386 [INFO] Resolved plugin: org.eclipse.sisu.inject-0.3.5.jar
-#86 7.386 [INFO] Resolved plugin: plexus-io-3.4.2.jar
-#86 7.386 [INFO] Resolved plugin: surefire-extensions-spi-3.5.2.jar
-#86 7.386 [INFO] Resolved plugin: flexmark-ext-gfm-tables-0.42.14.jar
-#86 7.386 [INFO] Resolved plugin: antlr4-runtime-4.7.2.jar
-#86 7.387 [INFO] Resolved plugin: plexus-interpolation-1.27.jar
-#86 7.387 [INFO] Resolved plugin: commons-io-2.11.0.jar
-#86 7.387 [INFO] Resolved plugin: jetty-io-9.4.46.v20220331.jar
-#86 7.387 [INFO] Resolved plugin: cdi-api-1.2.jar
-#86 7.387 [INFO] Resolved plugin: commons-chain-1.1.jar
-#86 7.387 [INFO] Resolved plugin: commons-codec-1.16.1.jar
-#86 7.387 [INFO] Resolved plugin: flexmark-html-parser-0.42.14.jar
-#86 7.388 [INFO] Resolved plugin: asm-tree-9.5.jar
-#86 7.388 [INFO] Resolved plugin: javax.inject-1.jar
-#86 7.388 [INFO] Resolved plugin: maven-shared-utils-3.3.4.jar
-#86 7.388 [INFO] Resolved plugin: javax.servlet-api-3.1.0.jar
-#86 7.388 [INFO] Resolved plugin: jetty-util-ajax-9.4.46.v20220331.jar
-#86 7.388 [INFO] Resolved plugin: commons-io-2.13.0.jar
-#86 7.389 [INFO] Resolved plugin: httpclient5-5.4.1.jar
-#86 7.389 [INFO] Resolved plugin: maven-settings-3.2.5.jar
-#86 7.389 [INFO] Resolved plugin: jna-platform-5.13.0.jar
-#86 7.389 [INFO] Resolved plugin: jsoup-1.10.2.jar
-#86 7.389 [INFO] Resolved plugin: oro-2.0.8.jar
-#86 7.390 [INFO] Resolved plugin: surefire-booter-3.5.2.jar
-#86 7.391 [INFO] Resolved plugin: maven-common-artifact-filters-3.3.2.jar
-#86 7.391 [INFO] Resolved plugin: xz-1.9.jar
-#86 7.392 [INFO] Resolved plugin: aether-impl-1.0.0.v20140518.jar
-#86 7.392 [INFO] Resolved plugin: commons-text-1.3.jar
-#86 7.392 [INFO] Resolved plugin: plexus-utils-4.0.0.jar
-#86 7.392 [INFO] Resolved plugin: commons-lang-2.4.jar
-#86 7.393 [INFO] Resolved plugin: slf4j-api-1.7.36.jar
-#86 7.393 [INFO] Resolved plugin: spring-boot-maven-plugin-3.4.1.jar
-#86 7.393 [INFO] Resolved plugin: maven-resolver-util-1.4.1.jar
-#86 7.394 [INFO] Resolved plugin: doxia-module-apt-1.11.1.jar
-#86 7.394 [INFO] Resolved plugin: flexmark-ext-gfm-issues-0.42.14.jar
-#86 7.394 [INFO] Resolved plugin: jetty-util-9.4.46.v20220331.jar
-#86 7.394 [INFO] Resolved plugin: maven-model-builder-3.2.5.jar
-#86 7.394 [INFO] Resolved plugin: maven-jar-plugin-3.4.2.jar
-#86 7.395 [INFO] Resolved plugin: plexus-archiver-4.2.7.jar
-#86 7.395 [INFO] Resolved plugin: commons-io-2.6.jar
-#86 7.395 [INFO] Resolved plugin: flexmark-ext-youtube-embedded-0.42.14.jar
-#86 7.395 [INFO] Resolved plugin: flexmark-formatter-0.42.14.jar
-#86 7.396 [INFO] Resolved plugin: maven-model-3.2.5.jar
-#86 7.396 [INFO] Resolved plugin: plexus-utils-4.0.1.jar
-#86 7.396 [INFO] Resolved plugin: jdom2-2.0.6.1.jar
-#86 7.397 [INFO] Resolved plugin: flexmark-profile-pegdown-0.42.14.jar
-#86 7.397 [INFO] Resolved plugin: doxia-module-docbook-simple-1.11.1.jar
-#86 7.397 [INFO] Resolved plugin: commons-compress-1.25.0.jar
-#86 7.397 [INFO] Resolved plugin: guava-16.0.1.jar
-#86 7.397 [INFO] Resolved plugin: flexmark-ext-typographic-0.42.14.jar
-#86 7.397 [INFO] Resolved plugin: flexmark-ext-autolink-0.42.14.jar
-#86 7.398 [INFO] Resolved plugin: flexmark-ext-jekyll-tag-0.42.14.jar
-#86 7.398 [INFO] Resolved plugin: flexmark-ext-gitlab-0.42.14.jar
-#86 7.399 [INFO] Resolved plugin: doxia-module-xdoc-1.11.1.jar
-#86 7.399 [INFO] Resolved plugin: doxia-site-renderer-1.11.1.jar
-#86 7.400 [INFO] Resolved plugin: commons-beanutils-1.7.0.jar
-#86 7.400 [INFO] Resolved plugin: maven-surefire-common-3.5.2.jar
-#86 7.402 [INFO] Resolved plugin: commons-lang3-3.14.0.jar
-#86 7.402 [INFO] Resolved plugin: plexus-classworlds-2.5.2.jar
-#86 7.402 [INFO] Resolved plugin: doxia-module-confluence-1.11.1.jar
-#86 7.402 [INFO] Resolved plugin: doxia-module-xhtml5-1.11.1.jar
-#86 7.402 [INFO] Resolved plugin: maven-clean-plugin-3.4.0.jar
-#86 7.402 [INFO] Resolved plugin: flexmark-ext-tables-0.42.14.jar
-#86 7.402 [INFO] Resolved plugin: javax.annotation-api-1.2.jar
-#86 7.402 [INFO] Resolved plugin: flexmark-ext-macros-0.42.14.jar
-#86 7.402 [INFO] Resolved plugin: micrometer-commons-1.14.2.jar
-#86 7.402 [INFO] Resolved plugin: plexus-sec-dispatcher-1.3.jar
-#86 7.402 [INFO] Resolved plugin: commons-collections4-4.4.jar
-#86 7.402 [INFO] Resolved plugin: plexus-i18n-1.0-beta-10.jar
-#86 7.402 [INFO] Resolved plugin: jackson-core-2.18.2.jar
-#86 7.402 [INFO] Resolved plugin: spring-core-6.2.1.jar
-#86 7.402 [INFO] Resolved plugin: flexmark-ext-gfm-users-0.42.14.jar
-#86 7.402 [INFO] Resolved plugin: plexus-archiver-4.9.2.jar
-#86 7.402 [INFO] Resolved plugin: spring-beans-6.2.1.jar
-#86 7.402 [INFO] Resolved plugin: asm-commons-9.5.jar
-#86 7.402 [INFO] Resolved dependency: reactor-extra-3.5.2.jar
-#86 7.403 [INFO] Resolved dependency: httpcore5-5.3.1.jar
-#86 7.403 [INFO] Resolved dependency: spring-boot-3.4.0.jar
-#86 7.403 [INFO] Resolved dependency: netty-buffer-4.1.115.Final.jar
-#86 7.403 [INFO] Resolved dependency: netty-resolver-dns-classes-macos-4.1.115.Final.jar
-#86 7.403 [INFO] Resolved dependency: reactor-netty-core-1.2.0.jar
-#86 7.403 [INFO] Resolved dependency: joda-time-2.3.jar
-#86 7.403 [INFO] Resolved dependency: jul-to-slf4j-2.0.16.jar
-#86 7.403 [INFO] Resolved dependency: spring-expression-6.2.1.jar
-#86 7.403 [INFO] Resolved dependency: netflix-infix-0.3.0.jar
-#86 7.404 [INFO] Resolved dependency: log4j-to-slf4j-2.24.3.jar
-#86 7.404 [INFO] Resolved dependency: spring-boot-autoconfigure-3.4.1.jar
-#86 7.404 [INFO] Resolved dependency: spring-aop-6.2.1.jar
-#86 7.404 [INFO] Resolved dependency: spring-cloud-starter-netflix-eureka-client-4.2.0.jar
-#86 7.404 [INFO] Resolved dependency: stringtemplate-3.2.1.jar
-#86 7.404 [INFO] Resolved dependency: byte-buddy-agent-1.15.4.jar
-#86 7.404 [INFO] Resolved dependency: classmate-1.7.0.jar
-#86 7.405 [INFO] Resolved dependency: commons-math-2.2.jar
-#86 7.405 [INFO] Resolved dependency: spring-beans-6.2.0.jar
-#86 7.405 [INFO] Resolved dependency: gson-2.11.0.jar
-#86 7.405 [INFO] Resolved dependency: netty-transport-native-epoll-4.1.115.Final-linux-x86_64.jar
-#86 7.405 [INFO] Resolved dependency: json-smart-2.5.1.jar
-#86 7.405 [INFO] Resolved dependency: spring-expression-6.2.0.jar
-#86 7.407 [INFO] Resolved dependency: dexx-collections-0.2.jar
-#86 7.407 [INFO] Resolved dependency: servo-core-0.5.3.jar
-#86 7.407 [INFO] Resolved dependency: spring-cloud-starter-loadbalancer-4.2.0.jar
-#86 7.407 [INFO] Resolved dependency: spring-cloud-netflix-eureka-client-4.2.0.jar
-#86 7.407 [INFO] Resolved dependency: asm-9.6.jar
-#86 7.407 [INFO] Resolved dependency: netty-codec-4.1.115.Final.jar
-#86 7.407 [INFO] Resolved dependency: spring-webflux-6.2.0.jar
-#86 7.407 [INFO] Resolved dependency: commons-logging-1.2.jar
-#86 7.407 [INFO] Resolved dependency: opentest4j-1.3.0.jar
-#86 7.407 [INFO] Resolved dependency: spring-cloud-starter-gateway-4.2.0.jar
-#86 7.407 [INFO] Resolved dependency: spring-boot-autoconfigure-3.4.0.jar
-#86 7.407 [INFO] Resolved dependency: bcprov-jdk18on-1.78.1.jar
-#86 7.407 [INFO] Resolved dependency: spring-aop-6.2.0.jar
-#86 7.407 [INFO] Resolved dependency: spring-boot-starter-logging-3.4.1.jar
-#86 7.407 [INFO] Resolved dependency: jboss-logging-3.6.1.Final.jar
-#86 7.407 [INFO] Resolved dependency: accessors-smart-2.5.1.jar
-#86 7.407 [INFO] Resolved dependency: netty-codec-http-4.1.115.Final.jar
-#86 7.409 [INFO] Resolved dependency: spring-jcl-6.2.1.jar
-#86 7.409 [INFO] Resolved dependency: failureaccess-1.0.2.jar
-#86 7.409 [INFO] Resolved dependency: httpclient-4.5.3.jar
-#86 7.409 [INFO] Resolved dependency: log4j-to-slf4j-2.24.1.jar
-#86 7.409 [INFO] Resolved dependency: spring-web-6.2.0.jar
-#86 7.409 [INFO] Resolved dependency: commons-lang-2.6.jar
-#86 7.409 [INFO] Resolved dependency: jackson-datatype-jdk8-2.18.1.jar
-#86 7.409 [INFO] Resolved dependency: xmlunit-core-2.10.0.jar
-#86 7.409 [INFO] Resolved dependency: spring-boot-starter-logging-3.4.0.jar
-#86 7.409 [INFO] Resolved dependency: spring-jcl-6.2.0.jar
-#86 7.409 [INFO] Resolved dependency: jackson-annotations-2.18.1.jar
-#86 7.409 [INFO] Resolved dependency: j2objc-annotations-3.0.0.jar
-#86 7.409 [INFO] Resolved dependency: micrometer-observation-1.14.2.jar
-#86 7.409 [INFO] Resolved dependency: spring-boot-3.4.1.jar
-#86 7.409 [INFO] Resolved dependency: spring-cloud-starter-4.2.0.jar
-#86 7.410 [INFO] Resolved dependency: commons-codec-1.17.1.jar
-#86 7.410 [INFO] Resolved dependency: hamcrest-2.2.jar
-#86 7.410 [INFO] Resolved dependency: jackson-databind-2.18.1.jar
-#86 7.410 [INFO] Resolved dependency: netty-transport-classes-epoll-4.1.115.Final.jar
-#86 7.410 [INFO] Resolved dependency: httpclient5-5.4.1.jar
-#86 7.410 [INFO] Resolved dependency: slf4j-api-2.0.11.jar
-#86 7.410 [INFO] Resolved dependency: httpcore5-h2-5.3.1.jar
-#86 7.410 [INFO] Resolved dependency: servlet-api-2.5.jar
-#86 7.410 [INFO] Resolved dependency: spring-context-support-6.2.0.jar
-#86 7.410 [INFO] Resolved dependency: spring-boot-starter-test-3.4.1.jar
-#86 7.411 [INFO] Resolved dependency: micrometer-observation-1.14.1.jar
-#86 7.411 [INFO] Resolved dependency: netty-resolver-dns-native-macos-4.1.115.Final-osx-x86_64.jar
-#86 7.411 [INFO] Resolved dependency: log4j-api-2.24.3.jar
-#86 7.412 [INFO] Resolved dependency: jackson-module-parameter-names-2.18.1.jar
-#86 7.413 [INFO] Resolved dependency: netty-transport-4.1.115.Final.jar
-#86 7.413 [INFO] Resolved dependency: antlr-runtime-3.4.jar
-#86 7.413 [INFO] Resolved dependency: logback-core-1.5.12.jar
-#86 7.414 [INFO] Resolved dependency: netty-common-4.1.115.Final.jar
-#86 7.414 [INFO] Resolved dependency: spring-boot-starter-json-3.4.0.jar
-#86 7.415 [INFO] Resolved dependency: error_prone_annotations-2.28.0.jar
-#86 7.415 [INFO] Resolved dependency: junit-jupiter-api-5.11.4.jar
-#86 7.416 [INFO] Resolved dependency: hibernate-validator-8.0.1.Final.jar
-#86 7.416 [INFO] Resolved dependency: listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar
-#86 7.416 [INFO] Resolved dependency: junit-jupiter-engine-5.11.4.jar
-#86 7.416 [INFO] Resolved dependency: evictor-1.0.0.jar
-#86 7.417 [INFO] Resolved dependency: spring-boot-starter-reactor-netty-3.4.0.jar
-#86 7.417 [INFO] Resolved dependency: objenesis-3.3.jar
-#86 7.417 [INFO] Resolved dependency: netty-codec-http2-4.1.115.Final.jar
-#86 7.418 [INFO] Resolved dependency: jackson-datatype-jsr310-2.18.1.jar
-#86 7.424 [INFO] Resolved dependency: spring-cloud-context-4.2.0.jar
-#86 7.424 [INFO] Resolved dependency: spring-boot-test-3.4.1.jar
-#86 7.424 [INFO] Resolved dependency: antlr-2.7.7.jar
-#86 7.424 [INFO] Resolved dependency: reactor-core-3.7.0.jar
-#86 7.424 [INFO] Resolved dependency: spring-cloud-gateway-server-4.2.0.jar
-#86 7.424 [INFO] Resolved dependency: snakeyaml-2.3.jar
-#86 7.424 [INFO] Resolved dependency: xmlpull-1.1.3.1.jar
-#86 7.424 [INFO] Resolved dependency: spring-boot-starter-cache-3.4.0.jar
-#86 7.424 [INFO] Resolved dependency: spring-boot-starter-3.4.1.jar
-#86 7.424 [INFO] Resolved dependency: spectator-api-1.7.3.jar
-#86 7.424 [INFO] Resolved dependency: assertj-core-3.26.3.jar
-#86 7.424 [INFO] Resolved dependency: byte-buddy-1.14.18.jar
-#86 7.424 [INFO] Resolved dependency: spring-boot-starter-webflux-3.4.0.jar
-#86 7.424 [INFO] Resolved dependency: httpcore-4.4.16.jar
-#86 7.424 [INFO] Resolved dependency: spring-security-crypto-6.4.1.jar
-#86 7.424 [INFO] Resolved dependency: netty-handler-4.1.115.Final.jar
-#86 7.424 [INFO] Resolved dependency: spring-context-6.2.1.jar
-#86 7.424 [INFO] Resolved dependency: jakarta.activation-api-2.1.3.jar
-#86 7.424 [INFO] Resolved dependency: commons-jxpath-1.3.jar
-#86 7.424 [INFO] Resolved dependency: spring-cloud-commons-4.2.0.jar
-#86 7.424 [INFO] Resolved dependency: junit-jupiter-params-5.11.4.jar
-#86 7.424 [INFO] Resolved dependency: jsonassert-1.5.3.jar
-#86 7.424 [INFO] Resolved dependency: xstream-1.4.20.jar
-#86 7.424 [INFO] Resolved dependency: annotations-2.0.0.jar
-#86 7.424 [INFO] Resolved dependency: checker-qual-3.43.0.jar
-#86 7.424 [INFO] Resolved dependency: spring-boot-starter-validation-3.4.0.jar
-#86 7.424 [INFO] Resolved dependency: jakarta.validation-api-3.0.2.jar
-#86 7.424 [INFO] Resolved dependency: reactor-netty-http-1.2.0.jar
-#86 7.424 [INFO] Resolved dependency: spring-cloud-loadbalancer-4.2.0.jar
-#86 7.424 [INFO] Resolved dependency: spring-boot-test-autoconfigure-3.4.1.jar
-#86 7.424 [INFO] Resolved dependency: jsr305-3.0.2.jar
-#86 7.424 [INFO] Resolved dependency: mockito-core-5.14.2.jar
-#86 7.424 [INFO] Resolved dependency: log4j-api-2.24.1.jar
-#86 7.424 [INFO] Resolved dependency: archaius-core-0.7.6.jar
-#86 7.424 [INFO] Resolved dependency: junit-platform-commons-1.11.4.jar
-#86 7.424 [INFO] Resolved dependency: netty-resolver-dns-4.1.115.Final.jar
-#86 7.424 [INFO] Resolved dependency: jakarta.xml.bind-api-4.0.2.jar
-#86 7.424 [INFO] Resolved dependency: micrometer-commons-1.14.1.jar
-#86 7.424 [INFO] Resolved dependency: jakarta.ws.rs-api-3.1.0.jar
-#86 7.424 [INFO] Resolved dependency: commons-configuration-1.10.jar
-#86 7.424 [INFO] Resolved dependency: jettison-1.5.4.jar
-#86 7.424 [INFO] Resolved dependency: junit-platform-engine-1.11.4.jar
-#86 7.424 [INFO] Resolved dependency: mockito-junit-jupiter-5.14.2.jar
-#86 7.425 [INFO] Resolved dependency: slf4j-api-2.0.16.jar
-#86 7.425 [INFO] Resolved dependency: jakarta.annotation-api-2.1.1.jar
-#86 7.425 [INFO] Resolved dependency: logback-classic-1.5.12.jar
-#86 7.425 [INFO] Resolved dependency: jackson-core-2.18.1.jar
-#86 7.425 [INFO] Resolved dependency: awaitility-4.2.2.jar
-#86 7.425 [INFO] Resolved dependency: spring-core-6.2.0.jar
-#86 7.426 [INFO] Resolved dependency: eureka-client-2.0.4.jar
-#86 7.426 [INFO] Resolved dependency: jakarta.inject-api-2.0.1.jar
-#86 7.426 [INFO] Resolved dependency: netty-resolver-4.1.115.Final.jar
-#86 7.426 [INFO] Resolved dependency: netty-codec-socks-4.1.115.Final.jar
-#86 7.426 [INFO] Resolved dependency: guava-33.3.1-jre.jar
-#86 7.426 [INFO] Resolved dependency: javax.annotation-api-1.2.jar
-#86 7.426 [INFO] Resolved dependency: micrometer-commons-1.14.2.jar
-#86 7.426 [INFO] Resolved dependency: tomcat-embed-el-10.1.33.jar
-#86 7.426 [INFO] Resolved dependency: mxparser-1.2.2.jar
-#86 7.426 [INFO] Resolved dependency: json-path-2.9.0.jar
-#86 7.427 [INFO] Resolved dependency: compactmap-2.0.jar
-#86 7.427 [INFO] Resolved dependency: apiguardian-api-1.1.2.jar
-#86 7.427 [INFO] Resolved dependency: spring-core-6.2.1.jar
-#86 7.427 [INFO] Resolved dependency: netty-codec-dns-4.1.115.Final.jar
-#86 7.427 [INFO] Resolved dependency: netty-handler-proxy-4.1.115.Final.jar
-#86 7.427 [INFO] Resolved dependency: spring-context-6.2.0.jar
-#86 7.427 [INFO] Resolved dependency: netflix-eventbus-0.3.0.jar
-#86 7.428 [INFO] Resolved dependency: netty-transport-native-unix-common-4.1.115.Final.jar
-#86 7.428 [INFO] Resolved dependency: spring-test-6.2.1.jar
-#86 7.428 [INFO] Resolved dependency: android-json-0.0.20131108.vaadin1.jar
-#86 7.428 [INFO] Resolved dependency: spring-boot-starter-3.4.0.jar
-#86 7.428 [INFO] Resolved dependency: spring-beans-6.2.1.jar
-#86 7.428 [INFO] Resolved dependency: reactive-streams-1.0.4.jar
-#86 7.428 [INFO] Resolved dependency: junit-jupiter-5.11.4.jar
-#86 7.429 [INFO] ------------------------------------------------------------------------
-#86 7.434 [INFO] BUILD SUCCESS
-#86 7.434 [INFO] ------------------------------------------------------------------------
-#86 7.434 [INFO] Total time:  3.753 s
-#86 7.434 [INFO] Finished at: 2025-01-03T16:48:02Z
-#86 7.434 [INFO] ------------------------------------------------------------------------
-#86 DONE 7.5s
-
-#94 [gateway build 5/6] COPY src ./src
-#94 DONE 0.1s
-
-#95 [gateway build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#95 1.887 [INFO] Scanning for projects...
-#95 2.171 [WARNING] 
-#95 2.171 [WARNING] Some problems were encountered while building the effective model for com.hcmus:api-gateway:jar:0.0.1-SNAPSHOT
-#95 2.171 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-test:jar -> duplicate declaration of version (?) @ line 51, column 15
-#95 2.171 [WARNING] 
-#95 2.171 [WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
-#95 2.171 [WARNING] 
-#95 2.171 [WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
-#95 2.172 [WARNING] 
-#95 2.191 [INFO] 
-#95 2.191 [INFO] -----------------------< com.hcmus:api-gateway >------------------------
-#95 2.192 [INFO] Building api-gateway 0.0.1-SNAPSHOT
-#95 2.192 [INFO]   from pom.xml
-#95 2.192 [INFO] --------------------------------[ jar ]---------------------------------
-#95 2.954 [INFO] 
-#95 2.954 [INFO] --- clean:3.4.0:clean (default-clean) @ api-gateway ---
-#95 3.019 [INFO] 
-#95 3.019 [INFO] --- resources:3.3.1:resources (default-resources) @ api-gateway ---
-#95 3.149 [INFO] Copying 1 resource from src/main/resources to target/classes
-#95 3.164 [INFO] Copying 0 resource from src/main/resources to target/classes
-#95 3.165 [INFO] 
-#95 3.166 [INFO] --- compiler:3.13.0:compile (default-compile) @ api-gateway ---
-#95 3.286 [INFO] Recompiling the module because of changed source code.
-#95 3.296 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/classes
-#95 4.200 [INFO] 
-#95 4.200 [INFO] --- resources:3.3.1:testResources (default-testResources) @ api-gateway ---
-#95 4.208 [INFO] skip non existing resourceDirectory /app/src/test/resources
-#95 4.208 [INFO] 
-#95 4.209 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ api-gateway ---
-#95 4.258 [INFO] Recompiling the module because of changed dependency.
-#95 4.260 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
-#95 4.728 [INFO] 
-#95 4.728 [INFO] --- surefire:3.5.2:test (default-test) @ api-gateway ---
-#95 4.964 [INFO] Tests are skipped.
-#95 4.964 [INFO] 
-#95 4.964 [INFO] --- jar:3.4.2:jar (default-jar) @ api-gateway ---
-#95 5.375 [INFO] Building jar: /app/target/api-gateway-0.0.1-SNAPSHOT.jar
-#95 5.455 [INFO] 
-#95 5.455 [INFO] --- spring-boot:3.4.1:repackage (repackage) @ api-gateway ---
-#95 7.915 [INFO] Replacing main artifact /app/target/api-gateway-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
-#95 7.916 [INFO] The original artifact has been renamed to /app/target/api-gateway-0.0.1-SNAPSHOT.jar.original
-#95 7.916 [INFO] 
-#95 7.917 [INFO] --- install:3.1.3:install (default-install) @ api-gateway ---
-#95 7.990 [INFO] Installing /app/pom.xml to /root/.m2/repository/com/hcmus/api-gateway/0.0.1-SNAPSHOT/api-gateway-0.0.1-SNAPSHOT.pom
-#95 8.029 [INFO] Installing /app/target/api-gateway-0.0.1-SNAPSHOT.jar to /root/.m2/repository/com/hcmus/api-gateway/0.0.1-SNAPSHOT/api-gateway-0.0.1-SNAPSHOT.jar
-#95 9.802 [INFO] ------------------------------------------------------------------------
-#95 9.802 [INFO] BUILD SUCCESS
-#95 9.802 [INFO] ------------------------------------------------------------------------
-#95 9.809 [INFO] Total time:  7.939 s
-#95 9.809 [INFO] Finished at: 2025-01-03T16:48:12Z
-#95 9.809 [INFO] ------------------------------------------------------------------------
-#95 DONE 10.0s
-
-#15 [gateway stage-1 2/3] WORKDIR /app
-#15 CACHED
-
-#96 [gateway stage-1 3/3] COPY --from=build /app/target/api-gateway-0.0.1-SNAPSHOT.jar .
-#96 DONE 0.2s
-
-#97 [gateway] exporting to image
-#97 exporting layers
-#97 exporting layers 2.2s done
-#97 exporting manifest sha256:eac78ce90e2ba77afac1c5b0759320518708692e1f9a405f36fcfced28672d5a 0.0s done
-#97 exporting config sha256:4c596cda90feed16ba262dfd4ea4b2e411116ffb865ce550c7f00746d6910052 0.0s done
-#97 exporting attestation manifest sha256:1d57dd32bca97c124e92441d4f93c13dfc28c534d6079abc3c128ec179ef014a 0.0s done
-#97 exporting manifest list sha256:0e4552ca4c33b3312f3a23bebd72f387aa81b75df100012cda7569bd7c3be6d3 0.0s done
-#97 naming to docker.io/library/micro-sevices-gateway:latest
-#97 naming to docker.io/library/micro-sevices-gateway:latest done
-#97 unpacking to docker.io/library/micro-sevices-gateway:latest
-#97 unpacking to docker.io/library/micro-sevices-gateway:latest 0.3s done
-#97 DONE 2.7s
-
-#98 [gateway] resolving provenance for metadata file
-#98 DONE 0.0s
-time="2025-01-03T23:48:16+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro-sevices\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+#22 [game-service build 3/6] COPY pom.xml .
+#22 CACHED
+
+#14 [game-service build 2/6] WORKDIR /app
+#14 CACHED
+
+#23 [game-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#23 CACHED
+
+#24 [game-service build 5/6] COPY src ./src
+#24 DONE 0.3s
+
+#25 [game-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#25 7.959 [INFO] Scanning for projects...
+#25 8.424 [INFO] 
+#25 8.425 [INFO] -----------------------< com.hcmus:game-service >-----------------------
+#25 8.425 [INFO] Building game-service 0.0.1-SNAPSHOT
+#25 8.425 [INFO]   from pom.xml
+#25 8.426 [INFO] --------------------------------[ jar ]---------------------------------
+#25 9.824 [INFO] 
+#25 9.824 [INFO] --- clean:3.4.0:clean (default-clean) @ game-service ---
+#25 9.920 [INFO] 
+#25 9.920 [INFO] --- resources:3.3.1:resources (default-resources) @ game-service ---
+#25 10.12 [INFO] Copying 1 resource from src/main/resources to target/classes
+#25 10.14 [INFO] Copying 0 resource from src/main/resources to target/classes
+#25 10.14 [INFO] 
+#25 10.14 [INFO] --- compiler:3.13.0:compile (default-compile) @ game-service ---
+#25 10.36 [INFO] Recompiling the module because of changed source code.
+#25 10.39 [INFO] Compiling 65 source files with javac [debug parameters release 17] to target/classes
+#25 15.48 [WARNING] /app/src/main/java/com/hcmus/gameservice/quizz/model/Question.java:[36,30] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+#25 15.49 [WARNING] /app/src/main/java/com/hcmus/gameservice/puzzle/model/Item.java:[33,28] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+#25 15.49 [WARNING] /app/src/main/java/com/hcmus/gameservice/quizz/model/Quizz.java:[30,28] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+#25 15.49 [WARNING] /app/src/main/java/com/hcmus/gameservice/puzzle/model/Puzzle.java:[31,24] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+#25 15.49 [INFO] 
+#25 15.49 [INFO] --- resources:3.3.1:testResources (default-testResources) @ game-service ---
+#25 15.50 [INFO] skip non existing resourceDirectory /app/src/test/resources
+#25 15.50 [INFO] 
+#25 15.50 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ game-service ---
+#25 15.53 [INFO] Recompiling the module because of changed dependency.
+#25 15.53 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+#25 16.61 [INFO] 
+#25 16.61 [INFO] --- surefire:3.5.2:test (default-test) @ game-service ---
+#25 16.93 [INFO] Tests are skipped.
+#25 16.93 [INFO] 
+#25 16.93 [INFO] --- jar:3.4.2:jar (default-jar) @ game-service ---
+#25 17.86 [INFO] Building jar: /app/target/game-service-0.0.1-SNAPSHOT.jar
+#25 18.39 [INFO] 
+#25 18.39 [INFO] --- spring-boot:3.4.1:repackage (repackage) @ game-service ---
+#25 23.77 [INFO] Replacing main artifact /app/target/game-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#25 23.78 [INFO] The original artifact has been renamed to /app/target/game-service-0.0.1-SNAPSHOT.jar.original
+#25 23.78 [INFO] 
+#25 23.78 [INFO] --- install:3.1.3:install (default-install) @ game-service ---
+#25 23.82 [INFO] Installing /app/pom.xml to /root/.m2/repository/com/hcmus/game-service/0.0.1-SNAPSHOT/game-service-0.0.1-SNAPSHOT.pom
+#25 23.83 [INFO] Installing /app/target/game-service-0.0.1-SNAPSHOT.jar to /root/.m2/repository/com/hcmus/game-service/0.0.1-SNAPSHOT/game-service-0.0.1-SNAPSHOT.jar
+#25 24.74 [INFO] ------------------------------------------------------------------------
+#25 24.74 [INFO] BUILD SUCCESS
+#25 24.74 [INFO] ------------------------------------------------------------------------
+#25 24.75 [INFO] Total time:  16.839 s
+#25 24.75 [INFO] Finished at: 2025-01-07T13:45:30Z
+#25 24.75 [INFO] ------------------------------------------------------------------------
+#25 DONE 25.0s
+
+#12 [game-service stage-1 2/3] WORKDIR /app
+#12 CACHED
+
+#26 [game-service stage-1 3/3] COPY --from=build /app/target/game-service-0.0.1-SNAPSHOT.jar .
+#26 DONE 0.2s
+
+#27 [game-service] exporting to image
+#27 exporting layers
+#27 exporting layers 4.0s done
+#27 exporting manifest sha256:83817554bcba41fde14e40b78400f97993846a3e4a128d59168187915bffb9bf 0.0s done
+#27 exporting config sha256:08b121174ac64aef369d19b032076571f74a48e3c2a621b264c5d08f357305dd 0.0s done
+#27 exporting attestation manifest sha256:42cfa185fffb6e92d5d8b5ea1285e28d8f1533da9efc2397de546a49b844b404 0.0s done
+#27 exporting manifest list sha256:48aa12fb2f565272c638369655eca8c4d16b40914c1660bd555035ed38917774 0.0s done
+#27 naming to docker.io/library/micro-sevices-game-service:latest
+#27 naming to docker.io/library/micro-sevices-game-service:latest done
+#27 unpacking to docker.io/library/micro-sevices-game-service:latest
+#27 unpacking to docker.io/library/micro-sevices-game-service:latest 1.0s done
+#27 DONE 5.1s
+
+#28 [game-service] resolving provenance for metadata file
+#28 DONE 0.0s
+time="2025-01-07T20:45:38+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro-sevices\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
  Network micro-sevices_default  Creating
  Network micro-sevices_default  Created
- Network micro-sevices_microservices-network  Creating
- Network micro-sevices_microservices-network  Created
- Container mysql  Creating
+time="2025-01-07T20:45:38+07:00" level=warning msg="Found orphan containers ([api-gateway notification-service image-service voucher-service campaign-service user-service brand-service]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container mongodb  Creating
  Container discovery-server  Creating
+ Container mysql  Creating
  Container discovery-server  Created
- Container voucher-service  Creating
- Container brand-service  Creating
- Container notification-service  Creating
  Container game-service  Creating
- Container api-gateway  Creating
- Container campaign-service  Creating
- Container image-service  Creating
- Container user-service  Creating
+ Container mongodb  Created
  Container mysql  Created
- Container api-gateway  Created
- Container notification-service  Created
- Container brand-service  Created
- Container image-service  Created
  Container game-service  Created
- Container campaign-service  Created
- Container user-service  Created
- Container voucher-service  Created
- Container mysql  Starting
  Container discovery-server  Starting
+ Container mysql  Starting
+ Container mongodb  Starting
  Container discovery-server  Started
-Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:3306 -> 0.0.0.0:0: listen tcp 0.0.0.0:3306: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
-An error occurred. Check the log file for details: start-services.dev.log
+ Container game-service  Starting
+ Container mysql  Started
+ Container mongodb  Started
+ Container game-service  Started
+Services started successfully.
