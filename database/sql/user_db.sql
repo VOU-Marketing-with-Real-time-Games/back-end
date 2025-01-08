@@ -1,5 +1,3 @@
-USE `user_db`;
-
 -- Dumping structure for table user_db.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` bigint NOT NULL AUTO_INCREMENT,

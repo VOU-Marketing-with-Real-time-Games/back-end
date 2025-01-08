@@ -1,5 +1,3 @@
-USE `game_db`;
-
 -- Dumping structure for table game_db.game_campaign
 CREATE TABLE IF NOT EXISTS `game_campaign` (
   `id` bigint NOT NULL AUTO_INCREMENT,

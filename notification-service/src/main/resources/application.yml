@@ -5,9 +5,9 @@ spring:
      mongodb:
          host: mongo
          port: 27017
-         database: notification
-         username: ${MONGO_INITDB_ROOT_USERNAME}
-         password: ${MONGO_INITDB_ROOT_PASSWORD}
+         database: ${IMAGE_DB}
+         username: ${IMAGE_DB}
+         password: ${MONGO_ROOT_PASSWORD}
 server:
   port: 8002
 

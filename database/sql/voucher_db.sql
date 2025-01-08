@@ -1,5 +1,3 @@
-USE `voucher_db`;
-
 -- Dumping structure for table voucher_db.user_voucher
 CREATE TABLE IF NOT EXISTS `user_voucher` (
   `id` bigint NOT NULL AUTO_INCREMENT,

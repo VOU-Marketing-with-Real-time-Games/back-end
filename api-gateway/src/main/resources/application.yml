@@ -21,11 +21,7 @@ spring:
         - id: game-service
           uri: lb://game-service
           predicates:
-            - Path=/v1/game/**
-        - id: game-service
-          uri: lb://game-service
-          predicates:
-            - Path=/v1/game/**
+            - Path=/v3/game/**
         - id: notification-service
           uri: lb://notification-service
           predicates:

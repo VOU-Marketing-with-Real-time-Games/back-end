@@ -1,4 +1,3 @@
-USE `campaign_db`;
 
 -- Dumping structure for table campaign_db.campaign
 CREATE TABLE IF NOT EXISTS `campaign` (

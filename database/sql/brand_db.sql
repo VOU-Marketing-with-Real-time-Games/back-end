@@ -1,5 +1,3 @@
-USE `brand_db`;
-
 -- Dumping structure for table brand_db.branch
 CREATE TABLE IF NOT EXISTS `branch` (
   `id` bigint NOT NULL AUTO_INCREMENT,
