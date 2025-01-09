@@ -52,15 +52,6 @@ public class AppConfig {
                 skip(destination.getStartTime());
             }
         });
-
-        // Map Quizz to QuizzResponseDto
-        modelMapper.addMappings(new PropertyMap<Quizz, QuizzResponseDto>() {
-            @Override
-            protected void configure() {
-                map().setCreatedAt(sourceToTargetDateConverter(source.getCreatedAt()));
-                map().setStartTime(sourceToTargetDateConverter(source.getStartTime()));
-            }
-        });
     }
 
     // Helper for formatting Date to String

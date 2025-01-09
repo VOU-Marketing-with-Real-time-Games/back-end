@@ -79,7 +79,10 @@ spring:
           uri: lb://brand-service
           predicates:
             - Path=/v3/branches/**
-
+        - id: quizz-realtime
+          uri: lb://quizz-realtime
+          predicates:
+            - Path=/v3/quizz-realtime/**
       globals:
         corsConfigurations:
           '[/**]':

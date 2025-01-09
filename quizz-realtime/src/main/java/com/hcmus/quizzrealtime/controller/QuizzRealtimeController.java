@@ -2,6 +2,7 @@ package com.hcmus.quizzrealtime.controller;
 
 import com.hcmus.quizzrealtime.dto.QuestionDto;
 import com.hcmus.quizzrealtime.dto.QuizzDto;
+import com.hcmus.quizzrealtime.dto.ScheduleRequestDto;
 import com.hcmus.quizzrealtime.service.TaskSchedulerService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -22,9 +23,9 @@ public class QuizzRealtimeController {
     private final TaskSchedulerService taskSchedulerService;
 
     @PostMapping("/schedule")
-    public boolean scheduleQuiz(@RequestBody QuizzDto quizzDto, @RequestBody List<QuestionDto> questionDtos) {
+    public boolean scheduleQuiz(@RequestBody ScheduleRequestDto request) {
         try {
-            taskSchedulerService.scheduleQuizStart(quizzDto, questionDtos);
+            taskSchedulerService.scheduleQuizStart(request.getQuizzDto(), request.getQuestionDtos());
             return true;
         } catch (Exception e) {
             LOGGER.error("Error scheduling quiz: {}", e.getMessage());

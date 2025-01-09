@@ -27,8 +27,7 @@ public class UserAnswerApiController {
 
 
     @GetMapping("/total-score/{quizzId}")
-    public ResponseEntity<List<UserQuizzTotalScoreDto>> getTotalScoreUserInQuizz(@PathVariable Long quizzId) {
-        List<UserQuizzTotalScoreDto> totalScores = userAnswerService.totalScoreUserInQuizz(quizzId);
-        return ResponseEntity.ok(totalScores);
+    public List<UserQuizzTotalScoreDto> getTotalScoreUserInQuizz(@PathVariable Long quizzId) {
+        return userAnswerService.totalScoreUserInQuizz(quizzId);
     }
 }

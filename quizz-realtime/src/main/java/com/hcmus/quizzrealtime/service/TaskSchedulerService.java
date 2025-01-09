@@ -35,7 +35,7 @@ public class TaskSchedulerService {
         LOGGER.info("Scheduled start time: {}", quizz.getStartTime());
 
         // Schedule the new task
-        ScheduledFuture<?> future = taskScheduler.schedule(() -> startGameThread(quizz, questionResponseDtos), Instant.parse(quizz.getStartTime()));
+        ScheduledFuture<?> future = taskScheduler.schedule(() -> startGameThread(quizz, questionResponseDtos), quizz.getStartTime());
         // Store the task in the map for potential future cancellation
         scheduledTasks.put(quizz.getId(), future);
     }

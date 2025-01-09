@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,8 +15,8 @@ public class QuizzResponseDto {
     private Long id;
     private String name;
     private String description;
-    private String createdAt;
+    private Date createdAt;
     private Integer secondPerQuestion;
-    private String startTime;
+    private Date startTime;
     private Long campaignGameId;
 }
