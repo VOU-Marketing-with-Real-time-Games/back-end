@@ -30,8 +30,6 @@ public class TaskSchedulerService {
     public void scheduleQuizStart(QuizzDto quizz, List<QuestionDto> questionResponseDtos) {
         // Cancel and remove any existing task for the given quiz
         cancelScheduledTask(quizz.getId());
-
-
         // Log the current time and scheduled time
         LOGGER.info("Current time: {}", new Date());
         LOGGER.info("Scheduled start time: {}", quizz.getStartTime());

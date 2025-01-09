@@ -11,6 +11,8 @@ import com.hcmus.gameservice.puzzle.model.Puzzle;
 import com.hcmus.gameservice.puzzle.model.UserItem;
 import com.hcmus.gameservice.puzzle.repository.UserItemRepository;
 
+import com.hcmus.gameservice.rabbit_mq.NotificationDto;
+import com.hcmus.gameservice.rabbit_mq.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class UserItemService {
     private final PuzzleService puzzleService;
     private final GameCampaignRepository gameCampaignRepository;
     private final VoucherClient voucherClient;
-    //private final NotificationService notificationService;
+    private final NotificationService notificationService;
     public ItemResponseDto addRandomItemToUser(Long userId, Long puzzleId) throws Exception {
         Item item = itemService.getRandomItemByPuzzleId(puzzleId);
         if (item == null) {
@@ -64,14 +66,18 @@ public class UserItemService {
             if(!isSuccessTook)
             {
                 //
-            }
-            else {
-                // Notify to user
-//            NotificationDto notificationDto = NotificationDto.builder()
-//                    .content("You have completed the puzzle " + puzzle.getName() + ". You have received a voucher.")
-//                    .userId(userId)
-//                    .build();
-//            notificationService.addNotification(notificationDto);
+                NotificationDto notificationDto = NotificationDto.builder()
+                        .content("You have completed the puzzle " + puzzle.getName() + ". But the voucher is out of stock.")
+                        .userId(userId)
+                        .build();
+                notificationService.notifyGameEvent(notificationDto);
+            } else {
+                //Notify to user
+                NotificationDto notificationDto = NotificationDto.builder()
+                        .content("You have completed the puzzle " + puzzle.getName() + ". You have received a voucher.")
+                        .userId(userId)
+                        .build();
+                notificationService.notifyGameEvent(notificationDto);
 
                 // Decrease total item
                 for (UserItem ui : userItems) {

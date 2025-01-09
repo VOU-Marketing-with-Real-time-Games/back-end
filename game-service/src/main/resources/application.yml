@@ -13,7 +13,23 @@ spring:
     properties:
       hibernate.format_sql: true
       hibernate.dialect: org.hibernate.dialect.MySQLDialect
-
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+    template:
+      mandatory: true
+rabbitmq:
+  exchange: game-exchange
+  routingkey: game-routing
+  queue: game-queue
 server:
   port: 8001
 

@@ -1,10 +1,11 @@
-package com.hcmus.gameservice.puzzle.dto;
+package com.hcmus.gameservice.rabbit_mq;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NotificationDto {
+public class NotificationDto implements Serializable {
     private String id;
     private String content;
     private Date createdAt;
