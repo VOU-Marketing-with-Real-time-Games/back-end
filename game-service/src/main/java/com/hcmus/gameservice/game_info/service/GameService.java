@@ -52,4 +52,10 @@ public class GameService {
             throw new IllegalArgumentException("Invalid ID");
         }
     }
+
+    public GameInfoDto addGame(GameInfoDto gameInfoDto) {
+        GameInfo gameInfo = modelMapper.map(gameInfoDto, GameInfo.class);
+        GameInfo savedGameInfo = gameInfoRepository.save(gameInfo);
+        return modelMapper.map(savedGameInfo, GameInfoDto.class);
+    }
 }

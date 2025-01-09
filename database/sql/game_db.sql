@@ -20,6 +20,11 @@ CREATE TABLE IF NOT EXISTS `game_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Dumping data for table vou.game_info: ~2 rows (approximately)
+INSERT INTO `game_info` (`id`, `enable`, `image`, `manual`, `name`, `game_type`) VALUES
+                                                                                     (1, b'1', '', 'manual', 'Quizz Game', 'QUIZZ'),
+                                                                                     (2, b'0', 'test_image1.png', 'Test manual update', 'Shake Gane', 'SHAKE_GAME');
+
 -- Dumping structure for table game_db.item
 CREATE TABLE IF NOT EXISTS `item` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -72,6 +77,10 @@ CREATE TABLE IF NOT EXISTS `quizz` (
   `start_time` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `quizz` (`id`, `campaign_game_id`, `created_at`, `description`, `name`, `second_per_question`, `start_time`) VALUES
+    (1, 1, '2024-12-28 17:58:36.020000', 'This is a sample quizz.', 'Sample Quizz', 30, '2024-12-29 23:17:00.000000');
+
 
 -- Dumping structure for table game_db.user_answer
 CREATE TABLE IF NOT EXISTS `user_answer` (

@@ -18,7 +18,7 @@ import java.util.List;
  * REST controller for managing game campaigns.
  */
 @RestController
-@RequestMapping("/v1/game/game-campaigns")
+@RequestMapping("/v3/game-campaigns")
 @RequiredArgsConstructor
 @Validated
 public class GameCampaignApiController {

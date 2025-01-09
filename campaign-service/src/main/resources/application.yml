@@ -2,16 +2,17 @@ spring:
   application:
     name: campaign-service
   datasource:
-    url: jdbc:mysql://${MYSQL_URL}:3306/${CAMPAIGN_DB}
-    username: ${CAMPAIGN_DB}
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://localhost:3306/campaign_db
+    username: root
+    password: leminhhoang
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
-      hibernate.hibernate.format_sql: true
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
 
 server:
   port: 8004

@@ -1,6 +1,8 @@
 package com.hcmus.gameservice.puzzle.service;
 
+import com.hcmus.gameservice.client.VoucherClient;
 import com.hcmus.gameservice.game_info.model.GameCampaign;
+import com.hcmus.gameservice.game_info.model.GameType;
 import com.hcmus.gameservice.game_info.repository.GameCampaignRepository;
 import com.hcmus.gameservice.puzzle.dto.ItemResponseDto;
 import com.hcmus.gameservice.puzzle.dto.UserItemDto;
@@ -25,60 +27,60 @@ public class UserItemService {
     private final ModelMapper modelMapper;
     private final PuzzleService puzzleService;
     private final GameCampaignRepository gameCampaignRepository;
-//    private final VoucherCampaignService voucherCampaignService;
-//    private final NotificationService notificationService;
-//    private final UserService userService;
+    private final VoucherClient voucherClient;
+    //private final NotificationService notificationService;
+    public ItemResponseDto addRandomItemToUser(Long userId, Long puzzleId) throws Exception {
+        Item item = itemService.getRandomItemByPuzzleId(puzzleId);
+        if (item == null) {
+            return null;
+        }
+        itemService.updateRemainingNum(item.getId());
+        // Add to user item
+        UserItem userItem = userItemRepository.findByUserIdAndItemId(userId, item.getId());
+        if(userItem == null)
+        {
+            userItem = UserItem.builder().userId(userId).item(item).totalItem(1).build();
+            userItemRepository.save(userItem);
+        }
+        else
+        {
+            userItem.setTotalItem(userItem.getTotalItem() + 1);
+        }
 
-//    public ItemResponseDto addRandomItemToUser(Long userId, Long puzzleId) throws Exception {
-//        Item item = itemService.getRandomItemByPuzzleId(puzzleId);
-//        if (item == null) {
-//            return null;
-//        }
-//
-//        itemService.updateRemainingNum(item.getId());
-//
-//        // Add to user item
-//        UserItem userItem = userItemRepository.findByUserIdAndItemId(userId, item.getId());
-//        if(userItem == null)
-//        {
-//            userItem = UserItem.builder().userId(userId).item(item).totalItem(1).build();
-//            userItemRepository.save(userItem);
-//        }
-//        else
-//        {
-//            userItem.setTotalItem(userItem.getTotalItem() + 1);
-//        }
-//
-//        checkReceiveVoucherAndNotify(userId, puzzleId);
-//
-//        return modelMapper.map(item, ItemResponseDto.class);
-//    }
+        checkReceiveVoucherAndNotify(userId, puzzleId);
 
-//    public void checkReceiveVoucherAndNotify(Long userId, Long puzzleId) throws Exception {
-//        Puzzle puzzle = puzzleService.getById(puzzleId);
-//        List<UserItem> userItems = userItemRepository.findByUserIdAndPuzzleId(userId, puzzleId);
-//
-//        if(userItems.size() == puzzle.getItemNum())
-//        {
-//            // Get voucher
-//            GameCampaign gameCampaign = gameCampaignRepository.findByGameTypeAndGameId(GameType.SHAKE_GAME, puzzleId);
-//            voucherCampaignService.takeVoucherToUser(gameCampaign.getCampaignId(), userId);
-//
-//            // Notify to user
+        return modelMapper.map(item, ItemResponseDto.class);
+    }
+
+    public void checkReceiveVoucherAndNotify(Long userId, Long puzzleId) throws Exception {
+        Puzzle puzzle = puzzleService.getById(puzzleId);
+        List<UserItem> userItems = userItemRepository.findByUserIdAndPuzzleId(userId, puzzleId);
+
+        if(userItems.size() == puzzle.getItemNum())
+        {
+            // Get voucher
+            GameCampaign gameCampaign = gameCampaignRepository.findByGameTypeAndGameId(GameType.SHAKE_GAME, puzzleId);
+            boolean isSuccessTook = voucherClient.takeVoucherToUser(gameCampaign.getCampaignId(), userId);
+            if(!isSuccessTook)
+            {
+                //
+            }
+            else {
+                // Notify to user
 //            NotificationDto notificationDto = NotificationDto.builder()
 //                    .content("You have completed the puzzle " + puzzle.getName() + ". You have received a voucher.")
 //                    .userId(userId)
 //                    .build();
 //            notificationService.addNotification(notificationDto);
-//
-//            // Decrease total item
-//            for(UserItem ui : userItems)
-//            {
-//                ui.setTotalItem(ui.getTotalItem() - 1);
-//                userItemRepository.save(ui);
-//            }
-//        }
-//    }
+
+                // Decrease total item
+                for (UserItem ui : userItems) {
+                    ui.setTotalItem(ui.getTotalItem() - 1);
+                    userItemRepository.save(ui);
+                }
+            }
+        }
+    }
 
     public List<UserItemDto> getUserItemsByUserId(Long userId) {
         List<UserItem> userItems = userItemRepository.findByUserId(userId);

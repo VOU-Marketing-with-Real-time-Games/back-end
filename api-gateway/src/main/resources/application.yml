@@ -18,14 +18,68 @@ spring:
         locator:
           enabled: false  # Enable service discovery for dynamic routing
       routes:
-        - id: game-service
+        - id: game-info
           uri: lb://game-service
           predicates:
             - Path=/v3/game/**
+        - id: game-campaign
+          uri: lb://game-service
+          predicates:
+            - Path=/v3/game-campaigns/**
+        - id: user-game-campaign
+          uri: lb://game-service
+          predicates:
+            - Path=/v3/user-campaign-games/**
+        - id: puzzle
+          uri: lb://game-service
+          predicates:
+            - Path=/v3/puzzles/**
+        - id: user-item
+          uri: lb://game-service
+          predicates:
+            - Path=/v3/user-items/**
+        - id: questions
+          uri: lb://game-service
+          predicates:
+            - Path=/v3/questions/**
+        - id: quizz
+          uri: lb://game-service
+          predicates:
+            - Path=/v3/quizzes/**
+        - id: user-answer
+          uri: lb://game-service
+          predicates:
+            - Path=/v3/user-answers/**
         - id: notification-service
           uri: lb://notification-service
           predicates:
-            - Path=/v1/notifications/**
+            - Path=/v3/notifications/**
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/v3/users/**
+        - id: voucher-service
+          uri: lb://voucher-service
+          predicates:
+            - Path=/v3/vouchers/**
+        - id: campaign-service
+          uri: lb://campaign-service
+          predicates:
+            - Path=/v3/campaigns/**
+        - id: image-service
+          uri: lb://image-service
+          predicates:
+            - Path=/v3/images/**
+        - id : brand-service
+          uri: lb://brand-service
+          predicates:
+            - Path=/v3/brands/**
+        - id: branch-service
+          uri: lb://brand-service
+          predicates:
+            - Path=/v3/branches/**
+
       globals:
         corsConfigurations:
           '[/**]':

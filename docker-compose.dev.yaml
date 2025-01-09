@@ -14,21 +14,21 @@ services:
 #      - ./database/sql:/docker-entrypoint-initdb.d/sql
 #    ports:
 #      - "3306:3306"
-#  mongo:
-#    image: mongo:6.0
-#    container_name: mongo
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
-#      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
-#      MONGO_MULTIPLE_DATABASES: ${MONGO_MULTIPLE_DATABASES}
-#    volumes:
-#      - mongo-data:/data/db
-#      - ./database/init-multi-mongodb-databases.sh:/docker-entrypoint-initdb.d/init-multi-mongodb-databases.sh
-#      - ./database/js:/docker-entrypoint-initdb.d/js
-#    ports:
-#      - "27017:27017"
-#    networks:
-#      - microservices-network
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_MULTIPLE_DATABASES: ${MONGO_MULTIPLE_DATABASES}
+    volumes:
+      - mongo-data:/data/db
+      - ./database/init-multi-mongodb-databases.sh:/docker-entrypoint-initdb.d/init-multi-mongodb-databases.sh
+      - ./database/js:/docker-entrypoint-initdb.d/js
+    ports:
+      - "27017:27017"
+    networks:
+      - microservices-network
   discovery:
     build:
       context: ./discovery-server
@@ -40,20 +40,20 @@ services:
     env_file:
       - .env
     container_name: discovery-server
-  gateway:
-    build:
-      context: ./api-gateway
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8080:8080"
-    depends_on:
-      - discovery
-    networks:
-      - microservices-network
-    env_file:
-      - .env
-    container_name: api-gateway
-#
+#  gateway:
+#    build:
+#      context: ./api-gateway
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - discovery
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: api-gateway
+
 #  user-service:
 #    build:
 #      context: ./user-service
@@ -128,20 +128,19 @@ services:
 #      - .env
 #    container_name: image-service
 #
-#  notification-service:
-#    build:
-#      context: ./notification-service
-#      dockerfile: Dockerfile.dev
-#    ports:
-#      - "8002:8002"
-#    depends_on:
-#      - discovery
-#      - mongo
-#    networks:
-#      - microservices-network
-#    env_file:
-#      - .env
-#    container_name: notification-service
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8002:8002"
+    depends_on:
+      - discovery
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: notification-service
 #
 #  voucher-service:
 #      build:
@@ -157,9 +156,9 @@ services:
 #      env_file:
 #        - .env
 #      container_name: voucher-service
-#volumes:
-#  db-data:
-#  mongo-data:
+volumes:
+ # db-data:
+ mongo-data:
 networks:
   microservices-network:
     driver: bridge

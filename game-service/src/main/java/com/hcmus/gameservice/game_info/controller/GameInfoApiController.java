@@ -4,6 +4,7 @@ import com.hcmus.gameservice.game_info.exception.GameNotFoundException;
 import com.hcmus.gameservice.game_info.service.GameService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.util.List;
  * REST controller for managing game information.
  */
 @RestController
-@RequestMapping("/v3/game/game-info")
+@RequestMapping("/v3/game-info")
 @RequiredArgsConstructor
 @Validated
 public class GameInfoApiController {
@@ -57,5 +58,11 @@ public class GameInfoApiController {
     public ResponseEntity<GameInfoDto> updateGame(@PathVariable Long id, @Valid @RequestBody GameInfoDto gameInfoDto) throws GameNotFoundException {
         GameInfoDto updatedGameInfoDto = gameService.updateGame(id, gameInfoDto);
         return ResponseEntity.ok(updatedGameInfoDto);
+    }
+
+    @PostMapping
+    public ResponseEntity<GameInfoDto> addGame(@Valid @RequestBody GameInfoDto gameInfoDto) {
+        GameInfoDto savedGameInfoDto = gameService.addGame(gameInfoDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedGameInfoDto);
     }
 }

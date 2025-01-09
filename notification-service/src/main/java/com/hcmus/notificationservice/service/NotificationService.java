@@ -45,8 +45,11 @@ public class NotificationService {
      * @param id the ID of the notification to delete
      * @throws IllegalArgumentException if the notification is not found
      */
-    public void softDeleteNotification(Long id) {
-        notificationRepository.softDeleteNotificationByUserId(id);
+    public void softDeleteNotification(String id) {
+        NotificationUser notification = notificationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Notification not found"));
+        notification.setIsDeleted(true);
+        notificationRepository.save(notification);
     }
 
     /**

@@ -34,3 +34,14 @@ CREATE TABLE IF NOT EXISTS `voucher_campaign` (
   KEY `FK3n9oxj4lfhr9c3koi6e7r91jl` (`voucher_id`),
   CONSTRAINT `FK3n9oxj4lfhr9c3koi6e7r91jl` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `voucher` (`code`, `brand_id`, `created_at`, `description`, `discount`, `expired_date`, `image`, `qr_code`, `status`) VALUES
+    ('1', 1, '2024-12-28 14:34:55.000000', 'Discount for Hat', 10, '2024-12-28 14:34:59.000000', NULL, NULL, NULL);
+
+INSERT INTO `voucher_campaign` (`campaign_id`, `remaining`, `total`, `voucher_id`) VALUES
+    (1, 97, 100, '1');
+
+INSERT INTO `user_voucher` (`id`, `add_to_time`, `status`, `user_id`, `voucher_id`) VALUES
+                                                                                        (10, '2024-12-29 18:13:29.343000', 'ACTIVE', 2, '1'),
+                                                                                        (11, '2024-12-29 18:13:37.436000', 'ACTIVE', 2, '1'),
+                                                                                        (12, '2024-12-29 20:26:28.856000', 'ACTIVE', 2, '1');

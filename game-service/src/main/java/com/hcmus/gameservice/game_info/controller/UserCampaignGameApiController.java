@@ -16,7 +16,7 @@ import java.util.List;
  * REST controller for managing user campaign games.
  */
 @RestController
-@RequestMapping("/v3/game/user-campaign-games")
+@RequestMapping("/v3/user-campaign-games")
 @RequiredArgsConstructor
 @Validated
 public class UserCampaignGameApiController {
@@ -86,11 +86,11 @@ public class UserCampaignGameApiController {
         return ResponseEntity.ok(responseDtos);
     }
 
-//    @GetMapping("/campaign/{campaignId}/users")
-//    public ResponseEntity<List<Long>> findDistinctUserByCampaign(@PathVariable Long campaignId) throws CampaignNotFoundException {
-//        List<Long> responseDtos = userCampaignGameService.getDistinctUserIdByCampaignId(campaignId);
-//        return ResponseEntity.ok(responseDtos);
-//    }
+    @GetMapping("/campaign/{campaignId}/users")
+    public ResponseEntity<List<Long>> findDistinctUserByCampaign(@PathVariable Long campaignId) {
+        List<Long> responseDtos = userCampaignGameService.getDistinctUserIdByCampaignId(campaignId);
+        return ResponseEntity.ok(responseDtos);
+    }
 
     @GetMapping("/campaign/users")
     public ResponseEntity<List<Long>> findDistinctUserByAllCampaign()  {

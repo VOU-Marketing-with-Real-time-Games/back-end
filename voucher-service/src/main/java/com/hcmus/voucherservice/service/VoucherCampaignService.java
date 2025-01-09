@@ -1,0 +1,35 @@
+package com.hcmus.voucherservice.service;
+
+import com.hcmus.voucherservice.model.Voucher;
+import com.hcmus.voucherservice.model.VoucherCampaign;
+import com.hcmus.voucherservice.repository.VoucherCampaignRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class VoucherCampaignService {
+    private final VoucherCampaignRepository voucherCampaignRepository;
+    private final UserVoucherService userVoucherService;
+
+    public void updateRemainingNum(Long campaignId, String voucherCode) {
+        VoucherCampaign voucherCampaign = voucherCampaignRepository.findByCampaignIdAndVoucherId(campaignId, voucherCode);
+        voucherCampaign.setRemaining(voucherCampaign.getRemaining() - 1);
+        voucherCampaignRepository.save(voucherCampaign);
+    }
+
+    public boolean takeVoucherToUser(Long campaignId, Long userId) {
+        List<VoucherCampaign> voucherCampaigns = voucherCampaignRepository.findByCampaignId(campaignId);
+        for(VoucherCampaign voucherCampaign : voucherCampaigns) {
+            if(voucherCampaign.getRemaining() > 0) {
+                Voucher voucher = voucherCampaign.getId().getVoucher();
+                userVoucherService.addVoucherToUser(userId, voucher);
+                updateRemainingNum(campaignId, voucher.getCode());
+                return true;
+            }
+        }
+        return false;
+    }
+}

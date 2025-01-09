@@ -2,9 +2,9 @@ spring:
   application:
     name: voucher-service
   datasource:
-    url: jdbc:mysql://${MYSQL_URL}:3306/${VOUCHER_DB}
-    username: ${VOUCHER_DB}
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://localhost:3306/voucher_db
+    username: root
+    password: leminhhoang
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

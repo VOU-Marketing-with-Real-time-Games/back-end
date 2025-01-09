@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/v1/game/puzzles")
+@RequestMapping("/v3/puzzles")
 @RequiredArgsConstructor
 @Validated
 public class PuzzleApiController {

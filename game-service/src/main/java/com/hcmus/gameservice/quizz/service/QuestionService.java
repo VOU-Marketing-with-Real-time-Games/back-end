@@ -60,7 +60,6 @@ public class QuestionService {
         Question updatedQuestion = questionRepository.save(question);
         return modelMapper.map(updatedQuestion, QuestionResponseDto.class);
     }
-
     public void deleteQuestion(Long id) {
         questionRepository.deleteById(id);
     }

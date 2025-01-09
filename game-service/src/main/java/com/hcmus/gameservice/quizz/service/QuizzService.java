@@ -1,14 +1,17 @@
 package com.hcmus.gameservice.quizz.service;
 
+import com.hcmus.gameservice.client.QuizzRealtimeClient;
 import com.hcmus.gameservice.game_info.exception.GameCampaignNotFoundException;
 import com.hcmus.gameservice.game_info.exception.Game_CampaignGameConflict;
 import com.hcmus.gameservice.game_info.exception.QuizzNotFoundException;
+import com.hcmus.gameservice.game_info.exception.SchedulingErrorException;
 import com.hcmus.gameservice.game_info.model.GameCampaign;
 import com.hcmus.gameservice.game_info.model.GameType;
 import com.hcmus.gameservice.game_info.service.GameCampaignService;
 import com.hcmus.gameservice.quizz.dto.QuestionResponseDto;
 import com.hcmus.gameservice.quizz.dto.QuizzRequestDto;
 import com.hcmus.gameservice.quizz.dto.QuizzResponseDto;
+import com.hcmus.gameservice.quizz.dto.ScheduleRequestDto;
 import com.hcmus.gameservice.quizz.model.Quizz;
 import com.hcmus.gameservice.quizz.repository.QuizzRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +37,7 @@ public class QuizzService {
     private final QuizzRepository quizzRepository;
     private final GameCampaignService gameCampaignService;
     private final ModelMapper modelMapper;
-    //private final TaskSchedulerService taskSchedulerService;
+    private  final QuizzRealtimeClient quizzRealtimeClient;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuizzService.class);
 
@@ -54,7 +57,7 @@ public class QuizzService {
     }
 
 
-    public QuizzResponseDto createQuizz(QuizzRequestDto quizzRequestDto) throws Game_CampaignGameConflict, GameCampaignNotFoundException {
+    public QuizzResponseDto createQuizz(QuizzRequestDto quizzRequestDto) throws Game_CampaignGameConflict, GameCampaignNotFoundException, SchedulingErrorException {
         Quizz quizz = modelMapper.map(quizzRequestDto, Quizz.class);
 
         GameCampaign gameCampaign = gameCampaignService.getById(quizz.getCampaignGameId());
@@ -74,13 +77,16 @@ public class QuizzService {
         List<QuestionResponseDto> questionResponseDtos = quizz.getQuestions().stream()
                 .map(question -> modelMapper.map(question, QuestionResponseDto.class))
                 .collect(Collectors.toList());
-        // Schedule the quiz start
-        //taskSchedulerService.scheduleQuizStart(savedQuizz,questionResponseDtos);
-
+        boolean isSuccessSchedule =  quizzRealtimeClient.scheduleQuiz(new ScheduleRequestDto(modelMapper.map(savedQuizz,QuizzResponseDto.class), questionResponseDtos));
+        if(!isSuccessSchedule)
+        {
+            LOGGER.error("Error scheduling quiz");
+            throw new SchedulingErrorException("Error scheduling quiz");
+        }
         return modelMapper.map(savedQuizz, QuizzResponseDto.class);
     }
 
-    public QuizzResponseDto updateQuizz(Long id, QuizzRequestDto quizzRequestDto) throws QuizzNotFoundException, ParseException {
+    public QuizzResponseDto updateQuizz(Long id, QuizzRequestDto quizzRequestDto) throws QuizzNotFoundException, ParseException, SchedulingErrorException {
         Quizz quizzDetails = modelMapper.map(quizzRequestDto, Quizz.class);
         quizzDetails.setStartTime(convertDate(quizzRequestDto.getStartTime()));
         Quizz quizz = findQuizzById(id);
@@ -90,8 +96,12 @@ public class QuizzService {
         List<QuestionResponseDto> questionResponseDtos = quizz.getQuestions().stream()
                 .map(question -> modelMapper.map(question, QuestionResponseDto.class))
                 .collect(Collectors.toList());
-        // Schedule the quiz start
-        //taskSchedulerService.scheduleQuizStart(updatedQuizz, questionResponseDtos);
+        boolean isSuccessSchedule =  quizzRealtimeClient.scheduleQuiz(new ScheduleRequestDto(modelMapper.map(updatedQuizz,QuizzResponseDto.class), questionResponseDtos));
+        if(!isSuccessSchedule)
+        {
+            LOGGER.error("Error scheduling quiz");
+            throw new SchedulingErrorException("Error scheduling quiz");
+        }
         return modelMapper.map(updatedQuizz, QuizzResponseDto.class);
     }
 

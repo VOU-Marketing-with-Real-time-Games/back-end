@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: quizz-realtime
+server:
+  port: 8007
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true

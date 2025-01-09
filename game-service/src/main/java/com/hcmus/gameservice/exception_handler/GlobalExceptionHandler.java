@@ -98,7 +98,7 @@ public class GlobalExceptionHandler {
      * @param ex      the exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler({Exception.class, SchedulingErrorException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ErrorDTO handleGeneralException(HttpServletRequest request, Exception ex) {

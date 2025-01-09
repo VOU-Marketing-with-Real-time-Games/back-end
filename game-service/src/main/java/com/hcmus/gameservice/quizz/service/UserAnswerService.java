@@ -1,7 +1,9 @@
 package com.hcmus.gameservice.quizz.service;
 
+import com.hcmus.gameservice.client.UserClient;
 import com.hcmus.gameservice.game_info.exception.QuestionNotFoundException;
 import com.hcmus.gameservice.quizz.dto.UserAnswerRequestDto;
+import com.hcmus.gameservice.quizz.dto.UserDto;
 import com.hcmus.gameservice.quizz.dto.UserQuizzTotalScoreDto;
 import com.hcmus.gameservice.quizz.model.Question;
 import com.hcmus.gameservice.quizz.model.UserAnswer;
@@ -19,8 +21,7 @@ public class UserAnswerService {
     private final QuestionService questionService;
     private final ModelMapper modelMapper;
     private final int MAX_SCORE = 10;
-    //private final UserService userService;
-
+    private final UserClient userClient;
     public void saveUserAnswer(UserAnswerRequestDto userAnswerRequestDto) throws QuestionNotFoundException {
         UserAnswer userAnswer = modelMapper.map(userAnswerRequestDto, UserAnswer.class);
         Question question = questionService.findQuestionById(userAnswer.getQuestion().getId());
@@ -38,13 +39,13 @@ public class UserAnswerService {
         userAnswerRepository.save(userAnswer);
     }
 
-//    public List<UserQuizzTotalScoreDto> totalScoreUserInQuizz(Long quizzId) {
-//        List<UserAnswer> userAnswers = userAnswerRepository.findByQuizzId(quizzId);
-//        List<User> users = userService.findByListId(userAnswers.stream().map(UserAnswer::getUserId).toList());
-//        return users.stream().map(user -> {
-//            List<UserAnswer> userAnswerList = userAnswers.stream().filter(userAnswer -> userAnswer.getUserId().equals(user.getId())).toList();
-//            int totalScore = userAnswerList.stream().mapToInt(UserAnswer::getScore).sum();
-//            return new UserQuizzTotalScoreDto(user.getId(), user.getFullName(), user.getAvatar() ,totalScore, quizzId);
-//        }).toList();
-//    }
+    public List<UserQuizzTotalScoreDto> totalScoreUserInQuizz(Long quizzId) {
+        List<UserAnswer> userAnswers = userAnswerRepository.findByQuizzId(quizzId);
+        List<UserDto> users = userClient.getUsersByListId(userAnswers.stream().map(UserAnswer::getUserId).toList());
+        return users.stream().map(user -> {
+            List<UserAnswer> userAnswerList = userAnswers.stream().filter(userAnswer -> userAnswer.getUserId().equals(user.getId())).toList();
+            int totalScore = userAnswerList.stream().mapToInt(UserAnswer::getScore).sum();
+            return new UserQuizzTotalScoreDto(user.getId(), user.getFullName(), user.getAvatar(), totalScore, quizzId);
+        }).toList();
+    }
 }

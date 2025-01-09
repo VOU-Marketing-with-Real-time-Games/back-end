@@ -1,5 +1,7 @@
 package com.hcmus.gameservice.game_info.service;
 
+import com.hcmus.gameservice.client.CampaignClient;
+import com.hcmus.gameservice.game_info.dto.CampaignDto;
 import com.hcmus.gameservice.game_info.dto.UserCampaignGameRequestDto;
 import com.hcmus.gameservice.game_info.dto.UserCampaignGameResponseDto;
 import com.hcmus.gameservice.game_info.exception.GameCampaignNotFoundException;
@@ -20,7 +22,7 @@ public class UserCampaignGameService {
     private final UserCampaignGameRepository userCampaignGameRepository;
     private final GameCampaignService gameCampaignService;
     private final ModelMapper modelMapper;
-    //private final CampaignService campaignService;
+    private final CampaignClient campaignClient;
 
     public UserCampaignGameResponseDto saveUserCampaignGame(UserCampaignGameRequestDto userCampaignGameDto) throws  GameCampaignNotFoundException {
         UserCampaignGame userCampaignGame = modelMapper.map(userCampaignGameDto, UserCampaignGame.class);
@@ -69,11 +71,11 @@ public class UserCampaignGameService {
                 .collect(Collectors.toList());
     }
 
-    //
-//    public List<Long> getDistinctUserIdByCampaignId(Long campaignId) throws CampaignNotFoundException {
-//        Campaign campaign = campaignService.findCampaign(campaignId);
-//        return userCampaignGameRepository.findDistinctUserIdByCampaignId(campaign.getId());
-//    }
+
+    public List<Long> getDistinctUserIdByCampaignId(Long campaignId) {
+        CampaignDto campaign = campaignClient.getCampaign(campaignId);
+        return userCampaignGameRepository.findDistinctUserIdByCampaignId(campaign.getId());
+    }
 
     public List<Long> getDistinctUserIdAllCampaigns() {
         return userCampaignGameRepository.findDistinctUserIdAllCampaign();

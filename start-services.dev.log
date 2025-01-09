@@ -1,224 +1,165 @@
-time="2025-01-08T10:32:03+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
- Container api-gateway  Stopping
- Container api-gateway  Stopped
- Container api-gateway  Removing
- Container api-gateway  Removed
+time="2025-01-08T13:38:55+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container mongo  Stopping
+ Container notification-service  Stopping
+ Container mongo  Stopped
+ Container mongo  Removing
+ Container mongo  Removed
+ Container notification-service  Stopped
+ Container notification-service  Removing
+ Container notification-service  Removed
  Container discovery-server  Stopping
  Container discovery-server  Stopped
  Container discovery-server  Removing
  Container discovery-server  Removed
  Network back-end_microservices-network  Removing
  Network back-end_microservices-network  Resource is still in use
-time="2025-01-08T10:32:18+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-01-08T13:39:07+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [discovery internal] load build definition from Dockerfile.dev
-#1 transferring dockerfile: 34B 0.0s
-#1 transferring dockerfile: 701B 0.0s done
+#1 transferring dockerfile: 701B 0.1s done
 #1 DONE 0.1s
 
 #2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
 #2 ...
 
-#3 [discovery auth] library/openjdk:pull token for registry-1.docker.io
-#3 DONE 0.0s
-
-#4 [discovery auth] library/maven:pull token for registry-1.docker.io
-#4 DONE 0.0s
-
-#5 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#5 ...
+#3 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#3 DONE 1.5s
 
 #2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#2 DONE 4.2s
+#2 DONE 1.5s
 
-#5 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#5 DONE 4.3s
+#4 [discovery internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#6 [discovery internal] load .dockerignore
-#6 transferring context:
-#6 transferring context: 2B done
-#6 DONE 0.3s
+#5 [discovery internal] load build context
+#5 DONE 0.0s
 
-#7 [discovery internal] load build context
-#7 DONE 0.0s
+#6 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#6 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
+#6 DONE 0.1s
 
-#8 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 1.0s done
-#8 DONE 1.1s
-
-#9 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#9 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.9s done
-#9 DONE 1.1s
-
-#7 [discovery internal] load build context
-#7 transferring context: 731B 0.0s done
+#7 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
 #7 DONE 0.1s
 
-#10 [discovery stage-1 2/3] WORKDIR /app
+#5 [discovery internal] load build context
+#5 transferring context: 731B 0.0s done
+#5 DONE 0.0s
+
+#8 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#8 CACHED
+
+#9 [discovery stage-1 2/3] WORKDIR /app
+#9 CACHED
+
+#10 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 #10 CACHED
 
 #11 [discovery build 2/6] WORKDIR /app
 #11 CACHED
 
-#12 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#12 [discovery build 3/6] COPY pom.xml .
 #12 CACHED
 
-#13 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#13 [discovery build 5/6] COPY src ./src
 #13 CACHED
 
-#14 [discovery build 5/6] COPY src ./src
+#14 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
 #14 CACHED
 
-#15 [discovery build 3/6] COPY pom.xml .
-#15 CACHED
+#15 [discovery] exporting to image
+#15 exporting layers
+#15 exporting layers 0.0s done
+#15 exporting manifest sha256:08e3419b7d3b670a33e2a1f0cb073cf45a648bd2e112a95e218652bb1cd22c7f done
+#15 exporting config sha256:59f47f698722a4b63f4deba075a92fdf0f7bf7f2fe4cdff3a4adec7b3f853a60 done
+#15 exporting attestation manifest sha256:56d1df6fd85a495c9aa6e7538c299c4cce5cacefb8e1f1dc148b5a0bb2615375
+#15 exporting attestation manifest sha256:56d1df6fd85a495c9aa6e7538c299c4cce5cacefb8e1f1dc148b5a0bb2615375 0.1s done
+#15 exporting manifest list sha256:7779373043553cf20441a203705266b65e78145d5fad5ab3a972478b6172ec31 0.0s done
+#15 naming to docker.io/library/back-end-discovery:latest done
+#15 unpacking to docker.io/library/back-end-discovery:latest 0.0s done
+#15 DONE 0.3s
 
-#16 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
-#16 CACHED
+#16 [discovery] resolving provenance for metadata file
+#16 DONE 0.2s
 
-#17 [discovery] exporting to image
-#17 exporting layers done
-#17 exporting manifest sha256:08e3419b7d3b670a33e2a1f0cb073cf45a648bd2e112a95e218652bb1cd22c7f done
-#17 exporting config sha256:59f47f698722a4b63f4deba075a92fdf0f7bf7f2fe4cdff3a4adec7b3f853a60
-#17 exporting config sha256:59f47f698722a4b63f4deba075a92fdf0f7bf7f2fe4cdff3a4adec7b3f853a60 done
-#17 exporting attestation manifest sha256:012477a41da54bf48828dbb3b91cb8c0c9453876504565b6892d7a6010f83103 0.1s done
-#17 exporting manifest list sha256:eaf20ccdaa985656a214c2caced6ed596e3cb7fce84767a6957ec186d8db9190 0.0s done
-#17 naming to docker.io/library/back-end-discovery:latest done
-#17 unpacking to docker.io/library/back-end-discovery:latest 0.0s done
-#17 DONE 0.3s
+#17 [notification-service internal] load build definition from Dockerfile.dev
+#17 transferring dockerfile: 709B 0.0s done
+#17 DONE 0.1s
 
-#18 [discovery] resolving provenance for metadata file
+#3 [notification-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#3 DONE 2.0s
+
+#2 [notification-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#2 DONE 2.0s
+
+#18 [notification-service internal] load .dockerignore
+#18 transferring context: 2B done
 #18 DONE 0.0s
 
-#19 [gateway internal] load build definition from Dockerfile.dev
-#19 transferring dockerfile: 691B 0.0s done
+#19 [notification-service internal] load build context
 #19 DONE 0.0s
 
-#5 [gateway internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#5 DONE 4.7s
+#7 [notification-service stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
+#7 DONE 0.2s
 
-#2 [gateway internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#2 DONE 4.7s
+#6 [notification-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#6 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
+#6 DONE 0.2s
 
-#20 [gateway internal] load .dockerignore
-#20 transferring context: 2B done
-#20 DONE 0.0s
+#19 [notification-service internal] load build context
+#19 transferring context: 2.48kB 0.0s done
+#19 DONE 0.0s
 
-#21 [gateway internal] load build context
-#21 DONE 0.0s
+#9 [notification-service stage-1 2/3] WORKDIR /app
+#9 CACHED
 
-#9 [gateway build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#9 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.3s done
-#9 DONE 1.4s
+#20 [notification-service build 3/6] COPY pom.xml .
+#20 CACHED
 
-#8 [gateway stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.3s done
-#8 DONE 1.4s
+#21 [notification-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#21 CACHED
 
-#21 [gateway internal] load build context
-#21 transferring context: 1.74kB 0.1s done
-#21 DONE 0.2s
-
-#11 [gateway build 2/6] WORKDIR /app
+#11 [notification-service build 2/6] WORKDIR /app
 #11 CACHED
 
-#22 [gateway build 3/6] COPY pom.xml .
+#22 [notification-service build 5/6] COPY src ./src
 #22 CACHED
 
-#23 [gateway build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#23 [notification-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
 #23 CACHED
 
-#24 [gateway build 5/6] COPY src ./src
-#24 DONE 0.4s
+#24 [notification-service stage-1 3/3] COPY --from=build /app/target/notification-service-0.0.1-SNAPSHOT.jar .
+#24 CACHED
 
-#25 [gateway build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#25 23.08 [INFO] Scanning for projects...
-#25 23.89 [WARNING] 
-#25 23.89 [WARNING] Some problems were encountered while building the effective model for com.hcmus:api-gateway:jar:0.0.1-SNAPSHOT
-#25 23.89 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-test:jar -> duplicate declaration of version (?) @ line 51, column 15
-#25 23.89 [WARNING] 
-#25 23.89 [WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
-#25 23.89 [WARNING] 
-#25 23.89 [WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
-#25 23.89 [WARNING] 
-#25 23.92 [INFO] 
-#25 23.92 [INFO] -----------------------< com.hcmus:api-gateway >------------------------
-#25 23.92 [INFO] Building api-gateway 0.0.1-SNAPSHOT
-#25 23.92 [INFO]   from pom.xml
-#25 23.92 [INFO] --------------------------------[ jar ]---------------------------------
-#25 26.26 [INFO] 
-#25 26.26 [INFO] --- clean:3.4.0:clean (default-clean) @ api-gateway ---
-#25 26.44 [INFO] 
-#25 26.44 [INFO] --- resources:3.3.1:resources (default-resources) @ api-gateway ---
-#25 27.52 [INFO] Copying 1 resource from src/main/resources to target/classes
-#25 27.57 [INFO] Copying 0 resource from src/main/resources to target/classes
-#25 27.57 [INFO] 
-#25 27.57 [INFO] --- compiler:3.13.0:compile (default-compile) @ api-gateway ---
-#25 27.99 [INFO] Recompiling the module because of changed source code.
-#25 28.03 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/classes
-#25 30.41 [INFO] 
-#25 30.42 [INFO] --- resources:3.3.1:testResources (default-testResources) @ api-gateway ---
-#25 30.43 [INFO] skip non existing resourceDirectory /app/src/test/resources
-#25 30.43 [INFO] 
-#25 30.43 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ api-gateway ---
-#25 30.44 [INFO] Recompiling the module because of changed dependency.
-#25 30.45 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
-#25 31.01 [INFO] 
-#25 31.01 [INFO] --- surefire:3.5.2:test (default-test) @ api-gateway ---
-#25 31.26 [INFO] Tests are skipped.
-#25 31.26 [INFO] 
-#25 31.26 [INFO] --- jar:3.4.2:jar (default-jar) @ api-gateway ---
-#25 31.82 [INFO] Building jar: /app/target/api-gateway-0.0.1-SNAPSHOT.jar
-#25 31.91 [INFO] 
-#25 31.91 [INFO] --- spring-boot:3.4.1:repackage (repackage) @ api-gateway ---
-#25 34.17 [INFO] Replacing main artifact /app/target/api-gateway-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
-#25 34.17 [INFO] The original artifact has been renamed to /app/target/api-gateway-0.0.1-SNAPSHOT.jar.original
-#25 34.17 [INFO] 
-#25 34.17 [INFO] --- install:3.1.3:install (default-install) @ api-gateway ---
-#25 34.23 [INFO] Installing /app/pom.xml to /root/.m2/repository/com/hcmus/api-gateway/0.0.1-SNAPSHOT/api-gateway-0.0.1-SNAPSHOT.pom
-#25 34.24 [INFO] Installing /app/target/api-gateway-0.0.1-SNAPSHOT.jar to /root/.m2/repository/com/hcmus/api-gateway/0.0.1-SNAPSHOT/api-gateway-0.0.1-SNAPSHOT.jar
-#25 34.77 [INFO] ------------------------------------------------------------------------
-#25 34.77 [INFO] BUILD SUCCESS
-#25 34.77 [INFO] ------------------------------------------------------------------------
-#25 34.78 [INFO] Total time:  11.741 s
-#25 34.78 [INFO] Finished at: 2025-01-08T03:33:03Z
-#25 34.78 [INFO] ------------------------------------------------------------------------
-#25 DONE 36.1s
+#25 [notification-service] exporting to image
+#25 exporting layers done
+#25 exporting manifest sha256:235e910ef2fc2d9fb4a50ca055327da472297c21b6d1301cd1958c5ebfd7ac4e done
+#25 exporting config sha256:0171a09ed25175495b86b051ade4506c628012b9e29571a2c8f0afa45aa05670 done
+#25 exporting attestation manifest sha256:7528d5f4cc92f4e9a358f6466b6e9e92817d6433219b9e90e33758bc2d7a33d6
+#25 exporting attestation manifest sha256:7528d5f4cc92f4e9a358f6466b6e9e92817d6433219b9e90e33758bc2d7a33d6 0.1s done
+#25 exporting manifest list sha256:d03d7c05344d87523382812801cdbbe3777c0e221e0458d0ae7a0af1214eac59 0.0s done
+#25 naming to docker.io/library/back-end-notification-service:latest done
+#25 unpacking to docker.io/library/back-end-notification-service:latest 0.0s done
+#25 DONE 0.2s
 
-#10 [gateway stage-1 2/3] WORKDIR /app
-#10 CACHED
-
-#26 [gateway stage-1 3/3] COPY --from=build /app/target/api-gateway-0.0.1-SNAPSHOT.jar .
-#26 DONE 1.5s
-
-#27 [gateway] exporting to image
-#27 exporting layers
-#27 exporting layers 8.3s done
-#27 exporting manifest sha256:74f0b38d03aa2d0f12f63f4844056a8d50b787b6b7868477e952ac2f494ecab9
-#27 exporting manifest sha256:74f0b38d03aa2d0f12f63f4844056a8d50b787b6b7868477e952ac2f494ecab9 0.3s done
-#27 exporting config sha256:a230bc29d513fb8719a54c52287f235e1bce3f7d498edcd0c3683419887a28b0
-#27 exporting config sha256:a230bc29d513fb8719a54c52287f235e1bce3f7d498edcd0c3683419887a28b0 0.3s done
-#27 exporting attestation manifest sha256:bd25c06ae31b86f8b796f6a2a9f6c7d8fe262634100c2254262103946182a866
-#27 exporting attestation manifest sha256:bd25c06ae31b86f8b796f6a2a9f6c7d8fe262634100c2254262103946182a866 0.6s done
-#27 exporting manifest list sha256:30f8775dd3e0af76c24c7eeda9f2f64d407833b8ad057e284d5af169c608a190
-#27 exporting manifest list sha256:30f8775dd3e0af76c24c7eeda9f2f64d407833b8ad057e284d5af169c608a190 0.3s done
-#27 naming to docker.io/library/back-end-gateway:latest
-#27 naming to docker.io/library/back-end-gateway:latest 0.1s done
-#27 unpacking to docker.io/library/back-end-gateway:latest
-#27 unpacking to docker.io/library/back-end-gateway:latest 2.7s done
-#27 DONE 12.9s
-
-#28 [gateway] resolving provenance for metadata file
-#28 DONE 0.2s
-time="2025-01-08T10:33:21+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
-time="2025-01-08T10:33:21+07:00" level=warning msg="Found orphan containers ([campaign-service voucher-service game-service brand-service user-service notification-service image-service mongo mysql-container]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+#26 [notification-service] resolving provenance for metadata file
+#26 DONE 0.0s
+time="2025-01-08T13:39:13+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-01-08T13:39:13+07:00" level=warning msg="Found orphan containers ([api-gateway game-service mysql-container campaign-service voucher-service brand-service user-service image-service]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
  Container discovery-server  Creating
+ Container mongo  Creating
  Container discovery-server  Created
- Container api-gateway  Creating
- Container api-gateway  Created
+ Container notification-service  Creating
+ Container mongo  Created
+ Container notification-service  Created
  Container discovery-server  Starting
+ Container mongo  Starting
+ Container mongo  Started
  Container discovery-server  Started
- Container api-gateway  Starting
- Container api-gateway  Started
+ Container notification-service  Starting
+ Container notification-service  Started
 Services started successfully.

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/notifications")
+@RequestMapping("/v3/notifications")
 @RequiredArgsConstructor
 public class NotificationController {
     private final NotificationService notificationService;
@@ -35,7 +35,7 @@ public class NotificationController {
      * @return a response entity with no content
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> softDeleteNotification(@PathVariable Long id)  {
+    public ResponseEntity<Void> softDeleteNotification(@PathVariable String id)  {
         notificationService.softDeleteNotification(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
