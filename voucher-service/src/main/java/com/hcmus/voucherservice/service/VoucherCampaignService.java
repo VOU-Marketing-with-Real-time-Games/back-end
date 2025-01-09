@@ -1,5 +1,7 @@
 package com.hcmus.voucherservice.service;
 
+import com.hcmus.voucherservice.dto.VoucherResponseDto;
+import com.hcmus.voucherservice.dto.VoucherUserRequestDto;
 import com.hcmus.voucherservice.model.Voucher;
 import com.hcmus.voucherservice.model.VoucherCampaign;
 import com.hcmus.voucherservice.repository.VoucherCampaignRepository;
@@ -32,4 +34,13 @@ public class VoucherCampaignService {
         }
         return false;
     }
+
+    public void takeVoucherAfterQuiz(VoucherUserRequestDto voucherUserRequestDto) {
+        Long campaignId = voucherUserRequestDto.getCampaignId();
+        List<Long> userIds = voucherUserRequestDto.getUserIds();
+        for(Long userId : userIds) {
+            takeVoucherToUser(campaignId, userId);
+        }
+    }
+
 }

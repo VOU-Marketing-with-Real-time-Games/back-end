@@ -1,9 +1,9 @@
 package com.hcmus.quizzrealtime.socket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hcmus.quizzrealtime.client.GameClient;
 import com.hcmus.quizzrealtime.dto.QuestionDto;
 import com.hcmus.quizzrealtime.dto.UserQuizzTotalScoreDto;
+import com.hcmus.quizzrealtime.thread.QuizzThread;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,6 +13,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +28,15 @@ public class QuizSocketHandler extends TextWebSocketHandler {
     // Map to track connected users by quiz ID
     private final Map<Long, Map<Long, WebSocketSession>> quizUserSessions = new ConcurrentHashMap<>(); // quizzId -> {userId -> sessionId}
     private final Map<Long, List<Long>> quizAnswerCompletion = new ConcurrentHashMap<>();
-    private final GameClient gameClient;
     // Map to track quiz states
     private final Map<Long, String> quizStates = new ConcurrentHashMap<>(); // quizzId -> state ("WAITING", "HAPPENING")
+    private final Map<Long, QuizzThread> quizzThreads = new ConcurrentHashMap<>();
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) {
         log.info("New connection established: {}", session.getId());
     }
+
     private void handleConnectQuiz(WebSocketSession session, Long userId, Long quizzId) throws IOException {
         // Validate if quiz is still in the "WAITING" state
         String quizState = quizStates.getOrDefault(quizzId, "WAITING");
@@ -47,6 +49,7 @@ public class QuizSocketHandler extends TextWebSocketHandler {
         quizUserSessions.computeIfAbsent(quizzId, k -> new ConcurrentHashMap<>()).put(userId, session);
         log.info("User {} connected to quiz {}", userId, quizzId);
     }
+
     private void handleAnswerComplete(Long userId, Long quizzId) {
         // Ensure thread-safe addition of userId to the quiz's completion list
         quizAnswerCompletion.compute(quizzId, (key, currentList) -> {
@@ -64,15 +67,16 @@ public class QuizSocketHandler extends TextWebSocketHandler {
         if (connectedUsers != null && completedUsers != null) {
             boolean allCompleted = connectedUsers.keySet().stream().allMatch(completedUsers::contains);
             if (allCompleted) {
+                QuizzThread quizzThread = quizzThreads.get(quizzId);
                 // Send results to all connected users
-                sendResultsToUsers(quizzId, connectedUsers);
+                quizzThread.totalScoreUserInQuiz();
                 // Reset the quizAnswerCompletion list for this quizzId
                 quizAnswerCompletion.remove(quizzId);
             }
         }
     }
-    private void sendResultsToUsers(Long quizzId, Map<Long, WebSocketSession> connectedUsers) {
-        List<UserQuizzTotalScoreDto> userQuizzTotalScoreDto = gameClient.getTotalScoreUserInQuizz(quizzId);
+    public void sendResultsToUsers(List<UserQuizzTotalScoreDto> userQuizzTotalScoreDto, Long quizzId) {
+        Map<Long, WebSocketSession> connectedUsers = quizUserSessions.get(quizzId);
         // Send results to all connected users
         for (Map.Entry<Long, WebSocketSession> entry : connectedUsers.entrySet()) {
             try {
@@ -119,16 +123,18 @@ public class QuizSocketHandler extends TextWebSocketHandler {
         // Remove user from any quiz they were connected to
         quizUserSessions.forEach((quizId, userSessions) ->
                 userSessions.entrySet().removeIf(entry -> entry.getValue().equals(session)));
+
     }
-    public void startQuiz(Long quizzId, List<QuestionDto> questionsAndAnswers) {
+    public void startQuiz(Long quizzId, List<QuestionDto> questionsAndAnswers, QuizzThread quizzThread) {
         log.info("Starting quiz: {}", quizzId);
+        quizzThreads.put(quizzId, quizzThread);
         quizStates.put(quizzId, "HAPPENING");
         // Notify all users in the quiz
         Map<Long, WebSocketSession> userSessions = quizUserSessions.getOrDefault(quizzId, Collections.emptyMap());
         userSessions.forEach((userId, session) -> {
             // Simulate sending the quiz questions to clients
             try {
-                if (session != null) {
+                if (session !=  null) {
                     session.sendMessage(new TextMessage(objectMapper.writeValueAsString(questionsAndAnswers)));
                 }
             } catch (Exception e) {
@@ -136,4 +142,14 @@ public class QuizSocketHandler extends TextWebSocketHandler {
             }
         });
     }
+    public List<Long> getUserIdsByQuizzId(Long quizzId) {
+        Map<Long, WebSocketSession> userSessions = quizUserSessions.getOrDefault(quizzId, Collections.emptyMap());
+        return new ArrayList<>(userSessions.keySet());
+    }
+
+    public void addUserCampaignGame(Long quizzId, QuizzThread quizzThread) {
+        List<Long> userIds = getUserIdsByQuizzId(quizzId);
+        quizzThread.addUserCampaignGame(userIds);
+    }
+
 }

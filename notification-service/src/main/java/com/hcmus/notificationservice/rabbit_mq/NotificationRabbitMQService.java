@@ -23,4 +23,14 @@ public class NotificationRabbitMQService {
             LOGGER.error("Error broadcasting notification to clients: " + e.getMessage());
         }
     }
+
+    @RabbitListener(queues = "quizz-queue")
+    public void handQuizNotification(NotificationDto notificationDto) {
+        LOGGER.info("Received from QuizzService: " + notificationDto);
+        try {
+            notificationSocketHandler.broadcastToClients(notificationDto);
+        } catch (Exception e) {
+            LOGGER.error("Error broadcasting notification to clients: " + e.getMessage());
+        }
+    }
 }

@@ -1,6 +1,24 @@
 spring:
   application:
     name: quizz-realtime
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+    template:
+      mandatory: true
+rabbitmq:
+  exchange: quizz-exchange
+  routingkey: quizz-routing
+  queue: quizz-queue
+
 server:
   port: 8007
 

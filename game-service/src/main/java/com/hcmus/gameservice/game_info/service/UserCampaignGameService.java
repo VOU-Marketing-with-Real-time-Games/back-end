@@ -7,12 +7,14 @@ import com.hcmus.gameservice.game_info.dto.UserCampaignGameResponseDto;
 import com.hcmus.gameservice.game_info.exception.GameCampaignNotFoundException;
 import com.hcmus.gameservice.game_info.exception.UserCampaignGameNotFoundException;
 import com.hcmus.gameservice.game_info.model.GameCampaign;
+import com.hcmus.gameservice.game_info.model.GameType;
 import com.hcmus.gameservice.game_info.model.UserCampaignGame;
 import com.hcmus.gameservice.game_info.repository.UserCampaignGameRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,5 +83,27 @@ public class UserCampaignGameService {
         return userCampaignGameRepository.findDistinctUserIdAllCampaign();
     }
 
+    // UserCampaignGameService.java
+    public void addUserCampaignGamesByUserIdsAndQuizzId(List<Long> userIds, Long quizzId) throws GameCampaignNotFoundException {
+        GameCampaign gameCampaign = gameCampaignService.findByGameTypeAndGameId(GameType.QUIZZ, quizzId);
+        for (Long userId : userIds) {
+            UserCampaignGame userCampaignGame = new UserCampaignGame();
+            userCampaignGame.setUserId(userId);
+            userCampaignGame.setCampaignGame(gameCampaign);
+            userCampaignGame.setIsCompleted(false);
+            userCampaignGameRepository.save(userCampaignGame);
+        }
+    }
+
+    public void updateListUserCampaignGame(List<Long> userIds, Long quizzId)  {
+        GameCampaign gameCampaign = gameCampaignService.findByGameTypeAndGameId(GameType.QUIZZ, quizzId);
+        for (Long userId : userIds) {
+            UserCampaignGame userCampaignGame = userCampaignGameRepository.findByUserIdAndCampaignGameId(userId, gameCampaign.getId());
+            if (userCampaignGame != null) {
+                userCampaignGame.setIsCompleted(true);
+                userCampaignGameRepository.save(userCampaignGame);
+            }
+        }
+    }
 
 }

@@ -3,6 +3,7 @@ package com.hcmus.voucherservice.controller;
 import com.hcmus.voucherservice.dto.UpdateVoucherDto;
 import com.hcmus.voucherservice.dto.VoucherDto;
 import com.hcmus.voucherservice.dto.VoucherResponseDto;
+import com.hcmus.voucherservice.dto.VoucherUserRequestDto;
 import com.hcmus.voucherservice.exception.ExistedVoucherException;
 import com.hcmus.voucherservice.exception.VoucherNotFoundException;
 import com.hcmus.voucherservice.service.VoucherCampaignService;
@@ -57,6 +58,7 @@ public class VoucherController {
         return new ResponseEntity<>(voucher,HttpStatus.OK);
     }
 
+
     /**
      * Update a voucher by its ID.
      *
@@ -106,5 +108,11 @@ public class VoucherController {
     @PostMapping("/take-voucher")
     public boolean takeVoucherToUser(@RequestParam Long campaignId, @RequestParam Long userId) {
         return voucherCampaignService.takeVoucherToUser(campaignId, userId);
+    }
+
+    @PostMapping("/take-voucher-after-quizz")
+    public ResponseEntity<Void> takeVoucherAfterQuizz(@RequestBody VoucherUserRequestDto voucherUserRequestDto) {
+        voucherCampaignService.takeVoucherAfterQuiz(voucherUserRequestDto);
+        return ResponseEntity.ok().build();
     }
 }

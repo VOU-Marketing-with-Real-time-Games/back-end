@@ -1,5 +1,6 @@
 package com.hcmus.gameservice.game_info.controller;
 
+import com.hcmus.gameservice.game_info.dto.UserCampaignGameClientRequest;
 import com.hcmus.gameservice.game_info.dto.UserCampaignGameRequestDto;
 import com.hcmus.gameservice.game_info.dto.UserCampaignGameResponseDto;
 import com.hcmus.gameservice.game_info.exception.GameCampaignNotFoundException;
@@ -93,8 +94,33 @@ public class UserCampaignGameApiController {
     }
 
     @GetMapping("/campaign/users")
-    public ResponseEntity<List<Long>> findDistinctUserByAllCampaign()  {
+    public ResponseEntity<List<Long>> findDistinctUserByAllCampaign() {
         List<Long> responseDtos = userCampaignGameService.getDistinctUserIdAllCampaigns();
         return ResponseEntity.ok(responseDtos);
     }
+
+    /**
+     * Adds user campaign games by user IDs and Quizz ID.
+     * @return a list of UserCampaignGameResponseDto
+     * @throws GameCampaignNotFoundException if the game campaign is not found
+     */
+    @PostMapping("/add-by-user-ids-and-quizz-id")
+    public ResponseEntity<Void> addUserCampaignGamesByUserIdsAndQuizzId(
+            @RequestBody UserCampaignGameClientRequest request) throws GameCampaignNotFoundException {
+        userCampaignGameService.addUserCampaignGamesByUserIdsAndQuizzId(request.getUserIds(), request.getQuizzId());
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Updates user campaign games to mark them as completed by user IDs and Quizz ID
+     * @return a ResponseEntity indicating the operation result
+     */
+    @PutMapping("/update-completed-by-user-ids-and-quizz-id")
+    public ResponseEntity<Void> updateListUserCampaignGame(
+            @RequestBody UserCampaignGameClientRequest request) {
+        userCampaignGameService.updateListUserCampaignGame(request.getUserIds(), request.getQuizzId());
+        return ResponseEntity.ok().build();
+    }
+
+
 }

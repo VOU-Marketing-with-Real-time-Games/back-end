@@ -7,6 +7,7 @@ import com.hcmus.gameservice.game_info.exception.GameCampaignNotFoundException;
 import com.hcmus.gameservice.game_info.exception.GameNotFoundException;
 import com.hcmus.gameservice.game_info.model.GameCampaign;
 import com.hcmus.gameservice.game_info.model.GameInfo;
+import com.hcmus.gameservice.game_info.model.GameType;
 import com.hcmus.gameservice.game_info.model.UserCampaignGame;
 import com.hcmus.gameservice.game_info.repository.GameCampaignRepository;
 import lombok.RequiredArgsConstructor;
@@ -90,4 +91,7 @@ public class GameCampaignService {
         return gameCampaignRepository.findDistinctCampaignByGameId(gameInfo.getId());
     }
 
+    public GameCampaign findByGameTypeAndGameId(GameType gameType, Long gameId) {
+        return gameCampaignRepository.findByGameTypeAndGameId(gameType, gameId);
+    }
 }

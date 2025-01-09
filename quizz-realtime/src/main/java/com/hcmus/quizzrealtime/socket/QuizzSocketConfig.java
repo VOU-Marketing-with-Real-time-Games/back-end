@@ -10,9 +10,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 @RequiredArgsConstructor
 public class QuizzSocketConfig implements WebSocketConfigurer {
-
     private final QuizSocketHandler quizSocketHandler;
-
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(quizSocketHandler, "/quizz-game").setAllowedOrigins("*");
