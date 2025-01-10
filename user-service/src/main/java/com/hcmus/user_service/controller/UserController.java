@@ -2,6 +2,7 @@ package com.hcmus.user_service.controller;
 
 import com.hcmus.user_service.dto.UserRequestDto;
 import com.hcmus.user_service.dto.UserRespondDto;
+import com.hcmus.user_service.dto.UserUpdateDto;
 import com.hcmus.user_service.exception.PhoneNumberExistedException;
 import com.hcmus.user_service.exception.UserEmailExistedException;
 import com.hcmus.user_service.exception.UserNameExistedException;
@@ -41,8 +42,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id,@Valid @RequestBody UserRequestDto userDto) throws UserNotFoundException {
-        UserRespondDto user = userService.update(id,userDto);
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto userDto)
+            throws UserNotFoundException {
+        UserRespondDto user = userService.update(id, userDto);
         return ResponseEntity.ok(user);
     }
 
