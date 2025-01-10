@@ -1,6 +1,7 @@
 package com.hcmus.user_service.service;
 import com.hcmus.user_service.dto.UserRequestDto;
 import com.hcmus.user_service.dto.UserRespondDto;
+import com.hcmus.user_service.dto.UserUpdateDto;
 import com.hcmus.user_service.exception.PhoneNumberExistedException;
 import com.hcmus.user_service.exception.UserEmailExistedException;
 import com.hcmus.user_service.exception.UserNameExistedException;
@@ -32,7 +33,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
-    public UserRespondDto update(Long id, UserRequestDto userDto) throws UserNotFoundException {
+    public UserRespondDto update(Long id, UserUpdateDto userDto) throws UserNotFoundException {
         User user = modelMapper.map(userDto, User.class);
         User oldUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
