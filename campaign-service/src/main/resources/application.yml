@@ -2,9 +2,9 @@ spring:
   application:
     name: campaign-service
   datasource:
-    url: jdbc:mysql://localhost:3306/campaign_db
-    username: root
-    password: leminhhoang
+    url: jdbc:mysql://${MYSQL_HOST}:3306/${CAMPAIGN_DB}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
