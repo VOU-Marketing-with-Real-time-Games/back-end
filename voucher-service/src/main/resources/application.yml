@@ -2,8 +2,8 @@ spring:
   application:
     name: voucher-service
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST}:3306/${VOUCHER_DB}
-    username: ${MYSQL_USER}
+    url: jdbc:mysql://${MYSQL_URL}:3306/${VOUCHER_DB}
+    username: ${VOUCHER_DB}
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:

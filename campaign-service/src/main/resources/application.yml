@@ -2,8 +2,8 @@ spring:
   application:
     name: campaign-service
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST}:3306/${CAMPAIGN_DB}
-    username: ${MYSQL_USER}
+    url: jdbc:mysql://${MYSQL_URL}:3306/${CAMPAIGN_DB}
+    username: ${CAMPAIGN_DB}
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:

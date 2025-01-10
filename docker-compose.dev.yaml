@@ -14,21 +14,20 @@ services:
 #      - ./database/sql:/docker-entrypoint-initdb.d/sql
 #    ports:
 #      - "3306:3306"
-  mongo:
-    image: mongo:6.0
-    container_name: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
-      MONGO_MULTIPLE_DATABASES: ${MONGO_MULTIPLE_DATABASES}
-    volumes:
-      - mongo-data:/data/db
-      - ./database/init-multi-mongodb-databases.sh:/docker-entrypoint-initdb.d/init-multi-mongodb-databases.sh
-      - ./database/js:/docker-entrypoint-initdb.d/js
-    ports:
-      - "27017:27017"
-    networks:
-      - microservices-network
+#  mongo:
+#    image: mongo:6.0
+#    container_name: mongo
+#    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+#      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+#    volumes:
+#      - mongo-data:/data/db
+#      - ./database/init-multi-mongodb-databases.sh:/docker-entrypoint-initdb.d/init-multi-mongodb-databases.sh
+#    ports:
+#      - "27017:27017"
+#    networks:
+#      - microservices-network
   discovery:
     build:
       context: ./discovery-server
@@ -53,7 +52,7 @@ services:
 #    env_file:
 #      - .env
 #    container_name: api-gateway
-
+#
 #  user-service:
 #    build:
 #      context: ./user-service
@@ -128,19 +127,35 @@ services:
 #      - .env
 #    container_name: image-service
 #
-  notification-service:
-    build:
-      context: ./notification-service
-      dockerfile: Dockerfile.dev
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    restart: always
     ports:
-      - "8002:8002"
-    depends_on:
-      - discovery
+      - "5672:5672" # RabbitMQ default port for AMQP
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     networks:
       - microservices-network
-    env_file:
-      - .env
-    container_name: notification-service
+
+#
+#
+#  notification-service:
+#    build:
+#      context: ./notification-service
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8002:8002"
+#    depends_on:
+#      - discovery
+#      - mongo
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: notification-service
 #
 #  voucher-service:
 #      build:
@@ -156,9 +171,24 @@ services:
 #      env_file:
 #        - .env
 #      container_name: voucher-service
-volumes:
- # db-data:
- mongo-data:
+
+  quizz-realtime:
+    build:
+      context: ./quizz-realtime
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8007:8007"
+    depends_on:
+      - rabbitmq
+      - discovery
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: quizz-realtime
+#volumes:
+# db-data:
+# mongo-data:
 networks:
   microservices-network:
     driver: bridge

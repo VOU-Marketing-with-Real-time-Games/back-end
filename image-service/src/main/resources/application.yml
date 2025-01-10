@@ -3,7 +3,7 @@ spring:
     name: image-service
   data:
     mongodb:
-      host: ${MONGO_HOST}
+      host: ${MONGO_URL}
       port: 27017
       database: ${IMAGE_DB}
 server:

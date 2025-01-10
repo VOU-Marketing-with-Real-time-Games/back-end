@@ -2,8 +2,8 @@ spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST}:3306/${USER_DB}
-    username: ${MYSQL_USER}
+    url: jdbc:mysql://${MYSQL_URL}:3306/${USER_DB}
+    username: ${USER_DB}
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:

@@ -2,10 +2,10 @@ spring:
   application:
     name: quizz-realtime
   rabbitmq:
-    host: localhost
+    host: ${RABBITMQ_HOST}
     port: 5672
-    username: guest
-    password: guest
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
     listener:
       simple:
         retry:

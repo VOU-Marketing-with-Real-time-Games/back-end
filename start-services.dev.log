@@ -1,165 +1,167 @@
-time="2025-01-08T13:38:55+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
- Container mongo  Stopping
- Container notification-service  Stopping
- Container mongo  Stopped
- Container mongo  Removing
- Container mongo  Removed
- Container notification-service  Stopped
- Container notification-service  Removing
- Container notification-service  Removed
+time="2025-01-10T21:01:02+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
  Container discovery-server  Stopping
+ Container rabbitmq  Stopping
  Container discovery-server  Stopped
  Container discovery-server  Removing
+ Container rabbitmq  Stopped
+ Container rabbitmq  Removing
  Container discovery-server  Removed
+ Container rabbitmq  Removed
  Network back-end_microservices-network  Removing
- Network back-end_microservices-network  Resource is still in use
-time="2025-01-08T13:39:07+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Network back-end_microservices-network  Removed
+time="2025-01-10T21:01:03+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [discovery internal] load build definition from Dockerfile.dev
-#1 transferring dockerfile: 701B 0.1s done
-#1 DONE 0.1s
+#1 transferring dockerfile: 701B 0.0s done
+#1 DONE 0.0s
 
 #2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
 #2 ...
 
-#3 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#3 DONE 1.5s
+#3 [discovery auth] library/openjdk:pull token for registry-1.docker.io
+#3 DONE 0.0s
 
-#2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#2 DONE 1.5s
-
-#4 [discovery internal] load .dockerignore
-#4 transferring context: 2B done
+#4 [discovery auth] library/maven:pull token for registry-1.docker.io
 #4 DONE 0.0s
 
-#5 [discovery internal] load build context
-#5 DONE 0.0s
+#5 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#5 DONE 2.3s
 
-#6 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#6 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
-#6 DONE 0.1s
+#2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#2 DONE 2.3s
 
-#7 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
-#7 DONE 0.1s
+#6 [discovery internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
 
-#5 [discovery internal] load build context
-#5 transferring context: 731B 0.0s done
-#5 DONE 0.0s
+#7 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#7 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.0s done
+#7 DONE 0.0s
 
-#8 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#8 CACHED
+#8 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.0s done
+#8 DONE 0.1s
 
-#9 [discovery stage-1 2/3] WORKDIR /app
-#9 CACHED
+#9 [discovery internal] load build context
+#9 transferring context: 731B 0.0s done
+#9 DONE 0.0s
 
-#10 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#10 [discovery build 3/6] COPY pom.xml .
 #10 CACHED
 
-#11 [discovery build 2/6] WORKDIR /app
+#11 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
 #11 CACHED
 
-#12 [discovery build 3/6] COPY pom.xml .
+#12 [discovery stage-1 2/3] WORKDIR /app
 #12 CACHED
 
-#13 [discovery build 5/6] COPY src ./src
+#13 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 #13 CACHED
 
-#14 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
+#14 [discovery build 5/6] COPY src ./src
 #14 CACHED
 
-#15 [discovery] exporting to image
-#15 exporting layers
-#15 exporting layers 0.0s done
-#15 exporting manifest sha256:08e3419b7d3b670a33e2a1f0cb073cf45a648bd2e112a95e218652bb1cd22c7f done
-#15 exporting config sha256:59f47f698722a4b63f4deba075a92fdf0f7bf7f2fe4cdff3a4adec7b3f853a60 done
-#15 exporting attestation manifest sha256:56d1df6fd85a495c9aa6e7538c299c4cce5cacefb8e1f1dc148b5a0bb2615375
-#15 exporting attestation manifest sha256:56d1df6fd85a495c9aa6e7538c299c4cce5cacefb8e1f1dc148b5a0bb2615375 0.1s done
-#15 exporting manifest list sha256:7779373043553cf20441a203705266b65e78145d5fad5ab3a972478b6172ec31 0.0s done
-#15 naming to docker.io/library/back-end-discovery:latest done
-#15 unpacking to docker.io/library/back-end-discovery:latest 0.0s done
-#15 DONE 0.3s
+#15 [discovery build 2/6] WORKDIR /app
+#15 CACHED
 
-#16 [discovery] resolving provenance for metadata file
-#16 DONE 0.2s
+#16 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
+#16 CACHED
 
-#17 [notification-service internal] load build definition from Dockerfile.dev
-#17 transferring dockerfile: 709B 0.0s done
+#17 [discovery] exporting to image
+#17 exporting layers done
+#17 exporting manifest sha256:08e3419b7d3b670a33e2a1f0cb073cf45a648bd2e112a95e218652bb1cd22c7f done
+#17 exporting config sha256:59f47f698722a4b63f4deba075a92fdf0f7bf7f2fe4cdff3a4adec7b3f853a60 done
+#17 exporting attestation manifest sha256:170bd7b5fd2f0515a01ec68c69f2a653e69122a1a5f5799d765705f1bd803621 0.1s done
+#17 exporting manifest list sha256:7218ec7a97951f0ba8995aa1598b3a347a17663f1c9d0a282daaf7e350174e4a
+#17 exporting manifest list sha256:7218ec7a97951f0ba8995aa1598b3a347a17663f1c9d0a282daaf7e350174e4a 0.0s done
+#17 naming to docker.io/library/back-end-discovery:latest done
+#17 unpacking to docker.io/library/back-end-discovery:latest done
 #17 DONE 0.1s
 
-#3 [notification-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#3 DONE 2.0s
-
-#2 [notification-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#2 DONE 2.0s
-
-#18 [notification-service internal] load .dockerignore
-#18 transferring context: 2B done
+#18 [discovery] resolving provenance for metadata file
 #18 DONE 0.0s
 
-#19 [notification-service internal] load build context
+#19 [quizz-realtime internal] load build definition from Dockerfile.dev
+#19 transferring dockerfile: 697B done
 #19 DONE 0.0s
 
-#7 [notification-service stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#7 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
-#7 DONE 0.2s
+#2 [quizz-realtime internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#2 ...
 
-#6 [notification-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#6 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
-#6 DONE 0.2s
+#5 [quizz-realtime internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#5 DONE 2.7s
 
-#19 [notification-service internal] load build context
-#19 transferring context: 2.48kB 0.0s done
-#19 DONE 0.0s
+#2 [quizz-realtime internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#2 DONE 2.8s
 
-#9 [notification-service stage-1 2/3] WORKDIR /app
-#9 CACHED
+#20 [quizz-realtime internal] load .dockerignore
+#20 transferring context: 2B done
+#20 DONE 0.0s
 
-#20 [notification-service build 3/6] COPY pom.xml .
-#20 CACHED
+#21 [quizz-realtime internal] load build context
+#21 DONE 0.0s
 
-#21 [notification-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#21 CACHED
+#8 [quizz-realtime stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.0s done
+#8 DONE 0.1s
 
-#11 [notification-service build 2/6] WORKDIR /app
-#11 CACHED
+#7 [quizz-realtime build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#7 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.0s done
+#7 DONE 0.1s
 
-#22 [notification-service build 5/6] COPY src ./src
+#21 [quizz-realtime internal] load build context
+#21 transferring context: 2.87kB done
+#21 DONE 0.0s
+
+#15 [quizz-realtime build 2/6] WORKDIR /app
+#15 CACHED
+
+#22 [quizz-realtime build 3/6] COPY pom.xml .
 #22 CACHED
 
-#23 [notification-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#23 [quizz-realtime build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 #23 CACHED
 
-#24 [notification-service stage-1 3/3] COPY --from=build /app/target/notification-service-0.0.1-SNAPSHOT.jar .
+#12 [quizz-realtime stage-1 2/3] WORKDIR /app
+#12 CACHED
+
+#24 [quizz-realtime build 5/6] COPY src ./src
 #24 CACHED
 
-#25 [notification-service] exporting to image
-#25 exporting layers done
-#25 exporting manifest sha256:235e910ef2fc2d9fb4a50ca055327da472297c21b6d1301cd1958c5ebfd7ac4e done
-#25 exporting config sha256:0171a09ed25175495b86b051ade4506c628012b9e29571a2c8f0afa45aa05670 done
-#25 exporting attestation manifest sha256:7528d5f4cc92f4e9a358f6466b6e9e92817d6433219b9e90e33758bc2d7a33d6
-#25 exporting attestation manifest sha256:7528d5f4cc92f4e9a358f6466b6e9e92817d6433219b9e90e33758bc2d7a33d6 0.1s done
-#25 exporting manifest list sha256:d03d7c05344d87523382812801cdbbe3777c0e221e0458d0ae7a0af1214eac59 0.0s done
-#25 naming to docker.io/library/back-end-notification-service:latest done
-#25 unpacking to docker.io/library/back-end-notification-service:latest 0.0s done
-#25 DONE 0.2s
+#25 [quizz-realtime build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#25 CACHED
 
-#26 [notification-service] resolving provenance for metadata file
-#26 DONE 0.0s
-time="2025-01-08T13:39:13+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
-time="2025-01-08T13:39:13+07:00" level=warning msg="Found orphan containers ([api-gateway game-service mysql-container campaign-service voucher-service brand-service user-service image-service]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+#26 [quizz-realtime stage-1 3/3] COPY --from=build /app/target/quizz-realtime-0.0.1-SNAPSHOT.jar .
+#26 CACHED
+
+#27 [quizz-realtime] exporting to image
+#27 exporting layers done
+#27 exporting manifest sha256:167bd42c677930780d01d412965f7dbcc4366b290153c0cef588fbc4fce78614 done
+#27 exporting config sha256:9b2906c2d96cc1eccff5d87fe33f95ce303d4d4b71e1a910e60b31e04c02cf0a done
+#27 exporting attestation manifest sha256:a56544bf1ba66d119f430b69fee0aa085ac9022b070954fd0164c0e5a74c0c7b 0.0s done
+#27 exporting manifest list sha256:53bb97960e0c7b4121895e5013838de97c2b481aa602e50e52024c725950c946
+#27 exporting manifest list sha256:53bb97960e0c7b4121895e5013838de97c2b481aa602e50e52024c725950c946 0.0s done
+#27 naming to docker.io/library/back-end-quizz-realtime:latest done
+#27 unpacking to docker.io/library/back-end-quizz-realtime:latest 0.0s done
+#27 DONE 0.1s
+
+#28 [quizz-realtime] resolving provenance for metadata file
+#28 DONE 0.0s
+time="2025-01-10T21:01:09+07:00" level=warning msg="F:\\HK7\\SoftwareArchitecture\\project\\micro\\back-end\\docker-compose.dev.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Network back-end_microservices-network  Creating
+ Network back-end_microservices-network  Created
+time="2025-01-10T21:01:09+07:00" level=warning msg="Found orphan containers ([notification-service user-service brand-service campaign-service game-service image-service voucher-service api-gateway]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container rabbitmq  Creating
  Container discovery-server  Creating
- Container mongo  Creating
  Container discovery-server  Created
- Container notification-service  Creating
- Container mongo  Created
- Container notification-service  Created
+ Container rabbitmq  Created
+ Container quizz-realtime  Creating
+ Container quizz-realtime  Created
  Container discovery-server  Starting
- Container mongo  Starting
- Container mongo  Started
+ Container rabbitmq  Starting
+ Container rabbitmq  Started
  Container discovery-server  Started
- Container notification-service  Starting
- Container notification-service  Started
+ Container quizz-realtime  Starting
+ Container quizz-realtime  Started
 Services started successfully.

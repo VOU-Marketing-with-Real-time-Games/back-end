@@ -3,14 +3,14 @@ spring:
      name: notification-service
   data:
     mongodb:
-      host: ${MONGO_HOST}
+      host: ${MONGO_URL}
       port: 27017
       database: ${NOTIFICATION_DB}
   rabbitmq:
-    host: localhost
+    host: ${RABBITMQ_HOST}
     port: 5672
-    username: guest
-    password: guest
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
 server:
   port: 8002
 

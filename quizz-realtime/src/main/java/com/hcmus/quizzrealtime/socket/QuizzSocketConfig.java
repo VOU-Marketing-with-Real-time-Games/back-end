@@ -13,6 +13,6 @@ public class QuizzSocketConfig implements WebSocketConfigurer {
     private final QuizSocketHandler quizSocketHandler;
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(quizSocketHandler, "/quizz-game").setAllowedOrigins("*");
+        registry.addHandler(quizSocketHandler, "/v3/quizz-game").setAllowedOrigins("*");
     }
 }
