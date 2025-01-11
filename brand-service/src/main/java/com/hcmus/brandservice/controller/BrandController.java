@@ -1,9 +1,12 @@
 package com.hcmus.brandservice.controller;
+
+import com.hcmus.brandservice.dto.BranchRespondDto;
 import com.hcmus.brandservice.dto.BrandRequestDto;
 import com.hcmus.brandservice.dto.BrandRespondDto;
 import com.hcmus.brandservice.exception.BranchNotFoundException;
 import com.hcmus.brandservice.exception.BrandExistedException;
 import com.hcmus.brandservice.exception.BrandNotFoundException;
+import com.hcmus.brandservice.service.BranchService;
 import com.hcmus.brandservice.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

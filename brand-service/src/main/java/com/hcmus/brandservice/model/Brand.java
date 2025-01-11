@@ -21,7 +21,6 @@ public class Brand {
     private Long id;
     private String name;
     private String field;
-    private String status;
     private Boolean enabled;
     private Long userId;
     private Date createdAt;
@@ -36,9 +35,6 @@ public class Brand {
         }
         if (brand.getField() != null) {
             this.setField(brand.getField());
-        }
-        if (brand.getStatus() != null) {
-            this.setStatus(brand.getStatus());
         }
         if (brand.getEnabled() != null) {
             this.setEnabled(brand.getEnabled());

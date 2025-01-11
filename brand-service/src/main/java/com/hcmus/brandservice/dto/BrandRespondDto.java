@@ -14,7 +14,6 @@ public class BrandRespondDto {
     private Long id;
     private String name;
     private String field;
-    private String status;
     private Boolean enabled;
     private Long creator;
     private String createdAt;

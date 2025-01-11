@@ -9,7 +9,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_MULTIPLE_DATABASES: ${MYSQL_MULTIPLE_DATABASES}
     volumes:
-      - db-data:/var/lib/mysql
+#      - db-data:/var/lib/mysql
+      - /var/lib/mysql #using for temporary volume
       - ./database/init-multi-mysql-databases.sh:/docker-entrypoint-initdb.d/init-multi-mysql-databases.sh
       - ./database/sql:/docker-entrypoint-initdb.d/sql
     ports:
@@ -53,20 +54,20 @@ services:
       - .env
     container_name: api-gateway
 
-  user-service:
-    build:
-      context: ./user-service
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8005:8005"
-    depends_on:
-      - mysql
-      - discovery
-    networks:
-      - microservices-network
-    env_file:
-      - .env
-    container_name: user-service
+#  user-service:
+#    build:
+#      context: ./user-service
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8005:8005"
+#    depends_on:
+#      - mysql
+#      - discovery
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: user-service
 
   brand-service:
     build:
@@ -83,20 +84,20 @@ services:
       - .env
     container_name: brand-service
 
-  campaign-service:
-    build:
-      context: ./campaign-service
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8004:8004"
-    depends_on:
-      - mysql
-      - discovery
-    networks:
-      - microservices-network
-    env_file:
-      - .env
-    container_name: campaign-service
+#  campaign-service:
+#    build:
+#      context: ./campaign-service
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8004:8004"
+#    depends_on:
+#      - mysql
+#      - discovery
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: campaign-service
 
 #  game-service:
 #      build:
@@ -112,20 +113,20 @@ services:
 #      env_file:
 #        - .env
 #      container_name: game-service
-  image-service:
-    build:
-      context: ./image-service
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8007:8007"
-    depends_on:
-      - mongo
-      - discovery
-    networks:
-      - microservices-network
-    env_file:
-      - .env
-    container_name: image-service
+#  image-service:
+#    build:
+#      context: ./image-service
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8007:8007"
+#    depends_on:
+#      - mongo
+#      - discovery
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: image-service
 
   rabbitmq:
     image: rabbitmq:3.9-management
@@ -140,35 +141,35 @@ services:
     networks:
       - microservices-network
 
-  notification-service:
-    build:
-      context: ./notification-service
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8002:8002"
-    depends_on:
-      - discovery
-      - mongo
-    networks:
-      - microservices-network
-    env_file:
-      - .env
-    container_name: notification-service
-
-  voucher-service:
-      build:
-        context: ./voucher-service
-        dockerfile: Dockerfile.dev
-      ports:
-        - "8006:8006"
-      depends_on:
-        - mysql
-        - discovery
-      networks:
-        - microservices-network
-      env_file:
-        - .env
-      container_name: voucher-service
+#  notification-service:
+#    build:
+#      context: ./notification-service
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8002:8002"
+#    depends_on:
+#      - discovery
+#      - mongo
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: notification-service
+#
+#  voucher-service:
+#      build:
+#        context: ./voucher-service
+#        dockerfile: Dockerfile.dev
+#      ports:
+#        - "8006:8006"
+#      depends_on:
+#        - mysql
+#        - discovery
+#      networks:
+#        - microservices-network
+#      env_file:
+#        - .env
+#      container_name: voucher-service
 
 #  quizz-realtime:
 #    build:
@@ -185,7 +186,7 @@ services:
 #      - .env
 #    container_name: quizz-realtime
 volumes:
- db-data:
+# db-data: #uncomment this line if you want to use volume for mysql
  mongo-data:
 networks:
   microservices-network:

@@ -1,8 +1,5 @@
-time="2025-01-11T13:12:12+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
-time="2025-01-11T13:12:12+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
- Volume "back-end_db-data"  Creating
- Volume "back-end_db-data"  Created
-time="2025-01-11T13:12:12+07:00" level=warning msg="Found orphan containers ([quizz-realtime game-service]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+time="2025-01-11T22:17:59+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+time="2025-01-11T22:17:59+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
  Container mysql-container  Creating
  Container mysql-container  Created
  Container mysql-container  Starting

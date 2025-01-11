@@ -28,13 +28,18 @@ public class BranchService {
     ModelMapper modelMapper;
 
     public List<BranchRespondDto> findAll() {
-        return branchRepository.findAll().stream().map(
-                branch -> BranchRespondDto.toBranchRespondDto(branch)).toList();
+        return branchRepository.findAll()
+                .stream()
+                .map(
+                        branch -> BranchRespondDto.toBranchRespondDto(branch))
+                .toList();
     }
 
     public BranchRespondDto findById(Long id) throws BranchNotFoundException {
-        return branchRepository.findById(id).map(
-                branch -> modelMapper.map(branch, BranchRespondDto.class)).orElseThrow(
+        return branchRepository.findById(id)
+                .map(
+                        branch -> modelMapper.map(branch, BranchRespondDto.class))
+                .orElseThrow(
                         () -> new BranchNotFoundException("Branch with id " + id + " not found"));
     }
 
@@ -45,9 +50,11 @@ public class BranchService {
                 .orElseThrow(
                         () -> new BranchNotFoundException("Branch with id " + id + " not found"));
         existingBranch.copy(branch);
-        Brand brand = brandRepository.findById(branch.getBrand().getId())
+        Brand brand = brandRepository.findById(branch.getBrand()
+                        .getId())
                 .orElseThrow(
-                        () -> new BrandNotFoundException("Brand with id " + branch.getBrand().getId() + " not found"));
+                        () -> new BrandNotFoundException("Brand with id " + branch.getBrand()
+                                .getId() + " not found"));
         brand.removeBranch(existingBranch);
         brand.addBranch(existingBranch);
         branch.setBrand(brand);
@@ -55,10 +62,13 @@ public class BranchService {
     }
 
     public BranchRespondDto create(BranchRequestDto branchDto) throws BrandNotFoundException {
-        Branch branch = toBranch(branchDto);;
-        Brand brand = brandRepository.findById(branch.getBrand().getId())
+        Branch branch = toBranch(branchDto);
+        ;
+        Brand brand = brandRepository.findById(branch.getBrand()
+                        .getId())
                 .orElseThrow(
-                        () -> new BrandNotFoundException("Brand with id " + branch.getBrand().getId() + " not found"));
+                        () -> new BrandNotFoundException("Brand with id " + branch.getBrand()
+                                .getId() + " not found"));
         brand.addBranch(branch);
         branch.setBrand(brand);
         return modelMapper.map(branchRepository.save(branch), BranchRespondDto.class);
@@ -73,7 +83,7 @@ public class BranchService {
     public Branch toBranch(BranchRequestDto branchDto) throws BrandNotFoundException {
         Brand brand = brandRepository.findById(branchDto.getBrandId())
                 .orElseThrow(() -> new BrandNotFoundException("Brand not found with id: " + branchDto.getBrandId()));
-        
+
         GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
         Coordinate coordinate = new Coordinate(branchDto.getLongtitude(), branchDto.getLatitude());
         Point point = geometryFactory.createPoint(coordinate);
@@ -88,7 +98,17 @@ public class BranchService {
     }
 
     public List<BranchRespondDto> findNearBy(Point center, Double radius) {
-        return branchRepository.findByLocationWithRadius(center, radius).stream().map(
-            branch -> modelMapper.map(branch, BranchRespondDto.class)).toList();
+        return branchRepository.findByLocationWithRadius(center, radius)
+                .stream()
+                .map(
+                        branch -> modelMapper.map(branch, BranchRespondDto.class))
+                .toList();
+    }
+
+    public List<BranchRespondDto> findByBrandId(Long brandId) {
+        return branchRepository.findByBrandId(brandId).stream()
+                .map(
+                        branch -> BranchRespondDto.toBranchRespondDto(branch))
+                .toList();
     }
 }
