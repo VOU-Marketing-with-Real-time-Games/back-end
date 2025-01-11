@@ -13,6 +13,8 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.PrecisionModel;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import java.util.List;
 
 @Service
 public class BranchService {
+    private static final Logger logger = LoggerFactory.getLogger(BranchService.class);
+
     @Autowired
     BranchRepository branchRepository;
     @Autowired
@@ -28,6 +32,7 @@ public class BranchService {
     ModelMapper modelMapper;
 
     public List<BranchRespondDto> findAll() {
+        logger.info("Fetching all branches");
         return branchRepository.findAll()
                 .stream()
                 .map(
@@ -36,6 +41,7 @@ public class BranchService {
     }
 
     public BranchRespondDto findById(Long id) throws BranchNotFoundException {
+        logger.info("Fetching branch with id: {}", id);
         return branchRepository.findById(id)
                 .map(
                         branch -> modelMapper.map(branch, BranchRespondDto.class))
@@ -45,6 +51,7 @@ public class BranchService {
 
     public BranchRespondDto update(Long id, BranchRequestDto branchDto)
             throws BranchNotFoundException, BrandNotFoundException {
+        logger.info("Updating branch with id: {} with data: {}", id, branchDto);
         Branch branch = toBranch(branchDto);
         Branch existingBranch = branchRepository.findById(id)
                 .orElseThrow(
@@ -62,8 +69,8 @@ public class BranchService {
     }
 
     public BranchRespondDto create(BranchRequestDto branchDto) throws BrandNotFoundException {
+        logger.info("Creating a new branch with data: {}", branchDto);
         Branch branch = toBranch(branchDto);
-        ;
         Brand brand = brandRepository.findById(branch.getBrand()
                         .getId())
                 .orElseThrow(
@@ -75,12 +82,14 @@ public class BranchService {
     }
 
     public void delete(Long id) throws BranchNotFoundException {
+        logger.info("Deleting branch with id: {}", id);
         Branch branch = branchRepository.findById(id)
                 .orElseThrow(() -> new BranchNotFoundException("Branch with id " + id + " not found"));
         branchRepository.delete(branch);
     }
 
     public Branch toBranch(BranchRequestDto branchDto) throws BrandNotFoundException {
+        logger.info("Converting BranchRequestDto to Branch entity with data: {}", branchDto);
         Brand brand = brandRepository.findById(branchDto.getBrandId())
                 .orElseThrow(() -> new BrandNotFoundException("Brand not found with id: " + branchDto.getBrandId()));
 
@@ -98,6 +107,7 @@ public class BranchService {
     }
 
     public List<BranchRespondDto> findNearBy(Point center, Double radius) {
+        logger.info("Fetching nearby branches with center: {}, radius: {}", center, radius);
         return branchRepository.findByLocationWithRadius(center, radius)
                 .stream()
                 .map(
@@ -106,6 +116,7 @@ public class BranchService {
     }
 
     public List<BranchRespondDto> findByBrandId(Long brandId) {
+        logger.info("Fetching branches for brand id: {}", brandId);
         return branchRepository.findByBrandId(brandId).stream()
                 .map(
                         branch -> BranchRespondDto.toBranchRespondDto(branch))

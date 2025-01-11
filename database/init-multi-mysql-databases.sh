@@ -9,12 +9,14 @@ function create_databases() {
     database=$1
     password=$2
     echo "Creating user and database '$database' with password '$password'"
-    mysql -u root -p"$MYSQL_ROOT_PASSWORD" <<-EOSQL
+    if ! mysql -u root -p"$MYSQL_ROOT_PASSWORD" <<-EOSQL; then
         CREATE USER '$database'@'%' IDENTIFIED BY '$password';
         CREATE DATABASE $database;
         GRANT ALL PRIVILEGES ON $database.* TO '$database'@'%';
         FLUSH PRIVILEGES;
 EOSQL
+        echo "Error creating user and database '$database'"
+    fi
 }
 
 function run_sql_script() {
@@ -23,6 +25,7 @@ function run_sql_script() {
     echo "Running SQL script '$script' on database '$database'"
     if ! mysql -u root -p"$MYSQL_ROOT_PASSWORD" $database < "$script"; then
         echo "Error executing SQL script '$script' on database '$database'"
+        mysql -u root -p"$MYSQL_ROOT_PASSWORD" $database < "$script" 2>&1
     fi
 }
 

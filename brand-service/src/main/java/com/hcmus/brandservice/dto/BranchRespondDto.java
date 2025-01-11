@@ -15,8 +15,8 @@ public class BranchRespondDto {
     private Long brandId;
     private String name;
     private String address;
-    private Double longitude;
     private Double latitude;
+    private Double longitude;
 
     public static BranchRespondDto toBranchRespondDto(Branch branch) {
         return new BranchRespondDto(
@@ -24,7 +24,7 @@ public class BranchRespondDto {
                 branch.getBrand().getId(),
                 branch.getName(),
                 branch.getAddress(),
-                branch.getLocation().getX(),
-                branch.getLocation().getY());
+                branch.getLocation().getY(),
+                branch.getLocation().getX());
     }
 }
