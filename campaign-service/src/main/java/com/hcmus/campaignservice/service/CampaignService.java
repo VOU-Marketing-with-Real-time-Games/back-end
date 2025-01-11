@@ -29,7 +29,7 @@ public class CampaignService {
         Date current = new Date();
         Campaign campaign = modelMapper.map(campaignDto, Campaign.class);
         campaign.setCreatedAt(current);
-        campaign.setStatus("Pending");
+        campaign.setStatus("PENDING");
         return modelMapper.map(campaignRepository.save(campaign),CampaignResponseDto.class);
     }
     public Page<CampaignResponseDto> getAllCampaigns(Pageable pageable) {
