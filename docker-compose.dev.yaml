@@ -54,20 +54,20 @@ services:
       - .env
     container_name: api-gateway
 
-#  user-service:
-#    build:
-#      context: ./user-service
-#      dockerfile: Dockerfile.dev
-#    ports:
-#      - "8005:8005"
-#    depends_on:
-#      - mysql
-#      - discovery
-#    networks:
-#      - microservices-network
-#    env_file:
-#      - .env
-#    container_name: user-service
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8005:8005"
+    depends_on:
+      - mysql
+      - discovery
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: user-service
 
   brand-service:
     build:
@@ -84,20 +84,20 @@ services:
       - .env
     container_name: brand-service
 
-#  campaign-service:
-#    build:
-#      context: ./campaign-service
-#      dockerfile: Dockerfile.dev
-#    ports:
-#      - "8004:8004"
-#    depends_on:
-#      - mysql
-#      - discovery
-#    networks:
-#      - microservices-network
-#    env_file:
-#      - .env
-#    container_name: campaign-service
+  campaign-service:
+    build:
+      context: ./campaign-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8004:8004"
+    depends_on:
+      - mysql
+      - discovery
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: campaign-service
 
 #  game-service:
 #      build:
@@ -141,20 +141,20 @@ services:
     networks:
       - microservices-network
 
-#  notification-service:
-#    build:
-#      context: ./notification-service
-#      dockerfile: Dockerfile.dev
-#    ports:
-#      - "8002:8002"
-#    depends_on:
-#      - discovery
-#      - mongo
-#    networks:
-#      - microservices-network
-#    env_file:
-#      - .env
-#    container_name: notification-service
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8002:8002"
+    depends_on:
+      - discovery
+      - mongo
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: notification-service
 #
 #  voucher-service:
 #      build:
