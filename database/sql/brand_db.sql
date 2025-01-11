@@ -1,21 +1,3 @@
--- Dumping structure for table brand_db.branch
-CREATE TABLE IF NOT EXISTS `branch`
-(
-    `id`       bigint NOT NULL AUTO_INCREMENT,
-    `address`  varchar(255) DEFAULT NULL,
-    `enable`   bit(1)       DEFAULT NULL,
-    `location` point  NOT NULL /*!80003 SRID 4326 */,
-    `name`     varchar(255) DEFAULT NULL,
-    `status`   varchar(255) DEFAULT NULL,
-    `brand_id` bigint       DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    KEY `FKfcqv80m9yureoqml45ryy2yee` (`brand_id`),
-    CONSTRAINT `FKfcqv80m9yureoqml45ryy2yee` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
-
-
 -- Dumping structure for table brand_db.brand
 CREATE TABLE IF NOT EXISTS `brand`
 (
@@ -45,4 +27,24 @@ VALUES (2, '2024-12-29 10:15:00.000000', b'1', 'Technology', 'Apple', 'ACTIVE', 
        (8, '2025-01-02 09:50:00.000000', b'0', 'Technology', 'Microsoft', 'BANNED', 9),
        (9, '2025-01-02 17:10:00.000000', b'1', 'Fashion', 'Louis Vuitton', 'ACTIVE', 10),
        (10, '2025-01-03 10:05:00.000000', b'1', 'Healthcare', 'Pfizer', 'INACTIVE', 11);
+
+-- Dumping structure for table brand_db.branch
+CREATE TABLE IF NOT EXISTS `branch`
+(
+    `id`       bigint NOT NULL AUTO_INCREMENT,
+    `address`  varchar(255) DEFAULT NULL,
+    `enable`   bit(1)       DEFAULT NULL,
+    `location` point  NOT NULL /*!80003 SRID 4326 */,
+    `name`     varchar(255) DEFAULT NULL,
+    `status`   varchar(255) DEFAULT NULL,
+    `brand_id` bigint       DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FKfcqv80m9yureoqml45ryy2yee` (`brand_id`),
+    CONSTRAINT `FKfcqv80m9yureoqml45ryy2yee` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+
 
