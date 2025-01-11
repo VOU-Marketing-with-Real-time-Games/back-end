@@ -30,6 +30,7 @@ public class AppConfig {
             mapper.skip(Campaign::setCreatedAt);
             mapper.skip(Campaign::setFavouriteCampaigns);
             mapper.map(CampaignDto::getBrandId, Campaign::setBrandId);
+            mapper.map(CampaignDto::getNote, Campaign::setNote);
         });
 
         // Model to Response DTO mapping
@@ -43,6 +44,7 @@ public class AppConfig {
             mapper.map(Campaign::getStatus, CampaignResponseDto::setStatus);
             mapper.map(Campaign::getBrandId, CampaignResponseDto::setBrandId);
             mapper.map(Campaign::getId, CampaignResponseDto::setId);
+            mapper.map(Campaign::getNote, CampaignResponseDto::setNote);
         });
 
         // Update DTO to Model mapping

@@ -20,6 +20,7 @@ public class UserRespondDto {
     private String role;
     private String phoneNumber;
     private Date dob;
+    private String status;
     private String gender;
     private String facebookLink;
     private Date createdAt;

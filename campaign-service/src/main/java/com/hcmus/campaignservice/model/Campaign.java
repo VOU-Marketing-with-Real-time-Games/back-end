@@ -22,12 +22,14 @@ public class Campaign {
     private Long id;
     private String name;
     private String image;
+    private String description;
     private String field;
     private Date startDate;
     private Date endDate;
     private String status;
     private Date createdAt;
     private  Long brandId;
+    private String note;
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<FavoriteCampaignUser> favouriteCampaigns = new ArrayList<>();
 }
