@@ -65,4 +65,10 @@ public class BranchController {
         branchService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/brand/{brandId}")
+    public ResponseEntity<?> getBranchesByBrandId(@PathVariable(name = "brandId") Long brandId) {
+        List<BranchRespondDto> branches = branchService.findByBrandId(brandId);
+        return new ResponseEntity<>(branches, HttpStatus.OK);
+    }
 }

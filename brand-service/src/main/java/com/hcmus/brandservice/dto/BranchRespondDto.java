@@ -15,19 +15,16 @@ public class BranchRespondDto {
     private Long brandId;
     private String name;
     private String address;
-    private String status;
     private Double longitude;
-    private Double lattitude;
+    private Double latitude;
 
     public static BranchRespondDto toBranchRespondDto(Branch branch) {
-        BranchRespondDto branchRespondDto = new BranchRespondDto(
+        return new BranchRespondDto(
                 branch.getId(),
                 branch.getBrand().getId(),
                 branch.getName(),
                 branch.getAddress(),
-                branch.getStatus(),
                 branch.getLocation().getX(),
                 branch.getLocation().getY());
-        return branchRespondDto;
     }
 }

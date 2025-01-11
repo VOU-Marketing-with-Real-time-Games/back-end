@@ -18,13 +18,8 @@ public class Branch {
     private Long id;
     private String name;
     private String address;
-    private String status;
-
     @Column(columnDefinition = "POINT SRID 4326", nullable = false)
     private Point location;
-
-    private Boolean enable;
-
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
@@ -36,17 +31,22 @@ public class Branch {
         if (branch.getAddress() != null) {
             this.setAddress(branch.getAddress());
         }
-        if (branch.getStatus() != null) {
-            this.setStatus(branch.getStatus());
-        }
         if (branch.getLocation() != null) {
             this.setLocation(branch.getLocation());
-        }
-        if (branch.getEnable() != null) {
-            this.setEnable(branch.getEnable());
         }
         if (branch.getBrand() != null) {
             this.setBrand(branch.getBrand());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Branch{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", location=" + location +
+                ", brand=" + brand +
+                '}';
     }
 }
