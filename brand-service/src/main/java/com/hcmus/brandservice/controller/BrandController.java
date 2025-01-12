@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/v3/brands")
 public class BrandController {
@@ -35,6 +34,13 @@ public class BrandController {
         logger.info("Creating a new brand with data: {}", brandDto);
         brandService.create(brandDto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchBrand(@RequestParam(name = "name") String name) {
+        logger.info("Searching brand with name: {}", name);
+        List<BrandRespondDto> brands = brandService.search(name);
+        return new ResponseEntity<>(brands, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

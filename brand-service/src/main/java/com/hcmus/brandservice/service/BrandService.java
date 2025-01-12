@@ -35,6 +35,13 @@ public class BrandService {
                         () -> new BrandNotFoundException("Brand with id " + id + " not found"));
     }
 
+    public List<BrandRespondDto> search(String name) {
+        return brandRepository.findByNameContaining(name)
+                .stream().map(
+                        brand -> modelMapper.map(brand, BrandRespondDto.class))
+                .toList();
+    }
+
     public BrandRespondDto update(Long id, BrandRequestDto brandDto) throws BrandNotFoundException, BranchNotFoundException {
         Brand brand = modelMapper.map(brandDto,Brand.class);
         Brand existingBrand = brandRepository.findById(id)
