@@ -11,4 +11,7 @@ public interface BrandRepository extends JpaRepository<Brand,Long> {
 
     @Query("SELECT b FROM Brand b WHERE b.field = :field")
     List<Brand> findByField(String field);
+
+    @Query("SELECT b FROM Brand b WHERE b.name LIKE %:name%")
+    List<Brand> findByNameContaining(String name);
 }
