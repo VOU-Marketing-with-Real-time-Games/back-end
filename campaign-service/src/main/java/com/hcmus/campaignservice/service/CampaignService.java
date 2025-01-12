@@ -49,7 +49,12 @@ public class CampaignService {
         return campaignRepository.findById(id)
                 .orElseThrow(() -> new CampaignNotFoundException("Campaign not found with id: " + id));
     }
-
+    public List<CampaignResponseDto> searchCampaignsByName(String name) {
+        List<Campaign> campaigns = campaignRepository.findByNameContaining(name);
+        return campaigns.stream()
+                .map(campaign -> modelMapper.map(campaign, CampaignResponseDto.class))
+                .collect(Collectors.toList());
+    }
     public CampaignResponseDto updateCampaign(Long id, UpdateCampaignDto campaignDto) throws CampaignNotFoundException
     {
         validateId(id);

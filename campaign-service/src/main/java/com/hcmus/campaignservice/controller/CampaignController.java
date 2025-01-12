@@ -98,4 +98,15 @@ public class CampaignController {
         List<CampaignResponseDto> campaigns = campaignService.getFavouriteCampaignsByUser(id);
         return new ResponseEntity<>(campaigns,HttpStatus.OK);
     }
+    /**
+     * Search campaigns by name.
+     *
+     * @param name the name of the campaign
+     * @return a list of CampaignResponseDto
+     */
+    @GetMapping("/search")
+    public ResponseEntity<?> searchCampaignsByName(@RequestParam String name) {
+        List<CampaignResponseDto> campaigns = campaignService.searchCampaignsByName(name);
+        return new ResponseEntity<>(campaigns, HttpStatus.OK);
+    }
 }
