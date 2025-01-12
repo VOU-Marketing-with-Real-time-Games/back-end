@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   mysql:
     image: mysql:8.0
@@ -54,35 +53,35 @@ services:
       - .env
     container_name: api-gateway
 
-  user-service:
-    build:
-      context: ./user-service
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8005:8005"
-    depends_on:
-      - mysql
-      - discovery
-    networks:
-      - microservices-network
-    env_file:
-      - .env
-    container_name: user-service
-
-  brand-service:
-    build:
-      context: ./brand-service
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8003:8003"
-    depends_on:
-      - mysql
-      - discovery
-    networks:
-      - microservices-network
-    env_file:
-      - .env
-    container_name: brand-service
+#  user-service:
+#    build:
+#      context: ./user-service
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8005:8005"
+#    depends_on:
+#      - mysql
+#      - discovery
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: user-service
+#
+#  brand-service:
+#    build:
+#      context: ./brand-service
+#      dockerfile: Dockerfile.dev
+#    ports:
+#      - "8003:8003"
+#    depends_on:
+#      - mysql
+#      - discovery
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: brand-service
 
   campaign-service:
     build:
@@ -128,18 +127,18 @@ services:
 #      - .env
 #    container_name: image-service
 
-  rabbitmq:
-    image: rabbitmq:3.9-management
-    container_name: rabbitmq
-    restart: always
-    ports:
-      - "5672:5672" # RabbitMQ default port for AMQP
-      - "15672:15672" # Management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-    networks:
-      - microservices-network
+#  rabbitmq:
+#    image: rabbitmq:3.9-management
+#    container_name: rabbitmq
+#    restart: always
+#    ports:
+#      - "5672:5672" # RabbitMQ default port for AMQP
+#      - "15672:15672" # Management UI
+#    environment:
+#      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+#      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+#    networks:
+#      - microservices-network
 
   notification-service:
     build:
