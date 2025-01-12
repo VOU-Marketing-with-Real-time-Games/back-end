@@ -109,4 +109,14 @@ public class CampaignController {
         List<CampaignResponseDto> campaigns = campaignService.searchCampaignsByName(name);
         return new ResponseEntity<>(campaigns, HttpStatus.OK);
     }
+    /**
+     * Get the newest campaign.
+     *
+     * @return the newest CampaignResponseDto
+     */
+    @GetMapping("/latest")
+    public ResponseEntity<?> getNewestCampaign() {
+        CampaignResponseDto newestCampaign = campaignService.getLatestCampaign();
+        return new ResponseEntity<>(newestCampaign, HttpStatus.OK);
+    }
 }

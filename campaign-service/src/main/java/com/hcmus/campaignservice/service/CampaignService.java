@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -81,5 +82,9 @@ public class CampaignService {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Invalid ID");
         }
+    }
+    public CampaignResponseDto getLatestCampaign() {
+        Campaign newestCampaign = campaignRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")).stream().findFirst().orElse(null);
+        return modelMapper.map(newestCampaign, CampaignResponseDto.class);
     }
 }
