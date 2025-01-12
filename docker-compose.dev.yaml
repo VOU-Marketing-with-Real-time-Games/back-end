@@ -1,20 +1,103 @@
 version: '3.8'
 
 services:
-  mysql:
+  mysql-primary:
     image: mysql:8.0
-    container_name: mysql-container
+    container_name: mysql-primary
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_MULTIPLE_DATABASES: ${MYSQL_MULTIPLE_DATABASES}
-    volumes:
-#      - db-data:/var/lib/mysql
-      - /var/lib/mysql #using for temporary volume
-      - ./database/init-multi-mysql-databases.sh:/docker-entrypoint-initdb.d/init-multi-mysql-databases.sh
-      - ./database/sql:/docker-entrypoint-initdb.d/sql
+      BINLOG_FORMAT: ROW
+      GTID_MODE: ON
+      ENFORCE_GTID_CONSISTENCY: ON
     ports:
       - "3306:3306"
+    volumes:
+      - primary-data:/var/lib/mysql
+      - ./database/init-multi-mysql-databases.sh:/docker-entrypoint-initdb.d/init-multi-mysql-databases.sh
+      - ./database/sql:/docker-entrypoint-initdb.d/sql
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --server-id=1
+      --log-bin=mysql-bin
+      --binlog-do-db=vou
+      --gtid-mode=ON
+      --enforce-gtid-consistency=ON
+      --log-slave-updates=1
+
+  mysql-replica-1:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql-replica-1
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - replica-1-data:/var/lib/mysql
+      - ./database/init-replica-replication.sql:/docker-entrypoint-initdb.d/init-replica-replication.sql
+    depends_on:
+      - mysql-primary
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --server-id=2
+      --log-bin=mysql-bin
+      --gtid-mode=ON
+      --enforce-gtid-consistency=ON
+      --read-only=1
+      --relay-log=relay-bin
+      --log-slave-updates=1
+
+  mysql-replica-2:
+    image: mysql:8.0
+    container_name: mysql-replica-2
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3308:3306"
+    volumes:
+      - replica-2-data:/var/lib/mysql
+      - ./database/init-replica-replication.sql:/docker-entrypoint-initdb.d/init-replica-replication.sql
+    depends_on:
+      - mysql-primary
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --server-id=3
+      --log-bin=mysql-bin
+      --gtid-mode=ON
+      --enforce-gtid-consistency=ON
+      --read-only=1
+      --relay-log=relay-bin
+      --log-slave-updates=1
+
+  proxysql:
+    image: proxysql/proxysql:2.6.6
+    container_name: proxysql
+    ports:
+      - "6032:6032" # ProxySQL admin interface
+      - "6033:6033" # ProxySQL MySQL interface
+    volumes:
+      - ./proxysql.cnf:/etc/proxysql.cnf
+    depends_on:
+      - mysql-primary
+      - mysql-replica-1
+      - mysql-replica-2
+#   mysql:
+#     image: mysql:8.0
+#     container_name: mysql-container
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+#       MYSQL_MULTIPLE_DATABASES: ${MYSQL_MULTIPLE_DATABASES}
+#     volumes:
+# #      - db-data:/var/lib/mysql
+#       - /var/lib/mysql #using for temporary volume
+#       - ./database/init-multi-mysql-databases.sh:/docker-entrypoint-initdb.d/init-multi-mysql-databases.sh
+#       - ./database/sql:/docker-entrypoint-initdb.d/sql
+#     ports:
+#       - "3306:3306"
   mongo:
     image: mongo:6.0
     container_name: mongo
@@ -58,10 +141,11 @@ services:
     build:
       context: ./user-service
       dockerfile: Dockerfile.dev
+    restart: always
     ports:
       - "8005:8005"
     depends_on:
-      - mysql
+      - proxysql
       - discovery
     networks:
       - microservices-network
@@ -73,10 +157,11 @@ services:
     build:
       context: ./brand-service
       dockerfile: Dockerfile.dev
+    restart: always
     ports:
       - "8003:8003"
     depends_on:
-      - mysql
+      - proxysql
       - discovery
     networks:
       - microservices-network
@@ -88,10 +173,11 @@ services:
     build:
       context: ./campaign-service
       dockerfile: Dockerfile.dev
+    restart: always
     ports:
       - "8004:8004"
     depends_on:
-      - mysql
+      - proxysql
       - discovery
     networks:
       - microservices-network
@@ -160,10 +246,11 @@ services:
 #      build:
 #        context: ./voucher-service
 #        dockerfile: Dockerfile.dev
+#      restart: always
 #      ports:
 #        - "8006:8006"
 #      depends_on:
-#        - mysql
+#        - proxysql
 #        - discovery
 #      networks:
 #        - microservices-network
@@ -187,7 +274,10 @@ services:
 #    container_name: quizz-realtime
 volumes:
 # db-data: #uncomment this line if you want to use volume for mysql
- mongo-data:
+  primary-data:
+  replica-1-data:
+  replica-2-data:
+  mongo-data:
 networks:
   microservices-network:
     driver: bridge

@@ -15,7 +15,6 @@ mysql_variables=
     have_compress=true
     poll_timeout=2000
     interfaces="0.0.0.0:6033"
-    default_schema="vou"
     stacksize=1048576
     server_version="8.0.33"  # Specify exact version
     connect_timeout_server=3000
@@ -68,11 +67,50 @@ mysql_servers =
 mysql_users =
 (
     {
-        username="root"
-        password="pass"
+        username="user_db"
+        password="123456"
         default_hostgroup=1
         max_connections=1000
-        default_schema="vou"
+        transaction_persistent=true
+        active=1
+        attributes="{\"isolation_level\":\"REPEATABLE_READ\"}"
+    },{
+        username="auth_db"
+        password="123456"
+        default_hostgroup=1
+        max_connections=1000
+        transaction_persistent=true
+        active=1
+        attributes="{\"isolation_level\":\"REPEATABLE_READ\"}"
+    },{
+        username="brand_db"
+        password="123456"
+        default_hostgroup=1
+        max_connections=1000
+        transaction_persistent=true
+        active=1
+        attributes="{\"isolation_level\":\"REPEATABLE_READ\"}"
+    },{
+        username="campaign_db"
+        password="123456"
+        default_hostgroup=1
+        max_connections=1000
+        transaction_persistent=true
+        active=1
+        attributes="{\"isolation_level\":\"REPEATABLE_READ\"}"
+    },{
+        username="game_db"
+        password="123456"
+        default_hostgroup=1
+        max_connections=1000
+        transaction_persistent=true
+        active=1
+        attributes="{\"isolation_level\":\"REPEATABLE_READ\"}"
+    },{
+        username="voucher_db"
+        password="123456"
+        default_hostgroup=1
+        max_connections=1000
         transaction_persistent=true
         active=1
         attributes="{\"isolation_level\":\"REPEATABLE_READ\"}"
