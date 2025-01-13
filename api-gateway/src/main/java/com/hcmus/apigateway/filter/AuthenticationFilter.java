@@ -8,7 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -16,7 +15,6 @@ import java.util.logging.Logger;
 public class AuthenticationFilter implements GlobalFilter, Ordered {
     @Autowired
     JwtUtils jwtUtils;
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         Logger logger = Logger.getLogger(AuthenticationFilter.class.getName());

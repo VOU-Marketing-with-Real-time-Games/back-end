@@ -80,8 +80,19 @@ public class GlobalExceptionHandler {
 
         return error;
     }
-
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorDTO handleRuntimeException(HttpServletRequest request, RuntimeException ex) {
+        ErrorDTO error = new ErrorDTO();
+        error.setTimestamp(new Date());
+        error.setPath(request.getServletPath());
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.addError(ex.getMessage());
+        LOGGER.error("Runtime Exception: {}", ex.getMessage(), ex);
+        return error;
+    }
+    @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ErrorDTO handleGeneralException(HttpServletRequest request, Exception ex) {

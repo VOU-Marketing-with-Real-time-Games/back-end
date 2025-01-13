@@ -57,6 +57,7 @@ public class UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setTurnNum(0);
+        user.setStatus("INACTIVE");
         user.setCreatedAt(new Date());
         userRepository.save(user);
         return modelMapper.map(user, UserRespondDto.class);
