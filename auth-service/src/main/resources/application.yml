@@ -1,11 +1,14 @@
 spring:
   application:
     name: auth-service
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
 server:
   port: 9004
 jwt:
   secret: ${JWT_SECRET:your-secret-key}
-  expiration: ${JWT_EXPIRATION:10000}
+  expiration: 86400000
 eureka:
   client:
     registerWithEureka: true

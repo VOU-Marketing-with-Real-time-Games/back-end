@@ -1,6 +1,7 @@
 package com.hcmus.auth_service.jwt;
 
 import com.hcmus.auth_service.dto.AuthRequest;
+import com.hcmus.auth_service.dto.UserRespondDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -20,12 +21,12 @@ public class JwtUtils {
     @Value("${jwt.expiration}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(AuthRequest authRequest) {
+    public String generateJwtToken(UserRespondDto userRespondDto) {
         return Jwts.builder()
-                .setSubject(authRequest.getUsername())
+                .setSubject(userRespondDto.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .claim("email", authRequest.getEmail())
+                .claim("id", userRespondDto.getId())
                 .signWith(key(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -51,7 +52,7 @@ public class JwtUtils {
     }
     public String getIdFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key()).build()
-                .parseClaimsJws(token).getBody().get("userID", String.class);
+                .parseClaimsJws(token).getBody().get("id", String.class);
     }
     /**
      * Validate the given JWT token.

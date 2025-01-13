@@ -1,9 +1,6 @@
 package com.hcmus.user_service.exception_handler;
 
-import com.hcmus.user_service.exception.PhoneNumberExistedException;
-import com.hcmus.user_service.exception.UserEmailExistedException;
-import com.hcmus.user_service.exception.UserNameExistedException;
-import com.hcmus.user_service.exception.UserNotFoundException;
+import com.hcmus.user_service.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +26,7 @@ public class GlobalExceptionHandler {
      * @param ex      the Exception
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({ PhoneNumberExistedException.class,UserEmailExistedException.class, UserNameExistedException.class})
+    @ExceptionHandler({ PhoneNumberExistedException.class,UserEmailExistedException.class, UserNameExistedException.class, ValidationUserException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleDuplicationExceptions(HttpServletRequest request, Exception ex) {
