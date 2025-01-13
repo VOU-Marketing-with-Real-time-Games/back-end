@@ -59,7 +59,11 @@ public class UserController {
         UserRespondDto user = userService.findByEmail(email);
         return ResponseEntity.ok(user);
     }
-
+    @GetMapping("/username/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username){
+        UserRespondDto user = userService.findByUsername(username);
+        return ResponseEntity.ok(user);
+    }
     @PostMapping("/list")
     public List<UserRespondDto> getUsersByListId(@RequestBody List<Long> listId) {
         return userService.findByListId(listId);

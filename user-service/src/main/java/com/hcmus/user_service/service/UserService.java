@@ -70,6 +70,10 @@ public class UserService {
         User user =  userRepository.findByEmail(email);
         return modelMapper.map(user, UserRespondDto.class);
     }
+    public UserRespondDto findByUsername(String username) {
+        User user =  userRepository.findByUsername(username);
+        return modelMapper.map(user, UserRespondDto.class);
+    }
 
     public List<UserRespondDto> findByListId(List<Long> listId) {
         List<User> users = userRepository.findByIds(listId);
