@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -49,7 +50,12 @@ public class CampaignService {
         return campaignRepository.findById(id)
                 .orElseThrow(() -> new CampaignNotFoundException("Campaign not found with id: " + id));
     }
-
+    public List<CampaignResponseDto> searchCampaignsByName(String name) {
+        List<Campaign> campaigns = campaignRepository.findByNameContaining(name);
+        return campaigns.stream()
+                .map(campaign -> modelMapper.map(campaign, CampaignResponseDto.class))
+                .collect(Collectors.toList());
+    }
     public CampaignResponseDto updateCampaign(Long id, UpdateCampaignDto campaignDto) throws CampaignNotFoundException
     {
         validateId(id);
@@ -76,5 +82,9 @@ public class CampaignService {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Invalid ID");
         }
+    }
+    public CampaignResponseDto getLatestCampaign() {
+        Campaign newestCampaign = campaignRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")).stream().findFirst().orElse(null);
+        return modelMapper.map(newestCampaign, CampaignResponseDto.class);
     }
 }

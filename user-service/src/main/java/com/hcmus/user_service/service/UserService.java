@@ -75,4 +75,8 @@ public class UserService {
         List<User> users = userRepository.findByIds(listId);
         return users.stream().map(user -> modelMapper.map(user, UserRespondDto.class)).toList();
     }
+
+    public void resetPlayerPlayTurn() {
+        userRepository.resetPlayerPlayTurn();
+    }
 }

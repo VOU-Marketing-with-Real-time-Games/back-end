@@ -20,4 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.id IN :listId")
     List<User> findByIds(List<Long> listId);
+
+    @Query("UPDATE User u SET u.turnNum = 10")
+    void resetPlayerPlayTurn();
 }
