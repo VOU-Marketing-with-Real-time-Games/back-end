@@ -1,5 +1,6 @@
 package com.hcmus.user_service.controller;
 
+import com.hcmus.user_service.dto.AuthRequest;
 import com.hcmus.user_service.dto.UserRequestDto;
 import com.hcmus.user_service.dto.UserRespondDto;
 import com.hcmus.user_service.dto.UserUpdateDto;
@@ -13,6 +14,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,9 +61,18 @@ public class UserController {
         UserRespondDto user = userService.findByEmail(email);
         return ResponseEntity.ok(user);
     }
-
+    @GetMapping("/username/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username){
+        UserRespondDto user = userService.findByUsername(username);
+        return ResponseEntity.ok(user);
+    }
     @PostMapping("/list")
     public List<UserRespondDto> getUsersByListId(@RequestBody List<Long> listId) {
         return userService.findByListId(listId);
     }
+    @PostMapping("/validate")
+    public ResponseEntity<?> validateUser(@RequestBody AuthRequest authRequest) throws Exception {
+        return ResponseEntity.ok(userService.validateUser(authRequest));
+    }
+
 }

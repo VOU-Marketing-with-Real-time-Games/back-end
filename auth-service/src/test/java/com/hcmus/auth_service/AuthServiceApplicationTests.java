@@ -1,10 +1,11 @@
-package com.hcmus.apigateway;
+package com.hcmus.auth_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiGatewayApplicationTests {
+class AuthServiceApplicationTests {
+
 	@Test
 	void contextLoads() {
 	}
