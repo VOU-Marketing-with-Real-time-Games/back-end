@@ -17,6 +17,8 @@ public class ImageService {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+    @Autowired
+    private CacheService cacheService;
 
     public Image storeImage(MultipartFile file) throws IOException {
         InputStream inputStream = file.getInputStream();
@@ -32,9 +34,14 @@ public class ImageService {
     }
 
     public Image getImage(String imageId) throws ImageNotFoundException {
+        // Check cache first
+        Image image = (Image) cacheService.getObject(imageId);
+        if (image != null) {
+            return image;
+        }
         Query query = new Query(Criteria.where("_id").is(imageId));
 
-        Image image = mongoTemplate.findOne(query, Image.class);
+        image = mongoTemplate.findOne(query, Image.class);
         if (image == null) {
             throw new ImageNotFoundException("Image not found");
         }

@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   mysql-primary:
     image: mysql:8.0
@@ -90,20 +90,102 @@ services:
       - mysql-primary
       - mysql-replica-1
       - mysql-replica-2
-  mongo:
+  mongo1:
+    container_name: mongo_rs0
     image: mongo:6.0
-    container_name: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    hostname: mongo1
+    command:
+      [
+        "--replSet",
+        "rs0",
+        "--bind_ip",
+        "127.0.0.1,mongo1",
+        "--port",
+        "27017",
+        "--keyFile",
+        "/etc/mongodb/pki/keyfile",
+      ]
     volumes:
-      - mongo-data:/data/db
+      - mongo1-data:/data/db
+      - ./database/mongo-keyfile:/etc/mongodb/pki/keyfile
       - ./database/init-multi-mongodb-databases.sh:/docker-entrypoint-initdb.d/init-multi-mongodb-databases.sh
     ports:
-      - "27017:27017"
+      - 27017:27017
     networks:
       - microservices-network
+    healthcheck:
+      test: echo "try {rs.status()} catch(err) {rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo1:27017',priority:1},{_id:1,host:'mongo2:27018',priority:0.5},{_id:2,host:'mongo3:27019',priority:0.5}]})}" | mongosh --port 27017 -u '${MONGO_ROOT_USERNAME}' -p '${MONGO_ROOT_PASSWORD}' --authenticationDatabase admin --quiet
+      interval: 2m
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}"
+  mongo2:
+    container_name: mongo_rs1
+    image: mongo:6.0
+    hostname: mongo2
+    command:
+      [
+        "--replSet",
+        "rs0",
+        "--bind_ip",
+        "127.0.0.1,mongo2",
+        "--port",
+        "27018",
+        "--keyFile",
+        "/etc/mongodb/pki/keyfile",
+      ]
+    volumes:
+      - mongo2-data:/data/db
+      - ./database/mongo-keyfile:/etc/mongodb/pki/keyfile
+    ports:
+      - 27018:27017
+    networks:
+      - microservices-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}"
+  mongo3:
+    container_name: mongo_rs2
+    image: mongo:6.0
+    hostname: mongo3
+    command:
+      [
+        "--replSet",
+        "rs0",
+        "--bind_ip",
+        "127.0.0.1,mongo3",
+        "--port",
+        "27019",
+        "--keyFile",
+        "/etc/mongodb/pki/keyfile",
+      ]
+    volumes:
+      - mongo3-data:/data/db
+      - ./database/mongo-keyfile:/etc/mongodb/pki/keyfile
+    ports:
+      - 27019:27017
+    networks:
+      - microservices-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}"
+  cache:
+    container_name: cache
+    hostname: cache
+    image: redis:6.2-alpine
+    restart: always
+    networks:
+      - microservices-network
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
+    volumes: 
+      - cache:/data
+    env_file:
+      - .env
   discovery:
     build:
       context: ./discovery-server
@@ -177,47 +259,50 @@ services:
       - .env
     container_name: campaign-service
 
-#  game-service:
-#      build:
-#        context: ./game-service
-#        dockerfile: Dockerfile.dev
-#      ports:
-#        - "8001:8001"
-#      depends_on:
-#        - mysql
-#        - discovery
-#      networks:
-#        - microservices-network
-#      env_file:
-#        - .env
-#      container_name: game-service
-#  image-service:
-#    build:
-#      context: ./image-service
-#      dockerfile: Dockerfile.dev
-#    ports:
-#      - "8007:8007"
-#    depends_on:
-#      - mongo
-#      - discovery
-#    networks:
-#      - microservices-network
-#    env_file:
-#      - .env
-#    container_name: image-service
+  game-service:
+    build:
+      context: ./game-service
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - "8001:8001"
+    depends_on:
+      - proxysql
+      - discovery
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: game-service
+  image-service:
+    build:
+      context: ./image-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8008:8008"
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+      - discovery
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: image-service
 
-#  rabbitmq:
-#    image: rabbitmq:3.9-management
-#    container_name: rabbitmq
-#    restart: always
-#    ports:
-#      - "5672:5672" # RabbitMQ default port for AMQP
-#      - "15672:15672" # Management UI
-#    environment:
-#      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-#      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-#    networks:
-#      - microservices-network
+  rabbitmq:
+     image: rabbitmq:3.9-management
+     container_name: rabbitmq
+     restart: always
+     ports:
+       - "5672:5672" # RabbitMQ default port for AMQP
+       - "15672:15672" # Management UI
+     environment:
+       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+     networks:
+       - microservices-network
 
   notification-service:
     build:
@@ -227,49 +312,54 @@ services:
       - "8002:8002"
     depends_on:
       - discovery
-      - mongo
+      - mongo1
+      - mongo2
+      - mongo3
     networks:
       - microservices-network
     env_file:
       - .env
     container_name: notification-service
-#
-#  voucher-service:
-#      build:
-#        context: ./voucher-service
-#        dockerfile: Dockerfile.dev
-#      restart: always
-#      ports:
-#        - "8006:8006"
-#      depends_on:
-#        - proxysql
-#        - discovery
-#      networks:
-#        - microservices-network
-#      env_file:
-#        - .env
-#      container_name: voucher-service
 
-#  quizz-realtime:
-#    build:
-#      context: ./quizz-realtime
-#      dockerfile: Dockerfile.dev
-#    ports:
-#      - "8007:8007"
-#    depends_on:
-#      - rabbitmq
-#      - discovery
-#    networks:
-#      - microservices-network
-#    env_file:
-#      - .env
-#    container_name: quizz-realtime
+  voucher-service:
+     build:
+       context: ./voucher-service
+       dockerfile: Dockerfile.dev
+     restart: always
+     ports:
+       - "8006:8006"
+     depends_on:
+       - proxysql
+       - discovery
+     networks:
+       - microservices-network
+     env_file:
+       - .env
+     container_name: voucher-service
+
+  quizz-realtime:
+   build:
+     context: ./quizz-realtime
+     dockerfile: Dockerfile.dev
+   ports:
+     - "8007:8007"
+   depends_on:
+     - rabbitmq
+     - discovery
+   networks:
+     - microservices-network
+   env_file:
+     - .env
+   container_name: quizz-realtime
 volumes:
-# db-data: #uncomment this line if you want to use volume for mysql
   primary-data:
   replica-1-data:
   replica-2-data:
-  mongo-data:
+  mongo1-data:
+  mongo2-data:
+  mongo3-data:
+  cache:
+    driver: local
 networks:
   microservices-network:
     driver: bridge

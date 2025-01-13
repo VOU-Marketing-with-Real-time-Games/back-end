@@ -3,9 +3,7 @@ spring:
      name: notification-service
   data:
     mongodb:
-      host: ${MONGO_URL}
-      port: 27017
-      database: ${NOTIFICATION_DB}
+      uri: mongodb://root:123456@mongo1:27017,mongo2:27018,mongo3:27019/notification_db?replicaSet=rs0&authSource=admin
   rabbitmq:
     host: ${RABBITMQ_HOST}
     port: 5672

@@ -3,11 +3,15 @@ spring:
     name: image-service
   data:
     mongodb:
-      host: ${MONGO_URL}
-      port: 27017
-      database: ${IMAGE_DB}
+      uri: mongodb://root:123456@mongo1:27017,mongo2:27018,mongo3:27019/image_db?replicaSet=rs0&authSource=admin
+
 server:
   port: 8007
+
+redis:
+  host: cache
+  port: 6379
+  password: ${REDIS_PASSWORD}
 
 eureka:
   client:

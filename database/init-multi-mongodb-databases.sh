@@ -3,7 +3,7 @@ set -e
 
 echo "Creating databases for NotificationService and ImageService..."
 
-mongo <<EOF
+mongosh <<EOF
   use notification_db;
   db.createCollection("init");
   use image_db;
