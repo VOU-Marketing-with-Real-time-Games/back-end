@@ -156,4 +156,8 @@ public class AuthService {
         UserRespondDto userRespondDto = userClient.getUserByID(token.getUserId());
         return jwtUtils.generateRefreshToken(userRespondDto.getUsername());
     }
+    public UserRespondDto getUserById(Long id)
+    {
+        return userClient.getUserByID(id);
+    }
 }

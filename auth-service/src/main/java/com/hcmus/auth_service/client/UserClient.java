@@ -6,7 +6,6 @@ import com.hcmus.auth_service.dto.UserRespondDto;
 import com.hcmus.auth_service.dto.UserUpdateDto;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "user-service", url = "http://user-service:8005/v3/users", configuration = FeignClientConfig.class)
