@@ -81,17 +81,21 @@ public class UserController {
         return ResponseEntity.ok(hasTurns);
     }
 
-    // UserController.java
     @PutMapping("/{id}/decrease-turn")
     public ResponseEntity<?> decreaseTurnNum(@PathVariable("id") Long id) throws UserNotFoundException {
         boolean success = userService.decreaseTurnNum(id);
         return ResponseEntity.ok(success);
     }
 
-    // UserController.java
     @PutMapping("/decrease-turns")
     public ResponseEntity<?> decreaseTurnNumForUsers(@RequestBody List<Long> ids) {
         userService.decreaseTurnNumForUsers(ids);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/increase-play-turn")
+    public ResponseEntity<?> increaseTurnNum(@PathVariable("id") Long id) throws UserNotFoundException {
+        boolean success = userService.increaseTurnNum(id);
+        return ResponseEntity.ok(success);
     }
 }

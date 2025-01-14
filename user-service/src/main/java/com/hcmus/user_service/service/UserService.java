@@ -124,4 +124,11 @@ public class UserService {
         }
         userRepository.saveAll(users);
     }
+    // UserService.java
+    public boolean increaseTurnNum(Long id) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        user.setTurnNum(user.getTurnNum() + 1);
+        userRepository.save(user);
+        return true;
+    }
 }
