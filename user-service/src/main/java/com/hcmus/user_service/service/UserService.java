@@ -1,16 +1,17 @@
 package com.hcmus.user_service.service;
+import com.hcmus.user_service.dto.AuthRequest;
 import com.hcmus.user_service.dto.UserRequestDto;
 import com.hcmus.user_service.dto.UserRespondDto;
 import com.hcmus.user_service.dto.UserUpdateDto;
-import com.hcmus.user_service.exception.PhoneNumberExistedException;
-import com.hcmus.user_service.exception.UserEmailExistedException;
-import com.hcmus.user_service.exception.UserNameExistedException;
-import com.hcmus.user_service.exception.UserNotFoundException;
+import com.hcmus.user_service.exception.*;
 import com.hcmus.user_service.model.User;
 import com.hcmus.user_service.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<UserRespondDto> findAll() {
         return userRepository.findAll().stream().map(
@@ -54,7 +57,9 @@ public class UserService {
         if (userRepository.findByPhoneNumber(user.getPhoneNumber()) != null) {
             throw new PhoneNumberExistedException("Phone number existed");
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setTurnNum(0);
+        user.setStatus("INACTIVE");
         user.setCreatedAt(new Date());
         userRepository.save(user);
         return modelMapper.map(user, UserRespondDto.class);
@@ -70,6 +75,10 @@ public class UserService {
         User user =  userRepository.findByEmail(email);
         return modelMapper.map(user, UserRespondDto.class);
     }
+    public UserRespondDto findByUsername(String username) {
+        User user =  userRepository.findByUsername(username);
+        return modelMapper.map(user, UserRespondDto.class);
+    }
 
     public List<UserRespondDto> findByListId(List<Long> listId) {
         List<User> users = userRepository.findByIds(listId);
@@ -78,5 +87,41 @@ public class UserService {
 
     public void resetPlayerPlayTurn() {
         userRepository.resetPlayerPlayTurn();
+    }
+    public UserRespondDto validateUser(AuthRequest authRequest) throws Exception {
+        User user = userRepository.findByUsername(authRequest.getUsername());
+        if(user==null)
+            throw new UserNotFoundException("User not found");
+        if(passwordEncoder.matches(authRequest.getPassword(),user.getPassword()))
+            return modelMapper.map(user, UserRespondDto.class);
+        else
+            throw new ValidationUserException("Invalid password");
+    }
+    // UserService.java
+    public boolean hasTurnsLeft(Long id) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        return user.getTurnNum() > 0;
+    }
+
+    // UserService.java
+    public boolean decreaseTurnNum(Long id) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        if (user.getTurnNum() > 0) {
+            user.setTurnNum(user.getTurnNum() - 1);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    // UserService.java
+    public void decreaseTurnNumForUsers(List<Long> ids) {
+        List<User> users = userRepository.findByIds(ids);
+        for (User user : users) {
+            if (user.getTurnNum() > 0) {
+                user.setTurnNum(user.getTurnNum() - 1);
+            }
+        }
+        userRepository.saveAll(users);
     }
 }

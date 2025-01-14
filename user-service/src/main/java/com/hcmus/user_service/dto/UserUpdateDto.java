@@ -27,4 +27,5 @@ public class UserUpdateDto {
     private String phoneNumber;
     @Pattern(regexp = "^(ACTIVE|INACTIVE|BANNED)$", message = "Status must be 'ACTIVE' or 'INACTIVE' or 'BANNED'")
     private String status;
+    private String password;
 }

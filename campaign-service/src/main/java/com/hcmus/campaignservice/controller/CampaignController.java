@@ -98,4 +98,25 @@ public class CampaignController {
         List<CampaignResponseDto> campaigns = campaignService.getFavouriteCampaignsByUser(id);
         return new ResponseEntity<>(campaigns,HttpStatus.OK);
     }
+    /**
+     * Search campaigns by name.
+     *
+     * @param name the name of the campaign
+     * @return a list of CampaignResponseDto
+     */
+    @GetMapping("/search")
+    public ResponseEntity<?> searchCampaignsByName(@RequestParam String name) {
+        List<CampaignResponseDto> campaigns = campaignService.searchCampaignsByName(name);
+        return new ResponseEntity<>(campaigns, HttpStatus.OK);
+    }
+    /**
+     * Get the newest campaign.
+     *
+     * @return the newest CampaignResponseDto
+     */
+    @GetMapping("/latest")
+    public ResponseEntity<?> getNewestCampaign() {
+        CampaignResponseDto newestCampaign = campaignService.getLatestCampaign();
+        return new ResponseEntity<>(newestCampaign, HttpStatus.OK);
+    }
 }

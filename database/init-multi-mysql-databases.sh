@@ -29,6 +29,7 @@ function run_sql_script() {
     fi
 }
 
+
 # Read and process the MYSQL_MULTIPLE_DATABASES environment variable
 if [ -n "$MYSQL_MULTIPLE_DATABASES" ]; then
     echo "Multiple database creation requested: $MYSQL_MULTIPLE_DATABASES"
@@ -49,3 +50,11 @@ if [ -n "$MYSQL_MULTIPLE_DATABASES" ]; then
     done
     echo "All databases created successfully!"
 fi
+
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" <<-EOSQL
+CREATE USER 'replica_user'@'%' IDENTIFIED BY 'replica_pass';
+GRANT REPLICATION SLAVE ON *.* TO 'replica_user'@'%';
+FLUSH PRIVILEGES;
+CREATE USER 'monitor_user'@'%' IDENTIFIED BY 'monitor_password';
+GRANT SHOW DATABASES, SHOW STATUS, SHOW VARIABLES ON *.* TO 'monitor_user'@'%';
+EOSQL
