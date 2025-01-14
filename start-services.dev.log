@@ -1,320 +1,201 @@
-time="2025-01-12T00:38:40+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
- Container rabbitmq  Stopping
- Container brand-service  Stopping
- Container mongo  Stopping
- Container api-gateway  Stopping
- Container mongo  Stopped
- Container mongo  Removing
- Container mongo  Removed
- Container brand-service  Stopped
- Container brand-service  Removing
- Container brand-service  Removed
- Container mysql-container  Stopping
- Container api-gateway  Stopped
- Container api-gateway  Removing
- Container api-gateway  Removed
- Container discovery-server  Stopping
- Container rabbitmq  Stopped
- Container rabbitmq  Removing
- Container rabbitmq  Removed
- Container discovery-server  Stopped
- Container discovery-server  Removing
- Container discovery-server  Removed
- Container mysql-container  Stopped
- Container mysql-container  Removing
- Container mysql-container  Removed
- Network back-end_microservices-network  Removing
- Network back-end_default  Removing
- Network back-end_default  Removed
- Network back-end_microservices-network  Removed
-time="2025-01-12T00:39:03+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [discovery internal] load build definition from Dockerfile.dev
-#1 transferring dockerfile: 679B 0.0s done
+#1 transferring dockerfile: 701B 0.0s done
 #1 DONE 0.1s
 
 #2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
 #2 ...
 
-#3 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#3 DONE 3.8s
+#3 [discovery auth] library/openjdk:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#4 DONE 4.7s
 
 #2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#2 DONE 3.8s
+#2 ...
 
-#4 [discovery internal] load .dockerignore
-#4 transferring context: 2B done
-#4 DONE 0.0s
-
-#5 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#5 [discovery auth] library/maven:pull token for registry-1.docker.io
 #5 DONE 0.0s
 
-#6 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#2 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#2 DONE 6.0s
+
+#6 [discovery internal] load .dockerignore
+#6 transferring context: 2B done
 #6 DONE 0.0s
 
 #7 [discovery internal] load build context
-#7 transferring context: 3.57kB 0.0s done
 #7 DONE 0.0s
 
-#8 [discovery stage-1 2/3] WORKDIR /app
-#8 CACHED
+#8 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.1s done
+#8 DONE 0.1s
 
-#9 [discovery build 3/6] COPY pom.xml .
-#9 CACHED
+#9 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#9 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.1s done
+#9 DONE 0.1s
+
+#7 [discovery internal] load build context
+#7 transferring context: 731B 0.0s done
+#7 DONE 0.1s
 
 #10 [discovery build 5/6] COPY src ./src
 #10 CACHED
 
-#11 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#11 [discovery stage-1 2/3] WORKDIR /app
 #11 CACHED
 
-#12 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#12 [discovery build 2/6] WORKDIR /app
 #12 CACHED
 
-#13 [discovery build 2/6] WORKDIR /app
+#13 [discovery build 3/6] COPY pom.xml .
 #13 CACHED
 
-#14 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
+#14 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 #14 CACHED
 
-#15 [discovery] exporting to image
-#15 exporting layers done
-#15 writing image sha256:23fbed831bbe12dc1a107dcfea3d71c187d13bc17c3336faf22db563b4c35db6 done
-#15 naming to docker.io/library/back-end-discovery
-#15 naming to docker.io/library/back-end-discovery done
-#15 DONE 0.0s
+#15 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#15 CACHED
 
-#16 [brand-service internal] load build definition from Dockerfile.dev
-#16 transferring dockerfile: 673B done
-#16 DONE 0.0s
+#16 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
+#16 CACHED
 
-#17 [campaign-service internal] load build definition from Dockerfile.dev
-#17 transferring dockerfile: 679B done
-#17 DONE 0.1s
+#17 [discovery] exporting to image
+#17 exporting layers done
+#17 exporting manifest sha256:88f9656de1c4f9fcbe123ac5510a24d53e5a86d1492569b7a68b2be51be5cde2
+#17 exporting manifest sha256:88f9656de1c4f9fcbe123ac5510a24d53e5a86d1492569b7a68b2be51be5cde2 done
+#17 exporting config sha256:1f9819ec084cccb3036a81aac452508c1b078a5604ed3277a25ec93a80b53e5d done
+#17 exporting attestation manifest sha256:5c672cc900bb536864c2f9135f7a0435f9c5e573e6fdf7e74f8f76c5a40d05af
+#17 exporting attestation manifest sha256:5c672cc900bb536864c2f9135f7a0435f9c5e573e6fdf7e74f8f76c5a40d05af 0.1s done
+#17 exporting manifest list sha256:8415036b96bf8c869a33ce4a86bc93fbd73bbc2547e269c26555ab593785a3f6 0.0s done
+#17 naming to docker.io/library/back-end-discovery:latest done
+#17 unpacking to docker.io/library/back-end-discovery:latest 0.0s done
+#17 DONE 0.3s
 
-#18 [user-service internal] load build definition from Dockerfile.dev
-#18 transferring dockerfile: 671B done
+#18 [discovery] resolving provenance for metadata file
 #18 DONE 0.0s
 
 #19 [gateway internal] load build definition from Dockerfile.dev
-#19 transferring dockerfile: 669B done
-#19 DONE 0.1s
+#19 transferring dockerfile: 691B 0.0s done
+#19 DONE 0.0s
 
-#20 [notification-service internal] load build definition from Dockerfile.dev
-#20 transferring dockerfile: 687B done
-#20 DONE 0.1s
+#20 [user-service internal] load build definition from Dockerfile.dev
+#20 transferring dockerfile: 693B 0.0s done
+#20 DONE 0.0s
+
+#4 [user-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#4 DONE 6.0s
 
 #2 [user-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#2 DONE 4.6s
+#2 DONE 8.3s
 
-#3 [gateway internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#3 DONE 4.6s
-
-#21 [notification-service internal] load .dockerignore
+#21 [gateway internal] load .dockerignore
 #21 transferring context: 2B done
 #21 DONE 0.0s
 
-#22 [brand-service internal] load .dockerignore
-#22 transferring context: 2B done
-#22 DONE 0.1s
+#22 [user-service internal] load .dockerignore
+#22 transferring context: 2B 0.0s done
+#22 DONE 0.0s
 
-#5 [gateway stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#5 DONE 0.0s
+#8 [gateway stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#8 resolve docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688 0.0s done
+#8 DONE 0.1s
 
-#6 [gateway build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#6 DONE 0.0s
+#9 [user-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#9 resolve docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d 0.0s done
+#9 DONE 0.1s
 
-#23 [gateway internal] load .dockerignore
-#23 transferring context: 2B done
-#23 DONE 0.1s
+#23 [user-service internal] load build context
+#23 transferring context: 2.45kB 0.1s done
+#23 DONE 0.5s
 
-#24 [user-service internal] load .dockerignore
-#24 transferring context: 2B done
-#24 DONE 0.1s
+#24 [gateway internal] load build context
+#24 transferring context: 701B 0.0s done
+#24 DONE 0.5s
 
-#25 [campaign-service internal] load .dockerignore
-#25 transferring context: 2B done
-#25 DONE 0.1s
+#25 [user-service build 3/6] COPY pom.xml .
+#25 CACHED
 
-#5 [campaign-service stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#5 DONE 0.0s
+#26 [user-service build 5/6] COPY src ./src
+#26 CACHED
 
-#6 [campaign-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#6 DONE 0.0s
+#27 [user-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#27 CACHED
 
-#26 [gateway internal] load build context
-#26 transferring context: 6.50kB 0.0s done
-#26 DONE 0.1s
+#28 [user-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#28 CACHED
 
-#27 [campaign-service internal] load build context
-#27 transferring context: 28.38kB 0.1s done
-#27 DONE 0.1s
+#29 [user-service stage-1 3/3] COPY --from=build /app/target/user-service-0.0.1-SNAPSHOT.jar .
+#29 CACHED
 
-#28 [notification-service internal] load build context
-#28 transferring context: 24.34kB 0.1s done
-#28 DONE 0.1s
+#30 [gateway build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#30 CACHED
 
-#29 [brand-service internal] load build context
-#29 transferring context: 17.30kB 0.1s done
-#29 DONE 0.1s
-
-#30 [user-service internal] load build context
-#30 transferring context: 26.61kB 0.1s done
-#30 DONE 0.1s
-
-#31 [gateway build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#31 [gateway build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
 #31 CACHED
 
-#32 [gateway build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#32 [gateway build 5/6] COPY src ./src
 #32 CACHED
 
-#33 [gateway build 5/6] COPY src ./src
+#11 [gateway stage-1 2/3] WORKDIR /app
+#11 CACHED
+
+#12 [gateway build 2/6] WORKDIR /app
+#12 CACHED
+
+#33 [gateway build 3/6] COPY pom.xml .
 #33 CACHED
 
-#34 [gateway build 3/6] COPY pom.xml .
+#34 [gateway stage-1 3/3] COPY --from=build /app/target/api-gateway-0.0.1-SNAPSHOT.jar .
 #34 CACHED
 
-#35 [gateway stage-1 3/3] COPY --from=build /app/target/api-gateway-0.0.1-SNAPSHOT.jar .
-#35 CACHED
+#35 [user-service] exporting to image
+#35 exporting layers done
+#35 exporting manifest sha256:862d09e231fb564c7a4e4472c1080b4436492f343b2eceeb8fbfd089e9989ce5 done
+#35 exporting config sha256:8604e1878ee29c6e9b177903cdd3a0a24655d56e3a67b3567c7dfd19f6cb123b done
+#35 exporting attestation manifest sha256:6b19ef1009830f34a3dc190454ecd760d2a9a812e9e5cea87af3ce7b25d90be7
+#35 exporting attestation manifest sha256:6b19ef1009830f34a3dc190454ecd760d2a9a812e9e5cea87af3ce7b25d90be7 0.1s done
+#35 exporting manifest list sha256:8828536cb2ac709665139dc323aa962e41fbffe84ceb3be98834c415c223ff2e
+#35 exporting manifest list sha256:8828536cb2ac709665139dc323aa962e41fbffe84ceb3be98834c415c223ff2e 0.1s done
+#35 naming to docker.io/library/back-end-user-service:latest 0.0s done
+#35 unpacking to docker.io/library/back-end-user-service:latest 0.0s done
+#35 DONE 0.3s
 
-#36 [notification-service build 5/6] COPY src ./src
-#36 CACHED
+#36 [gateway] exporting to image
+#36 exporting layers done
+#36 exporting manifest sha256:c32ea73dd5602f4b4234c2e690f50b1fe96d7c52dc56ed7feb0755b7261eb042 done
+#36 exporting config sha256:70c1f38b9a32610eaf3db98efaeec5dcdab66d20d506716653ee7d0b562e806b done
+#36 exporting attestation manifest sha256:500e51601bff733d8af1388b42e6294365d0a9bdaa34c5da057b50c609d54a64 0.1s done
+#36 exporting manifest list sha256:c87a394666b5491f565fda1c934b4ae3f8933498dd9c00be7287601626d253ee 0.1s done
+#36 naming to docker.io/library/back-end-gateway:latest 0.0s done
+#36 unpacking to docker.io/library/back-end-gateway:latest 0.0s done
+#36 DONE 0.4s
 
-#37 [notification-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#37 CACHED
+#37 [user-service] resolving provenance for metadata file
+#37 DONE 0.1s
 
-#38 [notification-service build 3/6] COPY pom.xml .
-#38 CACHED
-
-#39 [notification-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#39 CACHED
-
-#40 [notification-service stage-1 3/3] COPY --from=build /app/target/notification-service-0.0.1-SNAPSHOT.jar .
-#40 CACHED
-
-#41 [brand-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#41 CACHED
-
-#42 [brand-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#42 CACHED
-
-#43 [brand-service build 5/6] COPY src ./src
-#43 CACHED
-
-#44 [brand-service build 3/6] COPY pom.xml .
-#44 CACHED
-
-#45 [brand-service stage-1 3/3] COPY --from=build /app/target/brand-service-0.0.1-SNAPSHOT.jar .
-#45 CACHED
-
-#46 [campaign-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#46 CACHED
-
-#47 [campaign-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#47 CACHED
-
-#48 [campaign-service build 3/6] COPY pom.xml .
-#48 CACHED
-
-#49 [campaign-service build 5/6] COPY src ./src
-#49 CACHED
-
-#50 [campaign-service stage-1 3/3] COPY --from=build /app/target/campaign-service-0.0.1-SNAPSHOT.jar .
-#50 CACHED
-
-#13 [campaign-service build 2/6] WORKDIR /app
-#13 CACHED
-
-#51 [user-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#51 CACHED
-
-#52 [user-service build 5/6] COPY src ./src
-#52 CACHED
-
-#53 [user-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#53 CACHED
-
-#54 [user-service build 3/6] COPY pom.xml .
-#54 CACHED
-
-#8 [campaign-service stage-1 2/3] WORKDIR /app
-#8 CACHED
-
-#55 [user-service stage-1 3/3] COPY --from=build /app/target/user-service-0.0.1-SNAPSHOT.jar .
-#55 CACHED
-
-#56 [notification-service] exporting to image
-#56 exporting layers done
-#56 ...
-
-#57 [gateway] exporting to image
-#57 exporting layers done
-#57 writing image sha256:3e7f1051f1f8168085f37240961e00318b215326da488b2900b2d83acd80bf9e 0.0s done
-#57 naming to docker.io/library/back-end-gateway 0.0s done
-#57 DONE 0.1s
-
-#58 [brand-service] exporting to image
-#58 exporting layers done
-#58 writing image sha256:6c375251085053e7c759ed4ffa36582acabfdcbf15fdd406d6203f28d976c8cd 0.0s done
-#58 naming to docker.io/library/back-end-brand-service 0.0s done
-#58 DONE 0.1s
-
-#56 [notification-service] exporting to image
-#56 writing image sha256:236f1192cc366cde29cc97ec76f3ff2defd13d5c292a956be545993caf62d60d 0.0s done
-#56 naming to docker.io/library/back-end-notification-service 0.0s done
-#56 DONE 0.2s
-
-#59 [campaign-service] exporting to image
-#59 exporting layers done
-#59 writing image sha256:66a99ceded3f1f542eb7b08bbd5c778d6f220e6bc8641fc9fb0932675a1c9508 0.0s done
-#59 naming to docker.io/library/back-end-campaign-service 0.0s done
-#59 DONE 0.1s
-
-#60 [user-service] exporting to image
-#60 exporting layers done
-#60 writing image sha256:90399fbfbe15838e051dd2c3489f5cbc9784e914af8d6b061b94f7040241dc60 0.1s done
-#60 naming to docker.io/library/back-end-user-service done
-#60 DONE 0.1s
-time="2025-01-12T00:39:10+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+#38 [gateway] resolving provenance for metadata file
+#38 DONE 0.0s
  Network back-end_microservices-network  Creating
  Network back-end_microservices-network  Created
  Network back-end_default  Creating
  Network back-end_default  Created
- Container mongo  Creating
  Container discovery-server  Creating
  Container mysql-container  Creating
- Container rabbitmq  Creating
- Container mysql-container  Created
  Container discovery-server  Created
  Container api-gateway  Creating
- Container brand-service  Creating
+ Container mysql-container  Created
  Container user-service  Creating
- Container campaign-service  Creating
- Container mongo  Created
- Container notification-service  Creating
- Container rabbitmq  Created
- Container campaign-service  Created
- Container brand-service  Created
- Container notification-service  Created
- Container user-service  Created
  Container api-gateway  Created
+ Container user-service  Created
  Container mysql-container  Starting
- Container rabbitmq  Starting
  Container discovery-server  Starting
- Container mongo  Starting
- Container mysql-container  Started
  Container discovery-server  Started
- Container campaign-service  Starting
- Container user-service  Starting
- Container brand-service  Starting
  Container api-gateway  Starting
- Container mongo  Started
- Container notification-service  Starting
- Container rabbitmq  Started
+ Container mysql-container  Started
+ Container user-service  Starting
  Container api-gateway  Started
  Container user-service  Started
- Container notification-service  Started
- Container brand-service  Started
- Container campaign-service  Started
 Services started successfully.
