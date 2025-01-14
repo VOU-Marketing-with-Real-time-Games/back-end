@@ -2,6 +2,7 @@ package com.hcmus.brandservice.service;
 
 import com.hcmus.brandservice.dto.BrandRequestDto;
 import com.hcmus.brandservice.dto.BrandRespondDto;
+import com.hcmus.brandservice.dto.BrandStatisticsDto;
 import com.hcmus.brandservice.exception.BranchNotFoundException;
 import com.hcmus.brandservice.exception.BrandExistedException;
 import com.hcmus.brandservice.exception.BrandNotFoundException;
@@ -12,6 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -74,5 +78,37 @@ public class BrandService {
     public Brand getById(Long id) throws BrandNotFoundException {
         return brandRepository.findById(id).orElseThrow(
                 () -> new BrandNotFoundException("Brand with id " + id + " not found"));
+    }
+    public BrandStatisticsDto getBrandStatistics() {
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        List<Integer> dailyBrandCounts = new ArrayList<>();
+        int totalBrands = 0;
+        int previousDayCount = 0;
+        boolean isTrendUp = false;
+
+        for (int i = 0; i < 30; i++) {
+            LocalDate date = startDate.plusDays(i);
+            String formattedDate = date.format(formatter);
+            int brandCount = brandRepository.countBrandsByDate(formattedDate);
+            dailyBrandCounts.add(brandCount);
+            totalBrands += brandCount;
+
+            if (i > 0 && brandCount > previousDayCount) {
+                isTrendUp = true;
+            }
+            previousDayCount = brandCount;
+        }
+
+        BrandStatisticsDto stats = new BrandStatisticsDto();
+        stats.setTitle("Brands");
+        stats.setValue(String.valueOf(totalBrands));
+        stats.setInterval("Last 30 days");
+        stats.setTrend(isTrendUp ? "up" : "down");
+        stats.setData(dailyBrandCounts);
+
+        return stats;
     }
 }

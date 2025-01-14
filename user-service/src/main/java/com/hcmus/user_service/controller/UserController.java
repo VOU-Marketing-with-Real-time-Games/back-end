@@ -1,9 +1,6 @@
 package com.hcmus.user_service.controller;
 
-import com.hcmus.user_service.dto.AuthRequest;
-import com.hcmus.user_service.dto.UserRequestDto;
-import com.hcmus.user_service.dto.UserRespondDto;
-import com.hcmus.user_service.dto.UserUpdateDto;
+import com.hcmus.user_service.dto.*;
 import com.hcmus.user_service.exception.PhoneNumberExistedException;
 import com.hcmus.user_service.exception.UserEmailExistedException;
 import com.hcmus.user_service.exception.UserNameExistedException;
@@ -73,6 +70,19 @@ public class UserController {
     @PostMapping("/validate")
     public ResponseEntity<?> validateUser(@RequestBody AuthRequest authRequest) throws Exception {
         return ResponseEntity.ok(userService.validateUser(authRequest));
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<UserStatisticsDto> getUserStatistics() {
+        UserStatisticsDto stats = userService.getUserStatistics();
+        return ResponseEntity.ok(stats);
+    }
+
+    @PostMapping("create")
+    public ResponseEntity<?> createUserByAdmin(@Valid @RequestBody UserRequestDto userDto)
+            throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException {
+        UserRespondDto user = userService.createByAdmin(userDto);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
 }

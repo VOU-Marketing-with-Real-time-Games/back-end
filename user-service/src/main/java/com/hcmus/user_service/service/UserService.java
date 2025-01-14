@@ -1,8 +1,5 @@
 package com.hcmus.user_service.service;
-import com.hcmus.user_service.dto.AuthRequest;
-import com.hcmus.user_service.dto.UserRequestDto;
-import com.hcmus.user_service.dto.UserRespondDto;
-import com.hcmus.user_service.dto.UserUpdateDto;
+import com.hcmus.user_service.dto.*;
 import com.hcmus.user_service.exception.*;
 import com.hcmus.user_service.model.User;
 import com.hcmus.user_service.repository.UserRepository;
@@ -11,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -94,5 +94,58 @@ public class UserService {
             return modelMapper.map(user, UserRespondDto.class);
         else
             throw new ValidationUserException("Invalid password");
+    }
+
+    public UserStatisticsDto getUserStatistics() {
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        List<Integer> dailyUserCounts = new ArrayList<>();
+        int totalUsers = 0;
+        int previousDayCount = 0;
+        boolean isTrendUp = false;
+
+        for (int i = 0; i < 30; i++) {
+            LocalDate date = startDate.plusDays(i);
+            String formattedDate = date.format(formatter);
+            int userCount = userRepository.countUsersByDate(formattedDate);
+            dailyUserCounts.add(userCount);
+            totalUsers += userCount;
+
+            if (i > 0 && userCount > previousDayCount) {
+                isTrendUp = true;
+            }
+            previousDayCount = userCount;
+        }
+
+        UserStatisticsDto stats = new UserStatisticsDto();
+        stats.setTitle("Users");
+        stats.setValue(String.valueOf(totalUsers));
+        stats.setInterval("Last 30 days");
+        stats.setTrend(isTrendUp ? "up" : "down");
+        stats.setData(dailyUserCounts);
+
+        return stats;
+    }
+
+    public UserRespondDto createByAdmin(UserRequestDto userDto)
+            throws UserNameExistedException, UserEmailExistedException,
+            PhoneNumberExistedException {
+        User user = modelMapper.map(userDto, User.class);
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            throw new UserNameExistedException("Username existed");
+        }
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            throw new UserEmailExistedException("Email existed");
+        }
+        if (userRepository.findByPhoneNumber(user.getPhoneNumber()) != null) {
+            throw new PhoneNumberExistedException("Phone number existed");
+        }
+        user.setTurnNum(0);
+        user.setCreatedAt(new Date());
+        user.setStatus("ACTIVE");
+        userRepository.save(user);
+        return modelMapper.map(user, UserRespondDto.class);
     }
 }

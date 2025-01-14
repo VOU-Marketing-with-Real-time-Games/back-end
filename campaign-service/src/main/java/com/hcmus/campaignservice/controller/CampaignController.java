@@ -2,6 +2,7 @@ package com.hcmus.campaignservice.controller;
 
 import com.hcmus.campaignservice.dto.CampaignDto;
 import com.hcmus.campaignservice.dto.CampaignResponseDto;
+import com.hcmus.campaignservice.dto.CampaignStatisticsDto;
 import com.hcmus.campaignservice.dto.UpdateCampaignDto;
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
 import com.hcmus.campaignservice.service.CampaignService;
@@ -29,9 +30,10 @@ public class CampaignController {
      */
     @PostMapping
     public ResponseEntity<?> createCampaign(@Valid @RequestBody CampaignDto campaignDTO) {
-           CampaignResponseDto campaign = campaignService.createCampaign(campaignDTO);
-           return new ResponseEntity<>(campaign, HttpStatus.CREATED);
+        CampaignResponseDto campaign = campaignService.createCampaign(campaignDTO);
+        return new ResponseEntity<>(campaign, HttpStatus.CREATED);
     }
+
     /**
      * Get all campaigns.
      *
@@ -41,8 +43,9 @@ public class CampaignController {
     @GetMapping
     public ResponseEntity<?> getAllCampaigns(Pageable pageable) {
         Page<CampaignResponseDto> campaignList = campaignService.getAllCampaigns(pageable);
-        return new ResponseEntity<>(campaignList,HttpStatus.OK);
+        return new ResponseEntity<>(campaignList, HttpStatus.OK);
     }
+
     /**
      * Get a campaign by its ID.
      *
@@ -53,7 +56,7 @@ public class CampaignController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getACampaign(@PathVariable Long id) throws CampaignNotFoundException {
         CampaignResponseDto campaign = campaignService.getCampaign(id);
-        return new ResponseEntity<>(campaign,HttpStatus.OK);
+        return new ResponseEntity<>(campaign, HttpStatus.OK);
     }
 
 
@@ -65,16 +68,17 @@ public class CampaignController {
     /**
      * Update a campaign.
      *
-     * @param id the ID of the campaign
+     * @param id          the ID of the campaign
      * @param campaignDto the CampaignDto containing the details of the campaign
      * @return the updated CampaignResponseDto
      * @throws CampaignNotFoundException if the campaign is not found
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?>  updateACampaign(@PathVariable Long id,@Valid @RequestBody UpdateCampaignDto campaignDto) throws CampaignNotFoundException {
-            CampaignResponseDto campaign = campaignService.updateCampaign(id,campaignDto);
-            return new ResponseEntity<>(campaign,HttpStatus.OK);
+    public ResponseEntity<?> updateACampaign(@PathVariable Long id, @Valid @RequestBody UpdateCampaignDto campaignDto) throws CampaignNotFoundException {
+        CampaignResponseDto campaign = campaignService.updateCampaign(id, campaignDto);
+        return new ResponseEntity<>(campaign, HttpStatus.OK);
     }
+
     /**
      * Delete a campaign by its ID.
      *
@@ -84,8 +88,10 @@ public class CampaignController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCampaign(@PathVariable Long id) throws CampaignNotFoundException {
         campaignService.deleteCampaignById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent()
+                .build();
     }
+
     /**
      * Get all campaigns by user ID.
      *
@@ -93,11 +99,11 @@ public class CampaignController {
      * @return a list of CampaignResponseDto
      */
     @GetMapping("/user-favourite/{id}")
-    public ResponseEntity<?> getFavoriteCampaign(@PathVariable Long id)
-    {
+    public ResponseEntity<?> getFavoriteCampaign(@PathVariable Long id) {
         List<CampaignResponseDto> campaigns = campaignService.getFavouriteCampaignsByUser(id);
-        return new ResponseEntity<>(campaigns,HttpStatus.OK);
+        return new ResponseEntity<>(campaigns, HttpStatus.OK);
     }
+
     /**
      * Search campaigns by name.
      *
@@ -109,6 +115,7 @@ public class CampaignController {
         List<CampaignResponseDto> campaigns = campaignService.searchCampaignsByName(name);
         return new ResponseEntity<>(campaigns, HttpStatus.OK);
     }
+
     /**
      * Get the newest campaign.
      *
@@ -118,5 +125,11 @@ public class CampaignController {
     public ResponseEntity<?> getNewestCampaign() {
         CampaignResponseDto newestCampaign = campaignService.getLatestCampaign();
         return new ResponseEntity<>(newestCampaign, HttpStatus.OK);
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<CampaignStatisticsDto> getCampaignStatistics() {
+        CampaignStatisticsDto stats = campaignService.getCampaignStatistics();
+        return ResponseEntity.ok(stats);
     }
 }
