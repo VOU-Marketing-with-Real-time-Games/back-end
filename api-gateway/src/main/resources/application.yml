@@ -57,6 +57,10 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/v3/users/**
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/v3/auth/**
         - id: voucher-service
           uri: lb://voucher-service
           predicates:
@@ -85,8 +89,8 @@ spring:
         - id: get-all-users
           uri: lb://user-service
           predicates:
-              - Path=/v3/users
-              - Method=GET
+            - Path=/v3/users
+            - Method=GET
           filters:
             - StripPrefix=2
       globalcors:
@@ -114,5 +118,4 @@ eureka:
 server:
   port: 8080
 jwt:
-    secret: ${JWT_SECRET:your-secret-key}
-
+  secret: ${JWT_SECRET:your-secret-key}
