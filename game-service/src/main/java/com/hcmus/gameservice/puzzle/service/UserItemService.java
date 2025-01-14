@@ -1,5 +1,6 @@
 package com.hcmus.gameservice.puzzle.service;
 
+import com.hcmus.gameservice.client.UserClient;
 import com.hcmus.gameservice.client.VoucherClient;
 import com.hcmus.gameservice.game_info.model.GameCampaign;
 import com.hcmus.gameservice.game_info.model.GameType;
@@ -15,6 +16,7 @@ import com.hcmus.gameservice.rabbit_mq.NotificationDto;
 import com.hcmus.gameservice.rabbit_mq.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,12 +32,21 @@ public class UserItemService {
     private final PuzzleService puzzleService;
     private final GameCampaignRepository gameCampaignRepository;
     private final VoucherClient voucherClient;
+    private final UserClient userClient;
+
     private final NotificationService notificationService;
     public ItemResponseDto addRandomItemToUser(Long userId, Long puzzleId) throws Exception {
         Item item = itemService.getRandomItemByPuzzleId(puzzleId);
         if (item == null) {
             return null;
         }
+
+        // Call decreaseTurnNum API
+        ResponseEntity<?> response = userClient.decreaseTurnNum(userId);
+        if (response.getBody() == Boolean.FALSE) {
+            return null;
+        }
+
         itemService.updateRemainingNum(item.getId());
         // Add to user item
         UserItem userItem = userItemRepository.findByUserIdAndItemId(userId, item.getId());

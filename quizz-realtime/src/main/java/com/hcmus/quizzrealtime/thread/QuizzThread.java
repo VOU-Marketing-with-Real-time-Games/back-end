@@ -1,6 +1,7 @@
 package com.hcmus.quizzrealtime.thread;
 
 import com.hcmus.quizzrealtime.client.GameClient;
+import com.hcmus.quizzrealtime.client.UserClient;
 import com.hcmus.quizzrealtime.client.UserGameCampaignClient;
 import com.hcmus.quizzrealtime.client.VoucherClient;
 import com.hcmus.quizzrealtime.dto.*;
@@ -22,9 +23,10 @@ public class QuizzThread implements Runnable {
     private NotificationService notificationService;
     private VoucherClient voucherClient;
     private AtomicInteger count = new AtomicInteger(0);
+    private UserClient userClient;
 
     public QuizzThread(QuizzDto quizz, QuizSocketHandler quizWebSocketHandler, List<QuestionDto> questionResponseDto, GameClient gameClient,
-                       UserGameCampaignClient userGameCampaignClient, NotificationService notificationService, VoucherClient voucherClient) {
+                       UserGameCampaignClient userGameCampaignClient, NotificationService notificationService, VoucherClient voucherClient, UserClient userClient) {
         this.quizz = quizz;
         this.quizSocketHandler = quizWebSocketHandler;
         this.questionResponseDto = questionResponseDto;
@@ -32,6 +34,7 @@ public class QuizzThread implements Runnable {
         this.userGameCampaignClient = userGameCampaignClient;
         this.notificationService = notificationService;
         this.voucherClient = voucherClient;
+        this.userClient = userClient;
     }
 
     public synchronized void updateCount(List<Long> userIds) {
@@ -49,8 +52,6 @@ public class QuizzThread implements Runnable {
         }
     }
 
-
-
     @Override
     public void run()
     {
@@ -59,6 +60,7 @@ public class QuizzThread implements Runnable {
     }
 
     public void addUserCampaignGame(List<Long> userIds) {
+        userClient.decreaseTurnNumForUsers(userIds);
         userGameCampaignClient.addUserCampaignGamesByUserIdsAndQuizzId(new UserCampaignGameClientRequest(userIds, quizz.getId()));
     }
 
