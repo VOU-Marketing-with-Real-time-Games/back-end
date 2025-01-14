@@ -76,6 +76,10 @@ public class QuizzThread implements Runnable {
                 .collect(Collectors.toList());
     }
 
+
+
+
+
     public void totalScoreUserInQuiz() {
        List<UserQuizzTotalScoreDto> userQuizzTotalScoreDtos = gameClient.getTotalScoreUserInQuizz(quizz.getId());
        quizSocketHandler.sendResultsToUsers(userQuizzTotalScoreDtos, quizz.getId());

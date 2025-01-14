@@ -3,10 +3,7 @@ package com.hcmus.gameservice.client;
 import com.hcmus.gameservice.quizz.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,4 +17,7 @@ public interface UserClient {
 
     @PutMapping("/decrease-turns")
     ResponseEntity<?> decreaseTurnNumForUsers(@RequestBody List<Long> ids);
+
+    @GetMapping("/email/{email}")
+    ResponseEntity<?> getUserByEmail(@PathVariable("email") String email);
 }

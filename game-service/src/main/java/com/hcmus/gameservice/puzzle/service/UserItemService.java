@@ -12,10 +12,12 @@ import com.hcmus.gameservice.puzzle.model.Puzzle;
 import com.hcmus.gameservice.puzzle.model.UserItem;
 import com.hcmus.gameservice.puzzle.repository.UserItemRepository;
 
+import com.hcmus.gameservice.quizz.dto.UserDto;
 import com.hcmus.gameservice.rabbit_mq.NotificationDto;
 import com.hcmus.gameservice.rabbit_mq.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -111,5 +113,44 @@ public class UserItemService {
         return userItems.stream()
                 .map(userItem -> modelMapper.map(userItem, UserItemDto.class))
                 .toList();
+    }
+    // UserItemService.java
+    public boolean transferItemToUser(Long senderId, String recipientEmail, Long itemId) throws Exception {
+        // Check if sender has the item
+        UserItem senderItem = userItemRepository.findByUserIdAndItemId(senderId, itemId);
+        if (senderItem == null || senderItem.getTotalItem() <= 0) {
+            return false;
+        }
+
+        // Get recipient user by email
+        ResponseEntity<?> response = userClient.getUserByEmail(recipientEmail);
+        if (response.getStatusCode() != HttpStatus.OK) {
+            return false;
+        }
+        UserDto recipient = (UserDto) response.getBody();
+        if (recipient == null) {
+            return false;
+        }
+
+        // Transfer item
+        senderItem.setTotalItem(senderItem.getTotalItem() - 1);
+        userItemRepository.save(senderItem);
+
+        UserItem recipientItem = userItemRepository.findByUserIdAndItemId(recipient.getId(), itemId);
+        if (recipientItem == null) {
+            recipientItem = UserItem.builder().userId(recipient.getId()).item(senderItem.getItem()).totalItem(1).build();
+            userItemRepository.save(recipientItem);
+        } else {
+            recipientItem.setTotalItem(recipientItem.getTotalItem() + 1);
+            userItemRepository.save(recipientItem);
+        }
+
+        // Send notification to recipient
+        NotificationDto notificationDto = NotificationDto.builder()
+                .content("You have received an item from user with id:" + senderId)
+                .userId(recipient.getId())
+                .build();
+        notificationService.notifyGameEvent(notificationDto);
+        return true;
     }
 }
