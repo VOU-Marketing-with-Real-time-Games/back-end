@@ -2,8 +2,10 @@ package com.hcmus.auth_service.controller;
 
 import com.hcmus.auth_service.dto.*;
 import com.hcmus.auth_service.exception.InvalidRefreshTokenException;
+import com.hcmus.auth_service.jwt.JwtUtils;
 import com.hcmus.auth_service.model.RefreshToken;
 import com.hcmus.auth_service.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v3/auth")
 public class AuthController {
     private final AuthService authService;
+    private final JwtUtils jwtUtils;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserRequestDto userRequestDto) throws Exception{
@@ -103,5 +106,20 @@ public class AuthController {
     ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto) throws InvalidRefreshTokenException {
         authService.changePassword(resetPasswordDto);
         return ResponseEntity.ok("Password changed successfully");
+    }
+
+    /**
+     * Get user profile
+     * @param request
+     * @return
+     */
+    @GetMapping("/me")
+    ResponseEntity<?> getProfile(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            Long userId = jwtUtils.getIdFromJwtToken(authHeader.substring(7));
+            return new ResponseEntity<>(authService.getUserById(userId), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
     }
 }
