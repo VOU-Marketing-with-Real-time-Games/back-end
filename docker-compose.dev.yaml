@@ -160,7 +160,18 @@ services:
     env_file:
       - .env
     container_name: brand-service
-
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - "9004:9004"
+    networks:
+      - microservices-network
+    env_file:
+      - .env
+    container_name: auth-service
   campaign-service:
     build:
       context: ./campaign-service

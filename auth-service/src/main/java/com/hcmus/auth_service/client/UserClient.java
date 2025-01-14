@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "user-service", url = "http://localhost:8005/v3/users", configuration = FeignClientConfig.class)
+@FeignClient(name = "user-service", url = "http://user-service:8005/v3/users", configuration = FeignClientConfig.class)
 public interface UserClient {
     @PostMapping()
     UserRespondDto createUser(@RequestBody UserRequestDto userDto);

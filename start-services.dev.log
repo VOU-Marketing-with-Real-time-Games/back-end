@@ -1,212 +1,396 @@
-2025/01/12 18:53:02 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
-2025/01/12 18:53:03 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
-#0 building with "default" instance using docker driver
+time="2025-01-14T09:34:19+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+time="2025-01-14T09:34:19+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+#0 building with "desktop-linux" instance using docker driver
 
 #1 [discovery internal] load build definition from Dockerfile.dev
-#1 transferring dockerfile: 701B 0.1s done
-#1 DONE 0.2s
+#1 transferring dockerfile: 679B 0.0s done
+#1 DONE 0.0s
 
-#2 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#2 DONE 2.9s
+#2 [auth-service internal] load build definition from Dockerfile.dev
+#2 transferring dockerfile: 671B 0.0s done
+#2 DONE 0.0s
 
-#3 [discovery internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#3 DONE 3.0s
+#3 [discovery internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#3 DONE 3.4s
 
-#4 [discovery internal] load .dockerignore
-#4 transferring context: 0.0s
-#4 transferring context: 2B 0.1s done
-#4 DONE 1.7s
+#4 [auth-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#4 DONE 3.4s
 
-#5 [discovery build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#5 [auth-service internal] load .dockerignore
+#5 transferring context: 2B done
 #5 DONE 0.0s
 
-#6 [discovery stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#6 [discovery internal] load .dockerignore
+#6 transferring context: 2B done
 #6 DONE 0.0s
 
-#7 [discovery internal] load build context
-#7 transferring context: 731B 0.1s done
-#7 DONE 0.6s
+#7 [auth-service stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#7 DONE 0.0s
 
-#8 [discovery stage-1 2/3] WORKDIR /app
-#8 CACHED
+#8 [auth-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#8 DONE 0.0s
 
-#9 [discovery build 2/6] WORKDIR /app
-#9 CACHED
+#9 [discovery internal] load build context
+#9 transferring context: 3.57kB 0.0s done
+#9 DONE 0.0s
 
-#10 [discovery build 3/6] COPY pom.xml .
-#10 CACHED
+#10 [auth-service internal] load build context
+#10 transferring context: 47.01kB 0.0s done
+#10 DONE 0.1s
 
-#11 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#11 [discovery build 3/6] COPY pom.xml .
 #11 CACHED
 
-#12 [discovery build 5/6] COPY src ./src
+#12 [discovery stage-1 2/3] WORKDIR /app
 #12 CACHED
 
-#13 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#13 [discovery build 5/6] COPY src ./src
 #13 CACHED
 
-#14 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
+#14 [discovery build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 #14 CACHED
 
-#15 [discovery] exporting to image
-#15 exporting layers done
-#15 writing image sha256:f5517487aa1392a4d053fa59c4d0f7cee9ffa436b610c24dd001e0dcc6556a2b 0.2s done
-#15 naming to docker.io/library/v3-microservices-discovery
-#15 naming to docker.io/library/v3-microservices-discovery 0.1s done
-#15 DONE 0.3s
-2025/01/12 18:53:13 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
-2025/01/12 18:53:13 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
-2025/01/12 18:53:14 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
-2025/01/12 18:53:14 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
-2025/01/12 18:53:14 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
-2025/01/12 18:53:14 http2: server: error reading preface from client //./pipe/docker_engine: file has already been closed
+#15 [discovery build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#15 CACHED
 
-#16 [gateway internal] load build definition from Dockerfile.dev
-#16 transferring dockerfile: 34B 0.1s
-#16 transferring dockerfile: 691B 0.2s done
-#16 DONE 0.4s
+#16 [discovery stage-1 3/3] COPY --from=build /app/target/discovery-server-0.0.1-SNAPSHOT.jar .
+#16 CACHED
 
-#17 [notification-service internal] load build definition from Dockerfile.dev
-#17 transferring dockerfile: 709B 0.1s done
-#17 DONE 0.8s
+#17 [auth-service build 3/6] COPY pom.xml .
+#17 CACHED
 
-#18 [campaign-service internal] load build definition from Dockerfile.dev
-#18 transferring dockerfile: 701B 0.0s done
-#18 DONE 0.5s
+#18 [auth-service build 2/6] WORKDIR /app
+#18 CACHED
 
-#2 [campaign-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#2 DONE 5.4s
+#19 [auth-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#19 CACHED
 
-#3 [campaign-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#3 DONE 5.5s
+#20 [discovery] exporting to image
+#20 exporting layers done
+#20 writing image sha256:23fbed831bbe12dc1a107dcfea3d71c187d13bc17c3336faf22db563b4c35db6 done
+#20 naming to docker.io/library/back-end-discovery done
+#20 DONE 0.0s
 
-#19 [notification-service internal] load .dockerignore
-#19 transferring context: 2B 0.0s done
-#19 DONE 0.1s
-
-#20 [gateway internal] load .dockerignore
-#20 transferring context: 2B 0.0s done
-#20 DONE 0.1s
-
-#21 [campaign-service internal] load .dockerignore
-#21 transferring context: 2B 0.0s done
+#21 [auth-service build 5/6] COPY src ./src
 #21 DONE 0.1s
 
-#6 [campaign-service stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
-#6 DONE 0.0s
+#22 [auth-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#22 ...
 
-#5 [campaign-service build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
-#5 DONE 0.1s
+#23 [notification-service internal] load build definition from Dockerfile.dev
+#23 transferring dockerfile: 687B done
+#23 DONE 0.0s
 
-#22 [campaign-service internal] load build context
-#22 transferring context: 2.46kB 0.1s done
-#22 DONE 0.1s
+#24 [gateway internal] load build definition from Dockerfile.dev
+#24 transferring dockerfile: 669B done
+#24 DONE 0.0s
 
-#23 [gateway internal] load build context
-#23 transferring context: 701B 0.0s done
-#23 DONE 0.1s
+#25 [brand-service internal] load build definition from Dockerfile.dev
+#25 transferring dockerfile: 673B done
+#25 DONE 0.0s
 
-#24 [notification-service internal] load build context
-#24 transferring context: 2.75kB 0.1s done
-#24 DONE 0.1s
+#26 [user-service internal] load build definition from Dockerfile.dev
+#26 transferring dockerfile: 671B done
+#26 DONE 0.0s
 
-#25 [campaign-service build 3/6] COPY pom.xml .
-#25 CACHED
+#27 [campaign-service internal] load build definition from Dockerfile.dev
+#27 transferring dockerfile: 679B done
+#27 DONE 0.1s
 
-#26 [campaign-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#26 CACHED
+#4 [campaign-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
+#4 DONE 3.9s
 
-#27 [campaign-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#27 CACHED
+#7 [gateway stage-1 1/3] FROM docker.io/library/openjdk:21-jdk-slim@sha256:7072053847a8a05d7f3a14ebc778a90b38c50ce7e8f199382128a53385160688
+#7 DONE 0.0s
 
-#28 [campaign-service build 5/6] COPY src ./src
-#28 CACHED
+#8 [gateway build 1/6] FROM docker.io/library/maven:3.9.8-eclipse-temurin-21@sha256:de18e4e51396ad9266f76669779ed6d6b49fbb0f45ed6f39169d87378d548d7d
+#8 DONE 0.0s
 
-#29 [campaign-service stage-1 3/3] COPY --from=build /app/target/campaign-service-0.0.1-SNAPSHOT.jar .
-#29 CACHED
+#3 [notification-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
+#3 DONE 3.9s
 
-#30 [notification-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#30 CACHED
+#28 [notification-service internal] load .dockerignore
+#28 transferring context: 2B done
+#28 DONE 0.0s
 
-#31 [notification-service build 3/6] COPY pom.xml .
-#31 CACHED
+#29 [campaign-service internal] load .dockerignore
+#29 transferring context: 2B done
+#29 DONE 0.0s
 
-#32 [notification-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#32 CACHED
+#30 [brand-service internal] load .dockerignore
+#30 transferring context: 2B done
+#30 DONE 0.0s
 
-#33 [notification-service build 5/6] COPY src ./src
-#33 CACHED
+#31 [user-service internal] load .dockerignore
+#31 transferring context: 2B done
+#31 DONE 0.1s
 
-#34 [notification-service stage-1 3/3] COPY --from=build /app/target/notification-service-0.0.1-SNAPSHOT.jar .
-#34 CACHED
+#32 [gateway internal] load .dockerignore
+#32 transferring context: 2B done
+#32 DONE 0.1s
 
-#9 [campaign-service build 2/6] WORKDIR /app
-#9 CACHED
+#33 [campaign-service internal] load build context
+#33 transferring context: 30.04kB 0.0s done
+#33 DONE 0.1s
 
-#8 [campaign-service stage-1 2/3] WORKDIR /app
-#8 CACHED
+#34 [notification-service internal] load build context
+#34 transferring context: 24.34kB 0.0s done
+#34 DONE 0.1s
 
-#35 [gateway build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#35 CACHED
+#35 [user-service internal] load build context
+#35 transferring context: 29.80kB 0.0s done
+#35 DONE 0.1s
 
-#36 [gateway build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
-#36 CACHED
+#36 [gateway internal] load build context
+#36 transferring context: 13.10kB 0.0s done
+#36 DONE 0.1s
 
-#37 [gateway build 5/6] COPY src ./src
-#37 CACHED
+#37 [brand-service internal] load build context
+#37 transferring context: 38.61kB 0.0s done
+#37 DONE 0.1s
 
-#38 [gateway build 3/6] COPY pom.xml .
+#38 [notification-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
 #38 CACHED
 
-#39 [gateway stage-1 3/3] COPY --from=build /app/target/api-gateway-0.0.1-SNAPSHOT.jar .
+#39 [notification-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 #39 CACHED
 
-#40 [gateway] exporting to image
-#40 exporting layers done
-#40 writing image sha256:91ce5fc66d52d30fea75300a591709c67979036d1ca5521b903ef49623868b00 0.0s done
-#40 naming to docker.io/library/v3-microservices-gateway 0.0s done
-#40 DONE 0.1s
+#18 [notification-service build 2/6] WORKDIR /app
+#18 CACHED
 
-#41 [notification-service] exporting to image
-#41 exporting layers done
-#41 writing image sha256:b229c39d5157f3c09e944e5c73be1682975b5bb52db2b51f593bc33a0cfe8fbc 0.0s done
-#41 naming to docker.io/library/v3-microservices-notification-service 0.0s done
-#41 DONE 0.1s
+#40 [notification-service build 5/6] COPY src ./src
+#40 CACHED
 
-#42 [campaign-service] exporting to image
-#42 exporting layers done
-#42 writing image sha256:0a2321f0ef8a119dd07176cdb41f9ab11fe54385dfd01852d0338c88f70a5377 0.1s done
-#42 naming to docker.io/library/v3-microservices-campaign-service
-#42 naming to docker.io/library/v3-microservices-campaign-service 0.0s done
-#42 DONE 0.1s
- Network v3-microservices_default  Creating
- Network v3-microservices_default  Created
- Network v3-microservices_microservices-network  Creating
- Network v3-microservices_microservices-network  Created
- Volume "v3-microservices_mongo-data"  Creating
- Volume "v3-microservices_mongo-data"  Created
- Container mongo  Creating
- Container mysql-container  Creating
+#41 [notification-service build 3/6] COPY pom.xml .
+#41 CACHED
+
+#12 [notification-service stage-1 2/3] WORKDIR /app
+#12 CACHED
+
+#42 [notification-service stage-1 3/3] COPY --from=build /app/target/notification-service-0.0.1-SNAPSHOT.jar .
+#42 CACHED
+
+#22 [auth-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#22 ...
+
+#43 [campaign-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#43 CACHED
+
+#44 [campaign-service build 5/6] COPY src ./src
+#44 CACHED
+
+#45 [campaign-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#45 CACHED
+
+#46 [campaign-service build 3/6] COPY pom.xml .
+#46 CACHED
+
+#47 [campaign-service stage-1 3/3] COPY --from=build /app/target/campaign-service-0.0.1-SNAPSHOT.jar .
+#47 CACHED
+
+#48 [gateway build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#48 CACHED
+
+#49 [gateway build 3/6] COPY pom.xml .
+#49 CACHED
+
+#50 [gateway build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#50 CACHED
+
+#51 [gateway build 5/6] COPY src ./src
+#51 CACHED
+
+#52 [gateway stage-1 3/3] COPY --from=build /app/target/api-gateway-0.0.1-SNAPSHOT.jar .
+#52 CACHED
+
+#53 [brand-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#53 CACHED
+
+#54 [brand-service build 3/6] COPY pom.xml .
+#54 CACHED
+
+#55 [brand-service build 5/6] COPY src ./src
+#55 CACHED
+
+#56 [brand-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#56 CACHED
+
+#57 [brand-service stage-1 3/3] COPY --from=build /app/target/brand-service-0.0.1-SNAPSHOT.jar .
+#57 CACHED
+
+#12 [user-service stage-1 2/3] WORKDIR /app
+#12 CACHED
+
+#58 [user-service build 3/6] COPY pom.xml .
+#58 CACHED
+
+#18 [user-service build 2/6] WORKDIR /app
+#18 CACHED
+
+#59 [user-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#59 CACHED
+
+#60 [user-service build 5/6] COPY src ./src
+#60 CACHED
+
+#61 [user-service build 4/6] RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+#61 CACHED
+
+#62 [user-service stage-1 3/3] COPY --from=build /app/target/user-service-0.0.1-SNAPSHOT.jar .
+#62 CACHED
+
+#63 [notification-service] exporting to image
+#63 exporting layers done
+#63 writing image sha256:236f1192cc366cde29cc97ec76f3ff2defd13d5c292a956be545993caf62d60d 0.0s done
+#63 naming to docker.io/library/back-end-notification-service done
+#63 DONE 0.0s
+
+#64 [campaign-service] exporting to image
+#64 exporting layers done
+#64 writing image sha256:00e3c904e3ebb4ee5763d3d80cae742ce14cfb6f8bb49d23603c143c7c226061 0.0s done
+#64 naming to docker.io/library/back-end-campaign-service 0.0s done
+#64 DONE 0.1s
+
+#65 [brand-service] exporting to image
+#65 exporting layers done
+#65 writing image sha256:e817b07c153837c5e9e6d3fae7fefaf959a2c339f09610e13e6af3324d1dc179 0.0s done
+#65 naming to docker.io/library/back-end-brand-service 0.0s done
+#65 DONE 0.1s
+
+#66 [gateway] exporting to image
+#66 exporting layers done
+#66 writing image sha256:ddbaa1ebeb8c357734a828d2d2a84cb766e9ffd71e753af4c210370f01cc426f 0.0s done
+#66 naming to docker.io/library/back-end-gateway 0.0s done
+#66 DONE 0.1s
+
+#67 [user-service] exporting to image
+#67 exporting layers done
+#67 writing image sha256:033f4630379ccc6c2c9b1c249bc6a3453424075e8b80cfc19e6ad06876d8060e 0.0s done
+#67 naming to docker.io/library/back-end-user-service 0.0s done
+#67 DONE 0.1s
+
+#22 [auth-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
+#22 2.441 [INFO] Scanning for projects...
+#22 2.821 [INFO] 
+#22 2.822 [INFO] -----------------------< com.hcmus:auth-service >-----------------------
+#22 2.822 [INFO] Building auth-service 0.0.1-SNAPSHOT
+#22 2.822 [INFO]   from pom.xml
+#22 2.822 [INFO] --------------------------------[ jar ]---------------------------------
+#22 4.258 [INFO] 
+#22 4.258 [INFO] --- clean:3.4.0:clean (default-clean) @ auth-service ---
+#22 4.347 [INFO] 
+#22 4.347 [INFO] --- resources:3.3.1:resources (default-resources) @ auth-service ---
+#22 4.575 [INFO] Copying 1 resource from src/main/resources to target/classes
+#22 4.594 [INFO] Copying 0 resource from src/main/resources to target/classes
+#22 4.595 [INFO] 
+#22 4.595 [INFO] --- compiler:3.13.0:compile (default-compile) @ auth-service ---
+#22 4.750 [INFO] Recompiling the module because of changed source code.
+#22 4.764 [INFO] Compiling 29 source files with javac [debug parameters release 17] to target/classes
+#22 8.080 [INFO] Annotation processing is enabled because one or more processors were found
+#22 8.080   on the class path. A future release of javac may disable annotation processing
+#22 8.080   unless at least one processor is specified by name (-processor), or a search
+#22 8.080   path is specified (--processor-path, --processor-module-path), or annotation
+#22 8.080   processing is enabled explicitly (-proc:only, -proc:full).
+#22 8.080   Use -Xlint:-options to suppress this message.
+#22 8.080   Use -proc:none to disable annotation processing.
+#22 8.081 [INFO] 
+#22 8.081 [INFO] --- resources:3.3.1:testResources (default-testResources) @ auth-service ---
+#22 8.094 [INFO] skip non existing resourceDirectory /app/src/test/resources
+#22 8.094 [INFO] 
+#22 8.094 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ auth-service ---
+#22 8.106 [INFO] Recompiling the module because of changed dependency.
+#22 8.107 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+#22 8.894 [INFO] Annotation processing is enabled because one or more processors were found
+#22 8.894   on the class path. A future release of javac may disable annotation processing
+#22 8.894   unless at least one processor is specified by name (-processor), or a search
+#22 8.894   path is specified (--processor-path, --processor-module-path), or annotation
+#22 8.894   processing is enabled explicitly (-proc:only, -proc:full).
+#22 8.894   Use -Xlint:-options to suppress this message.
+#22 8.894   Use -proc:none to disable annotation processing.
+#22 8.894 [INFO] 
+#22 8.894 [INFO] --- surefire:3.5.2:test (default-test) @ auth-service ---
+#22 9.127 [INFO] Tests are skipped.
+#22 9.127 [INFO] 
+#22 9.128 [INFO] --- jar:3.4.2:jar (default-jar) @ auth-service ---
+#22 9.558 [INFO] Building jar: /app/target/auth-service-0.0.1-SNAPSHOT.jar
+#22 9.687 [INFO] 
+#22 9.687 [INFO] --- spring-boot:3.4.1:repackage (repackage) @ auth-service ---
+#22 11.38 [INFO] Replacing main artifact /app/target/auth-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#22 11.38 [INFO] The original artifact has been renamed to /app/target/auth-service-0.0.1-SNAPSHOT.jar.original
+#22 11.38 [INFO] 
+#22 11.38 [INFO] --- install:3.1.3:install (default-install) @ auth-service ---
+#22 11.43 [INFO] Installing /app/pom.xml to /root/.m2/repository/com/hcmus/auth-service/0.0.1-SNAPSHOT/auth-service-0.0.1-SNAPSHOT.pom
+#22 11.44 [INFO] Installing /app/target/auth-service-0.0.1-SNAPSHOT.jar to /root/.m2/repository/com/hcmus/auth-service/0.0.1-SNAPSHOT/auth-service-0.0.1-SNAPSHOT.jar
+#22 12.01 [INFO] ------------------------------------------------------------------------
+#22 12.01 [INFO] BUILD SUCCESS
+#22 12.01 [INFO] ------------------------------------------------------------------------
+#22 12.02 [INFO] Total time:  9.600 s
+#22 12.02 [INFO] Finished at: 2025-01-14T02:34:35Z
+#22 12.02 [INFO] ------------------------------------------------------------------------
+#22 DONE 14.4s
+
+#12 [auth-service stage-1 2/3] WORKDIR /app
+#12 CACHED
+
+#68 [auth-service stage-1 3/3] COPY --from=build /app/target/auth-service-0.0.1-SNAPSHOT.jar .
+#68 DONE 2.8s
+
+#69 [auth-service] exporting to image
+#69 exporting layers
+#69 exporting layers 1.2s done
+#69 writing image sha256:90c73affefa4f0b364270b21a4779db8fdf06d01937508a9c52db3bdc469678b 0.1s done
+#69 naming to docker.io/library/back-end-auth-service
+#69 naming to docker.io/library/back-end-auth-service 0.2s done
+#69 DONE 1.8s
+time="2025-01-14T09:34:43+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+ Network back-end_microservices-network  Creating
+ Network back-end_microservices-network  Created
+ Container mysql-primary  Creating
  Container discovery-server  Creating
+ Container auth-service  Creating
+ Container mongo  Creating
  Container discovery-server  Created
  Container api-gateway  Creating
+ Container mysql-primary  Created
+ Container auth-service  Created
+ Container mysql-replica-2  Creating
+ Container mysql-replica-1  Creating
  Container mongo  Created
  Container notification-service  Creating
- Container mysql-container  Created
- Container campaign-service  Creating
  Container api-gateway  Created
+ Container mysql-replica-2  Created
+ Container mysql-replica-1  Created
+ Container proxysql  Creating
  Container notification-service  Created
+ Container proxysql  Created
+ Container campaign-service  Creating
+ Container brand-service  Creating
+ Container user-service  Creating
+ Container brand-service  Created
  Container campaign-service  Created
+ Container user-service  Created
+ Container auth-service  Starting
+ Container mysql-primary  Starting
  Container discovery-server  Starting
  Container mongo  Starting
- Container mysql-container  Starting
- Container mongo  Started
+ Container auth-service  Started
+ Container mysql-primary  Started
+ Container mysql-replica-2  Starting
+ Container mysql-replica-1  Starting
  Container discovery-server  Started
- Container notification-service  Starting
  Container api-gateway  Starting
- Container mysql-container  Started
- Container campaign-service  Starting
- Container notification-service  Started
- Container campaign-service  Started
+ Container mongo  Started
+ Container notification-service  Starting
+ Container mysql-replica-2  Started
  Container api-gateway  Started
+ Container notification-service  Started
+ Container mysql-replica-1  Started
+ Container proxysql  Starting
+ Container proxysql  Started
+ Container brand-service  Starting
+ Container campaign-service  Starting
+ Container user-service  Starting
+ Container campaign-service  Started
+ Container brand-service  Started
+ Container user-service  Started
 Services started successfully.
