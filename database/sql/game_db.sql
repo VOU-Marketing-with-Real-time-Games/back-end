@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS `game_info`
 
 -- Dumping data for table vou.game_info: ~2 rows (approximately)
 INSERT INTO `game_info` (`id`, `enable`, `image`, `manual`, `name`, `game_type`)
-VALUES (1, b'1', '', 'manual', 'Quizz Game', 'QUIZZ'),
-       (2, b'0', 'test_image1.png', 'Test manual update', 'Shake Gane', 'SHAKE_GAME');
+VALUES (1, b'1', 'https://media.istockphoto.com/id/1336313511/vector/vector-funny-sign-quiz-game-set-of-creative-alphabet-letters-and-numbers.jpg?s=612x612&w=0&k=20&c=V7G9_GmHnJK89C-kt1U1kGDz2uBskO1-Z5fpxph9rX8=', 'manual', 'Quizz Game', 'QUIZZ'),
+       (2, b'0', 'https://static.vecteezy.com/system/resources/previews/006/950/963/non_2x/shake-phone-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg', 'Test manual update', 'Shake Game', 'SHAKE_GAME');
 
 -- Dumping structure for table game_db.game_campaign
 CREATE TABLE IF NOT EXISTS `game_campaign`

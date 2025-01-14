@@ -2,6 +2,7 @@ package com.hcmus.campaignservice.service;
 
 import com.hcmus.campaignservice.dto.CampaignDto;
 import com.hcmus.campaignservice.dto.CampaignResponseDto;
+import com.hcmus.campaignservice.dto.CampaignStatisticsDto;
 import com.hcmus.campaignservice.dto.UpdateCampaignDto;
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
 import com.hcmus.campaignservice.model.Campaign;
@@ -15,13 +16,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CampaignService {
+public class
+
+CampaignService {
     private final CampaignRepository campaignRepository;
     private final FavoriteCampaignUserRepository favoriteCampaignUserRepository;
     private final ModelMapper modelMapper;
@@ -86,5 +92,38 @@ public class CampaignService {
     public CampaignResponseDto getLatestCampaign() {
         Campaign newestCampaign = campaignRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")).stream().findFirst().orElse(null);
         return modelMapper.map(newestCampaign, CampaignResponseDto.class);
+    }
+
+    public CampaignStatisticsDto getCampaignStatistics() {
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        List<Integer> dailyCampaignCounts = new ArrayList<>();
+        int totalCampaigns = 0;
+        int previousDayCount = 0;
+        boolean isTrendUp = false;
+
+        for (int i = 0; i < 30; i++) {
+            LocalDate date = startDate.plusDays(i);
+            String formattedDate = date.format(formatter);
+            int campaignCount = campaignRepository.countCampaignsByDate(formattedDate);
+            dailyCampaignCounts.add(campaignCount);
+            totalCampaigns += campaignCount;
+
+            if (i > 0 && campaignCount > previousDayCount) {
+                isTrendUp = true;
+            }
+            previousDayCount = campaignCount;
+        }
+
+        CampaignStatisticsDto stats = new CampaignStatisticsDto();
+        stats.setTitle("Campaigns");
+        stats.setValue(String.valueOf(totalCampaigns));
+        stats.setInterval("Last 30 days");
+        stats.setTrend(isTrendUp ? "up" : "down");
+        stats.setData(dailyCampaignCounts);
+
+        return stats;
     }
 }

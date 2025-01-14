@@ -2,6 +2,7 @@ package com.hcmus.brandservice.controller;
 
 import com.hcmus.brandservice.dto.BrandRequestDto;
 import com.hcmus.brandservice.dto.BrandRespondDto;
+import com.hcmus.brandservice.dto.BrandStatisticsDto;
 import com.hcmus.brandservice.exception.BranchNotFoundException;
 import com.hcmus.brandservice.exception.BrandExistedException;
 import com.hcmus.brandservice.exception.BrandNotFoundException;
@@ -64,4 +65,10 @@ public class BrandController {
         brandService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/statistics")
+public ResponseEntity<BrandStatisticsDto> getBrandStatistics() {
+    BrandStatisticsDto stats = brandService.getBrandStatistics();
+    return ResponseEntity.ok(stats);
+}
 }

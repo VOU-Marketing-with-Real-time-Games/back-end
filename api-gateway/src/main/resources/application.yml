@@ -20,7 +20,7 @@ spring:
         - id: game-info
           uri: lb://game-service
           predicates:
-            - Path=/v3/game/**
+            - Path=/v3/game-info/**
         - id: game-campaign
           uri: lb://game-service
           predicates:

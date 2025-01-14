@@ -1,4 +1,4 @@
-time="2025-01-12T00:33:08+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+time="2025-01-15T03:06:49+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [brand-service internal] load build definition from Dockerfile.dev
@@ -6,10 +6,10 @@ time="2025-01-12T00:33:08+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\
 #1 DONE 0.1s
 
 #2 [brand-service internal] load metadata for docker.io/library/openjdk:21-jdk-slim
-#2 DONE 3.7s
+#2 DONE 2.8s
 
 #3 [brand-service internal] load metadata for docker.io/library/maven:3.9.8-eclipse-temurin-21
-#3 DONE 3.7s
+#3 DONE 2.8s
 
 #4 [brand-service internal] load .dockerignore
 #4 transferring context: 2B done
@@ -22,7 +22,7 @@ time="2025-01-12T00:33:08+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\
 #6 DONE 0.0s
 
 #7 [brand-service internal] load build context
-#7 transferring context: 15.17kB 0.0s done
+#7 transferring context: 3.14kB 0.0s done
 #7 DONE 0.1s
 
 #8 [brand-service build 2/6] WORKDIR /app
@@ -35,102 +35,103 @@ time="2025-01-12T00:33:08+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\
 #10 CACHED
 
 #11 [brand-service build 5/6] COPY src ./src
-#11 DONE 0.2s
+#11 CACHED
 
 #12 [brand-service build 6/6] RUN --mount=type=cache,target=/root/.m2 mvn clean install -DskipTests
-#12 11.42 [INFO] Scanning for projects...
-#12 12.53 [WARNING] 
-#12 12.53 [WARNING] Some problems were encountered while building the effective model for com.hcmus:brand-service:jar:0.0.1-SNAPSHOT
-#12 12.53 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.projectlombok:lombok:jar -> duplicate declaration of version (?) @ line 104, column 15
-#12 12.53 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-test:jar -> duplicate declaration of version (?) @ line 109, column 15
-#12 12.53 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.modelmapper:modelmapper:jar -> duplicate declaration of version 3.0.0 @ line 114, column 15
-#12 12.53 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-web:jar -> duplicate declaration of version (?) @ line 119, column 15
-#12 12.53 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.locationtech.jts:jts-core:jar -> duplicate declaration of version 1.18.2 @ line 123, column 15
-#12 12.53 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.hibernate:hibernate-spatial:jar -> duplicate declaration of version 6.6.4.Final @ line 128, column 15
-#12 12.53 [WARNING] 
-#12 12.53 [WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
-#12 12.53 [WARNING] 
-#12 12.53 [WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
-#12 12.53 [WARNING] 
-#12 12.55 [INFO] 
-#12 12.55 [INFO] ----------------------< com.hcmus:brand-service >-----------------------
-#12 12.55 [INFO] Building brand-service 0.0.1-SNAPSHOT
-#12 12.55 [INFO]   from pom.xml
-#12 12.55 [INFO] --------------------------------[ jar ]---------------------------------
-#12 27.16 [WARNING] The artifact org.hibernate:hibernate-spatial:jar:6.6.4.Final has been relocated to org.hibernate.orm:hibernate-spatial:jar:6.6.4.Final
-#12 27.21 [INFO] 
-#12 27.21 [INFO] --- clean:3.4.0:clean (default-clean) @ brand-service ---
-#12 27.35 [INFO] 
-#12 27.35 [INFO] --- resources:3.3.1:resources (default-resources) @ brand-service ---
-#12 27.60 [INFO] Copying 1 resource from src/main/resources to target/classes
-#12 27.64 [INFO] Copying 0 resource from src/main/resources to target/classes
-#12 27.65 [INFO] 
-#12 27.65 [INFO] --- compiler:3.13.0:compile (default-compile) @ brand-service ---
-#12 27.91 [INFO] Recompiling the module because of changed source code.
-#12 27.96 [INFO] Compiling 22 source files with javac [debug parameters release 17] to target/classes
-#12 34.07 [INFO] Annotation processing is enabled because one or more processors were found
-#12 34.07   on the class path. A future release of javac may disable annotation processing
-#12 34.07   unless at least one processor is specified by name (-processor), or a search
-#12 34.07   path is specified (--processor-path, --processor-module-path), or annotation
-#12 34.07   processing is enabled explicitly (-proc:only, -proc:full).
-#12 34.07   Use -Xlint:-options to suppress this message.
-#12 34.07   Use -proc:none to disable annotation processing.
-#12 34.07 [WARNING] /app/src/main/java/com/hcmus/brandservice/model/Brand.java:[29,26] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
-#12 34.07 [INFO] 
-#12 34.07 [INFO] --- resources:3.3.1:testResources (default-testResources) @ brand-service ---
-#12 34.07 [INFO] skip non existing resourceDirectory /app/src/test/resources
-#12 34.07 [INFO] 
-#12 34.07 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ brand-service ---
-#12 34.08 [INFO] Recompiling the module because of changed dependency.
-#12 34.09 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
-#12 36.66 [INFO] Annotation processing is enabled because one or more processors were found
-#12 36.66   on the class path. A future release of javac may disable annotation processing
-#12 36.66   unless at least one processor is specified by name (-processor), or a search
-#12 36.66   path is specified (--processor-path, --processor-module-path), or annotation
-#12 36.66   processing is enabled explicitly (-proc:only, -proc:full).
-#12 36.66   Use -Xlint:-options to suppress this message.
-#12 36.66   Use -proc:none to disable annotation processing.
-#12 36.66 [INFO] 
-#12 36.66 [INFO] --- surefire:3.5.2:test (default-test) @ brand-service ---
-#12 36.90 [INFO] Tests are skipped.
-#12 36.90 [INFO] 
-#12 36.91 [INFO] --- jar:3.4.2:jar (default-jar) @ brand-service ---
-#12 37.42 [INFO] Building jar: /app/target/brand-service-0.0.1-SNAPSHOT.jar
-#12 37.52 [INFO] 
-#12 37.52 [INFO] --- spring-boot:3.4.1:repackage (repackage) @ brand-service ---
-#12 47.63 [INFO] Replacing main artifact /app/target/brand-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
-#12 47.63 [INFO] The original artifact has been renamed to /app/target/brand-service-0.0.1-SNAPSHOT.jar.original
-#12 47.63 [INFO] 
-#12 47.63 [INFO] --- install:3.1.3:install (default-install) @ brand-service ---
-#12 47.72 [INFO] Installing /app/pom.xml to /root/.m2/repository/com/hcmus/brand-service/0.0.1-SNAPSHOT/brand-service-0.0.1-SNAPSHOT.pom
-#12 47.73 [INFO] Installing /app/target/brand-service-0.0.1-SNAPSHOT.jar to /root/.m2/repository/com/hcmus/brand-service/0.0.1-SNAPSHOT/brand-service-0.0.1-SNAPSHOT.jar
-#12 51.40 [INFO] ------------------------------------------------------------------------
-#12 51.40 [INFO] BUILD SUCCESS
-#12 51.40 [INFO] ------------------------------------------------------------------------
-#12 51.41 [INFO] Total time:  40.115 s
-#12 51.41 [INFO] Finished at: 2025-01-11T17:34:05Z
-#12 51.41 [INFO] ------------------------------------------------------------------------
-#12 DONE 53.1s
+#12 4.504 [INFO] Scanning for projects...
+#12 5.101 [WARNING] 
+#12 5.101 [WARNING] Some problems were encountered while building the effective model for com.hcmus:brand-service:jar:0.0.1-SNAPSHOT
+#12 5.101 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.projectlombok:lombok:jar -> duplicate declaration of version (?) @ line 104, column 15
+#12 5.101 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-test:jar -> duplicate declaration of version (?) @ line 109, column 15
+#12 5.101 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.modelmapper:modelmapper:jar -> duplicate declaration of version 3.0.0 @ line 114, column 15
+#12 5.102 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-web:jar -> duplicate declaration of version (?) @ line 119, column 15
+#12 5.102 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.locationtech.jts:jts-core:jar -> duplicate declaration of version 1.18.2 @ line 123, column 15
+#12 5.102 [WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.hibernate:hibernate-spatial:jar -> duplicate declaration of version 6.6.4.Final @ line 128, column 15
+#12 5.102 [WARNING] 
+#12 5.102 [WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+#12 5.102 [WARNING] 
+#12 5.102 [WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+#12 5.102 [WARNING] 
+#12 5.118 [INFO] 
+#12 5.118 [INFO] ----------------------< com.hcmus:brand-service >-----------------------
+#12 5.119 [INFO] Building brand-service 0.0.1-SNAPSHOT
+#12 5.119 [INFO]   from pom.xml
+#12 5.119 [INFO] --------------------------------[ jar ]---------------------------------
+#12 8.255 [WARNING] The artifact org.hibernate:hibernate-spatial:jar:6.6.4.Final has been relocated to org.hibernate.orm:hibernate-spatial:jar:6.6.4.Final
+#12 8.291 [INFO] 
+#12 8.291 [INFO] --- clean:3.4.0:clean (default-clean) @ brand-service ---
+#12 8.427 [INFO] 
+#12 8.427 [INFO] --- resources:3.3.1:resources (default-resources) @ brand-service ---
+#12 8.645 [INFO] Copying 1 resource from src/main/resources to target/classes
+#12 8.687 [INFO] Copying 0 resource from src/main/resources to target/classes
+#12 8.689 [INFO] 
+#12 8.689 [INFO] --- compiler:3.13.0:compile (default-compile) @ brand-service ---
+#12 8.927 [INFO] Recompiling the module because of changed source code.
+#12 8.946 [INFO] Compiling 23 source files with javac [debug parameters release 17] to target/classes
+#12 14.31 [INFO] Annotation processing is enabled because one or more processors were found
+#12 14.31   on the class path. A future release of javac may disable annotation processing
+#12 14.31   unless at least one processor is specified by name (-processor), or a search
+#12 14.31   path is specified (--processor-path, --processor-module-path), or annotation
+#12 14.31   processing is enabled explicitly (-proc:only, -proc:full).
+#12 14.31   Use -Xlint:-options to suppress this message.
+#12 14.31   Use -proc:none to disable annotation processing.
+#12 14.31 [WARNING] /app/src/main/java/com/hcmus/brandservice/model/Brand.java:[29,26] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+#12 14.31 [INFO] 
+#12 14.31 [INFO] --- resources:3.3.1:testResources (default-testResources) @ brand-service ---
+#12 14.32 [INFO] skip non existing resourceDirectory /app/src/test/resources
+#12 14.32 [INFO] 
+#12 14.32 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ brand-service ---
+#12 14.34 [INFO] Recompiling the module because of changed dependency.
+#12 14.34 [INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+#12 17.67 [INFO] Annotation processing is enabled because one or more processors were found
+#12 17.67   on the class path. A future release of javac may disable annotation processing
+#12 17.67   unless at least one processor is specified by name (-processor), or a search
+#12 17.67   path is specified (--processor-path, --processor-module-path), or annotation
+#12 17.67   processing is enabled explicitly (-proc:only, -proc:full).
+#12 17.67   Use -Xlint:-options to suppress this message.
+#12 17.67   Use -proc:none to disable annotation processing.
+#12 17.67 [INFO] 
+#12 17.67 [INFO] --- surefire:3.5.2:test (default-test) @ brand-service ---
+#12 22.22 [INFO] Tests are skipped.
+#12 22.24 [INFO] 
+#12 22.24 [INFO] --- jar:3.4.2:jar (default-jar) @ brand-service ---
+#12 28.83 [INFO] Building jar: /app/target/brand-service-0.0.1-SNAPSHOT.jar
+#12 29.58 [INFO] 
+#12 29.58 [INFO] --- spring-boot:3.4.1:repackage (repackage) @ brand-service ---
+#12 38.67 [INFO] Replacing main artifact /app/target/brand-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#12 38.67 [INFO] The original artifact has been renamed to /app/target/brand-service-0.0.1-SNAPSHOT.jar.original
+#12 38.68 [INFO] 
+#12 38.68 [INFO] --- install:3.1.3:install (default-install) @ brand-service ---
+#12 39.20 [INFO] Installing /app/pom.xml to /root/.m2/repository/com/hcmus/brand-service/0.0.1-SNAPSHOT/brand-service-0.0.1-SNAPSHOT.pom
+#12 39.21 [INFO] Installing /app/target/brand-service-0.0.1-SNAPSHOT.jar to /root/.m2/repository/com/hcmus/brand-service/0.0.1-SNAPSHOT/brand-service-0.0.1-SNAPSHOT.jar
+#12 42.10 [INFO] ------------------------------------------------------------------------
+#12 42.10 [INFO] BUILD SUCCESS
+#12 42.10 [INFO] ------------------------------------------------------------------------
+#12 42.11 [INFO] Total time:  37.666 s
+#12 42.11 [INFO] Finished at: 2025-01-14T20:07:35Z
+#12 42.11 [INFO] ------------------------------------------------------------------------
+#12 DONE 43.2s
 
 #13 [brand-service stage-1 2/3] WORKDIR /app
 #13 CACHED
 
 #14 [brand-service stage-1 3/3] COPY --from=build /app/target/brand-service-0.0.1-SNAPSHOT.jar .
-#14 DONE 3.3s
+#14 DONE 4.0s
 
 #15 [brand-service] exporting to image
 #15 exporting layers
-#15 exporting layers 1.5s done
-#15 writing image sha256:6c375251085053e7c759ed4ffa36582acabfdcbf15fdd406d6203f28d976c8cd
-#15 writing image sha256:6c375251085053e7c759ed4ffa36582acabfdcbf15fdd406d6203f28d976c8cd 0.2s done
-#15 naming to docker.io/library/back-end-brand-service
-#15 naming to docker.io/library/back-end-brand-service 0.3s done
-#15 DONE 2.6s
-time="2025-01-12T00:34:18+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+#15 exporting layers 2.4s done
+#15 writing image sha256:606a2cedce2b0101b79ad85497e6955e1814e778b6c5e84cb3288486c4bd9716 0.1s done
+#15 naming to docker.io/library/back-end-brand-service 0.0s done
+#15 DONE 2.5s
+time="2025-01-15T03:07:46+07:00" level=warning msg="C:\\Users\\ADMIN\\Workspace\\KTPM\\v3\\back-end\\docker-compose.dev.yaml: `version` is obsolete"
+ Container mysql-primary  Running
  Container discovery-server  Running
- Container mysql-container  Running
- Container brand-service  Recreate
- Container brand-service  Recreated
+ Container mysql-replica-1  Running
+ Container mysql-replica-2  Running
+ Container proxysql  Running
+ Container brand-service  Creating
+ Container brand-service  Created
  Container brand-service  Starting
  Container brand-service  Started
 your service service rebuilt and restarted successfully.
