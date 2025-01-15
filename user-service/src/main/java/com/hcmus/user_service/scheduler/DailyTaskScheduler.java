@@ -2,9 +2,7 @@ package com.hcmus.user_service.scheduler;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import com.hcmus.user_service.service.UserService;
-
 
 @Component
 public class DailyTaskScheduler {

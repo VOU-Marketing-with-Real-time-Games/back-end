@@ -5,10 +5,8 @@ import com.hcmus.user_service.model.User;
 import com.hcmus.user_service.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -183,5 +181,23 @@ public class UserService {
         user.setStatus("ACTIVE");
         userRepository.save(user);
         return modelMapper.map(user, UserRespondDto.class);
+    }
+
+
+    public List<UserDailyCountDto> getUserDailyCounts() {
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        List<UserDailyCountDto> dailyCounts = new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            LocalDate date = startDate.plusDays(i);
+            String formattedDate = date.format(formatter);
+            int userCount = userRepository.countUsersByDate(formattedDate);
+            dailyCounts.add(new UserDailyCountDto(userCount, formattedDate));
+        }
+
+        return dailyCounts;
     }
 }
