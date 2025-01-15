@@ -129,4 +129,11 @@ public class VoucherController {
         List<String> voucherIds = voucherCampaignService.getDistinctVoucherIdsByCampaignIds(campaignIds);
         return new ResponseEntity<>(voucherIds, HttpStatus.OK);
     }
+
+
+    @GetMapping("/campaign/{campaignId}/vouchers-given")
+    public ResponseEntity<Integer> getNumberOfVouchersGivenToUserByCampaignId(@PathVariable Long campaignId) {
+        int numberOfVouchersGiven = voucherCampaignService.getNumberOfVouchersGivenToUserByCampaignId(campaignId);
+        return ResponseEntity.ok(numberOfVouchersGiven);
+    }
 }

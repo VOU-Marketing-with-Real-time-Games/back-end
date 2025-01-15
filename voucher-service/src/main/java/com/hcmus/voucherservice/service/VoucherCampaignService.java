@@ -49,4 +49,12 @@ public class VoucherCampaignService {
         }
     }
 
+
+    public int getNumberOfVouchersGivenToUserByCampaignId(Long campaignId) {
+        return voucherCampaignRepository.findByCampaignId(campaignId)
+                .stream()
+                .mapToInt(vc -> vc.getTotal() - vc.getRemaining())
+                .sum();
+    }
+
 }
