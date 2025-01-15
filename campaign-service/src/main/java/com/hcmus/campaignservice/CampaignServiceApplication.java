@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.campaign-service.client")
+@EnableFeignClients(basePackages = "com.hcmus.campaignservice.client")
 public class CampaignServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CampaignServiceApplication.class, args);
