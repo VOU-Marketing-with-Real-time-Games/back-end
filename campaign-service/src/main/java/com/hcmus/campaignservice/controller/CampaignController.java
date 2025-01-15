@@ -1,10 +1,6 @@
 package com.hcmus.campaignservice.controller;
-
 import com.hcmus.campaignservice.dto.*;
-<<<<<<< HEAD
 import com.hcmus.campaignservice.exception.CampaignAlreadyAddedException;
-=======
->>>>>>> 5311a683069808918efd131ebb0b2348b41515da
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
 import com.hcmus.campaignservice.model.FavoriteCampaignUser;
 import com.hcmus.campaignservice.service.CampaignService;
