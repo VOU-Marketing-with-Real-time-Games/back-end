@@ -1,5 +1,6 @@
 package com.hcmus.brandservice.controller;
 
+import com.hcmus.brandservice.dto.BrandDailyCountDto;
 import com.hcmus.brandservice.dto.BrandRequestDto;
 import com.hcmus.brandservice.dto.BrandRespondDto;
 import com.hcmus.brandservice.dto.BrandStatisticsDto;
@@ -67,8 +68,14 @@ public class BrandController {
     }
 
     @GetMapping("/statistics")
-public ResponseEntity<BrandStatisticsDto> getBrandStatistics() {
-    BrandStatisticsDto stats = brandService.getBrandStatistics();
-    return ResponseEntity.ok(stats);
-}
+    public ResponseEntity<BrandStatisticsDto> getBrandStatistics() {
+        BrandStatisticsDto stats = brandService.getBrandStatistics();
+        return ResponseEntity.ok(stats);
+    }
+
+    @GetMapping("/daily-counts")
+    public ResponseEntity<List<BrandDailyCountDto>> getBrandDailyCounts() {
+        List<BrandDailyCountDto> dailyCounts = brandService.getBrandDailyCounts();
+        return ResponseEntity.ok(dailyCounts);
+    }
 }

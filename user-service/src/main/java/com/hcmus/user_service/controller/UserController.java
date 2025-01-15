@@ -110,4 +110,9 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
+    @GetMapping("/daily-counts")
+    public ResponseEntity<List<UserDailyCountDto>> getUserDailyCounts() {
+        List<UserDailyCountDto> dailyCounts = userService.getUserDailyCounts();
+        return ResponseEntity.ok(dailyCounts);
+    }
 }
