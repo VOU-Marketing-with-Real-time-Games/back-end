@@ -1,5 +1,6 @@
 package com.hcmus.brandservice.service;
 
+import com.hcmus.brandservice.dto.BrandDailyCountDto;
 import com.hcmus.brandservice.dto.BrandRequestDto;
 import com.hcmus.brandservice.dto.BrandRespondDto;
 import com.hcmus.brandservice.dto.BrandStatisticsDto;
@@ -118,12 +119,20 @@ public class BrandService {
         return stats;
     }
 
-    public BrandRespondDto getBrandByUserId(Long userId) throws BrandNotFoundException {
-        Brand brand = brandRepository.findByUserId(userId);
-        if (brand == null) {
-            throw new BrandNotFoundException("Brand with userId " + userId + " not found");
+    public List<BrandDailyCountDto> getBrandDailyCounts() {
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        List<BrandDailyCountDto> dailyCounts = new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            LocalDate date = startDate.plusDays(i);
+            String formattedDate = date.format(formatter);
+            int brandCount = brandRepository.countBrandsByDate(formattedDate);
+            dailyCounts.add(new BrandDailyCountDto(brandCount, formattedDate));
         }
-        return modelMapper.map(brand, BrandRespondDto.class);
+        return dailyCounts;
     }
 
 }

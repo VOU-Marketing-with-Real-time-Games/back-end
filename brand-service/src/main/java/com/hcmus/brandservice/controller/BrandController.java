@@ -1,5 +1,6 @@
 package com.hcmus.brandservice.controller;
 
+import com.hcmus.brandservice.dto.BrandDailyCountDto;
 import com.hcmus.brandservice.dto.BrandRequestDto;
 import com.hcmus.brandservice.dto.BrandRespondDto;
 import com.hcmus.brandservice.dto.BrandStatisticsDto;
@@ -77,5 +78,10 @@ public class BrandController {
     public ResponseEntity<?> getBrandByUserId(@PathVariable Long userId) throws BrandNotFoundException {
         BrandRespondDto brand = brandService.getBrandByUserId(userId);
         return ResponseEntity.ok(brand);
+
+    @GetMapping("/daily-counts")
+    public ResponseEntity<List<BrandDailyCountDto>> getBrandDailyCounts() {
+        List<BrandDailyCountDto> dailyCounts = brandService.getBrandDailyCounts();
+        return ResponseEntity.ok(dailyCounts);
     }
 }

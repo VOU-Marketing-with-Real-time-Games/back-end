@@ -1,9 +1,6 @@
 package com.hcmus.campaignservice.service;
 
-import com.hcmus.campaignservice.dto.CampaignDto;
-import com.hcmus.campaignservice.dto.CampaignResponseDto;
-import com.hcmus.campaignservice.dto.CampaignStatisticsDto;
-import com.hcmus.campaignservice.dto.UpdateCampaignDto;
+import com.hcmus.campaignservice.dto.*;
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
 import com.hcmus.campaignservice.model.Campaign;
 import com.hcmus.campaignservice.model.FavoriteCampaignUser;
@@ -133,5 +130,22 @@ CampaignService {
         return campaigns.stream()
                 .map(campaign -> modelMapper.map(campaign, CampaignResponseDto.class))
                 .collect(Collectors.toList());
+    }
+
+    public List<CampaignDailyCountDto> getCampaignDailyCounts() {
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        List<CampaignDailyCountDto> dailyCounts = new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            LocalDate date = startDate.plusDays(i);
+            String formattedDate = date.format(formatter);
+            int campaignCount = campaignRepository.countCampaignsByDate(formattedDate);
+            dailyCounts.add(new CampaignDailyCountDto(campaignCount, formattedDate));
+        }
+
+        return dailyCounts;
     }
 }
