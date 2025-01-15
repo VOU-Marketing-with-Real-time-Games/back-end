@@ -74,7 +74,6 @@ public class UserController {
         return ResponseEntity.ok(userService.validateUser(authRequest));
     }
 
-<<<<<<< HEAD
     @GetMapping("/{id}/has-turns")
     public ResponseEntity<?> hasTurnsLeft(@PathVariable("id") Long id) throws UserNotFoundException {
         boolean hasTurns = userService.hasTurnsLeft(id);
@@ -98,7 +97,6 @@ public class UserController {
         boolean success = userService.increaseTurnNum(id);
         return ResponseEntity.ok(success);
     }
-=======
     @GetMapping("/statistics")
     public ResponseEntity<UserStatisticsDto> getUserStatistics() {
         UserStatisticsDto stats = userService.getUserStatistics();
@@ -112,5 +110,4 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
->>>>>>> a655025475ff5ee0b9b98cbd578a8e31b740926d
 }

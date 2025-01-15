@@ -27,6 +27,7 @@ public class VoucherCampaignService {
     }
 
 
+
     public boolean takeVoucherToUser(Long campaignId, Long userId) {
         List<VoucherCampaign> voucherCampaigns = voucherCampaignRepository.findByCampaignId(campaignId);
         for(VoucherCampaign voucherCampaign : voucherCampaigns) {

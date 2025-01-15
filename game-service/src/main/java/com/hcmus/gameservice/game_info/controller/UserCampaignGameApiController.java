@@ -122,5 +122,13 @@ public class UserCampaignGameApiController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/distinct-user-ids")
+    public ResponseEntity<List<Long>> getDistinctUserIdsByCampaignIds(@RequestBody List<Long> campaignIds) {
+        List<Long> userIds = userCampaignGameService.getDistinctUserIdsByCampaignIds(campaignIds);
+        return ResponseEntity.ok(userIds);
+    }
+
+
+
 
 }

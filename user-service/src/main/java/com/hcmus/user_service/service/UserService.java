@@ -97,7 +97,6 @@ public class UserService {
         else
             throw new ValidationUserException("Invalid password");
     }
-<<<<<<< HEAD
     // UserService.java
     public boolean hasTurnsLeft(Long id) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -131,7 +130,7 @@ public class UserService {
         user.setTurnNum(user.getTurnNum() + 1);
         userRepository.save(user);
         return true;
-=======
+    }
 
     public UserStatisticsDto getUserStatistics() {
         LocalDate today = LocalDate.now();
@@ -184,6 +183,5 @@ public class UserService {
         user.setStatus("ACTIVE");
         userRepository.save(user);
         return modelMapper.map(user, UserRespondDto.class);
->>>>>>> a655025475ff5ee0b9b98cbd578a8e31b740926d
     }
 }
