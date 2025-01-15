@@ -1,8 +1,3 @@
-#!/bin/bash
-
-# Enable error handling
-set -e
-
 # Log file
 LOG_FILE="rebuild-single-service.log"
 
