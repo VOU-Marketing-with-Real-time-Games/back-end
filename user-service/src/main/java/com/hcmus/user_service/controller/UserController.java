@@ -1,9 +1,6 @@
 package com.hcmus.user_service.controller;
 
-import com.hcmus.user_service.dto.AuthRequest;
-import com.hcmus.user_service.dto.UserRequestDto;
-import com.hcmus.user_service.dto.UserRespondDto;
-import com.hcmus.user_service.dto.UserUpdateDto;
+import com.hcmus.user_service.dto.*;
 import com.hcmus.user_service.exception.PhoneNumberExistedException;
 import com.hcmus.user_service.exception.UserEmailExistedException;
 import com.hcmus.user_service.exception.UserNameExistedException;
@@ -77,6 +74,7 @@ public class UserController {
         return ResponseEntity.ok(userService.validateUser(authRequest));
     }
 
+<<<<<<< HEAD
     @GetMapping("/{id}/has-turns")
     public ResponseEntity<?> hasTurnsLeft(@PathVariable("id") Long id) throws UserNotFoundException {
         boolean hasTurns = userService.hasTurnsLeft(id);
@@ -100,4 +98,19 @@ public class UserController {
         boolean success = userService.increaseTurnNum(id);
         return ResponseEntity.ok(success);
     }
+=======
+    @GetMapping("/statistics")
+    public ResponseEntity<UserStatisticsDto> getUserStatistics() {
+        UserStatisticsDto stats = userService.getUserStatistics();
+        return ResponseEntity.ok(stats);
+    }
+
+    @PostMapping("create")
+    public ResponseEntity<?> createUserByAdmin(@Valid @RequestBody UserRequestDto userDto)
+            throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException {
+        UserRespondDto user = userService.createByAdmin(userDto);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+>>>>>>> a655025475ff5ee0b9b98cbd578a8e31b740926d
 }

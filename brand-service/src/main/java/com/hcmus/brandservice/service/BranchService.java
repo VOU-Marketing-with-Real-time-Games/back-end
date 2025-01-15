@@ -94,7 +94,7 @@ public class BranchService {
                 .orElseThrow(() -> new BrandNotFoundException("Brand not found with id: " + branchDto.getBrandId()));
 
         GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
-        Coordinate coordinate = new Coordinate(branchDto.getLongtitude(), branchDto.getLatitude());
+        Coordinate coordinate = new Coordinate(branchDto.getLongitude(), branchDto.getLatitude());
         Point point = geometryFactory.createPoint(coordinate);
 
         Branch branch = new Branch();

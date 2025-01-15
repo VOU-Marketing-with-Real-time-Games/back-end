@@ -23,7 +23,7 @@ public class BranchRequestDto {
     @NotBlank(message = "Address is required")
     private String address;
     @NotNull(message = "Longitude is required")
-    private Float longtitude;
+    private Float longitude;
     @NotNull(message = "Latitude is required")
     private Float latitude;
 }
