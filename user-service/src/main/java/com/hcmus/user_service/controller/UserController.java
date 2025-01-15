@@ -58,6 +58,7 @@ public class UserController {
         UserRespondDto user = userService.findByEmail(email);
         return ResponseEntity.ok(user);
     }
+
     @GetMapping("/username/{username}")
     public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username){
         UserRespondDto user = userService.findByUsername(username);
@@ -67,11 +68,35 @@ public class UserController {
     public List<UserRespondDto> getUsersByListId(@RequestBody List<Long> listId) {
         return userService.findByListId(listId);
     }
+
     @PostMapping("/validate")
     public ResponseEntity<?> validateUser(@RequestBody AuthRequest authRequest) throws Exception {
         return ResponseEntity.ok(userService.validateUser(authRequest));
     }
 
+    @GetMapping("/{id}/has-turns")
+    public ResponseEntity<?> hasTurnsLeft(@PathVariable("id") Long id) throws UserNotFoundException {
+        boolean hasTurns = userService.hasTurnsLeft(id);
+        return ResponseEntity.ok(hasTurns);
+    }
+
+    @PutMapping("/{id}/decrease-turn")
+    public ResponseEntity<?> decreaseTurnNum(@PathVariable("id") Long id) throws UserNotFoundException {
+        boolean success = userService.decreaseTurnNum(id);
+        return ResponseEntity.ok(success);
+    }
+
+    @PutMapping("/decrease-turns")
+    public ResponseEntity<?> decreaseTurnNumForUsers(@RequestBody List<Long> ids) {
+        userService.decreaseTurnNumForUsers(ids);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/increase-play-turn")
+    public ResponseEntity<?> increaseTurnNum(@PathVariable("id") Long id) throws UserNotFoundException {
+        boolean success = userService.increaseTurnNum(id);
+        return ResponseEntity.ok(success);
+    }
     @GetMapping("/statistics")
     public ResponseEntity<UserStatisticsDto> getUserStatistics() {
         UserStatisticsDto stats = userService.getUserStatistics();

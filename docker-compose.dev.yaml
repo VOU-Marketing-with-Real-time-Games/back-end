@@ -145,6 +145,9 @@ services:
       - .env
     container_name: user-service
 
+<<<<<<< HEAD
+#  brand-service:
+=======
   brand-service:
     build:
       context: ./brand-service
@@ -204,33 +207,94 @@ services:
 #        - .env
 #      container_name: game-service
 #  image-service:
+>>>>>>> a655025475ff5ee0b9b98cbd578a8e31b740926d
 #    build:
-#      context: ./image-service
+#      context: ./brand-service
 #      dockerfile: Dockerfile.dev
+#    restart: always
 #    ports:
-#      - "8007:8007"
+#      - "8003:8003"
 #    depends_on:
-#      - mongo
+#      - proxysql
 #      - discovery
 #    networks:
 #      - microservices-network
 #    env_file:
 #      - .env
-#    container_name: image-service
-
-#  rabbitmq:
-#    image: rabbitmq:3.9-management
-#    container_name: rabbitmq
+#    container_name: brand-service
+#  auth-service:
+#    build:
+#      context: ./auth-service
+#      dockerfile: Dockerfile.dev
 #    restart: always
 #    ports:
-#      - "5672:5672" # RabbitMQ default port for AMQP
-#      - "15672:15672" # Management UI
-#    environment:
-#      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-#      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+#      - "9004:9004"
 #    networks:
 #      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: auth-service
+#  campaign-service:
+#    build:
+#      context: ./campaign-service
+#      dockerfile: Dockerfile.dev
+#    restart: always
+#    ports:
+#      - "8004:8004"
+#    depends_on:
+#      - proxysql
+#      - discovery
+#    networks:
+#      - microservices-network
+#    env_file:
+#      - .env
+#    container_name: campaign-service
 
+<<<<<<< HEAD
+  #  game-service:
+  #      build:
+  #        context: ./game-service
+  #        dockerfile: Dockerfile.dev
+  #      ports:
+  #        - "8001:8001"
+  #      depends_on:
+  #        - mysql
+  #        - discovery
+  #      networks:
+  #        - microservices-network
+  #      env_file:
+  #        - .env
+  #      container_name: game-service
+  #  image-service:
+  #    build:
+  #      context: ./image-service
+  #      dockerfile: Dockerfile.dev
+  #    ports:
+  #      - "8007:8007"
+  #    depends_on:
+  #      - mongo
+  #      - discovery
+  #    networks:
+  #      - microservices-network
+  #    env_file:
+  #      - .env
+  #    container_name: image-service
+
+  #  rabbitmq:
+  #    image: rabbitmq:3.9-management
+  #    container_name: rabbitmq
+  #    restart: always
+  #    ports:
+  #      - "5672:5672" # RabbitMQ default port for AMQP
+  #      - "15672:15672" # Management UI
+  #    environment:
+  #      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+  #      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+  #    networks:
+  #      - microservices-network
+
+=======
+>>>>>>> a655025475ff5ee0b9b98cbd578a8e31b740926d
 #  notification-service:
 #    build:
 #      context: ./notification-service
@@ -277,7 +341,7 @@ services:
 #      - .env
 #    container_name: quizz-realtime
 volumes:
-# db-data: #uncomment this line if you want to use volume for mysql
+  # db-data: #uncomment this line if you want to use volume for mysql
   primary-data:
   replica-1-data:
   replica-2-data:

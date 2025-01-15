@@ -20,4 +20,7 @@ public interface UserCampaignGameRepository extends JpaRepository<UserCampaignGa
 
     @Query("SELECT DISTINCT u.userId FROM UserCampaignGame u")
     List<Long> findDistinctUserIdAllCampaign();
+
+    @Query("SELECT DISTINCT u.userId FROM UserCampaignGame u WHERE u.campaignGame.id IN :campaignIds")
+    List<Long> findDistinctUserIdsByCampaignIds(List<Long> campaignIds);
 }

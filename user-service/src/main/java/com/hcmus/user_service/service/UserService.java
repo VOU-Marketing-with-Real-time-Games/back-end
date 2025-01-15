@@ -5,8 +5,10 @@ import com.hcmus.user_service.model.User;
 import com.hcmus.user_service.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -94,6 +96,40 @@ public class UserService {
             return modelMapper.map(user, UserRespondDto.class);
         else
             throw new ValidationUserException("Invalid password");
+    }
+    // UserService.java
+    public boolean hasTurnsLeft(Long id) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        return user.getTurnNum() > 0;
+    }
+
+    // UserService.java
+    public boolean decreaseTurnNum(Long id) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        if (user.getTurnNum() > 0) {
+            user.setTurnNum(user.getTurnNum() - 1);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    // UserService.java
+    public void decreaseTurnNumForUsers(List<Long> ids) {
+        List<User> users = userRepository.findByIds(ids);
+        for (User user : users) {
+            if (user.getTurnNum() > 0) {
+                user.setTurnNum(user.getTurnNum() - 1);
+            }
+        }
+        userRepository.saveAll(users);
+    }
+    // UserService.java
+    public boolean increaseTurnNum(Long id) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        user.setTurnNum(user.getTurnNum() + 1);
+        userRepository.save(user);
+        return true;
     }
 
     public UserStatisticsDto getUserStatistics() {

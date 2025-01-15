@@ -1,5 +1,6 @@
 package com.hcmus.gameservice.puzzle.service;
 
+import com.hcmus.gameservice.client.UserClient;
 import com.hcmus.gameservice.client.VoucherClient;
 import com.hcmus.gameservice.game_info.model.GameCampaign;
 import com.hcmus.gameservice.game_info.model.GameType;
@@ -11,10 +12,13 @@ import com.hcmus.gameservice.puzzle.model.Puzzle;
 import com.hcmus.gameservice.puzzle.model.UserItem;
 import com.hcmus.gameservice.puzzle.repository.UserItemRepository;
 
+import com.hcmus.gameservice.quizz.dto.UserDto;
 import com.hcmus.gameservice.rabbit_mq.NotificationDto;
 import com.hcmus.gameservice.rabbit_mq.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,12 +34,21 @@ public class UserItemService {
     private final PuzzleService puzzleService;
     private final GameCampaignRepository gameCampaignRepository;
     private final VoucherClient voucherClient;
+    private final UserClient userClient;
+
     private final NotificationService notificationService;
     public ItemResponseDto addRandomItemToUser(Long userId, Long puzzleId) throws Exception {
         Item item = itemService.getRandomItemByPuzzleId(puzzleId);
         if (item == null) {
             return null;
         }
+
+        // Call decreaseTurnNum API
+        ResponseEntity<?> response = userClient.decreaseTurnNum(userId);
+        if (response.getBody() == Boolean.FALSE) {
+            return null;
+        }
+
         itemService.updateRemainingNum(item.getId());
         // Add to user item
         UserItem userItem = userItemRepository.findByUserIdAndItemId(userId, item.getId());
@@ -100,5 +113,44 @@ public class UserItemService {
         return userItems.stream()
                 .map(userItem -> modelMapper.map(userItem, UserItemDto.class))
                 .toList();
+    }
+    // UserItemService.java
+    public boolean transferItemToUser(Long senderId, String recipientEmail, Long itemId) throws Exception {
+        // Check if sender has the item
+        UserItem senderItem = userItemRepository.findByUserIdAndItemId(senderId, itemId);
+        if (senderItem == null || senderItem.getTotalItem() <= 0) {
+            return false;
+        }
+
+        // Get recipient user by email
+        ResponseEntity<?> response = userClient.getUserByEmail(recipientEmail);
+        if (response.getStatusCode() != HttpStatus.OK) {
+            return false;
+        }
+        UserDto recipient = (UserDto) response.getBody();
+        if (recipient == null) {
+            return false;
+        }
+
+        // Transfer item
+        senderItem.setTotalItem(senderItem.getTotalItem() - 1);
+        userItemRepository.save(senderItem);
+
+        UserItem recipientItem = userItemRepository.findByUserIdAndItemId(recipient.getId(), itemId);
+        if (recipientItem == null) {
+            recipientItem = UserItem.builder().userId(recipient.getId()).item(senderItem.getItem()).totalItem(1).build();
+            userItemRepository.save(recipientItem);
+        } else {
+            recipientItem.setTotalItem(recipientItem.getTotalItem() + 1);
+            userItemRepository.save(recipientItem);
+        }
+
+        // Send notification to recipient
+        NotificationDto notificationDto = NotificationDto.builder()
+                .content("You have received an item from user with id:" + senderId)
+                .userId(recipient.getId())
+                .build();
+        notificationService.notifyGameEvent(notificationDto);
+        return true;
     }
 }

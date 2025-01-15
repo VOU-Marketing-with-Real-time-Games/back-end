@@ -1,6 +1,7 @@
 package com.hcmus.quizzrealtime.thread;
 
 import com.hcmus.quizzrealtime.client.GameClient;
+import com.hcmus.quizzrealtime.client.UserClient;
 import com.hcmus.quizzrealtime.client.UserGameCampaignClient;
 import com.hcmus.quizzrealtime.client.VoucherClient;
 import com.hcmus.quizzrealtime.dto.QuestionDto;
@@ -22,17 +23,19 @@ public class QuizzThreadManager {
     private final UserGameCampaignClient userGameCampaignClient;
     private final NotificationService notificationService;
     private final VoucherClient voucherClient;
+    private final UserClient userClient;
 
-    public QuizzThreadManager(QuizSocketHandler quizSocketHandler, GameClient gameClient, UserGameCampaignClient userGameCampaignClient, NotificationService notificationService, VoucherClient voucherClient) {
+    public QuizzThreadManager(QuizSocketHandler quizSocketHandler, GameClient gameClient, UserGameCampaignClient userGameCampaignClient, NotificationService notificationService, VoucherClient voucherClient, UserClient userClient) {
         this.executorService = Executors.newFixedThreadPool(threadPoolSize); // Thread pool size
         this.quizWebSocketHandler = quizSocketHandler;
         this.gameClient = gameClient;
         this.userGameCampaignClient = userGameCampaignClient;
         this.notificationService = notificationService;
         this.voucherClient = voucherClient;
+        this.userClient = userClient;
     }
 
     public void startGame(QuizzDto quizz, List<QuestionDto> questionResponseDtos) {
-        executorService.submit(new QuizzThread(quizz, quizWebSocketHandler, questionResponseDtos, gameClient, userGameCampaignClient, notificationService, voucherClient));
+        executorService.submit(new QuizzThread(quizz, quizWebSocketHandler, questionResponseDtos, gameClient, userGameCampaignClient, notificationService, voucherClient, userClient));
     }
 }

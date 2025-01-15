@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface VoucherCampaignRepository extends JpaRepository<VoucherCampaign, VoucherCampaignId> {
+    @Query("select vc from VoucherCampaign vc where vc.id.campaignId = :campaignId")
     List<VoucherCampaign> findByIdCampaignId(Long campaignId);
 
     @Query("select vc from VoucherCampaign vc where vc.id.campaignId = :campaignId and vc.id.voucher.code = :voucherCode")
@@ -15,4 +16,7 @@ public interface VoucherCampaignRepository extends JpaRepository<VoucherCampaign
 
     @Query("select vc from VoucherCampaign vc where vc.id.campaignId = :campaignId")
     List<VoucherCampaign> findByCampaignId(Long campaignId);
+
+    @Query("select distinct vc.id.voucher.code from VoucherCampaign vc where vc.id.campaignId in :campaignIds")
+    List<String> findDistinctVoucherIdsByCampaignIds(List<Long> campaignIds);
 }
