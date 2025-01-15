@@ -17,4 +17,7 @@ public interface BrandRepository extends JpaRepository<Brand,Long> {
     List<Brand> findByNameContaining(String name);
     @Query("SELECT COUNT(b) FROM Brand b WHERE DATE_FORMAT(b.createdAt, '%Y-%m-%d') = :date")
 int countBrandsByDate(@Param("date") String date);
+
+    @Query("SELECT b FROM Brand b WHERE b.userId = :userId")
+    Brand findByUserId(@Param("userId") Long userId);
 }

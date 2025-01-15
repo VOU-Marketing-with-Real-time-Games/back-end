@@ -145,9 +145,6 @@ services:
       - .env
     container_name: user-service
 
-<<<<<<< HEAD
-#  brand-service:
-=======
   brand-service:
     build:
       context: ./brand-service
@@ -207,7 +204,6 @@ services:
 #        - .env
 #      container_name: game-service
 #  image-service:
->>>>>>> a655025475ff5ee0b9b98cbd578a8e31b740926d
 #    build:
 #      context: ./brand-service
 #      dockerfile: Dockerfile.dev
@@ -250,7 +246,6 @@ services:
 #      - .env
 #    container_name: campaign-service
 
-<<<<<<< HEAD
   #  game-service:
   #      build:
   #        context: ./game-service
@@ -293,8 +288,7 @@ services:
   #    networks:
   #      - microservices-network
 
-=======
->>>>>>> a655025475ff5ee0b9b98cbd578a8e31b740926d
+
 #  notification-service:
 #    build:
 #      context: ./notification-service
