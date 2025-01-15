@@ -1,9 +1,6 @@
 package com.hcmus.campaignservice.controller;
 
-import com.hcmus.campaignservice.dto.CampaignDto;
-import com.hcmus.campaignservice.dto.CampaignResponseDto;
-import com.hcmus.campaignservice.dto.CampaignStatisticsDto;
-import com.hcmus.campaignservice.dto.UpdateCampaignDto;
+import com.hcmus.campaignservice.dto.*;
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
 import com.hcmus.campaignservice.service.CampaignService;
 import jakarta.validation.Valid;
@@ -138,5 +135,11 @@ public class CampaignController {
     public ResponseEntity<List<CampaignResponseDto>> getCampaignsByBrandId(@PathVariable Long brandId) {
         List<CampaignResponseDto> campaigns = campaignService.getCampaignsByBrandId(brandId);
         return ResponseEntity.ok(campaigns);
+    }
+
+    @GetMapping("/daily-counts")
+    public ResponseEntity<List<CampaignDailyCountDto>> getCampaignDailyCounts() {
+        List<CampaignDailyCountDto> dailyCounts = campaignService.getCampaignDailyCounts();
+        return ResponseEntity.ok(dailyCounts);
     }
 }
