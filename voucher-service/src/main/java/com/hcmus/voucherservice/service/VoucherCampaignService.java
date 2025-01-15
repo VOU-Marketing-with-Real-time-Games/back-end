@@ -22,6 +22,11 @@ public class VoucherCampaignService {
         voucherCampaignRepository.save(voucherCampaign);
     }
 
+    public List<String> getDistinctVoucherIdsByCampaignIds(List<Long> campaignIds) {
+        return voucherCampaignRepository.findDistinctVoucherIdsByCampaignIds(campaignIds);
+    }
+
+
     public boolean takeVoucherToUser(Long campaignId, Long userId) {
         List<VoucherCampaign> voucherCampaigns = voucherCampaignRepository.findByCampaignId(campaignId);
         for(VoucherCampaign voucherCampaign : voucherCampaigns) {

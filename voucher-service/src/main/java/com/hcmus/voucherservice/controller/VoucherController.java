@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v3/vouchers")
@@ -57,6 +59,8 @@ public class VoucherController {
         VoucherResponseDto voucher = voucherService.getVoucher(id);
         return new ResponseEntity<>(voucher,HttpStatus.OK);
     }
+
+
 
 
     /**
@@ -105,6 +109,9 @@ public class VoucherController {
         return new ResponseEntity<>(voucherService.getVouchersByCampaignId(campaignId),HttpStatus.OK);
     }
 
+
+
+
     @PostMapping("/take-voucher")
     public boolean takeVoucherToUser(@RequestParam Long campaignId, @RequestParam Long userId) {
         return voucherCampaignService.takeVoucherToUser(campaignId, userId);
@@ -114,5 +121,12 @@ public class VoucherController {
     public ResponseEntity<Void> takeVoucherAfterQuizz(@RequestBody VoucherUserRequestDto voucherUserRequestDto) {
         voucherCampaignService.takeVoucherAfterQuiz(voucherUserRequestDto);
         return ResponseEntity.ok().build();
+    }
+
+
+    @PostMapping("/distinct-voucher-ids")
+    public ResponseEntity<List<String>> getDistinctVoucherIdsByCampaignIds(@RequestBody List<Long> campaignIds) {
+        List<String> voucherIds = voucherCampaignService.getDistinctVoucherIdsByCampaignIds(campaignIds);
+        return new ResponseEntity<>(voucherIds, HttpStatus.OK);
     }
 }
