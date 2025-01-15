@@ -132,4 +132,11 @@ public class CampaignController {
         CampaignStatisticsDto stats = campaignService.getCampaignStatistics();
         return ResponseEntity.ok(stats);
     }
+
+
+    @GetMapping("/brand/{brandId}")
+    public ResponseEntity<List<CampaignResponseDto>> getCampaignsByBrandId(@PathVariable Long brandId) {
+        List<CampaignResponseDto> campaigns = campaignService.getCampaignsByBrandId(brandId);
+        return ResponseEntity.ok(campaigns);
+    }
 }

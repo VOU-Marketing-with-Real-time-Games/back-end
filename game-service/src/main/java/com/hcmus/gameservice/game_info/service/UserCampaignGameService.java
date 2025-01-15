@@ -106,4 +106,8 @@ public class UserCampaignGameService {
         }
     }
 
+    public List<Long> getDistinctUserIdsByCampaignIds(List<Long> campaignIds) {
+        return userCampaignGameRepository.findDistinctUserIdsByCampaignIds(campaignIds);
+    }
+
 }
