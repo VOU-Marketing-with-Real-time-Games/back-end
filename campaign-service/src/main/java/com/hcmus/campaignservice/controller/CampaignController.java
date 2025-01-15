@@ -1,8 +1,10 @@
 package com.hcmus.campaignservice.controller;
-
 import com.hcmus.campaignservice.dto.*;
+import com.hcmus.campaignservice.exception.CampaignAlreadyAddedException;
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
+import com.hcmus.campaignservice.model.FavoriteCampaignUser;
 import com.hcmus.campaignservice.service.CampaignService;
+import com.hcmus.campaignservice.service.FavoriteCampaignService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CampaignController {
     private final CampaignService campaignService;
+    private final FavoriteCampaignService favoriteCampaignService;
 
     /**
      * Create a new campaign.
@@ -137,9 +140,21 @@ public class CampaignController {
         return ResponseEntity.ok(campaigns);
     }
 
-    @GetMapping("/daily-counts")
-    public ResponseEntity<List<CampaignDailyCountDto>> getCampaignDailyCounts() {
-        List<CampaignDailyCountDto> dailyCounts = campaignService.getCampaignDailyCounts();
-        return ResponseEntity.ok(dailyCounts);
+    /**
+     * Add a campaign to the user's favorite list.
+     *
+     * @param addFavoriteDto the AddFavoriteDto containing the user ID and campaign ID
+     * @return the FavoriteCampaignUser
+     * @throws CampaignNotFoundException if the campaign is not found
+     */
+    @PostMapping("/add-favourite")
+    public ResponseEntity<?> addFavoriteCampaign(@Valid @RequestBody AddFavoriteDto addFavoriteDto) throws CampaignNotFoundException, CampaignAlreadyAddedException, CampaignAlreadyAddedException {
+        FavoriteCampaignUser favoriteCampaignUser = favoriteCampaignService.addFavoriteCampaign(addFavoriteDto.getUserId(), addFavoriteDto.getCampaignId());
+        return new ResponseEntity<>(favoriteCampaignUser, HttpStatus.CREATED);
     }
+    @GetMapping("/daily-counts")
+    public ResponseEntity<List<CampaignDailyCountDto>> getCampaignDailyCounts () {
+            List<CampaignDailyCountDto> dailyCounts = campaignService.getCampaignDailyCounts();
+            return ResponseEntity.ok(dailyCounts);
+        }
 }

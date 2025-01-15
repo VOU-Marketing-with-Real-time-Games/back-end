@@ -7,6 +7,7 @@ import com.hcmus.voucherservice.exception.ExistedVoucherException;
 import com.hcmus.voucherservice.exception.VoucherNotFoundException;
 import com.hcmus.voucherservice.model.Voucher;
 import com.hcmus.voucherservice.model.VoucherCampaign;
+import com.hcmus.voucherservice.model.VoucherCampaignId;
 import com.hcmus.voucherservice.model.VoucherUser;
 import com.hcmus.voucherservice.repository.VoucherCampaignRepository;
 import com.hcmus.voucherservice.repository.VoucherRepository;
@@ -36,7 +37,17 @@ public class VoucherService {
         Voucher voucher = modelMapper.map(voucherDto,Voucher.class);
         voucher.setCreatedAt(current);
         voucher.setStatus("Pending");
-        return modelMapper.map(voucherRepository.save(voucher),VoucherResponseDto.class);
+        Voucher savedVoucher = voucherRepository.save(voucher);
+        VoucherCampaignId voucherCampaignId = VoucherCampaignId.builder()
+                .campaignId(voucherDto.getCampaignId())
+                .voucher(savedVoucher)
+                .build();
+        VoucherCampaign voucherCampaign = VoucherCampaign.builder()
+                .id(voucherCampaignId)
+                .total(voucherDto.getTotal())
+                .build();
+        voucherCampaignRepository.save(voucherCampaign);
+        return modelMapper.map(savedVoucher,VoucherResponseDto.class);
     }
     public Page<VoucherResponseDto> getAllVouchers(Pageable pageable) {
         return voucherRepository.findAll(pageable).map(value -> modelMapper.map(value,VoucherResponseDto.class));

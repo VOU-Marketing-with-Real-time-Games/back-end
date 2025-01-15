@@ -1,10 +1,15 @@
 package com.hcmus.campaignservice.exception_handler;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hcmus.campaignservice.exception.CampaignAlreadyAddedException;
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
+import com.hcmus.campaignservice.exception.CustomFeignException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +25,7 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * Handles validation errors and returns an ErrorDTO.
@@ -28,7 +34,7 @@ public class GlobalExceptionHandler {
      * @param ex      the MethodArgumentNotValidException
      * @return an ErrorDTO containing error details
      */
-    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    @ExceptionHandler({ MethodArgumentNotValidException.class, CampaignAlreadyAddedException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO handleValidationExceptions(HttpServletRequest request, MethodArgumentNotValidException ex) {
@@ -47,7 +53,20 @@ public class GlobalExceptionHandler {
 
         return error;
     }
+    @ExceptionHandler(CustomFeignException.class)
+    public ResponseEntity<JsonNode> handleCustomFeignException(CustomFeignException ex) {
+        LOGGER.error("Custom Feign Client Error: {}", ex.getMessage(), ex);
 
+        HttpStatus status = HttpStatus.resolve(ex.getStatus());
+        JsonNode errorJson;
+        try {
+            errorJson = objectMapper.readTree(ex.getMessage());
+        } catch (Exception e) {
+            errorJson = objectMapper.createObjectNode().put("error", "Failed to parse error message");
+        }
+        return ResponseEntity.status(status != null ? status : HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(errorJson);
+    }
 
     /**
      * Handles not found exceptions and returns an ErrorDTO.

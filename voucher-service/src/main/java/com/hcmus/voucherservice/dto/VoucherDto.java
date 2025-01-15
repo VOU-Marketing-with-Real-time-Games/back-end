@@ -29,4 +29,8 @@ public class VoucherDto {
     private Date expiredDate;
     @NotNull(message = "Brand id value must not be null")
     private  Long brandId;
+    @NotNull(message = "Campaign id value must not be null")
+    private  Long campaignId;
+    @NotNull(message = "total value must not be null")
+    private Integer total;
 }
