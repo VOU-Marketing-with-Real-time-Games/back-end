@@ -1,7 +1,10 @@
 package com.hcmus.campaignservice.controller;
 
 import com.hcmus.campaignservice.dto.*;
+<<<<<<< HEAD
 import com.hcmus.campaignservice.exception.CampaignAlreadyAddedException;
+=======
+>>>>>>> 5311a683069808918efd131ebb0b2348b41515da
 import com.hcmus.campaignservice.exception.CampaignNotFoundException;
 import com.hcmus.campaignservice.model.FavoriteCampaignUser;
 import com.hcmus.campaignservice.service.CampaignService;
@@ -140,6 +143,7 @@ public class CampaignController {
         List<CampaignResponseDto> campaigns = campaignService.getCampaignsByBrandId(brandId);
         return ResponseEntity.ok(campaigns);
     }
+
     /**
      * Add a campaign to the user's favorite list.
      *
@@ -152,4 +156,9 @@ public class CampaignController {
         FavoriteCampaignUser favoriteCampaignUser = favoriteCampaignService.addFavoriteCampaign(addFavoriteDto.getUserId(), addFavoriteDto.getCampaignId());
         return new ResponseEntity<>(favoriteCampaignUser, HttpStatus.CREATED);
     }
+    @GetMapping("/daily-counts")
+    public ResponseEntity<List<CampaignDailyCountDto>> getCampaignDailyCounts () {
+            List<CampaignDailyCountDto> dailyCounts = campaignService.getCampaignDailyCounts();
+            return ResponseEntity.ok(dailyCounts);
+        }
 }

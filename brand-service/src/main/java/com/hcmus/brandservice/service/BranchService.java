@@ -44,7 +44,7 @@ public class BranchService {
         logger.info("Fetching branch with id: {}", id);
         return branchRepository.findById(id)
                 .map(
-                        branch -> modelMapper.map(branch, BranchRespondDto.class))
+                        branch -> BranchRespondDto.toBranchRespondDto(branch))
                 .orElseThrow(
                         () -> new BranchNotFoundException("Branch with id " + id + " not found"));
     }

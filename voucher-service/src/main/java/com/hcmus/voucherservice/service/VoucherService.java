@@ -36,6 +36,7 @@ public class VoucherService {
         Voucher voucher = modelMapper.map(voucherDto,Voucher.class);
         voucher.setCreatedAt(current);
         voucher.setStatus("Pending");
+
         return modelMapper.map(voucherRepository.save(voucher),VoucherResponseDto.class);
     }
     public Page<VoucherResponseDto> getAllVouchers(Pageable pageable) {
