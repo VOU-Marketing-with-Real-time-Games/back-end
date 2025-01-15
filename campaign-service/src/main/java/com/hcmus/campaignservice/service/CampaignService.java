@@ -126,4 +126,12 @@ CampaignService {
 
         return stats;
     }
+
+
+    public List<CampaignResponseDto> getCampaignsByBrandId(Long brandId) {
+        List<Campaign> campaigns = campaignRepository.findByBrandId(brandId);
+        return campaigns.stream()
+                .map(campaign -> modelMapper.map(campaign, CampaignResponseDto.class))
+                .collect(Collectors.toList());
+    }
 }

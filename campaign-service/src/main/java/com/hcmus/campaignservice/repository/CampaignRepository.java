@@ -12,5 +12,7 @@ public interface CampaignRepository extends JpaRepository<Campaign,Long> {
     @Query("SELECT c FROM Campaign c WHERE c.name LIKE %:name%")
     List<Campaign> findByNameContaining(@Param("name") String name);
     @Query("SELECT COUNT(c) FROM Campaign c WHERE DATE_FORMAT(c.createdAt, '%Y-%m-%d') = :date")
-int countCampaignsByDate(@Param("date") String date);
+    int countCampaignsByDate(@Param("date") String date);
+
+    List<Campaign> findByBrandId(Long brandId);
 }
