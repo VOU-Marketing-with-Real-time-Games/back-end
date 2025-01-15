@@ -31,4 +31,7 @@ public class FavoriteCampaignService {
         favorite.setAddToTime(new Date());
         return favoriteCampaignUserRepository.save(favorite);
     }
+    public boolean checkFavoriteCampaign(Long userId, Long campaignId){
+        return favoriteCampaignUserRepository.findByUserIdAndCampaignId(userId,campaignId).isPresent();
+    }
 }

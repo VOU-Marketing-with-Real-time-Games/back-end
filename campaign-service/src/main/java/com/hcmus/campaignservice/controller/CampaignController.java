@@ -152,4 +152,17 @@ public class CampaignController {
         FavoriteCampaignUser favoriteCampaignUser = favoriteCampaignService.addFavoriteCampaign(addFavoriteDto.getUserId(), addFavoriteDto.getCampaignId());
         return new ResponseEntity<>(favoriteCampaignUser, HttpStatus.CREATED);
     }
+
+    /**
+     * Check if a campaign is in the user's favorite list.
+     *
+     * @param userId     the ID of the user
+     * @param campaignId the ID of the campaign
+     * @return true if the campaign is in the user's favorite list, false otherwise
+     */
+    @GetMapping("/user-favourite/{userId}/campaign/{campaignId}")
+    public ResponseEntity<?> checkFavoriteCampaign(@PathVariable Long userId, @PathVariable Long campaignId) {
+        boolean isFavorite = favoriteCampaignService.checkFavoriteCampaign(userId, campaignId);
+        return new ResponseEntity<>(isFavorite, HttpStatus.OK);
+    }
 }
