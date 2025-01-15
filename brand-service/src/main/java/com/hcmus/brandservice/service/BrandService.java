@@ -29,26 +29,30 @@ public class BrandService {
 
     public List<BrandRespondDto> findAll() {
         return brandRepository.findAll()
-                .stream().map(
+                .stream()
+                .map(
                         brand -> modelMapper.map(brand, BrandRespondDto.class))
                 .toList();
     }
 
     public BrandRespondDto findById(Long id) throws BrandNotFoundException {
-        return brandRepository.findById(id).map(
-                brand -> modelMapper.map(brand, BrandRespondDto.class)).orElseThrow(
+        return brandRepository.findById(id)
+                .map(
+                        brand -> modelMapper.map(brand, BrandRespondDto.class))
+                .orElseThrow(
                         () -> new BrandNotFoundException("Brand with id " + id + " not found"));
     }
 
     public List<BrandRespondDto> search(String name) {
         return brandRepository.findByNameContaining(name)
-                .stream().map(
+                .stream()
+                .map(
                         brand -> modelMapper.map(brand, BrandRespondDto.class))
                 .toList();
     }
 
     public BrandRespondDto update(Long id, BrandRequestDto brandDto) throws BrandNotFoundException, BranchNotFoundException {
-        Brand brand = modelMapper.map(brandDto,Brand.class);
+        Brand brand = modelMapper.map(brandDto, Brand.class);
         Brand existingBrand = brandRepository.findById(id)
                 .orElseThrow(
                         () -> new BrandNotFoundException("Brand with id " + id + " not found"));
@@ -77,9 +81,11 @@ public class BrandService {
     }
 
     public Brand getById(Long id) throws BrandNotFoundException {
-        return brandRepository.findById(id).orElseThrow(
-                () -> new BrandNotFoundException("Brand with id " + id + " not found"));
+        return brandRepository.findById(id)
+                .orElseThrow(
+                        () -> new BrandNotFoundException("Brand with id " + id + " not found"));
     }
+
     public BrandStatisticsDto getBrandStatistics() {
         LocalDate today = LocalDate.now();
         LocalDate startDate = today.minusDays(30);

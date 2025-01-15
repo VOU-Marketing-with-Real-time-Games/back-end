@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/v3/brands")
 public class BrandController {
@@ -72,6 +73,11 @@ public class BrandController {
         BrandStatisticsDto stats = brandService.getBrandStatistics();
         return ResponseEntity.ok(stats);
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getBrandByUserId(@PathVariable Long userId) throws BrandNotFoundException {
+        BrandRespondDto brand = brandService.getBrandByUserId(userId);
+        return ResponseEntity.ok(brand);
 
     @GetMapping("/daily-counts")
     public ResponseEntity<List<BrandDailyCountDto>> getBrandDailyCounts() {

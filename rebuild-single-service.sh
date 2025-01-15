@@ -1,8 +1,3 @@
-#!/bin/bash
-
-# Enable error handling
-set -e
-
 # Log file
 LOG_FILE="rebuild-single-service.log"
 
@@ -11,10 +6,10 @@ exec > >(tee -i $LOG_FILE)
 exec 2>&1
 
 # Rebuild your service, put the name of the service you want to rebuild
-docker-compose -f docker-compose.dev.yaml build user-service
+docker-compose -f docker-compose.dev.yaml build brand-service
 
 # Restart your service
-docker-compose -f docker-compose.dev.yaml up -d user-service
+docker-compose -f docker-compose.dev.yaml up -d brand-service
 
 # Check the exit status of the last command
 if [ $? -ne 0 ]; then
