@@ -27,6 +27,7 @@ public class JwtUtils {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .claim("id", userRespondDto.getId())
+                .claim("role", userRespondDto.getRole())
                 .signWith(key(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -53,6 +54,10 @@ public class JwtUtils {
     public Long getIdFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody().get("id", Long.class);
+    }
+    public String getRoleFromJwtToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key()).build()
+                .parseClaimsJws(token).getBody().get("role", String.class);
     }
     /**
      * Validate the given JWT token.
