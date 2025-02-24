@@ -31,9 +31,13 @@ public class JwtUtils {
         return Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
-    public String getIdFromJwtToken(String token) {
+    public Long getIdFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key()).build()
-                .parseClaimsJws(token).getBody().get("id", String.class);
+                .parseClaimsJws(token).getBody().get("id", Long.class);
+    }
+    public String getRoleFromJwtToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key()).build()
+                .parseClaimsJws(token).getBody().get("role", String.class);
     }
     /**
      * Validate the given JWT token.

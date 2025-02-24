@@ -33,7 +33,11 @@ public class UserController {
         UserRespondDto user = userService.create(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-
+    @PostMapping("/email")
+    public ResponseEntity<?> createUserLoginEmail(@Valid @RequestBody UserRequestDto userDto) throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException {
+        UserRespondDto user = userService.create(userDto);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserByID(@PathVariable("id") Long id) throws UserNotFoundException {
         UserRespondDto user = userService.findById(id);
@@ -102,17 +106,16 @@ public class UserController {
         UserStatisticsDto stats = userService.getUserStatistics();
         return ResponseEntity.ok(stats);
     }
-
     @PostMapping("create")
     public ResponseEntity<?> createUserByAdmin(@Valid @RequestBody UserRequestDto userDto)
             throws UserNameExistedException, UserEmailExistedException, PhoneNumberExistedException {
         UserRespondDto user = userService.createByAdmin(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-
     @GetMapping("/daily-counts")
     public ResponseEntity<List<UserDailyCountDto>> getUserDailyCounts() {
         List<UserDailyCountDto> dailyCounts = userService.getUserDailyCounts();
         return ResponseEntity.ok(dailyCounts);
     }
+
 }

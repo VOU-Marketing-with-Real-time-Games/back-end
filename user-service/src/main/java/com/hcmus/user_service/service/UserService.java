@@ -183,7 +183,6 @@ public class UserService {
         return modelMapper.map(user, UserRespondDto.class);
     }
 
-
     public List<UserDailyCountDto> getUserDailyCounts() {
         LocalDate today = LocalDate.now();
         LocalDate startDate = today.minusDays(30);

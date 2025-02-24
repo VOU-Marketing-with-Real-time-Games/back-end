@@ -13,6 +13,8 @@ ribbon:
 spring:
   cloud:
     gateway:
+      default-filters:
+        - name: AuthenticationFilter
       discovery:
         locator:
           enabled: false  # Enable service discovery for dynamic routing
@@ -85,14 +87,6 @@ spring:
           uri: lb://quizz-realtime
           predicates:
             - Path=/v3/quizz-realtime/**
-        #authentication some routes
-        - id: get-all-users
-          uri: lb://user-service
-          predicates:
-            - Path=/v3/users
-            - Method=GET
-          filters:
-            - StripPrefix=2
       globalcors:
         cors-configurations:
           '[/**]':
@@ -114,7 +108,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://discovery-server:8761/eureka/ # Eureka server
-
 server:
   port: 8080
 jwt:

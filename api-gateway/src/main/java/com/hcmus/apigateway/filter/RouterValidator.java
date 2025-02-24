@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Component
-public class RouteValidator {
+public class RouterValidator {
     public static final List<String> openApiEndpoints = List.of(
             "v3/auth/register",
             "v3/auth/login",
