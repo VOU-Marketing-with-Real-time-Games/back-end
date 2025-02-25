@@ -117,5 +117,9 @@ public class UserController {
         List<UserDailyCountDto> dailyCounts = userService.getUserDailyCounts();
         return ResponseEntity.ok(dailyCounts);
     }
-
+    @GetMapping("/admins")
+    public ResponseEntity<?> getAdmins() {
+        List<UserRespondDto> admins = userService.getAdmins();
+        return ResponseEntity.ok(admins);
+    }
 }

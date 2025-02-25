@@ -199,4 +199,9 @@ public class UserService {
 
         return dailyCounts;
     }
+    public List<UserRespondDto> getAdmins()
+    {
+        List<User> users = userRepository.findByRole("ADMIN");
+        return users.stream().map(user -> modelMapper.map(user, UserRespondDto.class)).toList();
+    }
 }

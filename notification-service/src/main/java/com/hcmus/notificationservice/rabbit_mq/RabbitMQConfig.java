@@ -41,6 +41,22 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(quizzQueue).to(quizzExchange).with("quizz-routing");
     }
 
+    //Campaign Service Configuration
+    @Bean
+    public Queue campaignQueue() {
+        return new Queue("campaign-queue", true);
+    }
+
+    @Bean
+    public DirectExchange campaignExchange() {
+        return new DirectExchange("campaign-exchange");
+    }
+
+    @Bean
+    public Binding campaignBinding(Queue campaignQueue, DirectExchange camapaignExchange) {
+        return BindingBuilder.bind(campaignQueue).to(camapaignExchange).with("campaign-routing");
+    }
+
     // Global Message Converter
     @Bean
     public Jackson2JsonMessageConverter jsonMessageConverter() {
