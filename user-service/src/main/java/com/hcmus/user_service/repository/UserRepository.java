@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber")
     User findByPhoneNumber(String phoneNumber);
-
+    List<User> findByRole(String role);
     @Query("SELECT u FROM User u WHERE u.id IN :listId")
     List<User> findByIds(List<Long> listId);
 

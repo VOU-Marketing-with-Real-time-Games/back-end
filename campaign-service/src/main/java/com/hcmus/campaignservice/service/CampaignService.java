@@ -28,6 +28,11 @@ CampaignService {
     private final CampaignRepository campaignRepository;
     private final FavoriteCampaignUserRepository favoriteCampaignUserRepository;
     private final ModelMapper modelMapper;
+    /**
+     * Create a new campaign
+     * @param campaignDto
+     * @return
+     */
     public CampaignResponseDto createCampaign(CampaignDto campaignDto)
     {
         Date current = new Date();
@@ -36,9 +41,20 @@ CampaignService {
         campaign.setStatus("PENDING");
         return modelMapper.map(campaignRepository.save(campaign),CampaignResponseDto.class);
     }
+    /**
+     * Get all campaigns
+     * @param pageable
+     * @return
+     */
     public Page<CampaignResponseDto> getAllCampaigns(Pageable pageable) {
         return campaignRepository.findAll(pageable).map(value -> modelMapper.map(value,CampaignResponseDto.class));
     }
+    /**
+     * Get a campaign by id
+     * @param id
+     * @return
+     * @throws CampaignNotFoundException
+     */
     public CampaignResponseDto getCampaign(Long id) throws CampaignNotFoundException
     {
         validateId(id);
@@ -47,18 +63,36 @@ CampaignService {
         return modelMapper.map(campaign,CampaignResponseDto.class);
     }
 
+    /**
+     * Find a campaign by id
+     * @param id
+     * @return
+     * @throws CampaignNotFoundException
+     */
     public Campaign findCampaign(Long id) throws CampaignNotFoundException
     {
         validateId(id);
         return campaignRepository.findById(id)
                 .orElseThrow(() -> new CampaignNotFoundException("Campaign not found with id: " + id));
     }
+    /**
+     * Search campaigns by name
+     * @param name
+     * @return
+     */
     public List<CampaignResponseDto> searchCampaignsByName(String name) {
         List<Campaign> campaigns = campaignRepository.findByNameContaining(name);
         return campaigns.stream()
                 .map(campaign -> modelMapper.map(campaign, CampaignResponseDto.class))
                 .collect(Collectors.toList());
     }
+    /**
+     * Update a campaign
+     * @param id
+     * @param campaignDto
+     * @return
+     * @throws CampaignNotFoundException
+     */
     public CampaignResponseDto updateCampaign(Long id, UpdateCampaignDto campaignDto) throws CampaignNotFoundException
     {
         validateId(id);
@@ -67,11 +101,22 @@ CampaignService {
         modelMapper.map(campaignDto, campaign);
         return modelMapper.map(campaignRepository.save(campaign),CampaignResponseDto.class);
     }
+    /**
+     * Delete a campaign by id
+     * @param id
+     * @throws CampaignNotFoundException
+     */
     public void deleteCampaignById(Long id) throws CampaignNotFoundException {
         validateId(id);
         getCampaign(id);
         campaignRepository.deleteById(id);
     }
+
+    /**
+     * Get favourite campaigns by user
+     * @param userId
+     * @return
+     */
     public List<CampaignResponseDto> getFavouriteCampaignsByUser(Long userId) {
         validateId(userId);
         List<FavoriteCampaignUser> favouriteCampaigns = favoriteCampaignUserRepository.findByUserId(userId);
@@ -80,17 +125,27 @@ CampaignService {
                 .collect(Collectors.toList());
     }
 
-
+    /**
+     * Validate ID
+     * @param id
+     */
     private void validateId(Long id) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Invalid ID");
         }
     }
+    /**
+     * Get latest campaign
+     * @return
+     */
     public CampaignResponseDto getLatestCampaign() {
         Campaign newestCampaign = campaignRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")).stream().findFirst().orElse(null);
         return modelMapper.map(newestCampaign, CampaignResponseDto.class);
     }
-
+    /**
+     * Get campaign statistics
+     * @return
+     */
     public CampaignStatisticsDto getCampaignStatistics() {
         LocalDate today = LocalDate.now();
         LocalDate startDate = today.minusDays(30);
@@ -124,14 +179,21 @@ CampaignService {
         return stats;
     }
 
-
+    /**
+     * Get campaigns by brand ID
+     * @param brandId
+     * @return
+     */
     public List<CampaignResponseDto> getCampaignsByBrandId(Long brandId) {
         List<Campaign> campaigns = campaignRepository.findByBrandId(brandId);
         return campaigns.stream()
                 .map(campaign -> modelMapper.map(campaign, CampaignResponseDto.class))
                 .collect(Collectors.toList());
     }
-
+    /**
+     * Get campaign daily counts
+     * @return
+     */
     public List<CampaignDailyCountDto> getCampaignDailyCounts() {
         LocalDate today = LocalDate.now();
         LocalDate startDate = today.minusDays(30);

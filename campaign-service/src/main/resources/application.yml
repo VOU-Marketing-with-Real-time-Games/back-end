@@ -13,6 +13,34 @@ spring:
     properties:
       hibernate.format_sql: true
       hibernate.dialect: org.hibernate.dialect.MySQLDialect
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: 5672
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+    template:
+      mandatory: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_ACCOUNT}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+rabbitmq:
+  exchange: campaign-exchange
+  routingkey: campaign-routing
+  queue: campaign-queue
 
 server:
   port: 8004

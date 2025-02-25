@@ -1,9 +1,13 @@
 package com.hcmus.notificationservice.exception_handler;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hcmus.notificationservice.exception.CustomFeignException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +23,7 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * Handles validation errors and returns an ErrorDTO.
@@ -45,6 +50,23 @@ public class GlobalExceptionHandler {
         LOGGER.error("Validation error: {}", ex.getBindingResult().getAllErrors(), ex);
 
         return error;
+    }
+    /**
+     * Handles Feign client exceptions and directly returns the Feign response body.
+     */
+    @ExceptionHandler(CustomFeignException.class)
+    public ResponseEntity<JsonNode> handleCustomFeignException(CustomFeignException ex) {
+        LOGGER.error("Custom Feign Client Error: {}", ex.getMessage(), ex);
+
+        HttpStatus status = HttpStatus.resolve(ex.getStatus());
+        JsonNode errorJson;
+        try {
+            errorJson = objectMapper.readTree(ex.getMessage());
+        } catch (Exception e) {
+            errorJson = objectMapper.createObjectNode().put("error", "Failed to parse error message");
+        }
+        return ResponseEntity.status(status != null ? status : HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(errorJson);
     }
 
     /**

@@ -1,4 +1,5 @@
-package com.hcmus.gameservice.rabbit_mq;
+package com.hcmus.campaignservice.rabbit_mq;
+
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class NotificationService {
         this.routingKey = routingKey;
     }
 
-    public void notifyGameEvent(NotificationDto notificationDto) {
+    public void notifyCampaignCreated(NotificationDto notificationDto) {
         rabbitTemplate.convertAndSend(exchange, routingKey, notificationDto);
         System.out.println("NotificationDto sent to RabbitMQ: " + notificationDto);
     }

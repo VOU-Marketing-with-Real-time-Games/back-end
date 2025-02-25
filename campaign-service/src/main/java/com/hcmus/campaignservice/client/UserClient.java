@@ -8,5 +8,4 @@ import org.springframework.web.bind.annotation.*;
 public interface UserClient {
     @GetMapping("/{id}")
     UserRespondDto getUserByID(@PathVariable("id") Long id);
-
 }

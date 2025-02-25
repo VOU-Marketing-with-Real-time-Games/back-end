@@ -1,6 +1,8 @@
 package com.hcmus.notificationservice.service;
 
+import com.hcmus.notificationservice.client.UserClient;
 import com.hcmus.notificationservice.dto.NotificationDto;
+import com.hcmus.notificationservice.dto.UserRespondDto;
 import com.hcmus.notificationservice.model.NotificationUser;
 import com.hcmus.notificationservice.repository.NotificationRepository;
 import com.hcmus.notificationservice.socket.NotificationSocketHandler;
